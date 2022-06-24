@@ -77,6 +77,7 @@ const ChangePasswordScreen = () => {
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your New Password"
+              placeholderTextColor="gray"
               secureTextEntry={true}
             />
           </View>
@@ -87,6 +88,7 @@ const ChangePasswordScreen = () => {
               value={password_confirmation}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your New Confirm Password"
+              placeholderTextColor="gray"
               secureTextEntry={true}
             />
           </View>

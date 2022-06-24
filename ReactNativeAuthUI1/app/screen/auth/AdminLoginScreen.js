@@ -85,6 +85,7 @@ const AdminLoginScreen = () => {
                             value={email}
                             onChangeText={setEmail}
                             placeholder="Write Your Email"
+                            placeholderTextColor="gray"
                             keyboardType='email-address' />
                     </View>
 
@@ -94,11 +95,13 @@ const AdminLoginScreen = () => {
                             style={styleOne.input}
                             value={password} onChangeText={setPassword}
                             placeholder="Write Your Password"
+                            placeholderTextColor="gray"
                             secureTextEntry={true} />
                     </View>
 
                     <View >
-                        <TouchableOpacity
+                        <TouchableOpacity 
+                        onPress={() => {navigation.navigate('DrawerScreen')}}
                             style={{
                                 justifyContent: "center",
                                 alignItems: "center",

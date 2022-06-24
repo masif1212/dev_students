@@ -85,6 +85,7 @@ const UserLoginScreen = () => {
             value={email} 
             onChangeText={setEmail} 
             placeholder="Write Your Email" 
+            placeholderTextColor='gray'
             keyboardType='email-address' />
           </View>
 
@@ -94,11 +95,13 @@ const UserLoginScreen = () => {
             style={styleOne.input} 
             value={password} onChangeText={setPassword} 
             placeholder="Write Your Password" 
+            placeholderTextColor='gray'
             secureTextEntry={true} />
           </View>
 
           <View >
           <TouchableOpacity
+          onPress={()=>navigation.navigate('SchoolAdminDrawer')}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
@@ -128,7 +131,7 @@ const UserLoginScreen = () => {
           <View style={{alignItems:'center', justifyContent:'center', }}>
 
             <View style={{ flex: 1, marginBottom:10,  }}>
-              <TouchableWithoutFeedback onPress={() => { navigation.navigate('SendPasswordResetEmail') }} >
+              <TouchableWithoutFeedback onPress={() => { navigation.navigate('TeacherDrawer') }} >
                 <Text style={{ fontWeight: 'bold' }}>Forgot Password</Text>
               </TouchableWithoutFeedback>
             </View>
@@ -156,6 +159,7 @@ const styleOne = StyleSheet.create({
     borderBottomColor: "gray",
     borderBottomWidth: 1,
     marginBottom: 10,
+  
   },
   heading: {
     fontSize: 24,
