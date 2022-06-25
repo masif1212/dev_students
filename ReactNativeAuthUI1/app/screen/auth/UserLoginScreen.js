@@ -101,7 +101,7 @@ const UserLoginScreen = () => {
 
           <View >
           <TouchableOpacity
-          onPress={()=>navigation.navigate('SchoolAdminDrawer')}
+             onPress={handleFormSubmit}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",

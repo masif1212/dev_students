@@ -1,363 +1,365 @@
-// import React, { useState, useRef } from "react";
-// import {
-//   View,
-//   StyleSheet,
-//   Text,
-//   TouchableOpacity,
-//   ScrollView,
-//   KeyboardAvoidingView,
-//   Image,
-// } from "react-native";
-// import Icon from "react-native-vector-icons/AntDesign";
-// import * as ImagePicker from "expo-image-picker";
-// import { useForm } from "react-hook-form";
-// import CustomInput from "../../Components/AdminRegistrationComponents/CustomInput";
-
-
-// const SignupSchoolAdmin = ({ navigation }) => {
-  
- 
-//   const [image, setImage ] = useState('');
-
-  
-//   const {control,handleSubmit,formState: { errors }} = useForm();
-
-  
-
-//  const onSubmit = (data) => {
-//   fetch('http://192.168.18.64:8000/students', {
-//     method: "POST",
-//     body: JSON.stringify(data),
-//     headers: {
-//       'content-type': 'application/json; charset=utf-8',
-//     }
-//   }).then((response)=> response.json())
-//   .then(()=>{
-//     setMsg({successmsg : "YOURCUSTOM MESSAGE FROM RESULT OBJECT"})
-//   })
-  
-//  }
-
-
-//   const pickImage = async () => {
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.All,
-//       allowsEditing: true,
-//       aspect: [4, 3],
-//       quality: 1,
-//     });
-
-//     if (!result.cancelled) {
-//       setImage({ image: result.uri });
-//     }
-//   };
-  
-//   return (
-//     <View style={{ height: "100%", backgroundColor: "#ffffff" }}>
-//       <KeyboardAvoidingView keyboardVerticalOffset={10}></KeyboardAvoidingView>
-//       <ScrollView showScrollIndicatorVertical={false}>
-//         <View style={styles.buttonContainer}>
-//           <View style={styles.buttonStyle}>
-//             <TouchableOpacity onPress={pickImage}>
-//               <Icon
-//                 style={{
-//                   marginRight: 12,
-//                   position: "absolute",
-//                   left: 60,
-//                   bottom: 30,
-//                   color: "green",
-//                 }}
-//                 name="pluscircle"
-//                 color="#c9c9c9"
-//                 size={14}
-//               />
-//               {image.image ? (
-//                 <Image
-//                   source={{ uri: image.image }}
-//                   style={{ width: 100, height: 100, borderRadius: 50 }}
-//                 />
-//               ) : (
-//                 <Text>Add Photo</Text>
-//               )}
-//             </TouchableOpacity>
-//           </View>
-
-//           <>
-
-          
-
-//             <CustomInput
-//               placeholder="First Name"
-//               autoCapitalize="none"
-//               keyboardType="default"
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="75%"
-//               paddingTop={10}
-//               control={control}
-//               name="first_name"
-//               rules={{ required: "First Name is required" }}
-//               onChangeText={(text) => handleChange("first_name", text)}
-//             />
-
-//             <CustomInput
-//               placeholder="Last Name"
-//               autoCapitalize="none"
-//               keyboardType="default"
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="45%"
-//               paddingTop={10}
-//               control={control}
-//               name="last_name"
-//               rules={{ required: "Last Name is required" }}
-//               onChangeText={(text) => handleChange("last_name", text)}
-//             />
-//             <CustomInput
-//               placeholder="Father Name"
-//               autoCapitalize="none"
-//               keyboardType="email-address"
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="father_name"
-//               rules={{ required: "father_name is required", 
-//                 message: 'must include "@" character in email'
-//                  }}
-//               onChangeText={(text) => handleChange("father_name", text)}
-//             />
-//             <CustomInput
-//               placeholder="Father Cnic"
-//               autoCapitalize="none"
-//               keyboardType={"default"}
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="father_cnic"
-//               rules={{ required: "CNIC is required" , pattern: {
-//                 value: /^\d{5}-\d{7}-\d{1}$/,
-//                 message: 'CNIC No must follow the XXXXX-XXXXXXX-X format!'
-
-//               } }}
-//             />
-
-//             <CustomInput
-//               placeholder="Class"
-//               autoCapitalize="none"
-//               keyboardType='numeric'
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="student_class"
-//               rules={{ required: "Class Name is required"}}
-//               onChangeText={(text) => handleChange("class", text)}
-//             />
-
-//             <CustomInput
-//               placeholder="Section"
-//               autoCapitalize="none"
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="section"
-//               rules={{ required: "Section is required", }}
-//               onChangeText={(text) => handleChange("contact", text)}
-//             />
-
-//             <CustomInput
-//               placeholder="Roll No."
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="roll_no"
-//               rules={{ required: "Section is required", }}
-//               onChangeText={(text) => handleChange("contact", text)}
-//             />
-              
-//             <CustomInput
-//               placeholder="Contact (03XXXXXXXXX)"
-//               autoCapitalize="none"
-//               keyboardType='numeric'
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               rules={{ required: "Contact is required", maxLength: { value: 11, message: 'Contact must be 11 digits '} }}
-//               name="contact"
-//               onChangeText={(text) => handleChange("contact", text)}
-//             />
-//              <CustomInput
-//               placeholder="Emergency Contact (03XXXXXXXXX)"
-//               autoCapitalize="none"
-//               keyboardType='numeric'
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               rules={{ required: "Contact is required", maxLength: { value: 11, message: 'Contact must be 11 digits '} }}
-//               name="emergency_contact"
-//               onChangeText={(text) => handleChange("alt_contact", text)}
-//             />
-            
-
-//             <CustomInput
-//               placeholder="Address Line 1"
-//               autoCapitalize="none"
-//               keyboardType={"default"}
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={22}
-//               control={control}
-//               name="address_1"
-//               rules={{ required: "Address is required" }}
-//               onChangeText={(text) => handleChange("address_1", text)}
-//             />
-
-//             <CustomInput
-//               placeholder="Address line 2"
-//               autoCapitalize="none"
-//               keyboardType={"default"}
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="address_2"
-//               onChangeText={(text) => handleChange("address_2", text)}
-//             />
-
-//             <CustomInput
-//               placeholder="City"
-//               autoCapitalize="none"
-//               keyboardType="default"
-//               placeholderTextColor="gray"
-//               autoCapitilization="none"
-//               width="90%"
-//               paddingTop={25}
-//               control={control}
-//               name="city"
-//               rules={{ required: "City is required" }}
-//               onChangeText={(text) => handleChange("city", text)}
-//             />
-
-//             <View style={{ width: "90%" }}>
-//               <TouchableOpacity
-//                 onPress={handleSubmit(onSubmit)}
-//                 style={{
-//                   justifyContent: "center",
-//                   alignItems: "center",
-//                   padding: 15,
-//                   width: "100%",
-//                   marginVertical: 5,
-//                   borderRadius: 50,
-//                   marginBottom: 80,
-//                   fontWeight: "bold",
-//                   backgroundColor: "#5062BD",
-//                   elevation: 4,
-//                   marginTop: 50,
-//                 }}
-//               >
-//                 <Text
-//                   style={{
-//                     color: "white",
-//                     justifyContent: "center",
-//                     alignItems: "center",
-//                   }}
-//                 >
-//                   Add Student
-//                 </Text>
-//               </TouchableOpacity>
-//             </View>
-//           </>
-//         </View>
-//       </ScrollView>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     alignItems: "center",
-//     width: "100%",
-//     backgroundColor: "#000",
-//     margin: 0,
-//   },
-//   card: {
-//     backgroundColor: "#ffffff",
-//     borderBottomRightRadius: 76,
-//     paddingVertical: 50,
-//     paddingHorizontal: 25,
-//     elevation: 4,
-//     shadowColor: "#000",
-//     shadowOffset: { width: 0, height: 2 },
-//     shadowOpacity: 0.1,
-//     shadowRadius: 1,
-//   },
-//   buttonContainer: {
-//     alignItems: "center",
-//   },
-//   heading: {
-//     fontSize: 24,
-//     fontWeight: "600",
-//     marginBottom: 10,
-//     color: "#5062BD",
-//   },
-//   cardContainer: {
-//     flex: 1,
-//     backgroundColor: "white",
-//   },
-//   buttonStyle: {
-//     width: 100,
-//     height: 100,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     padding: 10,
-//     borderRadius: 100,
-//     borderColor: "#5062BD",
-//     backgroundColor: "#fff",
-//     borderWidth: 1,
-//     borderRadius: 50,
-//     marginTop: 20,
-//   },
-
-//   constainerStyle: {
-//     justifyContent: "flex-start",
-//     alignItems: "center",
-//     padding: 0,
-//     width: "90%",
-//     fontWeight: "bold",
-//     backgroundColor: "transparent",
-//     elevation: 0,
-//     borderBottomWidth: 1,
-//     borderColor: "gray",
-//   },
-// });
-// export default SignupSchoolAdmin;
-
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableWithoutFeedback,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { styles, toastConfig } from "../../../style";
+import Toast from "react-native-toast-message";
+import Checkbox from "expo-checkbox";
+import { useRegisterUserMutation } from "../../../services/userAuthApi";
+import { storeToken } from "../../../services/AsyncStorageService";
+import Icon from "react-native-vector-icons/AntDesign";
+import * as ImagePicker from "expo-image-picker";
 
 const CreateStudentForm = () => {
+
+  const [image, setImage] = useState("");
+  const [first_name, setFirst_Name] = useState("");
+  const [last_name, setLast_Name] = useState("");
+  const [father_name, setFather_Name] = useState("");
+  const [father_cnic, setFather_cnic] = useState("");
+  const [contact, setContact] = useState("");
+  const [emergency_contact, setEmergency_Contact] = useState("");
+  const [address_1, setAdress_1] = useState("");
+  const [address_2, setAdress_2] = useState("");
+  const [roll_no, setRoll_no] = useState("");
+  const [student_class, setStudent_class] = useState("");
+  const [section, setSection] = useState();
+  const [city, setCity] = useState();
+  
+
+  const clearTextInput = () => {
+    setFirst_Name("");
+    setLast_Name("");
+    setFather_Name("");
+    setFather_cnic("");
+    setContact("");
+    setEmergency_Contact("");
+    setAdress_1("");
+    setAdress_2("");
+    setRoll_no("");
+    setStudent_class("");
+    setSection("");
+    setCity("");
+  };
+  const navigation = useNavigation();
+
+  const [registerStudent] = useRegisterStudentMutation();
+
+  const handleFormSubmit = async () => {
+    if (image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city) {
+        const formData = {
+          image,
+          first_name,
+          last_name,
+          father_name,
+          father_cnic,
+          contact,
+          roll_no,
+          emergency_contact,
+          address_1,
+          address_2,
+          student_class,
+          city,
+          section,
+        };
+        const res = await registerStudent(formData);
+        if (res.data.status === "success") {
+          await storeToken(res.data.token); // Store Token in Storage
+          clearTextInput();
+          navigation.navigate("UserPanelTab");
+        }
+        if (res.data.status === "failed") {
+          Toast.show({
+            type: "warning",
+            position: "top",
+            topOffset: 0,
+            text1: res.data.message,
+          });
+        }
+    
+    } else {
+      Toast.show({
+        type: "warning",
+        position: "top",
+        topOffset: 0,
+        text1: "All fields are Required",
+      });
+    }
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
   return (
-    <View>
-      <Text>CreateStudentForm</Text>
-    </View>
-  )
-}
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
+      <View style={styleOne.buttonContainer}>
+        <View style={styleOne.buttonStyle}>
+          <TouchableOpacity onPress={pickImage}>
+            <Icon
+              style={{
+                marginRight: 12,
+                position: "absolute",
+                left: 60,
+                bottom: 30,
+                color: "green",
+              }}
+              name="pluscircle"
+              color="#c9c9c9"
+              size={14}
+            />
+            {image ? (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
+              />
+            ) : (
+              <Text>Add Photo</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+        <Toast config={toastConfig} />
+      </View>
 
-export default CreateStudentForm
+      <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
+        <View style={{ marginLeft: 25 }}>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={firstName}
+              onChangeText={setFirstName}
+              placeholder="Write Your First Name"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={lastName}
+              onChangeText={setLastName}
+              placeholder="Write Your Last Name"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Write Your Email"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Write Your Password"
+              secureTextEntry={true}
+              keyboardType={"default"}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={password_confirmation}
+              onChangeText={setPassword_confirmation}
+              placeholder="Write Your Confirm Password"
+              secureTextEntry={true}
+              keyboardType={"default"}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={contact}
+              onChangeText={setContact}
+              placeholder="Contact"
+              keyboardType="numeric"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={alt_contact}
+              onChangeText={setAlt_Contact}
+              placeholder="Emergency Contact"
+              keyboardType="numeric"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={address_1}
+              onChangeText={setAdress_1}
+              placeholder="Address 1"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={address_2}
+              onChangeText={setAdress_2}
+              placeholder="Address 2"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={CNIC}
+              onChangeText={setCNIC}
+              placeholder="CNIC (XXXXX-XXXXXXX-X)"
+              keyboardType="phone-pad"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={city}
+              onChangeText={setCity}
+              placeholder="City"
+            />
+          </View>
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <Checkbox
+              value={tc}
+              onValueChange={setTc}
+              color={tc ? "#5062BD" : undefined}
+            />
+            <Text style={styles.labelText}>I agree to term and condition.</Text>
+          </View>
+        </View>
 
-const styles = StyleSheet.create({})
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity
+            onPress={handleFormSubmit}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 15,
+              width: "90%",
+              borderRadius: 50,
+              marginBottom: 10,
+              fontWeight: "bold",
+              backgroundColor: "#5062BD",
+              elevation: 1,
+              marginTop: 50,
+            }}
+          >
+            <Text
+              style={{
+                color: "white",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{
+          alignItems: 'flex-end',
+          marginRight: 25
+        }}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              navigation.navigate("AdminLogin");
+            }}
+          >
+            <Text style={{ fontWeight: "bold", paddingBottom: 50, color: 'gray' }}>
+              Already Registered ? Login
+            </Text>
+          </TouchableWithoutFeedback>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styleOne = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: "#fff",
+    margin: 0,
+  },
+  card: {
+    backgroundColor: "#ffffff",
+    borderBottomRightRadius: 76,
+    paddingVertical: 50,
+    paddingHorizontal: 25,
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+  },
+  buttonContainer: {
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 10,
+    color: "#5062BD",
+  },
+  cardContainer: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  buttonStyle: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 100,
+    borderColor: "#5062BD",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderRadius: 50,
+    marginTop: 20,
+  },
+
+  constainerStyle: {
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 0,
+    width: "90%",
+    fontWeight: "bold",
+    backgroundColor: "transparent",
+    elevation: 0,
+    borderBottomWidth: 1,
+    borderColor: "gray",
+  },
+  input: {
+    backgroundColor: "transparent",
+    width: "90%",
+    padding: 15,
+    fontSize: 14,
+    fontWeight: "400",
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+    marginBottom: 10,
+  },
+});
+
+export default CreateStudentForm;
