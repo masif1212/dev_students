@@ -56,6 +56,7 @@ const SendPasswordResetEmailScreen = () => {
             value={email}
             onChangeText={setEmail}
             placeholder="Write Your Email to Verify"
+            placeholderTextColor="gray"
             keyboardType='email-address'
           />
         </View>
