@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
 
 const toastConfig = {
   warning: ({ text1, props }) => (
-    <View style={{ height: 40, width: '100%', backgroundColor: 'orange',   padding: 5, }}>
-      <Text>{text1}</Text>
+    <View style={{ height: 25, width: '100%', backgroundColor: 'red',   padding: 4, position: 'absolute' }}>
+      <Text style={{color: 'white', fontWeight: 'bold'}}>{text1}</Text>
       <Text>{props.uuid}</Text>
     </View>
   ),
   done: ({ text1, props }) => (
-    <View style={{ height: 40, width: '100%', backgroundColor: '#1affc6', padding: 4, }}>
+    <View style={{height: 25, width: '100%', backgroundColor: 'red',   padding: 4, }}>
       <Text>{text1}</Text>
       <Text>{props.uuid}</Text>
     </View>

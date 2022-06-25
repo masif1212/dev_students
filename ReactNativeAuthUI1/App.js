@@ -46,8 +46,10 @@ const Stack = createNativeStackNavigator();
 const App = () => (
   <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '5062BD' }, headerTintColor: 'white' }}>
-      <Stack.Screen name="Welcome" component={Home} options={{headerShown: false,headerStyle: {backgroundColor: "white",}}}/>
+      <Stack.Navigator screenOptions={{ headerStyle: { color: 'black' }, headerTintColor: 'white', headerShown: false }}
+        
+      >
+      <Stack.Screen name="Home" component={Home} options={{headerShown: false,headerStyle: {backgroundColor: "white",}}}/>
         <Stack.Screen name="ShopTab" component={ShopTab} options={{ headerShown: false }} />
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{ title: 'User Login', headerShown: false }} />

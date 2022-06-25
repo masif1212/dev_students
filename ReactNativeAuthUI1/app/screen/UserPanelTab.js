@@ -8,7 +8,7 @@ import ChangePasswordScreen from './auth/ChangePasswordScreen';
 const Drawer = createDrawerNavigator();
 const UserPanelTab = () => {
   return (
-    <Drawer.Navigator drawerContent={props => <SideBar {...props} />} screenOptions={{ headerStyle: { backgroundColor: 'purple' }, headerTintColor: 'white' }}>
+    <Drawer.Navigator drawerContent={props => <SideBar {...props} />} screenOptions={{ headerStyle: { backgroundColor: '#5062BD' }, headerTintColor: 'white' }}>
       <Drawer.Screen name="Dashboard" component={DashboardScreen} />
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerTitle: 'Change Password' }} />
     </Drawer.Navigator>

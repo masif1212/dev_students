@@ -1,7 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   email: "",
-  name: "",
+  firstName: "",
+  lastName: "",
+  image: "",
+  contact: "",
+  alt_contact: "",
+  address_1: "",
+  address_2: "",
+  CNIC: "",
+  city: ""
+
 }
 export const userSlice = createSlice({
   name: 'user_info',
@@ -9,7 +18,7 @@ export const userSlice = createSlice({
   reducers: {
     setUserInfo: (state, action) => {
       state.email = action.payload.email
-      state.name = action.payload.name
+      state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.image = action.payload.image
       state.contact = action.payload.contact
@@ -21,7 +30,7 @@ export const userSlice = createSlice({
     },
     unSetUserInfo: (state, action) => {
       state.email = action.payload.email
-      state.name = action.payload.name
+      state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
       state.image = action.payload.image
       state.contact = action.payload.contact

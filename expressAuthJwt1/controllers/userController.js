@@ -5,18 +5,19 @@ import transporter from '../config/emailConfig.js'
 
 class UserController {
   static userRegistration = async (req, res) => {
-    const { name, email, password, password_confirmation, contact, alt_contact,  address_1, address_2, CNIC, city, tc } = req.body
+    const { firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
     const user = await UserModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
     } else {
-      if (name && email && password && password_confirmation && tc) {
+      if (firstName && email && password && password_confirmation && tc) {
         if (password === password_confirmation) {
           try {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
             const doc = new UserModel({
-              name: name,
+              firstName: firstName,
+              lastName: lastName,
               email: email,
               password: hashPassword,
               contact: contact,
@@ -25,6 +26,7 @@ class UserController {
               address_2: address_2,
               CNIC: CNIC,
               city: city,
+              image: image,
               tc: tc
             })
             await doc.save()
