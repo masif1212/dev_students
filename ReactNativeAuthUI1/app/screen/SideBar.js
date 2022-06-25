@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { unsetUserToken } from '../../features/authSlice';
 const SideBar = ({ ...props }) => {
 
   const handleLogout = async () => {
-    unSetUserInfo({ email: "", name: "" })
+    unSetUserInfo({ email: "", name: "", lastName: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
     navigation.navigate('Home');
@@ -25,6 +25,7 @@ const SideBar = ({ ...props }) => {
       <View style={{ margin: 15 }}>
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold' }}>{myData.name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.email}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.lastName}</Text>
       </View>
       <DrawerItemList {...props} />
       <DrawerItem label='Logout' onPress={handleLogout} />

@@ -22,13 +22,13 @@ const DashboardScreen = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setUserInfo({ email: data.user.email, name: data.user.name }))
+      dispatch(setUserInfo({ email: data.user.email, name: data.user.firstName, lastName: data.user.lastName }))
     }
   })
 
   return (
     <View>
-      <Text>Dashboard Screen</Text>
+      <Text>Dashbrd Screen</Text>
       <Text>{userLToken}</Text>
     </View>
   )
