@@ -77,7 +77,7 @@ const App = () => (
         <Stack.Screen name="SingleStudentDetail" component={SingleStudentDetail} options={{  headerShadowVisible: false,   headerTintColor:'black',  headerStyle: {  backgroundColor: "white",  },   }} />
         <Stack.Screen  name="SchoolAdmin"  component={SchoolAdmin} options={{ headerShadowVisible: false, headerStyle: {  backgroundColor: "white",  }, }}  />
         <Stack.Screen name="SignupSchoolAdmin" component={SignupSchoolAdmin} options={{  headerShadowVisible: false,  headerStyle: { backgroundColor: "white", }, }} />
-        <Stack.Screen name="MarkAttendanceScreen"component={MarkAttendanceScreen}/>
+        <Stack.Screen name="MarkAttendanceScreen" component={MarkAttendanceScreen}/>
         <Stack.Screen name="CreateSchoolScreen" component={CreateSchoolScreen}options={{ headerShadowVisible: false, headerStyle: {backgroundColor: "#5062BD",  },  }}/>
         <Stack.Screen  name="SuperAdminProfileScreen" component={SuperAdminProfileScreen} options={{ headerShadowVisible: false, headerStyle: {  backgroundColor: "white",  },  }}/>
         <Stack.Screen name="CreateStudent" component={CreateStudent}options={({navigation}) => ({ headerShadowVisible: false, headerTintColor:'black', headerRight: () => (

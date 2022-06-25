@@ -4,6 +4,7 @@ import { userAuthApi } from '../services/userAuthApi'
 import userReducer from '../features/userSlice'
 import authReducer from '../features/authSlice'
 import studentReducer from '../features/studentSlice'
+import schoolAdminReducer from '../features/schoolAdminSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     user: userReducer,
     auth: authReducer,
     student: studentReducer,
+    schoolAdmin: schoolAdminReducer
     
     
   },
