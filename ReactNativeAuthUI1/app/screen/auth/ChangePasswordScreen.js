@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, toastConfig } from '../../../style';
@@ -66,14 +66,18 @@ const ChangePasswordScreen = () => {
     }
   }
   return (
-    <SafeAreaView>
-      <Toast config={toastConfig} />
-      <ScrollView keyboardShouldPersistTaps='handled'>
-        <View style={{ marginHorizontal: 30 }}>
-          <View style={[styles.inputWithLabel, { marginBottom: 15 }]}>
-            <Text style={styles.labelText}>New Password</Text>
+    
+
+      <View style={{ marginTop: 30}} keyboardShouldPersistTaps='handled'>
+      <View>
+          <Toast config={toastConfig} />
+          </View>
+
+        <View style={styleOne.container}>
+
+          <View>
             <TextInput
-              style={styles.input}
+              style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your New Password"
@@ -82,9 +86,8 @@ const ChangePasswordScreen = () => {
             />
           </View>
           <View style={styles.inputWithLabel}>
-            <Text style={styles.labelText}>Confirm New Password</Text>
             <TextInput
-              style={styles.input}
+              style={styleOne.input}
               value={password_confirmation}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your New Confirm Password"
@@ -92,13 +95,51 @@ const ChangePasswordScreen = () => {
               secureTextEntry={true}
             />
           </View>
-          <View style={{ width: 200, alignSelf: 'center', margin: 20 }}>
-            <Button title="Save" onPress={handleFormSubmit} color='purple' />
+          <View style={{ width: 200, alignSelf: 'center', margin: 10 }}>
+            {/* <Button title="Save" onPress={handleFormSubmit} color='purple' /> */}
+            <TouchableOpacity
+              onPress={handleFormSubmit}
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 15,
+                marginVertical: 5,
+                borderRadius: 50,
+                fontWeight: "bold",
+                backgroundColor: "#5062BD",
+                elevation: 1,
+              }}
+            >
+              <Text
+                style={{
+                  color: "white",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Save
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        
+      </View>
   )
 }
 
+
+const styleOne = StyleSheet.create({
+  input: {
+    backgroundColor: "transparent",
+    width: "90%",
+    padding: 15,
+    fontSize: 14,
+    fontWeight: "400",
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    marginLeft: 20
+  },
+ 
+});
 export default ChangePasswordScreen
