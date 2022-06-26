@@ -35,7 +35,7 @@ const UserLoginScreen = () => {
       if (res.data.status === "success") {
         await storeToken(res.data.token); // Store Token in Storage
         clearTextInput();
-        navigation.navigate("UserPanelTab");
+        navigation.navigate("SelectedSchool");
       }
       if (res.data.status === "failed") {
         Toast.show({
