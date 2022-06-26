@@ -48,7 +48,7 @@ class SchoolAdminController {
     }
   }
 
-  static userLogin = async (req, res) => {
+  static schoolAdminLogin = async (req, res) => {
     try {
       const { email, password } = req.body
       if (email && password) {
@@ -75,9 +75,9 @@ class SchoolAdminController {
   }
 
   static changeUserPassword = async (req, res) => {
-    const { password, password_confirmation } = req.body
-    if (password && password_confirmation) {
-      if (password !== password_confirmation) {
+    const { password, confirm_password } = req.body
+    if (password && confirm_password) {
+      if (password !== confirm_password) {
         res.send({ "status": "failed", "message": "New Password and Confirm New Password doesn't match" })
       } else {
         const salt = await bcrypt.genSalt(10)
@@ -90,7 +90,7 @@ class SchoolAdminController {
     }
   }
 
-  static loggedUser = async (req, res) => {
+  static loggedSchoolAdmin = async (req, res) => {
     res.send({ "user": req.user })
   }
 
@@ -120,14 +120,14 @@ class SchoolAdminController {
   }
 
   static userPasswordReset = async (req, res) => {
-    const { password, password_confirmation } = req.body
+    const { password, confirm_password } = req.body
     const { id, token } = req.params
     const user = await SchoolAdminModel.findById(id)
     const new_secret = user._id + process.env.JWT_SECRET_KEY
     try {
       jwt.verify(token, new_secret)
-      if (password && password_confirmation) {
-        if (password !== password_confirmation) {
+      if (password && confirm_password) {
+        if (password !== confirm_password) {
           res.send({ "status": "failed", "message": "New Password and Confirm New Password doesn't match" })
         } else {
           const salt = await bcrypt.genSalt(10)

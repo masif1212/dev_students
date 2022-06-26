@@ -13,10 +13,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
-import { useLoginUserMutation } from "../../../services/userAuthApi";
+import { useSchoolAdminLoginMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 
-const UserLoginScreen = () => {
+const SchoolAdminLogin = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,16 +26,16 @@ const UserLoginScreen = () => {
     setPassword("");
   };
 
-  const [loginUser] = useLoginUserMutation();
+  const [loginSchoolAdmin] = useSchoolAdminLoginMutation();
 
   const handleFormSubmit = async () => {
     if (email && password) {
       const formData = { email, password };
-      const res = await loginUser(formData);
+      const res = await loginSchoolAdmin(formData);
       if (res.data.status === "success") {
         await storeToken(res.data.token); // Store Token in Storage
         clearTextInput();
-        navigation.navigate("UserPanelTab");
+        navigation.navigate("SchoolAdminPannel");
       }
       if (res.data.status === "failed") {
         Toast.show({
@@ -176,4 +176,4 @@ const styleOne = StyleSheet.create({
   },
 });
 
-export default UserLoginScreen;
+export default SchoolAdminLogin;

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userAuthApi = createApi({
   reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.18.12:8000/api/user/'
+    baseUrl: 'http://192.168.18.19:8000/api/user/'
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -30,6 +30,29 @@ export const userAuthApi = createApi({
           }
         }
       }
+    }),
+
+    schoolAdminLogin: builder.mutation({
+      query: (schooladmin) => {
+        return {
+          url: 'schoolAdminlogin',
+          method: 'POST',
+          body: schooladmin,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
+    }),
+
+    loggedSchoolAdmin: builder.query({
+      query: (token) => ({
+        url: 'loggedSchoolAdmin',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${token}`,
+        },
+      })
     }),
 
     registerStudent : builder.mutation({
@@ -93,4 +116,4 @@ export const userAuthApi = createApi({
   }),
 })
 
-export const { useRegisterUserMutation,useRegisterSchoolAdminMutation, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useSendPasswordResetEmailMutation, useChangeUserPasswordMutation } = userAuthApi
+export const { useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useSendPasswordResetEmailMutation, useChangeUserPasswordMutation } = userAuthApi

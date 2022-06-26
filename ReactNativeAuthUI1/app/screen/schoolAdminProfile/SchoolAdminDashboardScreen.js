@@ -1,14 +1,14 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { getToken } from "../../services/AsyncStorageService";
-import { useGetLoggedUserQuery } from "../../services/userAuthApi";
+import { getToken } from "../../../services/AsyncStorageService";
+import { useLoggedSchoolAdminQuery } from "../../../services/userAuthApi";
 import { useDispatch } from "react-redux";
-import { setUserInfo } from "../../features/userSlice";
-import { setUserToken } from "../../features/authSlice";
-import CustomCard from "../Components/customCard/CustomCard";
+import { setSchoolAdminInfo } from "../../../features/schoolAdminSlice";
+import { setUserToken } from "../../../features/authSlice";
+import CustomCard from "../../Components/customCard/CustomCard";
 
 
-const DashboardScreen = () => {
+const SchoolDashboardScreen = () => {
   const [userLToken, setUserLToken] = useState();
 
   useEffect(() => {
@@ -19,17 +19,17 @@ const DashboardScreen = () => {
     })();
   });
 
-  const { data, isSuccess } = useGetLoggedUserQuery(userLToken);
+  const { data, isSuccess } = useLoggedSchoolAdminQuery(userLToken);
 
   // Store User Data in Redux Store
   const dispatch = useDispatch();
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        setUserInfo({
+        setSchoolAdminInfo({
           email: data.user.email,
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
+          first_name: data.user.first_name,
+          last_name: data.user.last_name,
         })
       );
     }
@@ -51,4 +51,4 @@ const DashboardScreen = () => {
   );
 };
 
-export default DashboardScreen;
+export default SchoolDashboardScreen;

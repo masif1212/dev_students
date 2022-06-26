@@ -34,6 +34,7 @@ import SchoolAdminDrawer from "./app/Components/DrawerComponents/SchoolAdminDraw
 import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
+import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
 
 
 
@@ -52,6 +53,7 @@ const App = () => (
         <Stack.Screen name="Registration" component={RegistrationScreen} options={{ title: 'Registration', headerBackVisible: false }} />
         <Stack.Screen name="SendPasswordResetEmail" component={SendPasswordResetEmailScreen} options={{ title: 'Forgot Password' }} />
         <Stack.Screen name="UserPanelTab" component={UserPanelTab} options={{ headerShown: false }} />
+        <Stack.Screen name="SchoolAdminPannel" component={SchoolAdminPanelTab} options={{ headerShown: false }} />
         <Stack.Screen name="Schools" component={Schools} options={({navigation}) => ({ headerShadowVisible: false,headerTintColor:'black',headerRight: () => (
               <Button
                 onPress={()=> navigation.navigate('CreateSchoolScreen') }

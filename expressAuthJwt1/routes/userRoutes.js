@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 import UserController from '../controllers/userController.js';
 import checkUserAuth from '../middlewares/auth-middleware.js';
+import chechSchAdminAuth from '../middlewares/schoolAdminMiddleware.js';
 import StudentController from '../controllers/studentController.js';
 import SchoolController from '../controllers/schoolController.js';
 import StudentAttendanceController from '../controllers/studentAttendanceController.js';
@@ -26,6 +27,7 @@ router.get('/loggeduser', UserController.loggedUser)
 //students
 router.post('/createstudent', StudentController.studentRegistration)
 
+
 //school
 router.post('/createschool', SchoolController.schoolRegistration)
 
@@ -34,6 +36,12 @@ router.post('/studentattendance', StudentAttendanceController.MarkStudentAttenda
 
 //SCHOOL aDMIN MODEL
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
+router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
+router.use('/loggedSchoolAdmin', chechSchAdminAuth)
+router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
+
+
+
 
 
 export default router
