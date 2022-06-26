@@ -19,12 +19,10 @@ const SideBar = ({ ...props }) => {
 
   const navigation = useNavigation()
   // Getting User Data from Redux Store
-  const myData = useSelector(state => state.user)
+  const myData = useSelector(state => state.schoolAdmin)
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
-  useEffect(()=>{
-    console.log(myData.image)
-  })
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ margin: 15 }}>
