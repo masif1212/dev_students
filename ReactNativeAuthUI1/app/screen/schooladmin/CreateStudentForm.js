@@ -14,7 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
 import Checkbox from "expo-checkbox";
-import { useRegisterUserMutation } from "../../../services/userAuthApi";
+import { useRegisterStudentMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
@@ -75,7 +75,7 @@ const CreateStudentForm = () => {
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
-          navigation.navigate("UserPanelTab");
+          navigation.navigate("CreateStudentForm");
         }
         if (res.data.status === "failed") {
           Toast.show({
@@ -144,16 +144,16 @@ const CreateStudentForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={firstName}
-              onChangeText={setFirstName}
+              value={first_name}
+              onChangeText={setFirst_Name}
               placeholder="Write Your First Name"
             />
           </View>
           <View>
             <TextInput
               style={styleOne.input}
-              value={lastName}
-              onChangeText={setLastName}
+              value={last_name}
+              onChangeText={setLast_Name}
               placeholder="Write Your Last Name"
             />
           </View>
@@ -161,31 +161,21 @@ const CreateStudentForm = () => {
             <TextInput
               style={styleOne.input}
               keyboardType="email-address"
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Write Your Email"
+              value={father_name}
+              onChangeText={setFather_Name}
+              placeholder="Write Your Father Name"
             />
           </View>
           <View>
             <TextInput
               style={styleOne.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Write Your Password"
-              secureTextEntry={true}
-              keyboardType={"default"}
+              value={father_cnic}
+              onChangeText={setFather_cnic}
+              placeholder="Father CNIC (XXXXX-XXXXXXX-X)"
+              keyboardType="phone-pad"
             />
           </View>
-          <View>
-            <TextInput
-              style={styleOne.input}
-              value={password_confirmation}
-              onChangeText={setPassword_confirmation}
-              placeholder="Write Your Confirm Password"
-              secureTextEntry={true}
-              keyboardType={"default"}
-            />
-          </View>
+
           <View>
             <TextInput
               style={styleOne.input}
@@ -198,8 +188,8 @@ const CreateStudentForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={alt_contact}
-              onChangeText={setAlt_Contact}
+              value={emergency_contact}
+              onChangeText={setEmergency_Contact}
               placeholder="Emergency Contact"
               keyboardType="numeric"
             />
@@ -223,12 +213,28 @@ const CreateStudentForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={CNIC}
-              onChangeText={setCNIC}
-              placeholder="CNIC (XXXXX-XXXXXXX-X)"
-              keyboardType="phone-pad"
+              value={roll_no}
+              onChangeText={setRoll_no}
+              placeholder="Set Student Roll No."
             />
           </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={student_class}
+              onChangeText={setStudent_class}
+              placeholder="Student Class"
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={section}
+              onChangeText={setSection}
+              placeholder="Section"
+            />
+          </View>
+         
           <View>
             <TextInput
               style={styleOne.input}
@@ -237,14 +243,7 @@ const CreateStudentForm = () => {
               placeholder="City"
             />
           </View>
-          <View style={{ flex: 1, flexDirection: "row" }}>
-            <Checkbox
-              value={tc}
-              onValueChange={setTc}
-              color={tc ? "#5062BD" : undefined}
-            />
-            <Text style={styles.labelText}>I agree to term and condition.</Text>
-          </View>
+
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
