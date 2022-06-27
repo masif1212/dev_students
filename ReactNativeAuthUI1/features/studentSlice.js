@@ -2,6 +2,16 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   first_name: "",
   last_name: "",
+  father_name: "",
+  father_cnic: "",
+  contact: "",
+  emergency_contact: "",
+  address_1: "",
+  address_2 : "",
+  roll_no: "",
+  student_class: "",
+  section: "",
+  city: ""
 }
 export const studentSlice = createSlice({
   name: 'student_info',

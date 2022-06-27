@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
-import { useIsFocused } from "@react-navigation/native"; 
-
-
-
+import { useGetStudentQuery } from '../../../services/userAuthApi';
+import { useSelector } from 'react-redux';
 
 
 const CreateStudent = ({ navigation }) => {
@@ -18,27 +16,16 @@ const CreateStudent = ({ navigation }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  const [students, setStudents] = useState('')
+const[students, setStudents ] = useState('')
 
-  
-  const fetchPosts = () => {
-    const apiURL = "http://192.168.18.64:8000/studentsget";
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setStudents(responseJson);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const focus = useIsFocused();
+  const {data} = useGetStudentQuery();
+
+
   useEffect(() => {
-    fetchPosts();
-    return () => {};
-  }, [focus]);
+    setStudents(data);
+  });
 
-
+  const myData = useSelector(state => state.student)
 
 
   const sortTable = (column) => {
@@ -90,7 +77,7 @@ const CreateStudent = ({ navigation }) => {
       </View>
 
       <FlatList
-        data={students}
+      data={students}
         keyExtractor={(item, index) => index + ""}
         style={{ maxWidth: '100%' }}
         ListHeaderComponent={tableHeader}
@@ -101,14 +88,25 @@ const CreateStudent = ({ navigation }) => {
 
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.id}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name+' '+item.last_name}</Text>
 
 
               <View style={{ width: '100%', flexDirection: 'row' }}>
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('StudentDetail')}
+                onPress={()=>navigation.navigate('StudentDetail',{
+                  first_name:item.first_name,
+                  last_name:item.last_name,
+                  contact:item.contact,
+                  father_name:item.father_name,
+                  father_cnic:item.father_cnic,
+                  student_class:item.student_class,
+                  section:item.section,
+                  address_1:item.address_1,
+                  city:item.city,
+
+                })}
                 style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '30%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>
                   <Text style={{
                     color: 'white'

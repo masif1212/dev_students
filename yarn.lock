@@ -2,3 +2,12 @@
 # yarn lockfile v1
 
 
+react-native-dropdown-picker@^5.4.2:
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.2.tgz#3d17de3d8a84cb8e74a2ffda6be417d287245b81"
+  integrity sha512-cZBPyN+k52jA9XguFnKoF5tLf31z6gjZ8GijO/pfVNSSEtPwZ14UTUrr87JiiOnMh5K/O2kRzZ/jZN8D0MmUMA==
+
+react-native-select-search@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-select-search/-/react-native-select-search-1.0.6.tgz#ead8b96facceec04d3932d16e015cc9176ddae4d"
+  integrity sha512-HXDyAVALt5bM4X7LPUlPfgi1QpQ84YTajY4n9U5dm4qXGNnYWSI/OaUSiAeiUlIAxQrbTrK9LHUZI5zYP+Ivxw==
