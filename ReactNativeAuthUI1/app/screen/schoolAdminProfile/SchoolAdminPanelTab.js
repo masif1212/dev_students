@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import SchoolAdminDashboardScreen from './SchoolAdminDashboardScreen';
+import SchoolAdminDashboardScreen from './SchoolAdminDashboardScreen'
 import SideBar from './SideBar';
 import ChangePasswordScreen from '../auth/ChangePasswordScreen';
 import SchoolAdminHomePage from '../schooladmin/SchoolAdminHomePage';

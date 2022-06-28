@@ -75,6 +75,7 @@ const SchoolAdminLogin = () => {
               value={email}
               onChangeText={setEmail}
               placeholder="Write Your Email"
+              placeholderTextColor='gray'
               keyboardType="email-address"
             />
           </View>
@@ -85,6 +86,7 @@ const SchoolAdminLogin = () => {
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your Password"
+              placeholderTextColor='gray'
               secureTextEntry={true}
             />
           </View>
