@@ -9,6 +9,7 @@ Content-Type: application/json
 }
 
 ###
+<<<<<<< HEAD
 GET  http://192.168.18.19:8000/api/user/loggedSchoolAdmin
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3NzFmMGQ3YTU4ZjlhMjgxZGRiZWMiLCJpYXQiOjE2NTYyNTk0MzUsImV4cCI6MTY1NjY5MTQzNX0.KqQ0edvAkVv66tV-cOZrztKzeCs3oGB61G-sY6FLU_4
 
@@ -47,3 +48,10 @@ Content-Type: application/json
 GET  http://192.168.18.12:8000/api/user/loggedTeachers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTYzMjkxMDAsImV4cCI6MTY1Njc2MTEwMH0.4vBVoBx_TAhJn16bNsOoIOE-DTOFshlG6ZZJ07Izjp8
 
+=======
+GET  http://192.168.10.6:8000/api/user/loggedSchoolAdmin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3NzFmMGQ3YTU4ZjlhMjgxZGRiZWMiLCJpYXQiOjE2NTYyNTk0MzUsImV4cCI6MTY1NjY5MTQzNX0.KqQ0edvAkVv66tV-cOZrztKzeCs3oGB61G-sY6FLU_4
+
+###
+GET  http://192.168.18.64:8000/api/user/getstudent
+>>>>>>> 766c01427c3966b5a31c4be35c534ae1e8118394

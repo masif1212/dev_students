@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-native-dropdown-picker": "^5.4.2",
+    "react-native-select-search": "^1.0.6"
+  }
+}

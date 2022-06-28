@@ -27,7 +27,8 @@ router.post('/changepassword', UserController.changeUserPassword)
 router.get('/loggeduser', UserController.loggedUser)
 
 //students
-router.post('/createstudent', StudentController.studentRegistration)
+router.post('/createstudent', StudentController.studentRegistration);
+router.get('/getstudent',StudentController.studentsGet)
 
 
 //school

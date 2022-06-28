@@ -5,6 +5,7 @@ import DashboardScreen from './DashboardScreen';
 import SideBar from './SideBar';
 import ChangePasswordScreen from './auth/ChangePasswordScreen';
 import SelectedSchoolScreen from './SelectedSchoolScreen'
+
 const Drawer = createDrawerNavigator();
 const UserPanelTab = () => {
   return (
