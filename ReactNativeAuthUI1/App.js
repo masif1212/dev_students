@@ -18,7 +18,7 @@ import TeachersProfileScreen from './app/screen/Teachers/TeachersProfileScreen'
 import TeachersListScreen from './app/screen/Teachers/TeachersListScreen'
 import StudentDetail from './app/screen/singleStudentAttendance/StudentDetail'
 import SchoolAdminHomePage from './app/screen/schooladmin/SchoolAdminHomePage'
-import TeachersListForSchoolAdmin from './app/screen/schooladmin/TeachersListForSchoolAdmin'
+import TeachersListForSchoolAdmin from "./app/screen/schooladmin/TeachersListForSchoolAdmin";
 import AddTeacherForm from './app/screen/Teachers/AddTeacherForm'
 import ViewFullAttendance from './app/screen/singleStudentAttendance/ViewFullAttendance'
 import ClassStudents from './app/screen/singleStudentAttendance/ClassStudents'
@@ -36,6 +36,7 @@ import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
 import MarkTeacherAttendance from "./app/screen/schooladmin/MarkTeacherAttendance";
+import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 
 
 
@@ -93,6 +94,7 @@ const App = () => (
         <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{ headerShown: true,  headerShown:true, headerStyle: { backgroundColor: "white", }, }}/>
         <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "white", },  }} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
+        
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
     
 

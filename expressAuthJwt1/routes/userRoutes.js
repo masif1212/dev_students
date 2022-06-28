@@ -50,6 +50,7 @@ router.post('/registerTeacher', TeachersController.teachersRegistration)
 router.post('/teachersLogin', TeachersController.teachersLogin)
 router.use('/loggedTeachers', checkTeacherAuth)
 router.get('/loggedTeachers', TeachersController.loggedTeachers)
+router.get('/getTeachers', TeachersController.getTeachers)
 
 
 
