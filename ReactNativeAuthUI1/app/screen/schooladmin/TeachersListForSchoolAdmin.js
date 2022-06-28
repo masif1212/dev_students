@@ -10,80 +10,77 @@ import {
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-export default class UsersView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        {
-          name: "Mariam Batool",
-          email: "MariamBatool@gmail.com",
-          position: "Data Entry Clerk",
-          photo:
-            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6",
-        },
-        {
-          name: "Shiza wajid",
-          email: "ShizaWajid@gmail.com",
-          position: "Sales Manager",
-          photo: "https://randomuser.me/api/portraits/women/44.jpg",
-        },
-        {
-          name: "Mahnoor Ahmaad",
-          email: "MahnoorAhmad@gmail.com",
-          position: "Sales Manager",
-          photo: "https://randomuser.me/api/portraits/women/68.jpg",
-        },
-        {
-          name: "Areeba Ali",
-          email: "AreebaAli@gmail.com",
-          position: "Medical Assistant",
-          photo: "https://randomuser.me/api/portraits/women/65.jpg",
-        },
-        {
-          name: "Asif Turri",
-          email: "AsifTurri@gmail.com",
-          position: "Clerical",
-          photo: "https://randomuser.me/api/portraits/men/43.jpg",
-        },
-        {
-          name: "Sasha Ho",
-          email: "sasha.ho@gmail.com",
-          position: "Administrative Assistant",
-          photo:
-            "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?h=350&auto=compress&cs=tinysrgb",
-        },
-        {
-          name: "Abdullah Hadley",
-          email: "abdullah.hadley@gmail.com",
-          position: "Marketing",
-          photo:
-            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=a72ca28288878f8404a795f39642a46f",
-        },
-        {
-          name: "Thomas Stock",
-          email: "thomas.stock@gmail.com",
-          position: "Product Designer",
-          photo:
-            "https://tinyfac.es/data/avatars/B0298C36-9751-48EF-BE15-80FB9CD11143-500w.jpeg",
-        },
-        {
-          name: "Veeti Seppanen",
-          email: "veeti.seppanen@gmail.com",
-          position: "Product Designer",
-          photo: "https://randomuser.me/api/portraits/men/97.jpg",
-        },
-        {
-          name: "Bonnie Riley",
-          email: "bonnie.riley@gmail.com",
-          position: "Marketing",
-          photo: "https://randomuser.me/api/portraits/women/26.jpg",
-        },
-      ],
-    };
-  }
+const TeachersListForSchoolAdmin =({navigation})=> {
+  const [teacher, setTeacher] = ([
+    {
+      name: "Mariam Batool",
+      email: "MariamBatool@gmail.com",
+      position: "Data Entry Clerk",
+      photo:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=707b9c33066bf8808c934c8ab394dff6",
+    },
+    {
+      name: "Shiza wajid",
+      email: "ShizaWajid@gmail.com",
+      position: "Sales Manager",
+      photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      name: "Mahnoor Ahmaad",
+      email: "MahnoorAhmad@gmail.com",
+      position: "Sales Manager",
+      photo: "https://randomuser.me/api/portraits/women/68.jpg",
+    },
+    {
+      name: "Areeba Ali",
+      email: "AreebaAli@gmail.com",
+      position: "Medical Assistant",
+      photo: "https://randomuser.me/api/portraits/women/65.jpg",
+    },
+    {
+      name: "Asif Turri",
+      email: "AsifTurri@gmail.com",
+      position: "Clerical",
+      photo: "https://randomuser.me/api/portraits/men/43.jpg",
+    },
+    {
+      name: "Sasha Ho",
+      email: "sasha.ho@gmail.com",
+      position: "Administrative Assistant",
+      photo:
+        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?h=350&auto=compress&cs=tinysrgb",
+    },
+    {
+      name: "Abdullah Hadley",
+      email: "abdullah.hadley@gmail.com",
+      position: "Marketing",
+      photo:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=a72ca28288878f8404a795f39642a46f",
+    },
+    {
+      name: "Thomas Stock",
+      email: "thomas.stock@gmail.com",
+      position: "Product Designer",
+      photo:
+        "https://tinyfac.es/data/avatars/B0298C36-9751-48EF-BE15-80FB9CD11143-500w.jpeg",
+    },
+    {
+      name: "Veeti Seppanen",
+      email: "veeti.seppanen@gmail.com",
+      position: "Product Designer",
+      photo: "https://randomuser.me/api/portraits/men/97.jpg",
+    },
+    {
+      name: "Bonnie Riley",
+      email: "bonnie.riley@gmail.com",
+      position: "Marketing",
+      photo: "https://randomuser.me/api/portraits/women/26.jpg",
+    },
+  ])
+   
+  
 
-  render() {
+
     return (
       <View style={styles.body}>
            <View style={{
@@ -94,7 +91,7 @@ export default class UsersView extends Component {
                
           }}>
           <TouchableOpacity 
-          onPress={()=>this.props.navigation.navigate('AddTeacherForm')}
+          onPress={()=>navigation.navigate('AddTeacherForm')}
           style={{
               borderRadius:10,
               backgroundColor:'#5062BD',
@@ -126,7 +123,7 @@ export default class UsersView extends Component {
             return (
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate("TeachersProfile", {
+                  navigation.navigate("TeachersProfile", {
                     name: item.name,
                     email: item.email,
                     photo: item.photo,
@@ -175,8 +172,7 @@ export default class UsersView extends Component {
         />
       </View>
     );
-  }
-}
+  };
 
 const styles = StyleSheet.create({
   image: {
@@ -216,3 +212,5 @@ const styles = StyleSheet.create({
     bottom:5
   },
 });
+
+export default TeachersListForSchoolAdmin; 

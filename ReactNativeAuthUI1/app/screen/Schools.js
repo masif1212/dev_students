@@ -107,7 +107,7 @@ const Schools = ({ navigation }) => {
 
   return (
     <View>
-   <DropDownSuperAdmin />
+   {/* <DropDownSuperAdmin /> */}
   
      
 
