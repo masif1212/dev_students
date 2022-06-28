@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState,useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,32 @@ import {
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { useGetTeachersQuery } from '../../../services/userAuthApi'
+import { useIsFocused } from "@react-navigation/native"; 
+import { useDispatch } from "react-redux";
+import { setTeacherInfo } from "../../../features/teacherSlice";
+
+
+const TeachersListForSchoolAdmin = ({navigation}) => {
+  
+  const {data} = useGetTeachersQuery();
+  const [teachers,setTeachers] = useState();
+
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    if (data) {
+      dispatch(
+        setTeacherInfo({
+          email: data.user.email,
+          firstName: data.user.first_name,
+          lastName: data.user.last_name,
+        })
+      );
+    }
+   
+  }, [focus])
+  const focus = useIsFocused();
 
 const TeachersListForSchoolAdmin =({navigation})=> {
   const [teacher, setTeacher] = ([
@@ -117,16 +143,14 @@ const TeachersListForSchoolAdmin =({navigation})=> {
         <FlatList
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
-          data={this.state.data}
-          keyExtractor={item => item.photo}
+          data={teachers}
+          keyExtractor={item => item.image}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("TeachersProfile", {
-                    name: item.name,
-                    email: item.email,
-                    photo: item.photo,
+         
                   })
                 }
               >
@@ -137,7 +161,7 @@ const TeachersListForSchoolAdmin =({navigation})=> {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} source={{ uri: item.photo }} />
+                    <Image style={styles.image} source={{ uri: item.image }} />
                   </View>
                   <View
                     style={{
@@ -146,7 +170,7 @@ const TeachersListForSchoolAdmin =({navigation})=> {
                    
                     }}
                   >
-                    <Text style={styles.username}>{item.name}</Text>
+                    <Text style={styles.username}>{item.first_name}</Text>
                   </View>
                   <View
                     style={{
@@ -213,4 +237,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TeachersListForSchoolAdmin; 
+export default TeachersListForSchoolAdmin

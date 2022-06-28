@@ -4,14 +4,14 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navi
 import { useNavigation } from '@react-navigation/native';
 import { removeToken } from '../../../services/AsyncStorageService.js';
 import { useSelector } from 'react-redux';
-import { unSetTeacherInfo } from '../../../features/teacherSlice';
+import {  unsetTeacherInfo   } from '../../../features/teacherSlice';
 import { unsetUserToken } from '../../../features/authSlice.js';
 
 
-const SideBar = ({ ...props }) => {
+const TeacherSideBar = ({ ...props }) => {
 
   const handleLogout = async () => {
-    unSetTeacherInfo({ email: "", first_name: "", last_name: "", image: '' })
+    unsetTeacherInfo({ email: "", first_name: "", last_name: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
     navigation.navigate('Home');
@@ -19,7 +19,7 @@ const SideBar = ({ ...props }) => {
 
   const navigation = useNavigation()
   // Getting User Data from Redux Store
-  const myData = useSelector(state => state.user)
+  const myData = useSelector(state => state.teacher)
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
 
@@ -37,4 +37,4 @@ const SideBar = ({ ...props }) => {
   );
 };
 
-export default SideBar
+export default TeacherSideBar

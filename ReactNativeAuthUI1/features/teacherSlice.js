@@ -15,7 +15,7 @@ const initialState = {
 
 }
 export const teacherSlice = createSlice({
-  name: 'teacher_info',
+  name: 'user_info',
   initialState,
   reducers: {
     setTeacherInfo: (state, action) => {
@@ -32,7 +32,7 @@ export const teacherSlice = createSlice({
       state.cnic = action.payload.cnic
       state.city = action.payload.city
     },
-    unSetTeacherInfo: (state, action) => {
+    unsetTeacherInfo: (state, action) => {
       state.email = action.payload.email
       state.first_name = action.payload.first_name
       state.last_name = action.payload.last_name
@@ -49,5 +49,5 @@ export const teacherSlice = createSlice({
   }
 })
 
-export const { setTeacherInfo, unSetTeacherInfo } = teacherSlice.actions
+export const { setTeacherInfo, unsetTeacherInfo } = teacherSlice.actions
 export default teacherSlice.reducer

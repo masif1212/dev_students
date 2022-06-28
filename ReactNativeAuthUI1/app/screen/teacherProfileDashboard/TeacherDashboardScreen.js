@@ -1,14 +1,14 @@
 import { View, Text, Image, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getToken } from "../../../services/AsyncStorageService";
-import { useGetLoggedTeacherQuery } from "../../../services/userAuthApi";
+import { useGetLoggedTeachersQuery } from "../../../services/userAuthApi";
 import { useDispatch } from "react-redux";
 import { setTeacherInfo } from "../../../features/teacherSlice";
 import { setUserToken } from "../../../features/authSlice";
 import CustomCard from "../../Components/customCard/CustomCard";
 
 
-const SchoolDashboardScreen = () => {
+const TeacherDashboardScreen = () => {
   const [userLToken, setUserLToken] = useState();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const SchoolDashboardScreen = () => {
     })();
   });
 
-  const { data, isSuccess } = useGetLoggedTeacherQuery(userLToken);
+  const { data, isSuccess } = useGetLoggedTeachersQuery(userLToken);
 
   // Store User Data in Redux Store
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const SchoolDashboardScreen = () => {
           first_name: data.user.first_name,
           last_name: data.user.last_name,
         })
+        
       );
     }
   });
@@ -51,4 +52,4 @@ const SchoolDashboardScreen = () => {
   );
 };
 
-export default SchoolDashboardScreen;
+export default TeacherDashboardScreen; 

@@ -117,13 +117,13 @@ const Home =({ navigation })=> {
                   alignItems: "center",
                   padding: 15,
                   width: "100%",
-                  marginVertical: 5,
+               
                   borderRadius: 50,
-                  marginBottom: 80,
+      
                   fontWeight: "bold",
                   backgroundColor: "#fff",
                   elevation: 1,
-                  marginTop: 50,
+            
                 }}
               >
                 <Text

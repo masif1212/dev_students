@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://192.168.18.12:8000/api/user/teachersLogin
+POST http://192.168.18.26:8000/api/user/teachersLogin
 Content-Type: application/json
 
 {
@@ -44,8 +44,8 @@ Content-Type: application/json
 
 
 ###
-GET  http://192.168.18.12:8000/api/user/loggedTeachers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTYzMjkxMDAsImV4cCI6MTY1Njc2MTEwMH0.4vBVoBx_TAhJn16bNsOoIOE-DTOFshlG6ZZJ07Izjp8
+GET  http://192.168.18.26:8000/api/user/loggedTeachers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTY0MTQ0NjQsImV4cCI6MTY1Njg0NjQ2NH0.0B3EBycxVnSWMY8bFegFYZe7tNoJMd1irSnaz-E29kE
 
 ###
 GET  http://192.168.18.14:8000/api/user/getTeachers
