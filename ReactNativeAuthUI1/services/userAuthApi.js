@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userAuthApi = createApi({
   reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.18.64:8000/api/user/'
+    baseUrl: 'http://192.168.18.14:8000/api/user/'
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -137,7 +137,53 @@ export const userAuthApi = createApi({
         }
       }
     }),
+
+    // TEACHER SECTION 
+    registerTeachers : builder.mutation({
+      query: (teacher) => {
+        return {
+          url: 'registerTeacher',
+          method: 'POST',
+          body: teacher,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
+    }),
+
+    loginTeacher: builder.mutation({
+      query: (teacher) => {
+        return {
+          url: 'teachersLogin',
+          method: 'POST',
+          body: teacher,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
+    }),
+
+    getLoggedTeacher: builder.query({
+      query: (token) => ({
+        url: 'loggedTeachers',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${token}`,
+        },
+      })
+    }),
+
+    getTeachers: builder.query({
+      query: () => ({
+        url: 'getTeachers',
+        method: 'GET',
+        
+      })
+    }),
+
   }),
 })
 
-export const { useRegisterUserMutation,useRegisterSchoolAdminMutation, useStudentattendanceMutation , useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation } = userAuthApi
+export const {useLoginTeacherMutation,useRegisterTeachersMutation, useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation, useGetTeachersQuery } = userAuthApi

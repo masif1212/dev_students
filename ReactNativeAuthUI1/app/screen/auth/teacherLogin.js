@@ -13,10 +13,10 @@ import {
   import { styles, toastConfig } from "../../../style";
   import Toast from "react-native-toast-message";
   import { useNavigation } from "@react-navigation/native";
-  import { useLoginUserMutation } from "../../../services/userAuthApi";
+  import { useLoginTeacherMutation } from "../../../services/userAuthApi";
   import { storeToken } from "../../../services/AsyncStorageService";
   
-  const AdminLoginScreen = () => {
+  const TeacherLoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,16 +26,16 @@ import {
       setPassword("");
     };
   
-    const [loginUser] = useLoginUserMutation();
+    const [loginTeacher] = useLoginTeacherMutation();
   
     const handleFormSubmit = async () => {
       if (email && password) {
         const formData = { email, password };
-        const res = await loginUser(formData);
+        const res = await loginTeacher(formData);
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
-          navigation.navigate("UserPanelTab");
+          navigation.navigate("SchoolAdminPannel");
         }
         if (res.data.status === "failed") {
           Toast.show({
@@ -76,8 +76,6 @@ import {
                 onChangeText={setEmail}
                 placeholder="Write Your Email"
                 keyboardType="email-address"
-              placeholderTextColor='gray'
-
               />
             </View>
   
@@ -87,7 +85,6 @@ import {
                 value={password}
                 onChangeText={setPassword}
                 placeholder="Write Your Password"
-              placeholderTextColor='gray'
                 secureTextEntry={true}
               />
             </View>
@@ -132,15 +129,7 @@ import {
                 </TouchableWithoutFeedback>
               </View>
   
-              <View style={{ flex: 1, marginBottom: 10 }}>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    navigation.navigate("Registration");
-                  }}
-                >
-                  <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
-                </TouchableWithoutFeedback>
-              </View>
+           
             </View>
           </View>
         </ScrollView>
@@ -187,5 +176,5 @@ import {
     },
   });
   
-  export default AdminLoginScreen;
+  export default TeacherLoginScreen;
   

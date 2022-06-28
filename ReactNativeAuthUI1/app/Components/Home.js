@@ -75,10 +75,11 @@ const Home =({ navigation })=> {
                     alignItems: "center",
                   }}
                  >
-                  Admin
+                  Super Admin
                 </Text>
               </TouchableOpacity>
 
+              
               <TouchableOpacity
                 // onPress={() => navigation.navigate("UserLogin", { screen: "UserLogin" }) }
                 onPress={() => navigation.navigate("TeacherLandingPage", { screen: "TeacherLandingPage" }) }
@@ -105,7 +106,36 @@ const Home =({ navigation })=> {
                     alignItems: "center",
                   }}
                  >
-                  User
+                  Admin
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate("TeacherLoginScreen", { screen: "TeacherLoginScreen" }) }
+
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: 15,
+                  width: "100%",
+                  marginVertical: 5,
+                  borderRadius: 50,
+                  marginBottom: 80,
+                  fontWeight: "bold",
+                  backgroundColor: "#fff",
+                  elevation: 1,
+                  marginTop: 50,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                 >
+                  Teacher
                 </Text>
               </TouchableOpacity>
           </View>

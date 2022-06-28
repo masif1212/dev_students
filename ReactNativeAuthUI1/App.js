@@ -18,7 +18,7 @@ import TeachersProfileScreen from './app/screen/Teachers/TeachersProfileScreen'
 import TeachersListScreen from './app/screen/Teachers/TeachersListScreen'
 import StudentDetail from './app/screen/singleStudentAttendance/StudentDetail'
 import SchoolAdminHomePage from './app/screen/schooladmin/SchoolAdminHomePage'
-import TeachersListForSchoolAdmin from './app/screen/schooladmin/TeachersListForSchoolAdmin'
+import TeachersListForSchoolAdmin from "./app/screen/schooladmin/TeachersListForSchoolAdmin";
 import AddTeacherForm from './app/screen/Teachers/AddTeacherForm'
 import ViewFullAttendance from './app/screen/singleStudentAttendance/ViewFullAttendance'
 import ClassStudents from './app/screen/singleStudentAttendance/ClassStudents'
@@ -35,7 +35,8 @@ import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
-import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
+import MarkTeacherAttendance from "./app/screen/schooladmin/MarkTeacherAttendance";
+import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 
 
 
@@ -51,6 +52,7 @@ const App = () => (
         <Stack.Screen name="ShopTab" component={ShopTab} options={{ headerShown: false }} />
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{ title: 'User Login', headerShown: false }} />
+        <Stack.Screen name="TeacherLoginScreen" component={TeacherLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="Registration" component={RegistrationScreen} options={{ title: 'Registration', headerBackVisible: false }} />
         <Stack.Screen name="SendPasswordResetEmail" component={SendPasswordResetEmailScreen} options={{ title: 'Forgot Password' }} />
         <Stack.Screen name="UserPanelTab" component={UserPanelTab} options={{ headerShown: false }} />
@@ -92,7 +94,9 @@ const App = () => (
         <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{ headerShown: true,  headerShown:true, headerStyle: { backgroundColor: "white", }, }}/>
         <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true,headerStyle: { backgroundColor: "white", } }} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
-        <Stack.Screen name="TeacherLandingPage" component={TeacherLandingPage} options={{ headerShown: true,headerStyle: { backgroundColor: "white", } }}/>
+        
+        <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
+    
 
 
       </Stack.Navigator>

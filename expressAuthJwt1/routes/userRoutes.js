@@ -7,6 +7,8 @@ import StudentController from '../controllers/studentController.js';
 import SchoolController from '../controllers/schoolController.js';
 import StudentAttendanceController from '../controllers/studentAttendanceController.js';
 import SchoolAdminController from '../controllers/schoolAdminController.js';
+import TeachersController from '../controllers/teachersController.js'
+import checkTeacherAuth from '../middlewares/teacherMiddleware.js'
 
 
 
@@ -26,7 +28,7 @@ router.get('/loggeduser', UserController.loggedUser)
 
 //students
 router.post('/createstudent', StudentController.studentRegistration);
-router.get('/getstudent',StudentController.studentsGet)
+// router.get('/getstudent',StudentController.studentsGet)
 
 
 //school
@@ -42,6 +44,15 @@ router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
 router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
+
+
+
+//TEACHER ROUTES
+router.post('/registerTeacher', TeachersController.teachersRegistration)
+router.post('/teachersLogin', TeachersController.teachersLogin)
+router.use('/loggedTeachers', checkTeacherAuth)
+router.get('/loggedTeachers', TeachersController.loggedTeachers)
+router.get('/getTeachers', TeachersController.getTeachers)
 
 
 

@@ -1,39 +1,40 @@
-import UserModel from '../models/User.js'
+import TeachersModel from '../models/teacherModel.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import transporter from '../config/emailConfig.js'
 
-class UserController {
-  static userRegistration = async (req, res) => {
-    const { firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
-    const user = await UserModel.findOne({ email: email })
+class TeachersController {
+  static teachersRegistration = async (req, res) => {
+    const { first_name,last_name,image, email, password, confirm_password, contact, alt_contact,  address_1, address_2, cnic, city } = req.body
+    const user = await TeachersModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
     } else {
-      if (firstName && email && password && password_confirmation && tc) {
-        if (password === password_confirmation) {
+      if (first_name && email && password && confirm_password ) {
+        if (password === confirm_password) {
           try {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
-            const doc = new UserModel({
-              firstName: firstName,
-              lastName: lastName,
+            const doc = new TeachersModel({
+              image: image,
+              first_name: first_name,
+              last_name: last_name,
               email: email,
               password: hashPassword,
+              confirm_password : hashPassword,
               contact: contact,
               alt_contact: alt_contact,
               address_1: address_1,
               address_2: address_2,
-              CNIC: CNIC,
+              cnic: cnic,
               city: city,
-              image: image,
-              tc: tc
+             
             })
             await doc.save()
-            const saved_user = await UserModel.findOne({ email: email })
+            const saved_user = await TeachersModel.findOne({ email: email })
             // Generate JWT Token
             const token = jwt.sign({ userID: saved_user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' })
-            res.status(201).send({ "status": "success", "message": "Successfully Register", "token": token })
+            res.status(201).send({ "status": "success", "message": "Registration Success", "token": token })
           } catch (error) {
             console.log(error)
             res.send({ "status": "failed", "message": "Unable to Register" })
@@ -47,11 +48,11 @@ class UserController {
     }
   }
 
-  static userLogin = async (req, res) => {
+  static teachersLogin = async (req, res) => {
     try {
       const { email, password } = req.body
       if (email && password) {
-        const user = await UserModel.findOne({ email: email })
+        const user = await TeachersModel.findOne({ email: email })
         if (user != null) {
           const isMatch = await bcrypt.compare(password, user.password)
           if ((user.email === email) && isMatch) {
@@ -74,14 +75,14 @@ class UserController {
   }
 
   static changeUserPassword = async (req, res) => {
-    const { password, password_confirmation } = req.body
-    if (password && password_confirmation) {
-      if (password !== password_confirmation) {
+    const { password, confirm_password } = req.body
+    if (password && confirm_password) {
+      if (password !== confirm_password) {
         res.send({ "status": "failed", "message": "New Password and Confirm New Password doesn't match" })
       } else {
         const salt = await bcrypt.genSalt(10)
         const newHashPassword = await bcrypt.hash(password, salt)
-        await UserModel.findByIdAndUpdate(req.user._id, { $set: { password: newHashPassword } })
+        await TeachersModel.findByIdAndUpdate(req.user._id, { $set: { password: newHashPassword } })
         res.send({ "status": "success", "message": "Password changed succesfully" })
       }
     } else {
@@ -89,14 +90,14 @@ class UserController {
     }
   }
 
-  static loggedUser = async (req, res) => {
+  static loggedTeachers = async (req, res) => {
     res.send({ "user": req.user })
   }
 
   static sendUserPasswordResetEmail = async (req, res) => {
     const { email } = req.body
     if (email) {
-      const user = await UserModel.findOne({ email: email })
+      const user = await TeachersModel.findOne({ email: email })
       if (user) {
         const secret = user._id + process.env.JWT_SECRET_KEY
         const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' })
@@ -119,19 +120,19 @@ class UserController {
   }
 
   static userPasswordReset = async (req, res) => {
-    const { password, password_confirmation } = req.body
+    const { password, confirm_password } = req.body
     const { id, token } = req.params
-    const user = await UserModel.findById(id)
+    const user = await TeachersModel.findById(id)
     const new_secret = user._id + process.env.JWT_SECRET_KEY
     try {
       jwt.verify(token, new_secret)
-      if (password && password_confirmation) {
-        if (password !== password_confirmation) {
+      if (password && confirm_password) {
+        if (password !== confirm_password) {
           res.send({ "status": "failed", "message": "New Password and Confirm New Password doesn't match" })
         } else {
           const salt = await bcrypt.genSalt(10)
           const newHashPassword = await bcrypt.hash(password, salt)
-          await UserModel.findByIdAndUpdate(user._id, { $set: { password: newHashPassword } })
+          await TeachersModel.findByIdAndUpdate(user._id, { $set: { password: newHashPassword } })
           res.send({ "status": "success", "message": "Password Reset Successfully" })
         }
       } else {
@@ -142,6 +143,18 @@ class UserController {
       res.send({ "status": "failed", "message": "Invalid Token" })
     }
   }
+
+  static getTeachers = async (req, res) => {
+    try{
+      const teachers = await TeachersModel.find({
+        attributes: [ "id", "first_name","last_name","image", "email", "password", "confirm_password", "contact", "alt_contact",  "address_1", "address_2", "cnic", "city"]
+      });
+      res.json(teachers)
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 }
 
-export default UserController
+export default TeachersController

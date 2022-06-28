@@ -145,6 +145,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={first_name}
               onChangeText={setFirst_Name}
+              placeholderTextColor='gray'
               placeholder="Write Your First Name"
             />
           </View>
@@ -154,6 +155,7 @@ const CreateStudentForm = () => {
               value={last_name}
               onChangeText={setLast_Name}
               placeholder="Write Your Last Name"
+              placeholderTextColor='gray'
             />
           </View>
           <View>
@@ -162,6 +164,7 @@ const CreateStudentForm = () => {
               keyboardType="email-address"
               value={father_name}
               onChangeText={setFather_Name}
+              placeholderTextColor='gray'
               placeholder="Write Your Father Name"
             />
           </View>
@@ -171,6 +174,7 @@ const CreateStudentForm = () => {
               value={father_cnic}
               onChangeText={setFather_cnic}
               placeholder="Father CNIC (XXXXX-XXXXXXX-X)"
+              placeholderTextColor='gray'
               keyboardType="phone-pad"
             />
           </View>
@@ -181,6 +185,7 @@ const CreateStudentForm = () => {
               value={contact}
               onChangeText={setContact}
               placeholder="Contact"
+              placeholderTextColor='gray'
               keyboardType="numeric"
             />
           </View>
@@ -190,6 +195,7 @@ const CreateStudentForm = () => {
               value={emergency_contact}
               onChangeText={setEmergency_Contact}
               placeholder="Emergency Contact"
+              placeholderTextColor='gray'
               keyboardType="numeric"
             />
           </View>
@@ -198,6 +204,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={address_1}
               onChangeText={setAdress_1}
+              placeholderTextColor='gray'
               placeholder="Address 1"
             />
           </View>
@@ -206,6 +213,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={address_2}
               onChangeText={setAdress_2}
+              placeholderTextColor='gray'
               placeholder="Address 2"
             />
           </View>
@@ -214,6 +222,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={roll_no}
               onChangeText={setRoll_no}
+              placeholderTextColor='gray'
               placeholder="Set Student Roll No."
             />
           </View>
@@ -222,6 +231,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={student_class}
               onChangeText={setStudent_class}
+              placeholderTextColor='gray'
               placeholder="Student Class"
             />
           </View>
@@ -230,6 +240,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={section}
               onChangeText={setSection}
+              placeholderTextColor='gray'
               placeholder="Section"
             />
           </View>
@@ -239,6 +250,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={city}
               onChangeText={setCity}
+              placeholderTextColor='gray'
               placeholder="City"
             />
           </View>
