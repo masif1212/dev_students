@@ -35,6 +35,7 @@ import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
+import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 
 
 
@@ -50,6 +51,7 @@ const App = () => (
         <Stack.Screen name="ShopTab" component={ShopTab} options={{ headerShown: false }} />
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{ title: 'User Login', headerShown: false }} />
+        <Stack.Screen name="TeacherLoginScreen" component={TeacherLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="Registration" component={RegistrationScreen} options={{ title: 'Registration', headerBackVisible: false }} />
         <Stack.Screen name="SendPasswordResetEmail" component={SendPasswordResetEmailScreen} options={{ title: 'Forgot Password' }} />
         <Stack.Screen name="UserPanelTab" component={UserPanelTab} options={{ headerShown: false }} />
