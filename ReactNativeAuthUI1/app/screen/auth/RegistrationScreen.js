@@ -153,6 +153,7 @@ const RegistrationScreen = () => {
               value={firstName}
               onChangeText={setFirstName}
               placeholder="Write Your First Name"
+              placeholderTextColor='gray'
             />
           </View>
           <View>
@@ -161,6 +162,8 @@ const RegistrationScreen = () => {
               value={lastName}
               onChangeText={setLastName}
               placeholder="Write Your Last Name"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -169,6 +172,7 @@ const RegistrationScreen = () => {
               keyboardType="email-address"
               value={email}
               onChangeText={setEmail}
+              placeholderTextColor='gray'
               placeholder="Write Your Email"
             />
           </View>
@@ -180,6 +184,8 @@ const RegistrationScreen = () => {
               placeholder="Write Your Password"
               secureTextEntry={true}
               keyboardType={"default"}
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -190,6 +196,8 @@ const RegistrationScreen = () => {
               placeholder="Write Your Confirm Password"
               secureTextEntry={true}
               keyboardType={"default"}
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -199,6 +207,8 @@ const RegistrationScreen = () => {
               onChangeText={setContact}
               placeholder="Contact"
               keyboardType="numeric"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -208,6 +218,8 @@ const RegistrationScreen = () => {
               onChangeText={setAlt_Contact}
               placeholder="Emergency Contact"
               keyboardType="numeric"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -216,6 +228,8 @@ const RegistrationScreen = () => {
               value={address_1}
               onChangeText={setAdress_1}
               placeholder="Address 1"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -224,6 +238,8 @@ const RegistrationScreen = () => {
               value={address_2}
               onChangeText={setAdress_2}
               placeholder="Address 2"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -233,6 +249,8 @@ const RegistrationScreen = () => {
               onChangeText={setCNIC}
               placeholder="CNIC (XXXXX-XXXXXXX-X)"
               keyboardType="phone-pad"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View>
@@ -241,6 +259,8 @@ const RegistrationScreen = () => {
               value={city}
               onChangeText={setCity}
               placeholder="City"
+              placeholderTextColor='gray'
+
             />
           </View>
           <View style={{ flex: 1, flexDirection: "row" }}>

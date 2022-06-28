@@ -150,6 +150,7 @@ const SignUpSchoolAdmin = () => {
               value={first_name}
               onChangeText={setfirst_name}
               placeholder="Write Your First Name"
+              placeholderTextColor='gray'
             />
           </View>
           <View>
@@ -157,6 +158,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={last_name}
               onChangeText={setlast_name}
+              placeholderTextColor='gray'
               placeholder="Write Your Last Name"
             />
           </View>
@@ -166,6 +168,7 @@ const SignUpSchoolAdmin = () => {
               keyboardType="email-address"
               value={email}
               onChangeText={setEmail}
+              placeholderTextColor='gray'
               placeholder="Write Your Email"
             />
           </View>
@@ -174,6 +177,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
+              placeholderTextColor='gray'
               placeholder="Write Your Password"
               secureTextEntry={true}
               keyboardType={"default"}
@@ -184,6 +188,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={confirm_password}
               onChangeText={setconfirm_password}
+              placeholderTextColor='gray'
               placeholder="Write Your Confirm Password"
               secureTextEntry={true}
               keyboardType={"default"}
@@ -194,6 +199,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={contact}
               onChangeText={setContact}
+              placeholderTextColor='gray'
               placeholder="Contact"
               keyboardType="numeric"
             />
@@ -203,6 +209,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={alt_contact}
               onChangeText={setAlt_Contact}
+              placeholderTextColor='gray'
               placeholder="Emergency Contact"
               keyboardType="numeric"
             />
@@ -212,6 +219,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={address_1}
               onChangeText={setAdress_1}
+              placeholderTextColor='gray'
               placeholder="Address 1"
             />
           </View>
@@ -220,6 +228,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={address_2}
               onChangeText={setAdress_2}
+              placeholderTextColor='gray'
               placeholder="Address 2"
             />
           </View>
@@ -228,6 +237,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={cnic}
               onChangeText={setcnic}
+              placeholderTextColor='gray'
               placeholder="cnic (XXXXX-XXXXXXX-X)"
               keyboardType="phone-pad"
             />
@@ -237,6 +247,7 @@ const SignUpSchoolAdmin = () => {
               style={styleOne.input}
               value={city}
               onChangeText={setCity}
+              placeholderTextColor='gray'
               placeholder="City"
             />
           </View>

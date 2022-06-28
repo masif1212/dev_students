@@ -14,9 +14,7 @@ export const store = configureStore({
     user: userReducer,
     auth: authReducer,
     student: studentReducer,
-    schoolAdmin: schoolAdminReducer,
-    teacher: teacherReducer
-    
+    schoolAdmin: schoolAdminReducer   
     
   },
   middleware: (getDefaultMiddleware) =>

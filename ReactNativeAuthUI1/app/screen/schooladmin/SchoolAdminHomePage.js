@@ -19,7 +19,9 @@ const SchoolAdminHomePage = () => {
           alignItems: "center",
         }}
       >
-          <TouchableOpacity
+      
+
+        <TouchableOpacity
         onPress={() => navigation.navigate('TeachersListForSchoolAdmin')}
           style={{
             padding: 20,
@@ -56,6 +58,7 @@ const SchoolAdminHomePage = () => {
             </Text>
           </View>
         </TouchableOpacity>
+
         <TouchableOpacity
         onPress={()=>navigation.navigate('CreateStudent')}
           style={{
@@ -105,6 +108,44 @@ const SchoolAdminHomePage = () => {
         }}
       >
        
+       <TouchableOpacity
+        onPress={() => navigation.navigate('MarkAttendanceScreen')}
+          style={{
+            padding: 20,
+            borderRadius: 20,
+            margin: 10,
+            backgroundColor: "white",
+            width: "40%",
+            elevation:2
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              padding: 5,
+              alignItems: "center",
+            }}
+          >
+            <Icon
+              style={{
+                marginRight: 5,
+                color: "#5062BD",
+              }}
+              name="user"
+              size={30}
+              color="#900"
+            />
+            <Text
+              style={{
+                padding: 3,
+                fontSize: 18,
+                fontWeight: "300",
+              }}
+            >
+             Mark Teacher Attendance
+            </Text>
+          </View>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={{

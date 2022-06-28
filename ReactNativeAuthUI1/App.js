@@ -35,7 +35,7 @@ import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
-import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
+import MarkTeacherAttendance from "./app/screen/schooladmin/MarkTeacherAttendance";
 
 
 
@@ -93,6 +93,7 @@ const App = () => (
         <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{ headerShown: true,  headerShown:true, headerStyle: { backgroundColor: "white", }, }}/>
         <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "white", },  }} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
+        <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
     
 
 
