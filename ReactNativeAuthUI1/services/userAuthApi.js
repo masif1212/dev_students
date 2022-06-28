@@ -75,6 +75,19 @@ export const userAuthApi = createApi({
       })
     }),
 
+    studentattendance : builder.mutation({
+      query: (any) => {
+        return {
+          url: 'studentattendance',
+          method: 'POST',
+          body: any,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
+    }),
+
 
 
 
@@ -127,4 +140,4 @@ export const userAuthApi = createApi({
   }),
 })
 
-export const { useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation } = userAuthApi
+export const { useRegisterUserMutation,useRegisterSchoolAdminMutation, useStudentattendanceMutation , useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation } = userAuthApi

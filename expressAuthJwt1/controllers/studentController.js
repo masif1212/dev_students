@@ -32,7 +32,37 @@ class StudentController {
           res.send({ "status": "failed", "message": "All fields are required" })
         }
       
-    }
+    };
+
+    static studentsGet = async (req, res) => {
+      try {
+        const students = await StudentModel.find({
+          attributes: [
+            "image",
+            "first_name",
+            "last_name",
+            "father_name",
+            "father_cnic",
+            "contact",
+            "emergency_contact",
+            "address_1",
+            "address_2",
+            "roll_no",
+            "student_class",
+            "section",
+            "city"
+  
+  
+          ],
+        });
+        res.json(students);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
+
+
 }  
 
 export default StudentController;

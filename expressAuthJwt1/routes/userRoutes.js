@@ -34,6 +34,8 @@ router.post('/createschool', SchoolController.schoolRegistration)
 
 //student attendance
 router.post('/studentattendance', StudentAttendanceController.MarkStudentAttendance)
+// router.get('/getstudentsattendancedata', StudentAttendanceController.getStudentsAttendanceData)
+
 
 //SCHOOL aDMIN MODEL
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)

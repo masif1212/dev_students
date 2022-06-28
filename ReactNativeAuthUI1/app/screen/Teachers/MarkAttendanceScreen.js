@@ -1,294 +1,292 @@
-      import { StatusBar } from 'expo-status-bar';
-      import React, { useState, useEffect } from 'react';
-      import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions  } from 'react-native';
-      import { MaterialCommunityIcons } from '@expo/vector-icons';
-      import _ from "lodash"
-      import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
-      // import BouncyCheckbox from 'react-native-bouncy-checkbox'
-      // import { RadioButton } from 'react-native-paper';
-      // import RadioGroup from 'react-native-radio-buttons-group';
-      import { CheckBox } from 'react-native-elements';
-      import { useIsFocused } from "@react-navigation/native";
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions  } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import _ from "lodash"
+import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
+import { CheckBox } from 'react-native-elements';
+import { useGetStudentQuery } from '../../../services/userAuthApi';
+import { useSelector } from 'react-redux';
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const MarkAttendanceScreen = ({ navigation }) => {
+  const [columns, setColumns] = useState([
+    "RollNo",
+    "Name",
+  ])
+  
+  const [direction, setDirection] = useState('')
+  const [selectedColumn, setSelectedColumn] = useState('')
+  
+  const {data} = useGetStudentQuery();
+
+
+  const [students,setStudents] =useState({})
+
+
+  
+  useEffect(() => {
+    setStudents(data);
+    
+  });
+
+  const myData = useSelector(state => state.student)
 
 
 
-      const windowWidth = Dimensions.get('window').width;
-      const windowHeight = Dimensions.get('window').height;
+  const MarkAttendance=(item,S)=>{
+   let std=students
+   std[item].attendanc=S
+   let newArr = [...students]; // copying the old datas array
+   newArr[item].attendanc = S; 
+   setStudents(newArr) 
+  console.log([newArr])
+}
 
-      const MarkAttendanceScreen = ({ navigation }) => {
-        const [columns, setColumns] = useState([
-          "RollNo",
-          "Name",
-        ])
-        
-        const [direction, setDirection] = useState('')
-        const [selectedColumn, setSelectedColumn] = useState('')
-        
-        const [students,setStudents] =useState('')
+// const MarkAttendance=(item,S)=>{
+//   let std=students
+//   std(item).attendanc=S
+//   let newArr = [...students]; // copying the old datas array
+//   newArr[item].attendanc = S; 
+//   setStudents(newArr)  
+//  console.log(std[item])    }
+// // console.log(students[0])
 
-        const fetchPosts = () => {
-          const apiURL = "http://192.168.18.64:8000/getStudentAttendance";
-          fetch(apiURL)
-            .then((response) => response.json())
-            .then((responseJson) => {
-              setStudents(responseJson);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        };
-        const focus = useIsFocused();
-        useEffect(() => {
-          fetchPosts();
-          return () => {};
-        }, [focus]);
-      
+const [ items , setItems ] = useState()
+  const sortTable = (column) => {
+    const newDirection = direction === "desc" ? "asc" : "desc"
+    const sortedData = _.orderBy(students, [column], [newDirection])
+    setSelectedColumn(column)
+    setDirection(newDirection)
+    setStudents(sortedData)
+  }
+  const tableHeader = () => (
 
-        const onSubmit = (any) => {
-          console.log(any)
-          fetch('http://192.168.18.64:8000/studentattendance', {
-            method: "POST",
-            body: JSON.stringify(any),
-            headers: {
-              'content-type': 'application/json; charset=utf-8',
-            }
-          })
-          .then((response) => response.json())
-          .catch(err => {
-            console.log(err);
-
-        });
-         }
-        
+    <View style={styles.tableHeader} >
 
 
-        const MarkAttendance=(item,S)=>{
-         let std=students
-         std[item].attendanc = S
-         let newArr = [...std]; // copying the old datas array
-         newArr[item].attendanc = S; 
-         setStudents(newArr)
-          let any = std[item]
-        // console.log(any) 
-        onSubmit(any);
-        
-    }
-      // console.log(students[0])
-      
-      const [ items , setItems ] = useState()
-        const sortTable = (column) => {
-          const newDirection = direction === "desc" ? "asc" : "desc"
-          const sortedData = _.orderBy(students, [column], [newDirection])
-          setSelectedColumn(column)
-          setDirection(newDirection)
-          setStudents(sortedData)
-        }
-        const tableHeader = () => (
-
-          <View style={styles.tableHeader} >
+      {
+        columns.map((column, index) => {
+          {
+            return (
 
 
-            {columns.map((column, index) => {{
-                return (
-                    <TouchableOpacity
-                      key={index}
-                      style={styles.columnHeader}
-                      onPress={() => sortTable(column)}>
-                      <Text style={styles.columnHeaderTxt}>{column + ""}
-                        {selectedColumn === column && <MaterialCommunityIcons
-                          name={direction === "desc" ? "arrow-down-drop-circle" : "arrow-up-drop-circle"}
-                        />
-                        }
-                      </Text>
-                    </TouchableOpacity>
-
-                  )
-                }
-              })
-            }
-          </View>
-
-        )
-
-        return (
-
-        
-          <View  style={{ height: '100%',width:'100%' }} >
-            
-
-            <View >
-              <ClassSectionFilter />
-            </View>
-          
-            <FlatList
-              data={students}
-              keyExtractor={(item, index) => index + ""}
-              style={{ maxWidth: '100%' }}
-              ListHeaderComponent={tableHeader}
-              stickyHeaderIndices={[0]}
-              extraData={students}
-              renderItem={({ item, index }) => {
-                return (
-              
-                  <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>   
-                    <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.id}</Text>
-                    <Text style={{ ...styles.columnRowTxt }}>{item.first_name+' '+item.last_name}</Text>
-                    <ScrollView horizontal={true}
-                      showsHorizontalScrollIndicator={true}
-                      pagingEnabled={true}
-                      style={{width:'150%'}}
-                      >
-                    <View style={{  flexDirection: 'row',left:40 }}>
-                      <View 
-                      style={{
-                        left:23
-                        
-                      }}
-                      >
-                      
-                      <CheckBox
-                        title='P'
-                        checkedColor='green'
-                        checked={item.attendanc=='p'?true:false}                    
-                        checkedIcon ="dot-circle-o"
-                        unCheckedIcon='circle-o'
-                        onPress={()=>MarkAttendance(index,'p')}
-                        containerStyle={{
-                        alignItems:'center',
-                        justifyContent:'center',
-             
-                        height:50,  
-                        right:50,
-                        alignItems:'center',
-                        justifyContent:'center',
-                        top:-10,
-                        backgroundColor:'transparent'
-                        }}
-                        /> 
+              <TouchableOpacity
+                key={index}
+                style={styles.columnHeader}
+                onPress={() => sortTable(column)}>
+                <Text style={styles.columnHeaderTxt}>{column + ""}
+                  {selectedColumn === column && <MaterialCommunityIcons
+                    name={direction === "desc" ? "arrow-down-drop-circle" : "arrow-up-drop-circle"}
+                  />
+                  }
+                </Text>
+              </TouchableOpacity>
 
 
-                      </View>
-                      <View style={{
-                          left:5
-                      }}>             
-                    <CheckBox
-                        title='A'
-                        checkedColor='red'
-                        checked={item.attendanc=='a'?true:false}
-                        checkedIcon ="dot-circle-o"
-                        unCheckedIcon='circle-o'
-
-                        onPress={()=>MarkAttendance(index,'a')}
-                        containerStyle={{
-                        alignItems:'center',
-                        justifyContent:'center',
-              
-                        height:50,  
-                        right:50,
-                        alignItems:'center',
-                        justifyContent:'center',
-                        top:-10,
-                        backgroundColor:'transparent'
-                        }}
-                        />
-                      </View>
-
-
-                      <View style={{left:5,}}>
-                      <CheckBox
-                      title='L'
-                      checkedColor='gray'
-
-                      checked={item.attendanc=='l'?true:false}
-                      checkedIcon ='dot-circle-o'
-                      unCheckedIcon='circle-o'
-                      onPress={()=>MarkAttendance(index,'l')}
-                      containerStyle={{
-                        alignItems:'center',
-                        justifyContent:'center',
-       
-                        height:50,  
-                        right:70,
-                        alignItems:'center',
-                        justifyContent:'center',
-                        top:-10,
-                        backgroundColor:'transparent',
-                        
-                        }} 
-                      />
-
-          </View>
-
-      
-                    </View>
-                    </ScrollView>
-                    
-                  </View>
-
-                )
-              }}
-            />
-          
-          </View>
-        );
+            )
+          }
+        })
       }
+    </View>
 
-      const styles = StyleSheet.create({
+  )
 
-        tableHeader: {
+  return (
 
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          backgroundColor: "#5062BD",
-          borderTopEndRadius: 10,
-          borderTopStartRadius: 10,
-          height: 50,
-          
-        },
-        tableRow: {
-          flexDirection: "row",
-          height: 40,
-          margin: 2,
-          left: 8
-        },
-        columnHeader: {
-          width: "16%",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          margin: 10
-        },
-        columnHeaderTxt: {
-          color: "white",
-          fontWeight: "bold",
+  
+    <View style={{ height: windowHeight,width:'100%' }}>
+
+      <View >
+        <ClassSectionFilter />
+      </View>
+    
+      <FlatList
+        data={students}
+        keyExtractor={(item, index) => index + ""}
+        style={{ maxWidth: '100%' }}
+        ListHeaderComponent={tableHeader}
+        stickyHeaderIndices={[0]}
+        extraData={students}
+        renderItem={({ item, index }) => {
+          return (
+        
+            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>   
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
+              <ScrollView horizontal={true}
+                showsHorizontalScrollIndicator={true}
+                pagingEnabled={true}
+                style={{width:'150%'}}
+                >
+              <View style={{  flexDirection: 'row',left:40 }}>
+                <View 
+                style={{
+                  left:23
+                  
+                }}
+                >
+                
+                <CheckBox
+                  title='P'
+                  checkedColor='green'
+                  checked={item.attendanc=='p'?true:false}                    
+                  checkedIcon ="dot-circle-o"
+                  unCheckedIcon='circle-o'
+                  onPress={()=>MarkAttendance(index,'p')}
+                  containerStyle={{
+                  alignItems:'center',
+                  justifyContent:'center',
+       
+                  height:50,  
+                  right:50,
+                  alignItems:'center',
+                  justifyContent:'center',
+                  top:-10,
+                  backgroundColor:'transparent'
+                  }}
+                  /> 
+
+          {/* <BouncyCheckbox
+            size={20}
+            fillColor="green"
+            unfillColor="#FFFFFF"
+            text="P"
+            iconStyle={{  }}
+            textStyle={{  }}
+            onPress={()=>MarkPresent()}
+            isChecked={false}
+            /> */}
 
 
-        },
-        columnRowTxt: {
-          width: "18%",
-        },
-        attendanceContainer:{
-          width:'100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-         
-          display: 'flex',
-          
-          
-        },
-        submitAttendance:{
-          color:'white',
-          fontSize:18
-        },
-        submitAttendance: {
-          backgroundColor: 'orange',
-          padding:12,
-          bottom:12,
-          color: 'white',
-          fontSize:20,
-          borderRadius:10,
-        }
+                </View>
+                <View style={{
+                    left:5
+                }}>             
+              <CheckBox
+                  title='A'
+                  checkedColor='red'
+                  checked={item.attendanc=='a'?true:false}
+                  checkedIcon ="dot-circle-o"
+                  unCheckedIcon='circle-o'
 
-      });
+                  onPress={()=>MarkAttendance(index,'a')}
+                  containerStyle={{
+                  alignItems:'center',
+                  justifyContent:'center',
+        
+                  height:50,  
+                  right:50,
+                  alignItems:'center',
+                  justifyContent:'center',
+                  top:-10,
+                  backgroundColor:'transparent'
+                  }}
+                  />
 
-      export default MarkAttendanceScreen
+          {/* <BouncyCheckbox
+            size={20}
+            fillColor="red"
+            unfillColor="#FFFFFF"
+            text="A"
+            iconStyle={{  }}
+            textStyle={{  }}
+            onPress={()=>MarkAbsent()}
+    /> */}
+                </View>
+
+
+                <View style={{
+                    left:5,
+                }}>
+                <CheckBox
+                title='L'
+                checkedColor='gray'
+
+                checked={item.attendanc=='l'?true:false}
+                checkedIcon ='dot-circle-o'
+                unCheckedIcon='circle-o'
+                onPress={()=>MarkAttendance(index,'l')}
+                containerStyle={{
+                  alignItems:'center',
+                  justifyContent:'center',
+ 
+                  height:50,  
+                  right:70,
+                  alignItems:'center',
+                  justifyContent:'center',
+                  top:-10,
+                  backgroundColor:'transparent',
+                  
+                  }}
+                  
+                />
+
+        {/* <BouncyCheckbox
+          size={20}
+          fillColor="gray"
+          unfillColor="#FFFFFF"
+          text="L"
+          iconStyle={{  }}
+          textStyle={{  }}
+          onPress={(isChecked)=>MarkLeave({isChecked})}
+          isChecked = {MarkLeave === setLeave ? true : false  }
+    />
+                */}
+
+</View>
+
+
+              </View>
+              </ScrollView>
+            </View>
+
+          )
+        }}
+      />
+    
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  tableHeader: {
+
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    backgroundColor: "#5062BD",
+    borderTopEndRadius: 10,
+    borderTopStartRadius: 10,
+    height: 50,
+    
+  },
+  tableRow: {
+    flexDirection: "row",
+    height: 40,
+    margin: 2,
+    left: 8
+  },
+  columnHeader: {
+    width: "16%",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    margin: 10
+  },
+  columnHeaderTxt: {
+    color: "white",
+    fontWeight: "bold",
+
+
+  },
+  columnRowTxt: {
+    width: "18%",
+  }
+
+});
+
+export default MarkAttendanceScreen

@@ -35,7 +35,7 @@ const SingleStudentDetail = ({route,navigation}) => {
               backgroundColor: "#5062BD",
             }}
             
-              source={{uri:'https://randomuser.me/api/portraits/women/26.jpg'}}
+              source={{uri : route.params.image}}
           
           />
          

@@ -35,6 +35,7 @@ import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
+import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
 
 
 
@@ -89,9 +90,9 @@ const App = () => (
         <Stack.Screen  name="CreateStudentForm"  component={CreateStudentForm} options={{ headerShown:true, headerStyle: { backgroundColor: "#5062BD", },  }}  />
         <Stack.Screen  name="SchoolAdminDrawer"  component={SchoolAdminDrawer}  options={{ headerShown: true,  headerShown:true, headerStyle: {  backgroundColor: "#5062BD",  }, }} />
         <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{ headerShown: true,  headerShown:true, headerStyle: { backgroundColor: "white", }, }}/>
-        <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "white", },  }} />
+        <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true,headerStyle: { backgroundColor: "white", } }} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
-    
+        <Stack.Screen name="TeacherLandingPage" component={TeacherLandingPage} options={{ headerShown: true,headerStyle: { backgroundColor: "white", } }}/>
 
 
       </Stack.Navigator>
