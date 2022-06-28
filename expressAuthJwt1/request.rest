@@ -9,5 +9,8 @@ Content-Type: application/json
 }
 
 ###
-GET  http://192.168.18.19:8000/api/user/loggedSchoolAdmin
+GET  http://192.168.10.6:8000/api/user/loggedSchoolAdmin
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3NzFmMGQ3YTU4ZjlhMjgxZGRiZWMiLCJpYXQiOjE2NTYyNTk0MzUsImV4cCI6MTY1NjY5MTQzNX0.KqQ0edvAkVv66tV-cOZrztKzeCs3oGB61G-sY6FLU_4
+
+###
+GET  http://192.168.18.64:8000/api/user/getstudent
