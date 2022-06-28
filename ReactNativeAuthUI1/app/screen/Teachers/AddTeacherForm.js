@@ -14,67 +14,64 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
 import Checkbox from "expo-checkbox";
-import { useRegisterUserMutation } from "../../../services/userAuthApi";
+import { useRegisterTeachersMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 
-const AddTeacherForm = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+const TeacherRegister = () => {
+  const [first_name, setfirst_name] = useState("");
+  const [last_name, setlast_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [password_confirmation, setPassword_confirmation] = useState("");
+  const [confirm_password, setconfirm_password] = useState("");
   const [contact, setContact] = useState("");
   const [alt_contact, setAlt_Contact] = useState("");
   const [address_1, setAdress_1] = useState("");
   const [address_2, setAdress_2] = useState("");
-  const [CNIC, setCNIC] = useState("");
+  const [cnic, setcnic] = useState("");
   const [city, setCity] = useState("");
   const [image, setImage] = useState();
-  const [tc, setTc] = useState(false);
 
   const clearTextInput = () => {
-    setFirstName("");
-    setLastName("");
+    setfirst_name("");
+    setlast_name("");
     setPassword("");
-    setPassword_confirmation("");
+    setconfirm_password("");
     setContact("");
     setAlt_Contact("");
     setAdress_1("");
     setAdress_2("");
-    setCNIC("");
+    setcnic("");
     setCity("");
     setImage("");
-    setTc(false);
   };
   const navigation = useNavigation();
 
-  const [registerUser] = useRegisterUserMutation();
+  const [registerTeacher] = useRegisterTeachersMutation();
 
   const handleFormSubmit = async () => {
-    if (firstName && email && password && password_confirmation && tc) {
-      if (password === password_confirmation) {
+    if (first_name && email && password && confirm_password ) {
+      if (password === confirm_password) {
         const formData = {
-          firstName,
-          lastName,
+          first_name,
+          last_name,
           email,
           password,
-          password_confirmation,
+          confirm_password,
           contact,
           image,
           alt_contact,
           address_1,
           address_2,
-          CNIC,
+          cnic,
           city,
-          tc,
         };
-        const res = await registerUser(formData);
+        const res = await registerTeacher(formData);
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
-          navigation.navigate("UserPanelTab");
+          navigation.goBack();
         }
         if (res.data.status === "failed") {
           Toast.show({
@@ -150,16 +147,16 @@ const AddTeacherForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={firstName}
-              onChangeText={setFirstName}
+              value={first_name}
+              onChangeText={setfirst_name}
               placeholder="Write Your First Name"
             />
           </View>
           <View>
             <TextInput
               style={styleOne.input}
-              value={lastName}
-              onChangeText={setLastName}
+              value={last_name}
+              onChangeText={setlast_name}
               placeholder="Write Your Last Name"
             />
           </View>
@@ -185,8 +182,8 @@ const AddTeacherForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={password_confirmation}
-              onChangeText={setPassword_confirmation}
+              value={confirm_password}
+              onChangeText={setconfirm_password}
               placeholder="Write Your Confirm Password"
               secureTextEntry={true}
               keyboardType={"default"}
@@ -229,9 +226,9 @@ const AddTeacherForm = () => {
           <View>
             <TextInput
               style={styleOne.input}
-              value={CNIC}
-              onChangeText={setCNIC}
-              placeholder="CNIC (XXXXX-XXXXXXX-X)"
+              value={cnic}
+              onChangeText={setcnic}
+              placeholder="cnic (XXXXX-XXXXXXX-X)"
               keyboardType="phone-pad"
             />
           </View>
@@ -243,14 +240,7 @@ const AddTeacherForm = () => {
               placeholder="City"
             />
           </View>
-          <View style={{ flex: 1, flexDirection: "row" }}>
-            <Checkbox
-              value={tc}
-              onValueChange={setTc}
-              color={tc ? "#5062BD" : undefined}
-            />
-            <Text style={styles.labelText}>I agree to term and condition.</Text>
-          </View>
+          
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -276,11 +266,10 @@ const AddTeacherForm = () => {
                 alignItems: "center",
               }}
             >
-              Sign Up
+              Register
             </Text>
           </TouchableOpacity>
         </View>
-      
       </ScrollView>
     </SafeAreaView>
   );
@@ -355,4 +344,4 @@ const styleOne = StyleSheet.create({
   },
 });
 
-export default AddTeacherForm;
+export default TeacherRegister;
