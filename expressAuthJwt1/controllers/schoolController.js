@@ -4,16 +4,16 @@ import SchoolRegistrationModel from "../models/schoolregisterModel.js"
 
 class SchoolController {
     static schoolRegistration = async (req, res) => {
-      const { image, school_name, contact_no, district, province, location,city} = req.body
-        if (image&& school_name && contact_no && district && province && location && city) {
+      const {  school_name, contact_no, district, province, address_1, address_2, city} = req.body
+        if (school_name && contact_no && district && province && address_2 && address_1 && city) {
             try {
               const doc = new SchoolRegistrationModel({
-                image: image,
                 school_name: school_name,
                 contact_no: contact_no,
                 district: district,
                 province: province,
-                location: location,
+                address_1: address_1,
+                address_2: address_2,
                 city: city,
               })
               await doc.save()
@@ -26,6 +26,17 @@ class SchoolController {
           res.send({ "status": "failed", "message": "All fields are required" })
         }
       
+    }
+
+    static getSchool = async(req,res)=>{
+      try{
+        const school = await SchoolRegistrationModel.find({
+          attributes: ["school_name","contact_no","address_1","address_2","province","distrct",'city']
+        })
+        res.json(school)
+      }catch(err) {
+        console.log(err)
+      }
     }
 }  
 

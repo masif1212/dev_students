@@ -28,14 +28,17 @@ router.get('/loggeduser', UserController.loggedUser)
 
 //students
 router.post('/createstudent', StudentController.studentRegistration);
-// router.get('/getstudent',StudentController.studentsGet)
+router.get('/getstudent',StudentController.studentsGet)
 
 
 //school
 router.post('/createschool', SchoolController.schoolRegistration)
+router.get('/getschools', SchoolController.getSchool)
 
 //student attendance
 router.post('/studentattendance', StudentAttendanceController.MarkStudentAttendance)
+// router.get('/getstudentsattendancedata', StudentAttendanceController.getStudentsAttendanceData)
+
 
 //SCHOOL aDMIN MODEL
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)

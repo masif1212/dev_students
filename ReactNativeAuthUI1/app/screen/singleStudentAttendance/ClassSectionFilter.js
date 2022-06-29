@@ -84,7 +84,7 @@ const ClassSectionFilter = () => {
 
   useEffect(() => {
     setStudent(data);
-    console.log(student)
+   
   });
 
 

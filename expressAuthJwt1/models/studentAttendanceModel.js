@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
 })
 
 // Model
-const StudentAttendance = mongoose.model("student-attendance", userSchema)
+const StudentAttendance = mongoose.model("student_attendance", userSchema)
 
 export default StudentAttendance

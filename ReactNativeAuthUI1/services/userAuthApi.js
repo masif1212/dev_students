@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userAuthApi = createApi({
   reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.18.26:8000/api/user/'
+    baseUrl: 'http://192.168.18.14:8000/api/user/'
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -73,6 +73,19 @@ export const userAuthApi = createApi({
         url: 'getstudent',
         method: 'GET',
       })
+    }),
+
+    studentattendance : builder.mutation({
+      query: (any) => {
+        return {
+          url: 'studentattendance',
+          method: 'POST',
+          body: any,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
     }),
 
 
@@ -164,6 +177,34 @@ export const userAuthApi = createApi({
       }
     }),
 
+    schoolRegister: builder.mutation({
+      query:(addSchools) =>({
+        url: 'createschool',
+        method: 'POST',
+        body: addSchools,
+        headers: {
+          'Content-type': 'application/json',
+
+        }
+      })
+    }),
+
+    getSchools :builder.query({
+      query:()=>({
+        url: "getschools",
+        method:"GET"
+      })
+    }),
+
+    getLoggedTeachers: builder.query({
+      query: (token) => ({
+        url: 'loggedTeachers',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${token}`,
+        },
+      })
+    }),
 
 
     getTeachers: builder.query({
@@ -177,4 +218,4 @@ export const userAuthApi = createApi({
   }),
 })
 
-export const {useLoginTeacherMutation,useRegisterTeachersMutation, useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation, useGetTeachersQuery, useGetLoggedTeachersQuery } = userAuthApi
+export const {useLoginTeacherMutation,useRegisterTeachersMutation, useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation, useGetTeachersQuery, useGetLoggedTeachersQuery, useSchoolRegisterMutation,useGetSchoolsQuery } = userAuthApi

@@ -1,4 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
+import {
+Button,
+  StyleSheet,
+} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UserLoginScreen from "./app/screen/auth/UserLoginScreen";
 import ShopTab from './app/screen/shop/ShopTab'
@@ -10,7 +14,6 @@ import Home from "./app/Components/Home.js";
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from './app/store'
-import {Button} from "react-native";
 import Schools from "./app/screen/Schools";
 import Drawer from './app/Components/DrawerComponents/Drawer'
 import SelectedSchoolScreen from './app/screen/SelectedSchoolScreen'
@@ -41,14 +44,14 @@ import TeacherPannelTab from "./app/screen/teacherProfileDashboard/TeacherPannel
 
 const Stack = createNativeStackNavigator();
 
-const App = () => (
+const App = ({navigation}) => (
   <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerStyle: { color: 'black' }, headerTintColor: 'white', headerShown: false }}
         
       >
-      <Stack.Screen name="Home" component={Home} options={{headerShown: false,headerStyle: {backgroundColor: "white",}}}/>
-        <Stack.Screen name="ShopTab" component={ShopTab} options={{ headerShown: false }} />
+      <Stack.Screen name="MONITORING APP" component={Home}  options={{ headerShown:false,  headerStyle: { backgroundColor: "#5062BD" }}}/>
+        <Stack.Screen name="ShopTab" component={ShopTab}  options={{ headerShown:true,  headerStyle: { backgroundColor: "#5062BD"}}} />
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="TeacherLoginScreen" component={TeacherLoginScreen} options={{ title: 'User Login', headerShown: false }} />
@@ -61,7 +64,7 @@ const App = () => (
               <Button
                 onPress={()=> navigation.navigate('CreateSchoolScreen') }
                 title="Add School"
-                color="#5062BD"
+                color="white"
               />
             ),
             headerStyle: {
@@ -87,14 +90,14 @@ const App = () => (
         <Stack.Screen  name="SuperAdminProfileScreen" component={SuperAdminProfileScreen} options={{ headerShown: true, headerStyle: {  backgroundColor: "white",  }}}/>
 
         <Stack.Screen name="CreateStudent" component={CreateStudent} options={({navigation}) => ({ headerShown:true , headerTintColor:'black', headerRight: () => (
-        <Button  onPress={()=> navigation.navigate('CreateStudentForm') } title="Add Student"  color="#5062BD" /> ), headerStyle: {  backgroundColor: "#F5F5F5", },  })}/>
+        <Button  onPress={()=> navigation.navigate('CreateStudentForm') } title="Add Student"  color="#5062BD" /> ), headerStyle: {  backgroundColor: "#F5F5F5"} })}/>
          
-        <Stack.Screen  name="CreateStudentForm"  component={CreateStudentForm} options={{ headerShown:true, headerStyle: { backgroundColor: "#5062BD", },  }}  />
-        <Stack.Screen  name="SchoolAdminDrawer"  component={SchoolAdminDrawer}  options={{ headerShown: true,  headerShown:true, headerStyle: {  backgroundColor: "#5062BD",  }, }} />
-        <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{ headerShown: true,  headerShown:true, headerStyle: { backgroundColor: "white", }, }}/>
-        <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "white", },  }} />
+        <Stack.Screen  name="CreateStudentForm"  component={CreateStudentForm} options={{ headerShown:true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD" } }}  />
+        <Stack.Screen  name="SchoolAdminDrawer"  component={SchoolAdminDrawer}  options={{ headerShown: true,headerTintColor:'white',  headerShown:true, headerStyle: {  backgroundColor: "#5062BD" }}} />
+        <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{  headerShown:true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD"}}}/>
+        <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD"}}} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
-        
+
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
           
 

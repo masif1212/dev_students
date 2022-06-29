@@ -12,8 +12,9 @@ import React, { useState, useEffect } from "react";
 import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import Icons from "react-native-vector-icons/FontAwesome5";
-import DropDownSuperAdmin from "../Components/dropdown/DropDownSuperAdmin"
- import { useIsFocused } from "@react-navigation/native"; 
+// import DropDownSuperAdmin from "../Components/dropdown/DropDownSuperAdmin"
+//  import { useIsFocused } from "@react-navigation/native"; 
+import { useGetSchoolsQuery } from "../../services/userAuthApi";
 
  
 // import MultiSelect from 'react-native-multiple-select';
@@ -33,23 +34,33 @@ const Schools = ({ navigation }) => {
 
  
 
-  const fetchPosts = () => {
-    const apiURL = "http://192.168.18.64:8000/schools";
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setFilterData(responseJson);
-        setMasterDate(responseJson);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const focus = useIsFocused();
-  useEffect(() => {
-    fetchPosts();
-    return () => {};
-  }, [focus]);
+  // const fetchPosts = () => {
+  //   const apiURL = "http://192.168.18.64:8000/schools";
+  //   fetch(apiURL)
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       setFilterData(responseJson);
+  //       setMasterDate(responseJson);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // const focus = useIsFocused();
+  // useEffect(() => {
+  //   fetchPosts();
+  //   return () => {};
+  // }, [focus]);
+
+  const [schools,setSchools] = useState('')
+
+  const {data} = useGetSchoolsQuery()
+  useEffect(()=>{
+    setSchools(data)
+    setMasterDate(data)
+    setFilterData(data)
+    console.log(schools)
+  },[])
 
   const searchFilter = (text) => {
     if (text) {
@@ -107,7 +118,7 @@ const Schools = ({ navigation }) => {
 
   return (
     <View>
-   <DropDownSuperAdmin />
+   {/* <DropDownSuperAdmin /> */}
   
      
 

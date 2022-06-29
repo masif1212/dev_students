@@ -13,7 +13,6 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
-import Checkbox from "expo-checkbox";
 import { useRegisterStudentMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -267,7 +266,7 @@ const CreateStudentForm = () => {
               padding: 15,
               width: "90%",
               borderRadius: 50,
-              marginBottom: 10,
+              marginBottom: 40,
               fontWeight: "bold",
               backgroundColor: "#5062BD",
               elevation: 1,
@@ -281,24 +280,11 @@ const CreateStudentForm = () => {
                 alignItems: "center",
               }}
             >
-              Sign Up
+              Register
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{
-          alignItems: 'flex-end',
-          marginRight: 25
-        }}>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate("AdminLogin");
-            }}
-          >
-            <Text style={{ fontWeight: "bold", paddingBottom: 50, color: 'gray' }}>
-              Already Registered ? Login
-            </Text>
-          </TouchableWithoutFeedback>
-        </View>
+       
       </ScrollView>
     </SafeAreaView>
   );

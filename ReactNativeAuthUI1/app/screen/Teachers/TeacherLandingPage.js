@@ -6,6 +6,11 @@ import _ from "lodash"
 import { useNavigation } from '@react-navigation/native';
 import { useIsFocused } from "@react-navigation/native"; 
 import {Divider} from 'react-native-paper';
+import DropDownClassStudents from '../../Components/dropdown/DropDownClassStudents';
+import { useGetStudentQuery } from '../../../services/userAuthApi';
+import { useSelector } from 'react-redux';
+
+
 
 
 
@@ -21,7 +26,13 @@ const TeacherLandingPage = () => {
 
   const [students, setStudents] = useState('')
 
-  
+
+  const myData = useSelector(state => state.student)
+  const {data} = useGetStudentQuery();
+  useEffect(() => {
+    setStudents(data);
+  });
+
   const fetchPosts = () => {
     const apiURL = "http://192.168.18.64:8000/studentsget";
     fetch(apiURL)
@@ -163,7 +174,7 @@ const TeacherLandingPage = () => {
 
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.id}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.coloumnRowName, }}>{item.first_name+' '+ item.last_name}</Text>
 

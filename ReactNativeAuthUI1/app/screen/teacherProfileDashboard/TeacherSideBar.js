@@ -1,4 +1,3 @@
-import { View, Text, Image } from 'react-native';
 import React, { useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { useNavigation } from '@react-navigation/native';

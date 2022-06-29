@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
@@ -114,6 +114,7 @@ const[students, setStudents ] = useState('')
                 </TouchableOpacity>
                 <TouchableOpacity
                  onPress={()=>navigation.navigate('SingleStudentDetail',{
+                  image:item.image,
                   first_name:item.first_name,
                   last_name:item.last_name,
                   contact:item.contact,

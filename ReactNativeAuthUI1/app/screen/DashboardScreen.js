@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View} from "react-native";
 import React, { useEffect, useState } from "react";
 import { getToken } from "../../services/AsyncStorageService";
 import { useGetLoggedUserQuery } from "../../services/userAuthApi";

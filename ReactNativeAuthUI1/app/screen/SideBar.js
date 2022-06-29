@@ -13,7 +13,7 @@ const SideBar = ({ ...props }) => {
     unSetUserInfo({ email: "", firstName: "", lastName: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
-    navigation.navigate('Home');
+    navigation.navigate('MONITORING APP');
   }
 
   const navigation = useNavigation()

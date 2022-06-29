@@ -2,9 +2,10 @@ import StudentAttendance from "../models/studentAttendanceModel.js"
 
 
 
+
 class StudentAttendanceController {
     static MarkStudentAttendance = async (req, res) => {
-      const { first_name, roll_no, attendance_status} = req.body
+      const { first_name,last_name, roll_no, attendance_status} = req.body
         if ( first_name && roll_no && attendance_status) {
             try {
               const doc = new StudentAttendance({
@@ -22,7 +23,9 @@ class StudentAttendanceController {
           res.send({ "status": "failed", "message": "All fields are required" })
         }
       
-    }
-}  
+    };
+
+
+} 
 
 export default StudentAttendanceController;
