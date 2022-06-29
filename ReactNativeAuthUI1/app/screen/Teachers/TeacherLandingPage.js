@@ -180,7 +180,13 @@ const TeacherLandingPage = () => {
 
               <View style={{ width: '100%', flexDirection: 'row',right:10 }}>
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('StudentDetail')}
+                onPress={()=>navigation.navigate('StudentDetail',{
+                  first_name:item.first_name,
+                  last_name:item.last_name,
+                  student_class: item.student_class,
+                  section: item.section,
+
+                })}
                 style={{ backgroundColor: '#5062BD', margin: 2, borderRadius: 6, width: '28%', alignItems: 'center',justifyContent: 'center', }}>
                   <Text style={{
                     color: 'white'

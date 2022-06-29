@@ -161,8 +161,8 @@ const  ViewFullAttendance = ({navigation})=> {
         renderItem={({item, index})=> {
           return (
             <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-             <Text style={{...styles.columnRowTxt, fontWeight:"bold", right: 25}}>{item.Roll_No}</Text>
-              <Text style={{...styles.columnRowTxt, right:20}}>{item.name}</Text>
+             <Text style={{...styles.columnRowTxt, fontWeight:"bold", right: 25}}>{item.roll_no}</Text>
+              <Text style={{...styles.columnRowTxt, right:20}}>{item.first_name}</Text>
               <Text style={styles.columnRowTxt}>{item.Status}</Text>
             </View>
           )
