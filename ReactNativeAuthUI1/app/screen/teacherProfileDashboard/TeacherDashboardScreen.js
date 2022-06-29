@@ -8,7 +8,7 @@ import { setUserToken } from "../../../features/authSlice";
 import CustomCard from "../../Components/customCard/CustomCard";
 
 
-const SchoolDashboardScreen = () => {
+const TeacherDashboardScreen = () => {
   const [userLToken, setUserLToken] = useState();
 
   useEffect(() => {
@@ -52,4 +52,4 @@ const SchoolDashboardScreen = () => {
   );
 };
 
-export default SchoolDashboardScreen;
+export default TeacherDashboardScreen; 

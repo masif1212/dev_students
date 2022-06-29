@@ -35,7 +35,7 @@ import {
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
-          navigation.navigate("SchoolAdminPannel");
+          navigation.navigate("Teacherpannel");
         }
         if (res.data.status === "failed") {
           Toast.show({

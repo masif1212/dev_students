@@ -1,17 +1,16 @@
-import { View, Text, Image } from 'react-native';
 import React, { useEffect } from 'react';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { useNavigation } from '@react-navigation/native';
 import { removeToken } from '../../../services/AsyncStorageService.js';
 import { useSelector } from 'react-redux';
-import { unSetTeacherInfo } from '../../../features/teacherSlice.js';
+import {  unsetTeacherInfo   } from '../../../features/teacherSlice';
 import { unsetUserToken } from '../../../features/authSlice.js';
 
 
-const SideBar = ({ ...props }) => {
+const TeacherSideBar = ({ ...props }) => {
 
   const handleLogout = async () => {
-    unSetTeacherInfo({ email: "", first_name: "", last_name: "", image: '' })
+    unsetTeacherInfo({ email: "", first_name: "", last_name: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
     navigation.navigate('Home');
@@ -37,4 +36,4 @@ const SideBar = ({ ...props }) => {
   );
 };
 
-export default SideBar
+export default TeacherSideBar
