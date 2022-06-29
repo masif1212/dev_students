@@ -81,7 +81,8 @@ const Home =({ navigation })=> {
 
               
               <TouchableOpacity
-                onPress={() => navigation.navigate("UserLogin", { screen: "UserLogin" }) }
+                // onPress={() => navigation.navigate("UserLogin", { screen: "UserLogin" }) }
+                onPress={() => navigation.navigate("TeacherLandingPage", { screen: "TeacherLandingPage" }) }
 
                 style={{
                   justifyContent: "center",

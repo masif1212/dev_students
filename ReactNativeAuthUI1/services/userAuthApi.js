@@ -75,6 +75,19 @@ export const userAuthApi = createApi({
       })
     }),
 
+    studentattendance : builder.mutation({
+      query: (any) => {
+        return {
+          url: 'studentattendance',
+          method: 'POST',
+          body: any,
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+      }
+    }),
+
 
 
 
@@ -183,6 +196,15 @@ export const userAuthApi = createApi({
       })
     }),
 
+    getLoggedTeachers: builder.query({
+      query: (token) => ({
+        url: 'loggedTeachers',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${token}`,
+        },
+      })
+    }),
 
 
     getTeachers: builder.query({

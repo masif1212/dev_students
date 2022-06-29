@@ -1,9 +1,9 @@
-import { View, Text, Image, ScrollView } from "react-native";
+import { View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getToken } from "../../../services/AsyncStorageService";
 import { useGetLoggedTeachersQuery } from "../../../services/userAuthApi";
 import { useDispatch } from "react-redux";
-import { setTeacherInfo } from "../../../features/teacherSlice";
+import { setTeacherInfo } from "../../../features/teacherSlice.js";
 import { setUserToken } from "../../../features/authSlice";
 import CustomCard from "../../Components/customCard/CustomCard";
 
