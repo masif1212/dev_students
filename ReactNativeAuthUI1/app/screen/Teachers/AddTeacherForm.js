@@ -18,6 +18,8 @@ import { useRegisterTeachersMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import { useSelector } from 'react-redux';
+
 
 const TeacherRegister = () => {
   const [first_name, setfirst_name] = useState("");
@@ -48,7 +50,13 @@ const TeacherRegister = () => {
   };
   const navigation = useNavigation();
 
+
+
+
   const [registerTeacher] = useRegisterTeachersMutation();
+
+  const myData = useSelector(state => state.teacher)
+
 
   const handleFormSubmit = async () => {
     if (first_name && email && password && confirm_password ) {
@@ -144,6 +152,15 @@ const TeacherRegister = () => {
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
+
+        <View>
+            <TextInput
+              style={styleOne.input}
+              placeholder="Write"
+              placeholderTextColor='gray'
+            >{myData.schoolName}</TextInput>
+          </View>
+
           <View>
             <TextInput
               style={styleOne.input}

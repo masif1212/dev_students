@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
@@ -19,7 +19,7 @@ import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 
-const SignUpSchoolAdmin = () => {
+const SignUpSchoolAdmin = ({route}) => {
   const [first_name, setfirst_name] = useState("");
   const [last_name, setlast_name] = useState("");
   const [email, setEmail] = useState("");
@@ -32,6 +32,8 @@ const SignUpSchoolAdmin = () => {
   const [cnic, setcnic] = useState("");
   const [city, setCity] = useState("");
   const [image, setImage] = useState();
+  const [schoolId, setSchoolId] = useState("")
+  const[schoolName, setSchoolName]=useState("")
 
   const clearTextInput = () => {
     setfirst_name("");
@@ -66,6 +68,8 @@ const SignUpSchoolAdmin = () => {
           address_2,
           cnic,
           city,
+          schoolId,
+          schoolName,
         };
         const res = await registerSchoolAdmin(formData);
         if (res.data.status === "success") {
@@ -99,6 +103,9 @@ const SignUpSchoolAdmin = () => {
     }
   };
 
+  useEffect(()=>{
+    setSchoolId(route.params.schoolid)
+  })
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -144,6 +151,15 @@ const SignUpSchoolAdmin = () => {
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
+
+        <View>
+            <TextInput
+              style={styleOne.input}
+              value={route.params.schoolName}
+              placeholderTextColor='gray'
+            />
+          </View>
+
           <View>
             <TextInput
               style={styleOne.input}

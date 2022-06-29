@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import schoolAdminSlice from "../../features/schoolAdminSlice";
 
 
 const SelectedSchoolScreen = ({navigation, route}) => {
   const { id, title } = route.params;
+
+ 
+  
   return (
     <View>
       <View
@@ -15,7 +19,10 @@ const SelectedSchoolScreen = ({navigation, route}) => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity onPress={() => navigation.navigate('SchoolAdmin')}
+        <TouchableOpacity onPress={() => navigation.navigate('SchoolAdmin',{
+          schoolid : route.params.schoolid,
+          schoolName: route.params.title
+        })}
           style={{
             padding: 20,
             borderRadius: 20,
@@ -47,9 +54,7 @@ const SelectedSchoolScreen = ({navigation, route}) => {
                 fontWeight: "300",
               }}
             >
-            <Text>
-              itemId: {JSON.stringify(route.params.id)}
-            </Text>
+            
               Admin
             </Text>
           </View>

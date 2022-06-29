@@ -19,6 +19,8 @@ export const store = configureStore({
     teacher : teacherReducer,
     school : schoolReducer
     
-  }
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(userAuthApi.middleware),
 })
 setupListeners(store.dispatch)

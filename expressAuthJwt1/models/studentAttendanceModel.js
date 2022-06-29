@@ -12,8 +12,6 @@ const userSchema = new mongoose.Schema({
   createdAt:  {type: Date, default: Date.now},
   section: { type: String, required: true, trim: true },
   student_class: { type: String, required: true, trim: true },
-
-
   
 })
 

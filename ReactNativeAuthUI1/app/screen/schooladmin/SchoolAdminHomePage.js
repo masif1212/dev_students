@@ -5,12 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const SchoolAdminHomePage = () => {
+
+
+const SchoolAdminHomePage = (route) => {
   const navigation = useNavigation(); 
+
+
+
   return (
     <View>
-     
-       
       <View
         style={{
           flexDirection: "row",
@@ -23,6 +26,7 @@ const SchoolAdminHomePage = () => {
 
         <TouchableOpacity
         onPress={() => navigation.navigate('TeachersListForSchoolAdmin')}
+        
           style={{
             padding: 20,
             borderRadius: 20,

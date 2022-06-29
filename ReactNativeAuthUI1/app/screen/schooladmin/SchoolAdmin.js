@@ -83,7 +83,7 @@ const data = [
 
 
 
-const SchoolAdmin = ({ navigation }) => { 
+const SchoolAdmin = ({ navigation, route }) => { 
   const [admin,setAdmin] = useState('');
 
 
@@ -117,7 +117,10 @@ const SchoolAdmin = ({ navigation }) => {
                
           }}>
           <TouchableOpacity 
-          onPress={()=>navigation.navigate('SignupSchoolAdmin')}
+          onPress={()=>navigation.navigate('SignupSchoolAdmin',{
+            schoolid: route.params.schoolid,
+            schoolName:route.params.schoolName,
+          })}
           style={{
               borderRadius:10,
               backgroundColor:'#5062BD',
@@ -200,6 +203,7 @@ const SchoolAdmin = ({ navigation }) => {
             );
           }}
         />
+        
       </View>
     );
   }

@@ -40,7 +40,7 @@ const Schools = ({ navigation }) => {
 
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.64:8000/api/user/getschools");
+    const resp = await fetch("http://192.168.10.6:8000/api/user/getschools");
     const data = await resp.json();
     setMasterDate(data);
     setFilterData(data);
@@ -77,7 +77,7 @@ const Schools = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("SelectedSchool", { title: item.school_name, id: item.id  })
+          navigation.navigate("SelectedSchool", { title: item.school_name, schoolid: item._id  })
         }
       >
         <View style={styles.itemViewStyles}>
