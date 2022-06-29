@@ -75,6 +75,7 @@ import {
                 value={email}
                 onChangeText={setEmail}
                 placeholder="Write Your Email"
+                placeholderTextColor='gray'
                 keyboardType="email-address"
               />
             </View>
@@ -84,6 +85,7 @@ import {
                 style={styleOne.input}
                 value={password}
                 onChangeText={setPassword}
+                placeholderTextColor='gray'
                 placeholder="Write Your Password"
                 secureTextEntry={true}
               />

@@ -50,7 +50,7 @@ const App = ({navigation}) => (
       <Stack.Navigator screenOptions={{ headerStyle: { color: 'black' }, headerTintColor: 'white', headerShown: false }}
         
       >
-      <Stack.Screen name="MONITORING APP" component={Home}  options={{ headerShown:true,  headerStyle: { backgroundColor: "#5062BD" }}}/>
+      <Stack.Screen name="MONITORING APP" component={Home}  options={{ headerShown:false,  headerStyle: { backgroundColor: "#5062BD" }}}/>
         <Stack.Screen name="ShopTab" component={ShopTab}  options={{ headerShown:true,  headerStyle: { backgroundColor: "#5062BD"}}} />
         <Stack.Screen name="AdminLogin" component={AdminLoginScreen} options={{ title: 'User Login', headerShown: false }} />
         <Stack.Screen name="UserLogin" component={UserLoginScreen} options={{ title: 'User Login', headerShown: false }} />

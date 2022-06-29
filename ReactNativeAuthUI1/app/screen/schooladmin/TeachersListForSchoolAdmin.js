@@ -197,7 +197,7 @@ const TeachersListForSchoolAdmin =({navigation})=> {
       </View>
     );
   };
-
+}
 const styles = StyleSheet.create({
   image: {
     width: 60,
@@ -237,4 +237,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TeachersListForSchoolAdmin
+export default TeachersListForSchoolAdmin;

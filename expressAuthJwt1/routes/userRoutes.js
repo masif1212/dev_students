@@ -33,6 +33,7 @@ router.post('/createstudent', StudentController.studentRegistration);
 
 //school
 router.post('/createschool', SchoolController.schoolRegistration)
+router.get('/getschools', SchoolController.getSchool)
 
 //student attendance
 router.post('/studentattendance', StudentAttendanceController.MarkStudentAttendance)
