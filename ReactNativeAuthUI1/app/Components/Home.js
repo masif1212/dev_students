@@ -30,8 +30,8 @@ const Home =({ navigation })=> {
               <Image
                 source={require("../../assets/images/welcomeImg.png")}
                 style={{
-                  width: Dimensions.get("window").width - 90,
-                  height: 250,
+                  width: Dimensions.get("window").width - 100,
+                  height: 230,
                   borderRadius: 15,
                   marginTop: 20,
                 }}
@@ -46,7 +46,7 @@ const Home =({ navigation })=> {
 
           <View
             style={{
-              marginTop: 60,
+              marginTop: 0,
             }}
           >
                       <View >
@@ -91,7 +91,7 @@ const Home =({ navigation })=> {
                   width: "100%",
                   marginVertical: 5,
                   borderRadius: 50,
-                  marginBottom: 80,
+                  marginBottom: 50,
                   fontWeight: "bold",
                   backgroundColor: "#fff",
                   elevation: 1,

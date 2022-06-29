@@ -51,4 +51,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5N
 GET  http://192.168.18.14:8000/api/user/getTeachers
 
 ###
+GET  http://192.168.18.14:8000/api/user/getschools
+
+###
+POST http://192.168.18.14:8000/api/user/createschool
+Content-Type: application/json
+
+{
+ "school_name": "adfjldska",
+              "contact_no": "44353",
+              "address_1": "address_1",
+              "address_2": "address_2",
+              "district" : "district",
+              "province" : "province",
+              "city": "city"
+}
 GET http://192.168.18.64:8000/api/user/getstudent

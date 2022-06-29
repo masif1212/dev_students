@@ -35,8 +35,6 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
    
   }, [focus])
   const focus = useIsFocused();
-
-
     return (
       <View style={styles.body}>
            <View style={{
@@ -126,7 +124,8 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
         />
       </View>
     );
-  };
+  }
+
 
 const styles = StyleSheet.create({
   image: {
@@ -166,6 +165,7 @@ const styles = StyleSheet.create({
     bottom:5
   },
 });
+
 
 
 export default TeachersListForSchoolAdmin
