@@ -23,7 +23,6 @@ const UserPanelTab = () => {
             },
           })}  />      
       <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      <Drawer.Screen name="SelectedSchool" component={SelectedSchoolScreen} options={{ headerTitle: 'Super Admin' }} />      
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerTitle: 'Change Password' }} />
     </Drawer.Navigator>
   )

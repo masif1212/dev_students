@@ -3,7 +3,8 @@ import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 
-const SelectedSchoolScreen = ({navigation}) => {
+const SelectedSchoolScreen = ({navigation, route}) => {
+  const { id, title } = route.params;
   return (
     <View>
       <View
@@ -46,6 +47,9 @@ const SelectedSchoolScreen = ({navigation}) => {
                 fontWeight: "300",
               }}
             >
+            <Text>
+              itemId: {JSON.stringify(route.params.id)}
+            </Text>
               Admin
             </Text>
           </View>

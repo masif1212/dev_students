@@ -9,12 +9,14 @@ import {
   ScrollView
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, RefreshControl} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import Icons from "react-native-vector-icons/FontAwesome5";
 // import DropDownSuperAdmin from "../Components/dropdown/DropDownSuperAdmin"
-//  import { useIsFocused } from "@react-navigation/native"; 
-import { useGetSchoolsQuery } from "../../services/userAuthApi";
+ import { useIsFocused } from "@react-navigation/native"; 
+import { useGetschoolsQuery } from "../../services/userAuthApi";
+import { setSchoolInfo } from "../../features/schoolSlice";
+import { useDispatch } from "react-redux";
 
  
 // import MultiSelect from 'react-native-multiple-select';
@@ -31,36 +33,28 @@ const Schools = ({ navigation }) => {
   const [filterData, setFilterData] = useState();
   const [masterDate, setMasterDate] = useState();
   const [search, setSearch] = useState();
+ 
 
  
 
-  // const fetchPosts = () => {
-  //   const apiURL = "http://192.168.18.64:8000/schools";
-  //   fetch(apiURL)
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       setFilterData(responseJson);
-  //       setMasterDate(responseJson);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  // const focus = useIsFocused();
-  // useEffect(() => {
-  //   fetchPosts();
-  //   return () => {};
-  // }, [focus]);
 
-  const [schools,setSchools] = useState('')
+  const focus = useIsFocused();
+  const fetchData = async () => {
+    const resp = await fetch("http://192.168.18.64:8000/api/user/getschools");
+    const data = await resp.json();
+    setMasterDate(data);
+    setFilterData(data);
+  };
 
-  const {data} = useGetSchoolsQuery()
-  useEffect(()=>{
-    setSchools(data)
-    setMasterDate(data)
-    setFilterData(data)
-    console.log(schools)
-  },[])
+  useEffect(() => {
+     fetchData();
+  }, [focus]);
+
+
+ 
+  
+
+
 
   const searchFilter = (text) => {
     if (text) {
@@ -83,7 +77,7 @@ const Schools = ({ navigation }) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("SelectedSchool", { title: item.school_name })
+          navigation.navigate("SelectedSchool", { title: item.school_name, id: item.id  })
         }
       >
         <View style={styles.itemViewStyles}>
@@ -146,6 +140,7 @@ const Schools = ({ navigation }) => {
           keyExtractor={(item, index) => index.toString()}
           itemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
+         
         />
  
       </View>

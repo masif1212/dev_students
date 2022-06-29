@@ -42,6 +42,8 @@ const MarkAttendanceScreen = ({ navigation }) => {
     setStudents(attend)
     // console.log(item)
 
+    
+
 
     // console.log(students)
 
