@@ -1,6 +1,6 @@
 
 ###
-POST http://192.168.18.19:8000/api/user/schoolAdminlogin
+POST http://192.168.18.64:8000/api/user/schoolAdminlogin
 Content-Type: application/json
 
 {
@@ -9,13 +9,13 @@ Content-Type: application/json
 }
 
 ###
-GET  http://192.168.18.19:8000/api/user/loggedSchoolAdmin
+GET  http://192.168.18.64:8000/api/user/loggedSchoolAdmin
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3NzFmMGQ3YTU4ZjlhMjgxZGRiZWMiLCJpYXQiOjE2NTYyNTk0MzUsImV4cCI6MTY1NjY5MTQzNX0.KqQ0edvAkVv66tV-cOZrztKzeCs3oGB61G-sY6FLU_4
 
 
 ###
 
-POST http://192.168.18.12:8000/api/user/registerTeacher
+POST http://192.168.18.64:8000/api/user/registerTeacher
 Content-Type: application/json
 
 {
@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://192.168.18.12:8000/api/user/teachersLogin
+POST http://192.168.18.64:8000/api/user/teachersLogin
 Content-Type: application/json
 
 {
@@ -44,8 +44,11 @@ Content-Type: application/json
 
 
 ###
-GET  http://192.168.18.12:8000/api/user/loggedTeachers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTYzMjkxMDAsImV4cCI6MTY1Njc2MTEwMH0.4vBVoBx_TAhJn16bNsOoIOE-DTOFshlG6ZZJ07Izjp8
+GET  http://192.168.18.64:8000/api/user/loggedTeachers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTY0MDcwNjQsImV4cCI6MTY1NjgzOTA2NH0.PJs6G4v6DyUYULvFaJl_TI5ekFGBTp6yCqJmyBrAWcU
 
 ###
 GET  http://192.168.18.14:8000/api/user/getTeachers
+
+###
+GET http://192.168.18.64:8000/api/user/getstudent

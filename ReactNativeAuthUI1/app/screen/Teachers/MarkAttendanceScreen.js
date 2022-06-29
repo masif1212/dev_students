@@ -24,36 +24,40 @@ const MarkAttendanceScreen = ({ navigation }) => {
   const {data} = useGetStudentQuery();
 
 
-  const [students,setStudents] =useState({})
+  const [students,setStudents] =useState([])
 
-
+useEffect(() => {
+  setStudents(data);
+}, [])
   
-  useEffect(() => {
-    setStudents(data);
-    
-  });
+  
+ 
 
   const myData = useSelector(state => state.student)
 
 
 
   const MarkAttendance=(item,S)=>{
-   let std=students
-   std[item].attendanc=S
-   let newArr = [...students]; // copying the old datas array
-   newArr[item].attendanc = S; 
-   setStudents(newArr) 
-  console.log([newArr])
-}
+    const attend = (students.map(l => l._id===item._id ? {...l,  attendance: S} : l));
+    setStudents(attend)
+    // console.log(item)
 
-// const MarkAttendance=(item,S)=>{
-//   let std=students
-//   std(item).attendanc=S
-//   let newArr = [...students]; // copying the old datas array
-//   newArr[item].attendanc = S; 
-//   setStudents(newArr)  
-//  console.log(std[item])    }
-// // console.log(students[0])
+
+    // console.log(students)
+
+
+
+    // const MarkAttendance=(item,S)=>{
+    //   let std=students
+    //   std[item].attendance = S
+    //   let newArr = [...std]; // copying the old datas array
+    //   newArr[item].attendance = S; 
+    //    let any = std[item]
+    //  setStudents(any)
+    //  console.log(students)
+    // //  onSubmit(any);
+     
+ }
 
 const [ items , setItems ] = useState()
   const sortTable = (column) => {
@@ -112,10 +116,10 @@ const [ items , setItems ] = useState()
         stickyHeaderIndices={[0]}
         extraData={students}
         renderItem={({ item, index }) => {
+        console.log(item)
           return (
-        
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>   
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item?.roll_no}</Text>
               <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
@@ -133,10 +137,10 @@ const [ items , setItems ] = useState()
                 <CheckBox
                   title='P'
                   checkedColor='green'
-                  checked={item.attendanc=='p'?true:false}                    
+                  checked={item.attendance==='P'? true:false}                    
                   checkedIcon ="dot-circle-o"
                   unCheckedIcon='circle-o'
-                  onPress={()=>MarkAttendance(index,'p')}
+                  onPress={()=>MarkAttendance(item,'P')}
                   containerStyle={{
                   alignItems:'center',
                   justifyContent:'center',

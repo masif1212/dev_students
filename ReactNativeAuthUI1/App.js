@@ -37,6 +37,7 @@ import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
 import MarkTeacherAttendance from "./app/screen/schooladmin/MarkTeacherAttendance";
 import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
+import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
 
 
 
@@ -96,6 +97,7 @@ const App = () => (
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} />
         
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
+        <Stack.Screen name="TeacherLandingPage" component={TeacherLandingPage} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
     
 
 
