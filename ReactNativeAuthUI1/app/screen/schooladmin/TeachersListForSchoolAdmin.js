@@ -9,32 +9,29 @@ import {
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useGetTeachersQuery } from '../../../services/userAuthApi'
 import { useIsFocused } from "@react-navigation/native"; 
-import { useDispatch } from "react-redux";
-import { setTeacherInfo } from "../../../features/teacherSlice";
+
 
 
 const TeachersListForSchoolAdmin = ({navigation}) => {
   
-  const {data} = useGetTeachersQuery();
   const [teachers,setTeachers] = useState();
 
+  
 
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    if (data) {
-      dispatch(
-        setTeacherInfo({
-          email: data.user.email,
-          firstName: data.user.first_name,
-          lastName: data.user.last_name,
-        })
-      );
-    }
-   
-  }, [focus])
   const focus = useIsFocused();
+  const fetchData = async () => {
+    const resp = await fetch("http://192.168.18.64:8000/api/user/getTeachers");
+    const data = await resp.json();
+    setTeachers(data);
+  };
+
+  useEffect(() => {
+     fetchData();
+  }, [focus]);
+
+
+
     return (
       <View style={styles.body}>
            <View style={{

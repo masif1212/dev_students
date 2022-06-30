@@ -66,4 +66,6 @@ Content-Type: application/json
               "province" : "province",
               "city": "city"
 }
+
+###
 GET http://192.168.18.64:8000/api/user/getstudent

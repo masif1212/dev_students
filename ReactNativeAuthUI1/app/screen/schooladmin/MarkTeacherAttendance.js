@@ -45,7 +45,6 @@ const MarkTeacherAttendance = ({ navigation }) => {
 
 
   const onSubmit = (any) => {
-    console.log(any)
     fetch('http://192.168.18.64:8000/studentattendance', {
       method: "POST",
       body: JSON.stringify(any),

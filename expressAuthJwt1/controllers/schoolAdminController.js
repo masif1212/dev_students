@@ -145,6 +145,9 @@ class SchoolAdminController {
       res.send({ "status": "failed", "message": "Invalid Token" })
     }
   }
+
+
+  
 }
 
 export default SchoolAdminController

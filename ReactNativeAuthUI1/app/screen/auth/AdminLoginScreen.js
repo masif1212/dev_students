@@ -13,7 +13,7 @@ import {
   import { styles, toastConfig } from "../../../style";
   import Toast from "react-native-toast-message";
   import { useNavigation } from "@react-navigation/native";
-  import { useLoginUserMutation } from "../../../services/userAuthApi";
+  import { useLoginUserMutation } from "../../../services/userAuthApi.js";
   import { storeToken } from "../../../services/AsyncStorageService";
   
   const AdminLoginScreen = () => {

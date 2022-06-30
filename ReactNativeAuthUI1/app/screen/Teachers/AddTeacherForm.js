@@ -3,22 +3,22 @@ import {
   Text,
   TextInput,
   Image,
-  TouchableWithoutFeedback,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles, toastConfig } from "../../../style";
+import {  toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
-import Checkbox from "expo-checkbox";
 import { useRegisterTeachersMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from 'react-redux';
+
+
 
 
 const TeacherRegister = () => {
@@ -33,9 +33,11 @@ const TeacherRegister = () => {
   const [address_2, setAdress_2] = useState("");
   const [cnic, setcnic] = useState("");
   const [city, setCity] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState('');
+  const [schoolName, setSchoolName] = useState('')
 
-  const clearTextInput = () => {
+  const clearTextInput = ({...props}) => {
+    setSchoolName("")
     setfirst_name("");
     setlast_name("");
     setPassword("");
@@ -52,16 +54,16 @@ const TeacherRegister = () => {
 
 
 
-
+  
   const [registerTeacher] = useRegisterTeachersMutation();
-
-  const myData = useSelector(state => state.teacher)
-
+  
+ 
 
   const handleFormSubmit = async () => {
     if (first_name && email && password && confirm_password ) {
       if (password === confirm_password) {
         const formData = {
+          schoolName,
           first_name,
           last_name,
           email,
@@ -120,6 +122,11 @@ const TeacherRegister = () => {
     }
   };
 
+  const myData = useSelector(state => state.schoolAdmin)
+  useEffect(() => {
+    console.log(myData)
+  }, [])
+
   return (
     <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
       <View style={styleOne.buttonContainer}>
@@ -157,8 +164,9 @@ const TeacherRegister = () => {
             <TextInput
               style={styleOne.input}
               placeholder="Write"
+              value={myData.schoolName}
               placeholderTextColor='gray'
-            >{myData.schoolName}</TextInput>
+            />
           </View>
 
           <View>
