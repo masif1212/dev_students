@@ -36,8 +36,7 @@ const TeacherRegister = () => {
   const [image, setImage] = useState('');
   const [schoolName, setSchoolName] = useState('')
 
-  const clearTextInput = ({...props}) => {
-    setSchoolName("")
+  const clearTextInput = () => {
     setfirst_name("");
     setlast_name("");
     setPassword("");
@@ -124,8 +123,9 @@ const TeacherRegister = () => {
 
   const myData = useSelector(state => state.schoolAdmin)
   useEffect(() => {
-    console.log(myData)
-  }, [])
+    console.log(myData.schoolName)
+    setSchoolName(myData.schoolName)
+  }, [myData])
 
   return (
     <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
@@ -163,7 +163,7 @@ const TeacherRegister = () => {
         <View>
             <TextInput
               style={styleOne.input}
-              placeholder="Write"
+              placeholder="School Name"
               value={myData.schoolName}
               placeholderTextColor='gray'
             />

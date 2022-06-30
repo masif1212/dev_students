@@ -105,6 +105,7 @@ const SignUpSchoolAdmin = ({route}) => {
 
   useEffect(()=>{
     setSchoolId(route.params.schoolid)
+    setSchoolName(route.params.schoolName)
   })
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -156,6 +157,7 @@ const SignUpSchoolAdmin = ({route}) => {
             <TextInput
               style={styleOne.input}
               value={route.params.schoolName}
+              onChangeText={setSchoolName}
               placeholderTextColor='gray'
             />
           </View>

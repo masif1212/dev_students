@@ -18,10 +18,11 @@ POST http://192.168.18.64:8000/api/user/registerTeacher
 Content-Type: application/json
 
 {
+  "schoolName" : "Teacher",
   "image": "image",
  "first_name": "first_name",
  "last_name": "last_name",
-              "email": "email@gmail.com",
+              "email": "emaijadfl@gmail.com",
               "password": "444444",
               "confirm_password" : "444444",
               "contact": "44353",
@@ -71,3 +72,24 @@ Content-Type: application/json
 
 ###
 GET http://192.168.18.64:8000/api/user/getstudent
+
+###
+POST  http://192.168.18.64:8000/api/user/schooladmin
+Content-Type: application/json
+
+{
+              "schoolName": "ee",
+              "schoolId": "dwd",
+              "image": "image",
+              "first_name": "first_name",
+              "last_name": "last_name",
+              "email": "email1@email.com",
+              "password": "dfd",
+              "confirm_password" : "dfd",
+              "contact": "332423423",
+              "alt_contact": "4234234",
+              "address_1": "fdsdf",
+              "address_2": "fsdfsdf",
+              "cnic": "32423432",
+              "city": "city"
+}
