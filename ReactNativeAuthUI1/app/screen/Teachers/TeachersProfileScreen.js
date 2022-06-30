@@ -34,7 +34,7 @@ const TeachersProfileScreen = ({route}) => {
               borderRadius: 50,
               backgroundColor: "#5062BD",
             }}
-            source={{uri:route.params.photo}}
+            source={{uri:route.params.image}}
               
           
           />
@@ -44,7 +44,7 @@ const TeachersProfileScreen = ({route}) => {
           fontSize:20,
           top:-12
           
-        }}>{route.params.name}
+        }}>{route.params.first_name + ' ' + route.params.last_name}
         </Text>
         
         </View>
@@ -64,7 +64,7 @@ const TeachersProfileScreen = ({route}) => {
         >
           General Information
         </Text>
-        <View
+        {/* <View
           style={{
               marginTop:10,
             borderBottomColor: "gray",
@@ -76,7 +76,7 @@ const TeachersProfileScreen = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Father Name</Text>
-        <Text>Shakoor Ahmad</Text>
+        <Text>{route.params.father_name}</Text> */}
         <View
           style={{
               marginTop:10,
@@ -102,8 +102,22 @@ const TeachersProfileScreen = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Address</Text>
-        <Text>G9-1,Islamabad</Text>
+        <Text>{route.params.address_1}</Text>
+
         <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Address 2</Text>
+        <Text>{route.params.address_2}</Text>
+        {/* <View
           style={{
               marginTop:10,
             borderBottomColor: "gray",
@@ -115,10 +129,10 @@ const TeachersProfileScreen = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Qualification</Text>
-        <Text>Ms Computer Science</Text>
+        <Text>Ms Computer Science</Text> */}
   
      
-        <View
+        {/* <View
           style={{
               marginTop:10,
             borderBottomColor: "gray",
@@ -130,7 +144,7 @@ const TeachersProfileScreen = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Date of Birth</Text>
-        <Text>10/10/1990</Text>
+        <Text>10/10/1990</Text> */}
         <View
           style={{
               marginTop:10,
@@ -143,7 +157,35 @@ const TeachersProfileScreen = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Contact</Text>
-        <Text>+92336655114</Text>
+        <Text>+92 {route.params.contact}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >alt_Contact</Text>
+        <Text>+92 {route.params.alt_contact}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >City</Text>
+        <Text> {route.params.city}</Text>
       
       </View>
       <View style={{

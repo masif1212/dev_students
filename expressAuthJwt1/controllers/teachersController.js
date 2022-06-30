@@ -147,7 +147,7 @@ class TeachersController {
 
   static getTeachers = async (req, res) => {
     try{
-      const teachers = await TeachersModel.find({
+      const teachers = await SchoolAdminModel.find({
         attributes: [ "id", "first_name","last_name","image", "email", "password", "confirm_password", "contact", "alt_contact",  "address_1", "address_2", "cnic", "city"]
       });
       res.json(teachers)

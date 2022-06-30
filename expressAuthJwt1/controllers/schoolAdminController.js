@@ -145,9 +145,20 @@ class SchoolAdminController {
       res.send({ "status": "failed", "message": "Invalid Token" })
     }
   }
+  
+  static getSchoolAdmins = async (req, res) => {
+    try{
+      const SchoolAdmins = await SchoolAdminModel.find({
+        attributes: [ "schoolId", "schoolName","image","first_name", "last_name", "email", "password", "confirm_password", "cnic","contact","alt_contact",  "address_1", "address_2", "city"]
+      });
+      res.json(SchoolAdmins)
+    } catch (error) {
+      console.log(error);
+    }
 
-
+  }
   
 }
+
 
 export default SchoolAdminController

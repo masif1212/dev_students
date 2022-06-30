@@ -68,7 +68,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
-          data={teachers}
+              data={teachers}
           keyExtractor={item => item.image}
           renderItem={({ item }) => {
             return (
