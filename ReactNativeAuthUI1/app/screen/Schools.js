@@ -78,12 +78,12 @@ const Schools = ({ navigation }) => {
       >
         <View style={styles.itemViewStyles}>
           <Icons name="school"
-          size={70}
+          size={60}
           color='#5062BD'
    
             style={{
-              width: Dimensions.get("window").width - 290,
-              height: Dimensions.get("window").height -730,
+              width: Dimensions.get("window").width -290,
+              height: Dimensions.get("window").height -665,
               margin: 4,
             }}
           />
@@ -115,7 +115,7 @@ const Schools = ({ navigation }) => {
 
     <View style={styles.container}>
   
-      <View style={{ height: '100%', paddingBottom: 140}}>
+      <View style={{ height: '120%', paddingBottom: 140}}>
      
       <View style={styles.searchContainer}>
         <TextInput
