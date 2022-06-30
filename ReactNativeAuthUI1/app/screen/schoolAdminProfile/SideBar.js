@@ -26,7 +26,7 @@ const SideBar = ({ ...props }) => {
   console.log(myData)
  }, [])
 
- 
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ margin: 15 }}>

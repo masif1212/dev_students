@@ -82,8 +82,8 @@ const Schools = ({ navigation }) => {
           color='#5062BD'
    
             style={{
-              width: Dimensions.get("window").width - 290,
-              height: Dimensions.get("window").height -800,
+              width: Dimensions.get("window").width -290,
+              height: Dimensions.get("window").height -665,
               margin: 4,
             }}
           />
@@ -115,7 +115,7 @@ const Schools = ({ navigation }) => {
 
     <View style={styles.container}>
   
-      <View style={{paddingBottom: 140}}>
+      <View style={{ height: '120%', paddingBottom: 140}}>
      
       <View style={styles.searchContainer}>
         <TextInput
