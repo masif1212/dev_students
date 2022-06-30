@@ -82,8 +82,8 @@ const Schools = ({ navigation }) => {
           color='#5062BD'
    
             style={{
-              width: Dimensions.get("window").width -290,
-              height: Dimensions.get("window").height -665,
+              width: Dimensions.get("window").width -300,
+              height: Dimensions.get("window").height -650,
               margin: 4,
             }}
           />

@@ -27,6 +27,7 @@ const SideBar = ({ ...props }) => {
   return (
     <DrawerContentScrollView {...props} style={styles.mainContainer}>
       <View style={{ margin: 15, }}>
+        <Image style= {{width:100, height:100}} source={{uri: myData.image ? myData.image : null}}/>
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white"}}>{myData.firstName}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" }}>{myData.email}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" }}>{myData.lastName}</Text>
