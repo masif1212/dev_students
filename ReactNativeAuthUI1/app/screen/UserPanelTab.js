@@ -24,7 +24,7 @@ const UserPanelTab = () => {
               backgroundColor: "#F5F5F5",
             },
           })}  />      
- 
+      {/* <Drawer.Screen name="Dashboard" component={DashboardScreen} /> */}
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerTitle: 'Change Password' }} />
     </Drawer.Navigator>
   )

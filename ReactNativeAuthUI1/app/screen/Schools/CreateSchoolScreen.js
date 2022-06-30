@@ -122,7 +122,7 @@ const CreateSchoolScreen = ({navigation}) => {
               style={styleOne.input}
               value={province}
               onChangeText={setProvince}
-              placeholder="City"
+              placeholder="Province"
               placeholderTextColor='gray'
 
             />
