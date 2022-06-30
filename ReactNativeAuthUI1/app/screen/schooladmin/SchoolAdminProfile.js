@@ -34,7 +34,7 @@ const SchoolAdminProfile = ({route}) => {
               borderRadius: 50,
               backgroundColor: "#5062BD",
             }}
-            source={{uri:route.params.photo}}
+            source={{uri:route.params.image}}
               
           
           />
@@ -116,7 +116,7 @@ const SchoolAdminProfile = ({route}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >CNIC NO</Text>
-        <Text>{route.params.CNIC_no}</Text>
+        <Text>{route.params.cnic}</Text>
   
      
         <View

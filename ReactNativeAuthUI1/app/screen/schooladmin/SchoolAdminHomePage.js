@@ -142,7 +142,7 @@ const SchoolAdminHomePage = (route) => {
             <Text
               style={{
                 padding: 3,
-                fontSize: 18,
+                fontSize:14,
                 fontWeight: "300",
               }}
             >

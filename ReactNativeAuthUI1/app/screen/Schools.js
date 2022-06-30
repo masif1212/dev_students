@@ -36,7 +36,7 @@ const Schools = ({ navigation }) => {
 
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.26:8000/api/user/getschools");
+    const resp = await fetch("http://192.168.18.14:8000/api/user/getschools");
     const data = await resp.json();
     setMasterDate(data);
     setFilterData(data);
@@ -78,12 +78,12 @@ const Schools = ({ navigation }) => {
       >
         <View style={styles.itemViewStyles}>
           <Icons name="school"
-          size={70}
+          size={60}
           color='#5062BD'
    
             style={{
-              width: Dimensions.get("window").width - 290,
-              height: Dimensions.get("window").height -730,
+              width: Dimensions.get("window").width -290,
+              height: Dimensions.get("window").height -665,
               margin: 4,
             }}
           />
@@ -115,7 +115,7 @@ const Schools = ({ navigation }) => {
 
     <View style={styles.container}>
   
-      <View style={{ height: '100%', paddingBottom: 140}}>
+      <View style={{ height: '120%', paddingBottom: 140}}>
      
       <View style={styles.searchContainer}>
         <TextInput
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
     width: windowWidth,
-    height: '100%',
+    height: windowHeight,
     padding: 0,
     paddingHorizontal: 15,
     
