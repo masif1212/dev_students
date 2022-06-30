@@ -38,6 +38,14 @@ const TeacherRegister = () => {
   const [schoolName, setSchoolName] = useState('')
   const[schoolId, setSchoolId]=useState('');
 
+  const focus = useIsFocused();
+  const myData = useSelector(state => state.schoolAdmin)
+  useEffect(() => {
+    setSchoolId(myData.schoolId)
+    setSchoolName(myData.schoolName)
+  }, [focus])
+
+  
   const clearTextInput = () => {
     setfirst_name("");
     setlast_name("");
@@ -111,6 +119,8 @@ const TeacherRegister = () => {
     }
   };
 
+ 
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -124,12 +134,8 @@ const TeacherRegister = () => {
     }
   };
 
-  const focus = useIsFocused();
-  const myData = useSelector(state => state.schoolAdmin)
-  useEffect(() => {
-    setSchoolId(myData.schoolId)
-    setSchoolName(myData.schoolName)
-  }, [focus])
+
+
 
   return (
     <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
