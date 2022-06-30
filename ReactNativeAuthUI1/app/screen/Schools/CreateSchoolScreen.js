@@ -71,7 +71,7 @@ const CreateSchoolScreen = ({navigation}) => {
               style={styleOne.input}
               value={school_name}
               onChangeText={setSchoolname}
-              placeholder="School Name"
+              placeholder="School Name" 
               placeholderTextColor='gray'
             />
           </View>

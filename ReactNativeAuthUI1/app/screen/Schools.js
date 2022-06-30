@@ -15,7 +15,6 @@ import Icons from "react-native-vector-icons/FontAwesome5";
 // import DropDownSuperAdmin from "../Components/dropdown/DropDownSuperAdmin"
 //  import { useIsFocused } from "@react-navigation/native"; 
 import { useGetSchoolsQuery } from "../../services/userAuthApi";
-
  
 // import MultiSelect from 'react-native-multiple-select';
 
@@ -25,14 +24,11 @@ const windowHeight = Dimensions.get("window").height;
 
 const Schools = ({ navigation }) => {
 
- 
-
-
   const [filterData, setFilterData] = useState();
   const [masterDate, setMasterDate] = useState();
   const [search, setSearch] = useState();
+  const [loading, setLoading] = useState(true);
 
- 
 
   // const fetchPosts = () => {
   //   const apiURL = "http://192.168.18.64:8000/schools";
@@ -55,12 +51,17 @@ const Schools = ({ navigation }) => {
   const [schools,setSchools] = useState('')
 
   const {data} = useGetSchoolsQuery()
+
   useEffect(()=>{
     setSchools(data)
+    setLoading(false);
     setMasterDate(data)
     setFilterData(data)
     console.log(schools)
-  },[])
+    
+  },[
+    
+  ])
 
   const searchFilter = (text) => {
     if (text) {
