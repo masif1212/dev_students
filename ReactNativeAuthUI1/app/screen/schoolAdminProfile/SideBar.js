@@ -14,7 +14,7 @@ const SideBar = ({ ...props }) => {
     unSetSchoolAdminInfo({ email: "", first_name: "", last_name: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
-    navigation.navigate('Home');
+    navigation.navigate('MONITORING APP');
   }
 
   const navigation = useNavigation()
