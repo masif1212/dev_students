@@ -31,7 +31,8 @@ const SchoolDashboardScreen = () => {
           email: data.user.email,
           first_name: data.user.first_name,
           last_name: data.user.last_name,
-          image: data.user.image
+          image: data.user.image,
+          schoolId: data.user.schoolId,
         })
         
       );

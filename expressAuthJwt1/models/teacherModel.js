@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 // Defining Schema
 const teacherSchema = new mongoose.Schema({
+  schoolId:  { type: String, required: true, trim: true},
   schoolName: { type: String, required: true, trim: true },
   image: { type: String, required: true, trim: true },
   first_name: { type: String, required: true, trim: true },
