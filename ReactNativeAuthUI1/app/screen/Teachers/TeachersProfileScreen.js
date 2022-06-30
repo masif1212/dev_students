@@ -201,7 +201,7 @@ const TeachersProfileScreen = ({route}) => {
 
             }}><Text style={{
                 color:'white'
-            }}>View Attendance</Text></TouchableOpacity>
+            }}>view Attendance</Text></TouchableOpacity>
         </View>
     </ScrollView>
   );
