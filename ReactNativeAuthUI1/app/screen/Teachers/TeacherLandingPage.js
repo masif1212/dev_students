@@ -33,22 +33,6 @@ const TeacherLandingPage = () => {
     setStudents(data);
   });
 
-  const fetchPosts = () => {
-    const apiURL = "http://192.168.18.64:8000/studentsget";
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setStudents(responseJson);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const focus = useIsFocused();
-  useEffect(() => {
-    fetchPosts();
-    return () => {};
-  }, [focus]);
 
 
   const sortTable = (column) => {
@@ -97,30 +81,7 @@ const TeacherLandingPage = () => {
 
       <View >
        <View style={styles.container}>
-     
-     <View style={{
-       flexDirection:'row',
-       justifyContent:'space-around'
-     }} >
-     
-     <Text 
-     style={{
-         fontSize: 18,
-         top: 5,
-         left:7,
-         fontWeight: 'bold'
-          }}
-     >Filter</Text>
-     <View style={{
-       width:'90%',
-       left:10
-     }}>
-       <DropDownClassStudents />
-     </View>
 
-    
-     </View>
-     
        <Divider borderWidth={0.2} width={'100%'} margin={5}/>
        <View>
 

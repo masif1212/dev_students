@@ -19,6 +19,7 @@ Content-Type: application/json
 
 {
   "schoolName" : "Teacher",
+  "schoolId" : "4834543",
   "image": "image",
  "first_name": "first_name",
  "last_name": "last_name",

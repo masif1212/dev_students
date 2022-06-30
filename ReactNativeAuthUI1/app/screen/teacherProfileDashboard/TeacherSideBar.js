@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { View, Text} from 'react-native';
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 import { useNavigation } from '@react-navigation/native';
 import { removeToken } from '../../../services/AsyncStorageService.js';
@@ -29,6 +30,8 @@ const TeacherSideBar = ({ ...props }) => {
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold' }}>{myData.first_name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.email}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.last_name}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.schoolName}</Text>
+
       </View>
       <DrawerItemList {...props} />
       <DrawerItem label='Logout' onPress={handleLogout} />

@@ -5,7 +5,7 @@ import transporter from '../config/emailConfig.js'
 
 class TeachersController {
   static teachersRegistration = async (req, res) => {
-    const { schoolName, first_name,last_name,image, email, password, confirm_password, contact, alt_contact,  address_1, address_2, cnic, city } = req.body
+    const {schoolId, schoolName, first_name,last_name,image, email, password, confirm_password, contact, alt_contact,  address_1, address_2, cnic, city } = req.body
     const user = await TeachersModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
@@ -16,6 +16,7 @@ class TeachersController {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
             const doc = new TeachersModel({
+              schoolId: schoolId,
               schoolName: schoolName,
               image: image,
               first_name: first_name,

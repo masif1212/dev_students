@@ -17,6 +17,7 @@ import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from 'react-redux';
+import { useIsFocused } from "@react-navigation/native"; 
 
 
 
@@ -35,6 +36,7 @@ const TeacherRegister = () => {
   const [city, setCity] = useState("");
   const [image, setImage] = useState('');
   const [schoolName, setSchoolName] = useState('')
+  const[schoolId, setSchoolId]=useState('');
 
   const clearTextInput = () => {
     setfirst_name("");
@@ -63,6 +65,7 @@ const TeacherRegister = () => {
       if (password === confirm_password) {
         const formData = {
           schoolName,
+          schoolId,
           first_name,
           last_name,
           email,
@@ -121,11 +124,12 @@ const TeacherRegister = () => {
     }
   };
 
+  const focus = useIsFocused();
   const myData = useSelector(state => state.schoolAdmin)
   useEffect(() => {
-    console.log(myData.schoolName)
+    setSchoolId(myData.schoolId)
     setSchoolName(myData.schoolName)
-  }, [myData])
+  }, [focus])
 
   return (
     <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
