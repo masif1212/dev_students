@@ -124,6 +124,7 @@ const TeacherRegister = () => {
   const myData = useSelector(state => state.schoolAdmin)
   useEffect(() => {
     console.log(myData.schoolName)
+    setSchoolName(myData.schoolName)
   }, [myData])
 
   return (

@@ -47,7 +47,7 @@ router.get('/getschooladmin', SchoolAdminController.getSchoolAdmins)
 
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
-router.get('/getSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
+router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
 
 
 
