@@ -13,8 +13,8 @@ const SchoolAdminPanel = () => {
 
   return (
     <Drawer.Navigator drawerContent={props => <SideBar {...props} />} screenOptions={{ headerStyle: { backgroundColor: '#5062BD' }, headerTintColor: 'white' }}>
-      <Drawer.Screen name="SchoolAdminHomePage" component={SchoolAdminHomePage} options={{ headerTitle: 'Super Admin' }} />      
       <Drawer.Screen name="Dashboard" component={SchoolAdminDashboardScreen} />
+      <Drawer.Screen name="SchoolAdminHomePage" component={SchoolAdminHomePage} options={{ headerTitle: 'Super Admin' }} />      
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerTitle: 'Change Password' }} />
     </Drawer.Navigator>
   )

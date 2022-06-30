@@ -14,7 +14,7 @@ const SideBar = ({ ...props }) => {
     unSetSchoolAdminInfo({ email: "", first_name: "", last_name: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
-    navigation.navigate('Home');
+    navigation.navigate('MONITORING APP');
   }
 
   const navigation = useNavigation()
@@ -22,7 +22,11 @@ const SideBar = ({ ...props }) => {
   const myData = useSelector(state => state.schoolAdmin)
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
+ useEffect(()=>{
+  console.log(myData)
+ }, [])
 
+ 
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ margin: 15 }}>
