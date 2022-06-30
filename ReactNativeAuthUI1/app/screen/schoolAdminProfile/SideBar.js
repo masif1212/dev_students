@@ -29,12 +29,17 @@ useEffect(()=>{
 
   return (
     <DrawerContentScrollView {...props}>
-      <View style={{ margin: 15 }}>
-        <Image style={{ height: 100,width:100 }} source={{ uri: myData.image}} />
-        <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold' }}>{myData.first_name}</Text>
-        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.email}</Text>
-        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.last_name}</Text>
-        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.schoolName}</Text>
+      <View style={{ 
+        margin:4, 
+        backgroundColor:'#5062BD', 
+        borderRadius:16,
+        alignItems:'center',
+        justifyContent:'center',
+        bottom:10
+        }}>
+        <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : myData.image}} />
+        <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white",}}>{myData.first_name + " "+myData.last_name}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5,color:"white" ,}}>{myData.email}</Text>
 
       </View>
       <DrawerItemList {...props} />
