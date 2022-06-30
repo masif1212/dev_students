@@ -76,7 +76,7 @@ const App = ({navigation}) => (
         <Stack.Screen name="DrawerScreen" component={Drawer} options={{ hederaShown: true, headerStyle: {backgroundColor: "white",},}}/>
         <Stack.Screen name="SelectedSchool" component={SelectedSchoolScreen} options = {({route}) => ({title: route.params.title , headerShadowVisible: true, headerShown: true, headerStyle: {backgroundColor: "#F5F5F5", }})}/>
         <Stack.Screen name="TeachersProfile" component={TeachersProfileScreen} options={{headerShown: true,headerStyle: {backgroundColor: "white",},}}/> 
-        <Stack.Screen name="TeachersList" component={TeachersListScreen} options={{headerShown: true, headerStyle: { backgroundColor: "white", }, }}  />
+        <Stack.Screen name="TeachersList" component={TeachersListScreen} options={{headerShown: true, headerStyle: { backgroundColor: "#5062BD", }, }}  />
         <Stack.Screen name="StudentDetail" component={StudentDetail} options={{ headerShown:true, headerTintColor:'black',  headerStyle: {  backgroundColor: "white",   }, }}/>
         <Stack.Screen name="SchoolAdminHomePage" component={SchoolAdminHomePage} options={{  headerShown:true,  headerStyle: { backgroundColor: "white",  },  }}  />
         <Stack.Screen name="TeachersListForSchoolAdmin" component={TeachersListForSchoolAdmin} options={{  headerShown:true,  headerStyle: { backgroundColor: "white",  },  }}  />
@@ -101,6 +101,7 @@ const App = ({navigation}) => (
 
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
         <Stack.Screen name="TeacherLandingPage" component={TeacherLandingPage} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
+  
           
 
 
