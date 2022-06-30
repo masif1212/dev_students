@@ -30,6 +30,7 @@ const DashboardScreen = () => {
           email: data.user.email,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
+          image: data.user.image,
         })
       );
     }
