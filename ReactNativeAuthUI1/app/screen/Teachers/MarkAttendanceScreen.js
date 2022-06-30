@@ -118,7 +118,6 @@ const MarkAttendanceScreen = ({ navigation }) => {
         stickyHeaderIndices={[0]}
         extraData={students}
         renderItem={({ item, index }) => {
-          console.log(item)
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
               <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item?.roll_no}</Text>

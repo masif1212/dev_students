@@ -14,17 +14,23 @@ import { useIsFocused } from "@react-navigation/native";
 
 
 const TeachersListForSchoolAdmin = ({navigation}) => {
-  const [teachers,setTeachers] = useState('');
+  
+  const [teachers,setTeachers] = useState();
+
+  
+
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.26:8000/api/user/getTeachers");
+    const resp = await fetch("http://192.168.18.64:8000/api/user/getTeachers");
     const data = await resp.json();
-    setTeachers(data)
+    setTeachers(data);
   };
 
   useEffect(() => {
      fetchData();
   }, [focus]);
+
+
 
     return (
       <View style={styles.body}>
