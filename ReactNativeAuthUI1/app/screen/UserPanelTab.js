@@ -17,7 +17,7 @@ const UserPanelTab = () => {
               <Button
                 onPress={()=> navigation.navigate('CreateSchoolScreen') }
                 title="Add School"
-                color="blue"
+                color="#5062BD"
               />
             ),
             headerStyle: {
