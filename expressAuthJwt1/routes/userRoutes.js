@@ -42,9 +42,12 @@ router.post('/studentattendance', StudentAttendanceController.MarkStudentAttenda
 
 //SCHOOL aDMIN MODEL
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
+router.get('/getschooladmin', SchoolAdminController.getSchoolAdmins)
+
+
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
-router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
+router.get('/getSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
 
 
 
