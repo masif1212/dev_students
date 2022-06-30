@@ -12,14 +12,9 @@ import React, { useState, useEffect } from "react";
 import { Dimensions, RefreshControl} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import Icons from "react-native-vector-icons/FontAwesome5";
-// import DropDownSuperAdmin from "../Components/dropdown/DropDownSuperAdmin"
  import { useIsFocused } from "@react-navigation/native"; 
-import { useGetschoolsQuery } from "../../services/userAuthApi";
-import { setSchoolInfo } from "../../features/schoolSlice";
-import { useDispatch } from "react-redux";
 
  
-// import MultiSelect from 'react-native-multiple-select';
 
 
 const windowWidth = Dimensions.get("window").width;
@@ -36,7 +31,7 @@ const Schools = ({ navigation }) => {
 
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.64:8000/api/user/getschools");
+    const resp = await fetch("http://192.168.18.12:8000/api/user/getschools");
     const data = await resp.json();
     setMasterDate(data);
     setFilterData(data);
