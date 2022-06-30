@@ -23,13 +23,15 @@ const SideBar = ({ ...props }) => {
   // console.log(myToken)
   useEffect(()=>{
     console.log(myData.image)
+
   })
   return (
     <DrawerContentScrollView {...props} style={styles.mainContainer}>
       <View style={{ margin: 15, }}>
-        <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white"}}>{myData.firstName}</Text>
-        <Text style={{ fontSize: 16, marginBottom: 5,color:"white" }}>{myData.email}</Text>
-        <Text style={{ fontSize: 16, marginBottom: 5,color:"white" }}>{myData.lastName}</Text>
+        <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"black"}}>{myData.firstName}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5,color:"black" }}>{myData.email}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5,color:"black" }}>{myData.lastName}</Text>
+        <Image style={{ height: 300}} source={{ uri : myData.image}} />
       </View>
       <DrawerItemList {...props} />
       <DrawerItem label='Logout' onPress={handleLogout} />
