@@ -23,12 +23,14 @@ const SideBar = ({ ...props }) => {
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
 
-
+useEffect(()=>{
+  console.log(myData.image)
+})
 
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ margin: 15 }}>
-     
+        <Image style={{ height: 100,width:100 }} source={{ uri: myData.image}} />
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold' }}>{myData.first_name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.email}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.last_name}</Text>
