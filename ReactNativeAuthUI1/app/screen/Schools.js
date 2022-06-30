@@ -73,13 +73,16 @@ const Schools = ({ navigation }) => {
       >
         <View style={styles.itemViewStyles}>
           <Icons name="school"
-          size={60}
+          size={40}
           color='#5062BD'
+          
    
             style={{
               width: Dimensions.get("window").width -300,
               height: Dimensions.get("window").height -650,
-              margin: 4,
+              top:20,
+              left:5
+              
             }}
           />
           <View>
@@ -172,11 +175,13 @@ const styles = StyleSheet.create({
   },
   itemStyles: {
     padding: 2,
-    fontSize: 14,
+    fontSize: 12,
     color: "#787878",
     borderRadius: 20,
-    justifyContent:'center',
-    alignItems:'center'
+    right:45
+    // justifyContent:'center',
+    // alignItems:'center'
+
   },
   itemStyles2: {
     color: "#000",
