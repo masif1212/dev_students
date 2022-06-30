@@ -192,10 +192,7 @@ export const userAuthApi = createApi({
     getschools :builder.query({
       query:()=>({
         url: "getschools",
-        method:"GET",
-        headers: {
-          'Content-type' : 'application/json'
-        }
+        method:"GET", 
       })
     }),
 
