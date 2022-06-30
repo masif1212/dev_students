@@ -21,6 +21,8 @@ export const schoolSlice = createSlice({
       state.province = action.payload.province
       state.district = action.payload.district
       state.city = action.payload.city
+
+      
     },
     unSetSchoolInfo: (state, action) => {
       state.school_name = action.payload.school_name
