@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F5F5F5",
     width: windowWidth,
-    height: '100%',
+    height: windowHeight,
     padding: 0,
     paddingHorizontal: 15,
     

@@ -54,6 +54,9 @@ GET  http://192.168.18.14:8000/api/user/getTeachers
 GET  http://192.168.18.64:8000/api/user/getschools
 
 ###
+GET  http://192.168.18.26:8000/api/user/getSchoolAdmin
+
+###
 POST http://192.168.18.14:8000/api/user/createschool
 Content-Type: application/json
 
@@ -66,4 +69,6 @@ Content-Type: application/json
               "province" : "province",
               "city": "city"
 }
+
+###
 GET http://192.168.18.64:8000/api/user/getstudent
