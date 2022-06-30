@@ -75,7 +75,17 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("TeachersProfile", {
-         
+                    schoolName:item.schoolName,
+                    image: item.image,
+                    first_name: item.first_name,
+                    last_name: item.last_name,
+                    email: item.email,
+                    contact:item.contact,
+                    alt_contact: item.alt_contact,
+                    address_1: item.address_1,
+                    address_2: item.address_2,
+                    city: item.city
+
                   })
                 }
               >
