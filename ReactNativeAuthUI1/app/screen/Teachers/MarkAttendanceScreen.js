@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions  } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
@@ -17,30 +17,32 @@ const MarkAttendanceScreen = ({ navigation }) => {
     "RollNo",
     "Name",
   ])
-  
+
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  
-  const {data} = useGetStudentQuery();
+
+  const { data } = useGetStudentQuery();
 
 
-  const [students,setStudents] =useState([])
+  const [students, setStudents] = useState([])
 
-useEffect(() => {
-  setStudents(data);
-}, [])
-  
-  
- 
+  useEffect(() => {
+    setStudents(data);
+  }, [])
+
+
+
 
   const myData = useSelector(state => state.student)
 
 
 
-  const MarkAttendance=(item,S)=>{
-    const attend = (students.map(l => l._id===item._id ? {...l,  attendance: S} : l));
+  const MarkAttendance = (item, S) => {
+    const attend = (students.map(l => l._id === item._id ? { ...l, attendance: S } : l));
     setStudents(attend)
     // console.log(item)
+
+    
 
 
     // console.log(students)
@@ -56,10 +58,10 @@ useEffect(() => {
     //  setStudents(any)
     //  console.log(students)
     // //  onSubmit(any);
-     
- }
 
-const [ items , setItems ] = useState()
+  }
+
+  const [items, setItems] = useState()
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc"
     const sortedData = _.orderBy(students, [column], [newDirection])
@@ -101,13 +103,13 @@ const [ items , setItems ] = useState()
 
   return (
 
-  
-    <View style={{ height: windowHeight,width:'100%' }}>
+
+    <View style={{ height: windowHeight, width: '100%' }}>
 
       <View >
         <ClassSectionFilter />
       </View>
-    
+
       <FlatList
         data={students}
         keyExtractor={(item, index) => index + ""}
@@ -116,45 +118,45 @@ const [ items , setItems ] = useState()
         stickyHeaderIndices={[0]}
         extraData={students}
         renderItem={({ item, index }) => {
-        console.log(item)
+          console.log(item)
           return (
-            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>   
+            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
               <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item?.roll_no}</Text>
               <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
                 pagingEnabled={true}
-                style={{width:'150%'}}
-                >
-              <View style={{  flexDirection: 'row',left:40 }}>
-                <View 
-                style={{
-                  left:23
-                  
-                }}
-                >
-                
-                <CheckBox
-                  title='P'
-                  checkedColor='green'
-                  checked={item.attendance==='P'? true:false}                    
-                  checkedIcon ="dot-circle-o"
-                  unCheckedIcon='circle-o'
-                  onPress={()=>MarkAttendance(item,'P')}
-                  containerStyle={{
-                  alignItems:'center',
-                  justifyContent:'center',
-       
-                  height:50,  
-                  right:50,
-                  alignItems:'center',
-                  justifyContent:'center',
-                  top:-10,
-                  backgroundColor:'transparent'
-                  }}
-                  /> 
+                style={{ width: '150%' }}
+              >
+                <View style={{ flexDirection: 'row', left: 40 }}>
+                  <View
+                    style={{
+                      left: 23
 
-          {/* <BouncyCheckbox
+                    }}
+                  >
+
+                    <CheckBox
+                      title='P'
+                      checkedColor='green'
+                      checked={item.attendance === 'P' ? true : false}
+                      checkedIcon="dot-circle-o"
+                      unCheckedIcon='circle-o'
+                      onPress={() => MarkAttendance(item, 'P')}
+                      containerStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+
+                        height: 50,
+                        right: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: -10,
+                        backgroundColor: 'transparent'
+                      }}
+                    />
+
+                    {/* <BouncyCheckbox
             size={20}
             fillColor="green"
             unfillColor="#FFFFFF"
@@ -166,32 +168,32 @@ const [ items , setItems ] = useState()
             /> */}
 
 
-                </View>
-                <View style={{
-                    left:5
-                }}>             
-              <CheckBox
-                  title='A'
-                  checkedColor='red'
-                  checked={item.attendanc=='a'?true:false}
-                  checkedIcon ="dot-circle-o"
-                  unCheckedIcon='circle-o'
+                  </View>
+                  <View style={{
+                    left: 5
+                  }}>
+                    <CheckBox
+                      title='A'
+                      checkedColor='red'
+                      checked={item.attendance === 'A' ? true : false}
+                      checkedIcon="dot-circle-o"
+                      unCheckedIcon='circle-o'
 
-                  onPress={()=>MarkAttendance(index,'a')}
-                  containerStyle={{
-                  alignItems:'center',
-                  justifyContent:'center',
-        
-                  height:50,  
-                  right:50,
-                  alignItems:'center',
-                  justifyContent:'center',
-                  top:-10,
-                  backgroundColor:'transparent'
-                  }}
-                  />
+                      onPress={() => MarkAttendance(item, 'A')}
+                      containerStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
 
-          {/* <BouncyCheckbox
+                        height: 50,
+                        right: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: -10,
+                        backgroundColor: 'transparent'
+                      }}
+                    />
+
+                    {/* <BouncyCheckbox
             size={20}
             fillColor="red"
             unfillColor="#FFFFFF"
@@ -200,58 +202,71 @@ const [ items , setItems ] = useState()
             textStyle={{  }}
             onPress={()=>MarkAbsent()}
     /> */}
+                  </View>
+
+
+                  <View style={{
+                    left: 5,
+                  }}>
+                    <CheckBox
+                      title='L'
+                      checkedColor='gray'
+
+                      checked={item.attendance === 'L' ? true : false}
+                      checkedIcon='dot-circle-o'
+                      unCheckedIcon='circle-o'
+                      onPress={() => MarkAttendance(item, 'L')}
+                      containerStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+
+                        height: 50,
+                        right: 70,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: -10,
+                        backgroundColor: 'transparent',
+
+                      }}
+                    />
+                  </View>
                 </View>
-
-
-                <View style={{
-                    left:5,
-                }}>
-                <CheckBox
-                title='L'
-                checkedColor='gray'
-
-                checked={item.attendanc=='l'?true:false}
-                checkedIcon ='dot-circle-o'
-                unCheckedIcon='circle-o'
-                onPress={()=>MarkAttendance(index,'l')}
-                containerStyle={{
-                  alignItems:'center',
-                  justifyContent:'center',
- 
-                  height:50,  
-                  right:70,
-                  alignItems:'center',
-                  justifyContent:'center',
-                  top:-10,
-                  backgroundColor:'transparent',
-                  
-                  }}
-                  
-                />
-
-        {/* <BouncyCheckbox
-          size={20}
-          fillColor="gray"
-          unfillColor="#FFFFFF"
-          text="L"
-          iconStyle={{  }}
-          textStyle={{  }}
-          onPress={(isChecked)=>MarkLeave({isChecked})}
-          isChecked = {MarkLeave === setLeave ? true : false  }
-    />
-                */}
-
-</View>
-
-
-              </View>
               </ScrollView>
             </View>
-
           )
         }}
       />
-    
+
+      
+<View>
+              <TouchableOpacity
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: 15,
+                  width: "100%",
+                  marginVertical: 5,
+                  borderRadius: 50,
+                  marginBottom: 60,
+                  fontWeight: "bold",
+                  backgroundColor: "#5062BD",
+                  elevation: 1,
+                  marginTop: 30,
+                }}
+              >
+                <Text
+                  style={{
+                    color: "white",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  Submit Attendance
+                </Text>
+              </TouchableOpacity>
+            </View>
+  
+
     </View>
   );
 }
@@ -267,7 +282,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
     height: 50,
-    
+
   },
   tableRow: {
     flexDirection: "row",

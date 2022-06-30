@@ -30,6 +30,8 @@ const SideBar = ({ ...props }) => {
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold' }}>{myData.first_name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.email}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.last_name}</Text>
+        <Text style={{ fontSize: 16, marginBottom: 5 }}>{myData.schoolName}</Text>
+
       </View>
       <DrawerItemList {...props} />
       <DrawerItem label='Logout' onPress={handleLogout} />

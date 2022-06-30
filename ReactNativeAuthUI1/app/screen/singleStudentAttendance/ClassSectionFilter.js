@@ -68,6 +68,10 @@ const ClassSectionFilter = () => {
     }
    
   ];
+
+  const [classData,setClassData]=useState([
+    {student_class:'1',section:'A',name:'',rollNo:'',isPresent:0,isAbsent:0,isLeave:0,}
+  ])
  
 
   const [ classes, setClasses ] = useState({})
@@ -119,7 +123,7 @@ const ClassSectionFilter = () => {
 				maxHeight: 140
 			}}
 			items={items}
-			placeholder="Placeholder."
+			placeholder="Class"
 			resetValue={false}
 			underlineColorAndroid='transparent' />
 
@@ -150,7 +154,7 @@ const ClassSectionFilter = () => {
 				maxHeight: 140
 			}}
 			items={items_2}
-			placeholder="Placeholder."
+			placeholder="Section."
 			resetValue={false}
 			underlineColorAndroid='transparent' />
 

@@ -10,7 +10,7 @@ const initialState = {
 
 }
 export const schoolSlice = createSlice({
-  name: 'school_data',
+  name: 'user_info',
   initialState,
   reducers: {
     setSchoolInfo: (state, action) => {

@@ -98,10 +98,8 @@
 //           component={SelectedSchoolScreen}
 //            options = {
 //              ({route}) => ({title: route.params.title , headerShadowVisible: false,
-//             headerShown: true,
-//             headerStyle: {
-//               backgroundColor: "#F5F5F5",
-//             }})
+//             headerShown: true})
+//     
 //           }
          
 //         />

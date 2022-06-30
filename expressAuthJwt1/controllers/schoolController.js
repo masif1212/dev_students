@@ -31,7 +31,7 @@ class SchoolController {
     static getSchool = async(req,res)=>{
       try{
         const school = await SchoolRegistrationModel.find({
-          attributes: ["school_name","contact_no","address_1","address_2","province","distrct",'city']
+          attributes: [ "school_name","contact_no","address_1","address_2","province","distrct",'city']
         })
         res.json(school)
       }catch(err) {
