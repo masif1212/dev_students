@@ -10,6 +10,8 @@ const Drawer = createDrawerNavigator();
 const TeacherPannelTab = () => {
   return (
     <Drawer.Navigator drawerContent={props => <SideBar {...props} />} screenOptions={{ headerStyle: { backgroundColor: '#5062BD' }, headerTintColor: 'white' }}>
+      <Drawer.Screen name="TeacherDashboardScreen" component={TeacherDashboardScreen} />  
+      
       <Drawer.Screen name="TeacherLandingPage" component={TeacherLandingPage} />  
       <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} options={{ headerTitle: 'Change Password' }} />
     </Drawer.Navigator>
