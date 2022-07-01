@@ -65,8 +65,8 @@ class StudentController {
     
 
     static getStudents = async (req, res) => {
-      const authors = await StudentModel.find({'schoolId': req.params.schoolId});
-      res.send(authors);
+      const students = await StudentModel.find({'schoolId': req.params.schoolId});
+      res.send(students);
     }
 
   

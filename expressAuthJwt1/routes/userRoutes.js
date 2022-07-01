@@ -30,6 +30,8 @@ router.get('/loggeduser', UserController.loggedUser)
 //students
 router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
+router.get('/getStudents/:schoolId', StudentController.getStudents)
+
 
 
 //school
@@ -46,7 +48,7 @@ router.post('/studentattendance', StudentAttendanceController.MarkStudentAttenda
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
 router.get('/getschooladmin', SchoolAdminController.getSchoolAdmins)
 
-
+router.get('/getSchoolAdmin/:schoolId', SchoolAdminController.getschoolAdmin)
 
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
@@ -60,9 +62,13 @@ router.post('/teachersLogin', TeachersController.teachersLogin)
 router.use('/loggedTeachers', checkTeacherAuth)
 router.get('/loggedTeachers', TeachersController.loggedTeachers)
 router.get('/getTeachers', TeachersController.getTeachers)
+router.get('/getteacher/:schoolId', TeachersController.getTeacher)
 
 
-router.get('/getStudents/:schoolId', StudentController.getStudents)
+
+
+
+
 // router.get('/getStudents/:schoolId', function(req, res) {
 //     try{
 //         res.send("tagId is set to " + req.params.schoolId);

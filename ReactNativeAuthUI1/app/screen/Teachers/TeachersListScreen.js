@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,24 +8,25 @@ import {
   FlatList,
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
+import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
 
 
-const TeachersListScreen = ({navigation})=> {
+const TeachersListScreen = ({navigation, route})=> {
 
-  const [getTeachers , setGetTeachers] = useState("");
+  const [teachers,setTeachers] = useState();
 
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolid}`);
+    const data = await resp.json();
+    setTeachers(data);
+  };
+  
   
   const focus = useIsFocused();
-  const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.26:8000/api/user/getTeachers");
-    const data = await resp.json();
-    setGetTeachers(data);
-   
-  };
 
   useEffect(() => {
-     fetchData();
+   fetchData();
   }, [focus]);
 
 
@@ -34,7 +35,7 @@ const TeachersListScreen = ({navigation})=> {
         <FlatList
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
-          data={getTeachers}
+          data={teachers}
           keyExtractor={(item) => item.item}
           renderItem={({ item }) => {
             return (

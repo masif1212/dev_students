@@ -5,14 +5,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
 import { CheckBox } from 'react-native-elements';
-import { useGetStudentQuery } from '../../../services/userAuthApi';
 import { useSelector } from 'react-redux';
+import { useIsFocused } from "@react-navigation/native";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const MarkAttendanceScreen = ({ navigation }) => {
+const MarkAttendanceScreen = ({ route }) => {
   const [columns, setColumns] = useState([
     "RollNo",
     "Name",
@@ -20,54 +20,41 @@ const MarkAttendanceScreen = ({ navigation }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
+  const [ teachers , setTeachers] = useState(' ');
+  const [ attendance, setAttendance ] = useState('')
 
-  const { data } = useGetStudentQuery();
 
-
-  const [students, setStudents] = useState([])
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolId}`);
+    const data = await resp.json();
+    setTeachers(data);
+  };
+  
+  const focus = useIsFocused();
 
   useEffect(() => {
-    setStudents(data);
-  }, [])
+    fetchData();
+  }, [focus]);
 
 
 
-
-  const myData = useSelector(state => state.student)
 
 
 
   const MarkAttendance = (item, S) => {
-    const attend = (students.map(l => l._id === item._id ? { ...l, attendance: S } : l));
-    setStudents(attend)
-    // console.log(item)
-
-    
-
-
-    // console.log(students)
-
-
-
-    // const MarkAttendance=(item,S)=>{
-    //   let std=students
-    //   std[item].attendance = S
-    //   let newArr = [...std]; // copying the old datas array
-    //   newArr[item].attendance = S; 
-    //    let any = std[item]
-    //  setStudents(any)
-    //  console.log(students)
-    // //  onSubmit(any);
-
+    const attend = (teachers.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    setTeachers(attend)
+    setAttendance(attend)
+    console.log(attendance)
   }
 
   const [items, setItems] = useState()
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc"
-    const sortedData = _.orderBy(students, [column], [newDirection])
+    const sortedData = _.orderBy(teachers, [column], [newDirection])
     setSelectedColumn(column)
     setDirection(newDirection)
-    setStudents(sortedData)
+    setTeachers(sortedData)
   }
   const tableHeader = () => (
 
@@ -111,12 +98,12 @@ const MarkAttendanceScreen = ({ navigation }) => {
       </View>
 
       <FlatList
-        data={students}
+        data={teachers}
         keyExtractor={(item, index) => index + ""}
         style={{ maxWidth: '100%' }}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
-        extraData={students}
+        extraData={teachers}
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
