@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import DpFullAttendance from './DpFullAttendance ';
+
+import {Divider} from 'react-native-paper';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Icon from "react-native-vector-icons/FontAwesome";
 
 
 
@@ -111,6 +114,22 @@ const  ViewFullAttendance = ({navigation})=> {
   ])
 
 
+ 
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
+
   
   
 
@@ -149,7 +168,81 @@ const  ViewFullAttendance = ({navigation})=> {
     <View style={{height:'100%'}}>
 
     <View style={{width:"100%"}}>
-      <DpFullAttendance />
+      {/* <DpFullAttendance /> */}
+      <View>
+      <View style={styles.container}>
+ 
+<View style={{
+    flexDirection: 'row',
+    justifyContent: 'flex-end' 
+}}>
+  
+</View>
+
+
+  
+<View style={{
+    flexDirection:'row',
+    justifyContent:'flex-end',
+
+  }}>
+ 
+          <TouchableOpacity style={{
+             flexDirection:'row',
+             borderRadius:10,
+             backgroundColor:'#5062BD',
+             padding:10,
+             width:'35%',
+             justifyContent:'center'
+             
+    
+          }} 
+          onPress={showDatePicker}>
+             <Icon name="calendar"
+          size={20}
+          color='white'
+          />
+          <Text style={{
+            left:4,
+            color:'white'
+          }}>Select Date</Text> 
+     
+      </TouchableOpacity>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        />
+      </View>
+   <Divider borderWidth={0.2} width={'100%'} margin={5}/>
+
+
+   <View>
+  <Text style={{
+      fontSize:35,
+      fontWeight: 'bold',
+      left: 5
+
+  }}>Class : 5th</Text>
+  <Text style={{
+    left: 5
+  }} >School Name</Text>
+</View>
+{/* add pie here */}
+
+<View style={{flexDirection: 'row', top:10}}>
+  <Text  style={{
+    left:5
+  }}>Section : A</Text>
+  
+</View>
+
+   <Divider margin={13} />
+
+</View>
+
+      </View>
     </View>
 
       <FlatList 
@@ -177,6 +270,19 @@ const  ViewFullAttendance = ({navigation})=> {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 15
+
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#8099F7',
+    marginBottom: 5,
+    padding: 3,
+    marginLeft: 4,
+    borderRadius: 10,
+    
+  },
 
   tableHeader: {
     flexDirection: "row",

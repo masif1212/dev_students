@@ -1,49 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput,Button } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
+
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
-
+import Icon from "react-native-vector-icons/FontAwesome";
 
 
 
 const  StudentDetail = ({navigation,route})=> {
 
-  const [date, setDate] = useState('');
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  // const [filterData, setFilterData] = useState('')
-  // const [masterData, setMasterData] = useState('')
-  // const [search, setSearch] = useState('');
-
-
+  const [studentdate,setStudentDate] = useState('');
+ 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
-    
-
   };
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
-    
+
   };
 
   const handleConfirm = (date) => {
-    setDate(date);
+    setStudentDate(date)
+    console.log(date)
     hideDatePicker();
-    searchFilter(date)
+
   };
-
-
-
-  const getDate = () => {
-    let tempDate = date.toString().split(' ');
-    return date !== ''
-      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : '';
-  };
-
+// useEffect (() => {
+//   console.log(studentdate)
+// }) 
 
 
   const [ columns, setColumns ] = useState([
@@ -53,15 +43,15 @@ const  StudentDetail = ({navigation,route})=> {
   ])
   const [ direction, setDirection ] = useState(null)
   const [ selectedColumn, setSelectedColumn ] = useState(null)
-  const [ pets, setPets ] = useState([
+  const [ students, setStudents ] = useState([
     {
     
-      date: "1.6.2022",
+      date: "2022-07-01T12:42:08.441Z",
       Status: "Present"
     },
     {
  
-      date: "2.6.2022",
+      date: "2022-07-02T13:03:35.822Z",
       Status: "Absent"
     },
     {
@@ -154,10 +144,10 @@ const  StudentDetail = ({navigation,route})=> {
 
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc" 
-    const sortedData = _.orderBy(pets, [column],[newDirection])
+    const sortedData = _.orderBy(students, [column],[newDirection])
     setSelectedColumn(column)
     setDirection(newDirection)
-    setPets(sortedData)
+    setStudents(sortedData)
   }
   const tableHeader = () => (
     <View style={styles.tableHeader}>
@@ -189,44 +179,50 @@ const  StudentDetail = ({navigation,route})=> {
     <View style={{width:"100%"}}>
     <View style={styles.container}>
  
-    
- <View style={{flexDirection:'row'}}>
- <Text 
- style={{
-     fontSize: 18,
-     top: 40,
-     left:7,
-     fontWeight: 'bold'
-      }}
- >Filter</Text>
- </View>
 <View style={{
     flexDirection: 'row',
     justifyContent: 'flex-end' 
 }}>
 
-<TouchableOpacity  onPress={showDatePicker}>
-    <Text style={{borderWidth: 1,borderColor:'#8099F7',borderRadius: 10,  padding: 7, backgroundColor: '#5062BD', color: 'white', fontSize:14}}>Set Date</Text>
-</TouchableOpacity>
 
-<TextInput
-    style={styles.textInput}
-    value={getDate()}
-    placeholder="Day| MM | DD | YY"
-  />
   
 </View>
 
 
-  
-  <DateTimePickerModal
-    isVisible={isDatePickerVisible}
-    mode="date"
-    onConfirm={handleConfirm}
-    onCancel={hideDatePicker}
-    onChangeText={(date) => searchFilter(date)}
-   
-  />
+  <View style={{
+    flexDirection:'row',
+    justifyContent:'flex-end',
+
+  }}>
+ 
+          <TouchableOpacity style={{
+             flexDirection:'row',
+             borderRadius:10,
+             backgroundColor:'#5062BD',
+             padding:10,
+             width:'35%',
+             justifyContent:'center'
+             
+    
+          }} 
+          onPress={showDatePicker}>
+             <Icon name="calendar"
+          size={20}
+          color='white'
+          />
+          <Text style={{
+            left:4,
+            color:'white'
+          }}>Select Date</Text> 
+     
+      </TouchableOpacity>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+        />
+      </View>
 
   
    <Divider borderWidth={0.2} width={'100%'} margin={5}/>
@@ -259,20 +255,24 @@ const  StudentDetail = ({navigation,route})=> {
     </View>
 
       <FlatList 
-        data={pets}
+        data={students}
         style={{width:"100%"}}
         keyExtractor={(item, index) => index+""}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
         renderItem={({item, index})=> {
           return (
-            <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-              <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{item.date}</Text>
-              <Text style={styles.columnRowTxt}>{item.Status}</Text>
-            </View>
+            <View>
+              { item.date === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
+                <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{item.date}</Text>
+                <Text style={styles.columnRowTxt}>{item.Status}</Text>
+              </View> : <Text>bsd</Text>}
+              </View>
           )
         }}
       />
+
+      
       <StatusBar style="auto" />
       </View>
       
