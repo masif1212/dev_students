@@ -18,7 +18,7 @@ const TeachersListScreen = ({navigation})=> {
   
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.64:8000/api/user/getTeachers");
+    const resp = await fetch("http://192.168.18.26:8000/api/user/getTeachers");
     const data = await resp.json();
     setGetTeachers(data);
    

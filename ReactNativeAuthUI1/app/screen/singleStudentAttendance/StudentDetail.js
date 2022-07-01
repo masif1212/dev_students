@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import DatePick from  './DatePick'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
 

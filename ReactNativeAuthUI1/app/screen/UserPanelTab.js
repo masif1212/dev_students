@@ -18,11 +18,15 @@ const UserPanelTab = () => {
        
             <Drawer.Screen name="Dashboard" component={DashboardScreen} />
       <Drawer.Screen name="Schools" component={Schools} options={({navigation}) => ({ headerShadowVisible: true,headerTintColor:'black',headerRight: () => (
+   
               <Button
                 onPress={()=> navigation.navigate('CreateSchoolScreen') }
                 title="Add School"
                 color="#5062BD"
+           
+               
               />
+           
             ),
             headerStyle: {
               backgroundColor: "#F5F5F5",
