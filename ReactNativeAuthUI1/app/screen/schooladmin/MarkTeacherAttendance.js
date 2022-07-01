@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions,Divider  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import ChangeSectionClass from '../singleStudentAttendance/ChangeSectionClass';
 // import BouncyCheckbox from 'react-native-bouncy-checkbox'
 // import { RadioButton } from 'react-native-paper';
 // import RadioGroup from 'react-native-radio-buttons-group';
@@ -27,7 +26,7 @@ const MarkTeacherAttendance = ({ navigation }) => {
   const [students,setStudents] =useState('')
 
   const fetchPosts = () => {
-    const apiURL = "http://192.168.18.14:8000/getStudentAttendance";
+    const apiURL = "http://192.168.18.26:8000/getStudentAttendance";
     fetch(apiURL)
       .then((response) => response.json())
       .then((responseJson) => {
