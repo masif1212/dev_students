@@ -94,3 +94,7 @@ Content-Type: application/json
               "cnic": "32423432",
               "city": "city"
 }
+
+###
+
+GET  http://192.168.18.64:8000/api/user/getStudents/62bdaff18c221a57d7182281

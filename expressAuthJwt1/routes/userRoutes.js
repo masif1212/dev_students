@@ -9,6 +9,7 @@ import StudentAttendanceController from '../controllers/studentAttendanceControl
 import SchoolAdminController from '../controllers/schoolAdminController.js';
 import TeachersController from '../controllers/teachersController.js'
 import checkTeacherAuth from '../middlewares/teacherMiddleware.js'
+import StudentModel from '../models/StudentModel.js'
 
 
 
@@ -37,12 +38,14 @@ router.get('/getschools', SchoolController.getSchool)
 
 //student attendance
 router.post('/studentattendance', StudentAttendanceController.MarkStudentAttendance)
+
 // router.get('/getstudentsattendancedata', StudentAttendanceController.getStudentsAttendanceData)
 
 
 //SCHOOL aDMIN MODEL
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
 router.get('/getschooladmin', SchoolAdminController.getSchoolAdmins)
+
 
 
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
@@ -59,6 +62,16 @@ router.get('/loggedTeachers', TeachersController.loggedTeachers)
 router.get('/getTeachers', TeachersController.getTeachers)
 
 
+router.get('/getStudents/:schoolId', StudentController.getStudents)
+// router.get('/getStudents/:schoolId', function(req, res) {
+//     try{
+//         res.send("tagId is set to " + req.params.schoolId);
+//         const students =  StudentModel.findAll({ where : {schoolId: req.params.schoolId}});
+//         res.json(students)
+//       } catch (error) {
+//         console.log(error);
+//       }
+//   });
 
 
 
