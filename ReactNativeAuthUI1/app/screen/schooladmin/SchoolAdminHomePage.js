@@ -18,7 +18,6 @@ const [ schoolName, setSchoolName] = useState('');
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-    console.log(newData)
   })
 
 
@@ -126,7 +125,10 @@ const [ schoolName, setSchoolName] = useState('');
       >
        
        <TouchableOpacity
-        onPress={() => navigation.navigate('MarkAttendanceScreen')}
+        onPress={() => navigation.navigate('MarkAttendanceScreen', {
+          schoolId: schoolId,
+          schoolName: schoolName
+        })}
           style={{
             padding: 20,
             borderRadius: 20,

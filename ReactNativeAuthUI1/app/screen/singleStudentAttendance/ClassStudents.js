@@ -1,16 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
+import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
 
 
 
 
-
-const ClassStudents = ({ navigation }) => {
+const ClassStudents = ({ navigation, route }) => {
   const [columns, setColumns] = useState([
     "RollNo",
     "Name",
@@ -21,23 +21,22 @@ const ClassStudents = ({ navigation }) => {
   const [students, setStudents] = useState('')
 
   
-  const fetchPosts = () => {
-    const apiURL = "http://192.168.18.64:8000/studentsget";
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setStudents(responseJson);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
+  
+ 
+  
   const focus = useIsFocused();
-  useEffect(() => {
-    fetchPosts();
-    return () => {};
-  }, [focus]);
-
+  
+    const fetchData = async () => {
+      const resp = await fetch(`http://192.168.18.64:8000/api/user/getStudents/${route.params.schoolid}`);
+      const data = await resp.json();
+      setStudents(data);
+    };
+    
+    useEffect(() => {
+     fetchData();
+    }, [focus]);
+  
 
 
 
@@ -101,7 +100,7 @@ const ClassStudents = ({ navigation }) => {
 
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.id}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name}</Text>
 
