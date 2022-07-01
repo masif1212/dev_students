@@ -100,7 +100,7 @@ const ClassSectionFilter = () => {
 			onTextChange={(text) =>  setClasses(text)}
 			onItemSelect={(item) =>  setClasses(item)}
 			containerStyle={{
-				padding: 5
+				padding: 5,
 			}}
 			textInputStyle={{
 				padding: 12,
@@ -210,7 +210,7 @@ const ClassSectionFilter = () => {
 
       </View>
 
-      <Divider borderWidth={0.2} width={'100%'} margin={5} />
+      <Divider borderWidth={0.2} width={'100%'} top={15} />
 
 
 

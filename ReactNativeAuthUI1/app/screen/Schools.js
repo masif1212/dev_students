@@ -31,7 +31,7 @@ const Schools = ({ navigation }) => {
 
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.26:8000/api/user/getschools");
+    const resp = await fetch("http://192.168.18.14:8000/api/user/getschools");
     const data = await resp.json();
     setMasterDate(data);
     setFilterData(data);
@@ -66,33 +66,29 @@ const Schools = ({ navigation }) => {
 
   const ItemView = ({ item }) => {
     return (
+  
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("SelectedSchool", { title: item.school_name, schoolid: item._id  })
         }
       >
+        
         <View style={styles.itemViewStyles}>
           <Icons name="school"
-          size={40}
+          size={30}
           color='#5062BD'
-          
-   
-            style={{
-              width: Dimensions.get("window").width -300,
-              height: Dimensions.get("window").height -650,
-              top:20,
-              left:5
-              
-            }}
           />
-          <View>
-            <Text style={[styles.itemStyles, styles.itemStyles2]}>
+          <View style={{justifyContent:'center',left:10}}>
+            <Text style={[ styles.itemStyles2]}>
               {item.school_name.toUpperCase()}
+          
             </Text>
             <Text style={styles.itemStyles}>Address : {item.address_1}</Text>
           </View>
         </View>
+        
       </TouchableOpacity>
+   
     );
   };
 
@@ -177,8 +173,8 @@ const styles = StyleSheet.create({
     padding: 2,
     fontSize: 12,
     color: "#787878",
-    borderRadius: 20,
-    right:45
+   
+    
     // justifyContent:'center',
     // alignItems:'center'
 
@@ -204,8 +200,10 @@ const styles = StyleSheet.create({
     margin: 4,
     borderRadius: 10,
     elevation: 1,
+    padding: 11,
 
-    alignItems:'center'
+ 
+    
   },
   searchContainer: {
     justifyContent: 'center'

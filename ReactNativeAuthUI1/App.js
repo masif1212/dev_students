@@ -75,7 +75,7 @@ const App = ({navigation}) => (
         <Stack.Screen name="SingleStudentDetail" component={SingleStudentDetail} options={{  headerShown:true,   headerTintColor:'black',  headerStyle: {  backgroundColor: "white",  },   }} />
         <Stack.Screen  name="SchoolAdmin"  component={SchoolAdmin} options={{ headerShown:true, headerStyle: {  backgroundColor: "#5062BD",  }, }}  />
         <Stack.Screen name="SignupSchoolAdmin" component={SignupSchoolAdmin} options={{  headerShown:true,  headerStyle: { backgroundColor: "#5062BD", }, }} />
-        <Stack.Screen name="MarkAttendanceScreen" component={MarkAttendanceScreen}/>
+        <Stack.Screen name="MarkAttendanceScreen" component={MarkAttendanceScreen} options={{ headerShown:true, headerStyle: {backgroundColor: "#5062BD",  },  }}/>
         <Stack.Screen name="CreateSchoolScreen" component={CreateSchoolScreen}options={{ headerShown:true, headerStyle: {backgroundColor: "#5062BD",  },  }}/>
         <Stack.Screen  name="SuperAdminProfileScreen" component={SuperAdminProfileScreen} options={{ headerShown: true, headerStyle: {  backgroundColor: "white",  }}}/>
 
