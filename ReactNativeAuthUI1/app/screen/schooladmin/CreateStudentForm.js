@@ -106,7 +106,7 @@ const CreateStudentForm = () => {
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-  })
+  }, [newData])
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
