@@ -159,10 +159,10 @@ const [ items , setItems ] = useState()
                 <CheckBox
                   title='P'
                   checkedColor='green'
-                  checked={item.attendanc=='p'?true:false}                    
+                  checked={item.attendance=='P'?true:false}                    
                   checkedIcon ="dot-circle-o"
                   unCheckedIcon='circle-o'
-                  onPress={()=>MarkAttendance(index,'p')}
+                  onPress={()=>MarkAttendance(item,'p')}
                   containerStyle={{
                   alignItems:'center',
                   justifyContent:'center',
@@ -184,11 +184,11 @@ const [ items , setItems ] = useState()
               <CheckBox
                   title='A'
                   checkedColor='red'
-                  checked={item.attendanc=='a'?true:false}
+                  checked={item.attendance=='A'?true:false}
                   checkedIcon ="dot-circle-o"
                   unCheckedIcon='circle-o'
 
-                  onPress={()=>MarkAttendance(index,'a')}
+                  onPress={()=>MarkAttendance(item,'A')}
                   containerStyle={{
                   alignItems:'center',
                   justifyContent:'center',
@@ -209,10 +209,10 @@ const [ items , setItems ] = useState()
                 title='L'
                 checkedColor='gray'
 
-                checked={item.attendanc=='l'?true:false}
+                checked={item.attendance=='L'?true:false}
                 checkedIcon ='dot-circle-o'
                 unCheckedIcon='circle-o'
-                onPress={()=>MarkAttendance(index,'l')}
+                onPress={()=>MarkAttendance(item,'L')}
                 containerStyle={{
                   alignItems:'center',
                   justifyContent:'center',

@@ -103,8 +103,23 @@ GET  http://192.168.18.64:8000/api/user/getStudents/62bdaff18c221a57d7182281
 GET  http://192.168.18.64:8000/api/user/getschoolAdmin/62bd734cd42e6cb70ce8187b
 
 ###
-GET  http://192.168.18.64:8000/api/user/getteacher/62bd734cd42e6cb70ce8187b
+GET  http://192.168.18.12:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
 
 
 
 
+###
+GET  http://192.168.18.12:8000/api/user/getSchoolAdmin
+
+###
+POST http://192.168.18.12:8000/api/user/teacherattendance
+Content-Type: application/json
+
+ {
+    "id": "62bda0dc8983ac4ba784851d",
+    "attendance": "L",
+    "first_name": "mehdj",
+    "last_name":"djsdjh",
+    "schoolAdminId": "62bd73bbd42e6cb70ce81882",
+    "schoolId": "62bd734cd42e6cb70ce8187b"
+  }

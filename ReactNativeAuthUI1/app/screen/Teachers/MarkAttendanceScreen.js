@@ -1,18 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
 import { CheckBox } from 'react-native-elements';
-import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native";
+import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
+import Toast from "react-native-toast-message";
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const MarkAttendanceScreen = ({ route }) => {
+const MarkAttendanceScreen = ({ navigation, route }) => {
   const [columns, setColumns] = useState([
     "RollNo",
     "Name",
@@ -20,32 +20,32 @@ const MarkAttendanceScreen = ({ route }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  const [ teachers , setTeachers] = useState(' ');
+  const [ teachers , setTeachers] = useState([]);
   const [ attendance, setAttendance ] = useState('')
+  const [ attendanceState, setAttendanceState ] = useState('')
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.12:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
-    setTeachers(data);
+   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
+   setAttendanceState(schAdminId)
+    
   };
   
   const focus = useIsFocused();
 
-  useEffect(() => {
+
+  useLayoutEffect(()=>{
     fetchData();
-  }, [focus]);
+  }, [focus])
 
-
-
-
-
+ 
 
   const MarkAttendance = (item, S) => {
-    const attend = (teachers.map(l => l._id === item._id ? { ...l, attendance: S } : l));
-    setTeachers(attend)
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    setAttendanceState(attend)
     setAttendance(attend)
-    console.log(attendance)
   }
 
   const [items, setItems] = useState()
@@ -56,6 +56,30 @@ const MarkAttendanceScreen = ({ route }) => {
     setDirection(newDirection)
     setTeachers(sortedData)
   }
+
+  const [registerAttendance] = useRegisterTechAttendanceMutation();
+
+  const handleFormSubmit = async () => {
+        const res = await registerAttendance(attendance);
+        if (res.data.status === "success") {
+          navigation.navigate("UserPanelTab");
+
+        }
+        if (res.data.status === "failed") {
+          Toast.show({
+            type: "warning",
+            position: "top",
+            topOffset: 0,
+            text1: res.data.message,
+          });
+        }
+  };
+
+
+
+
+
+
   const tableHeader = () => (
 
     <View style={styles.tableHeader} >
@@ -98,12 +122,12 @@ const MarkAttendanceScreen = ({ route }) => {
       </View>
 
       <FlatList
-        data={teachers}
+        data={attendanceState}
         keyExtractor={(item, index) => index + ""}
         style={{ maxWidth: '100%' }}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
-        extraData={teachers}
+        extraData={attendanceState}
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
@@ -226,6 +250,7 @@ const MarkAttendanceScreen = ({ route }) => {
       
 <View>
               <TouchableOpacity
+              onPress={handleFormSubmit}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
