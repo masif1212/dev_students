@@ -251,6 +251,8 @@ const MarkAttendanceScreen = ({ navigation }) => {
                   backgroundColor: "#5062BD",
                   elevation: 1,
                   marginTop: 30,
+                  bottom:20,
+                  
                 }}
               >
                 <Text
@@ -258,9 +260,10 @@ const MarkAttendanceScreen = ({ navigation }) => {
                     color: "white",
                     justifyContent: "center",
                     alignItems: "center",
+                    
                   }}
                 >
-                  Submit Attendance
+                  Submit Attendance    
                 </Text>
               </TouchableOpacity>
             </View>
