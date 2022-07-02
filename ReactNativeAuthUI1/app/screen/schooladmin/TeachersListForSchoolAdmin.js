@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
 
 
@@ -17,19 +18,19 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   
   const [teachers,setTeachers] = useState();
 
-  
+  const newData = useSelector(state => state.schoolAdmin);
 
-  const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.64:8000/api/user/getTeachers");
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
   };
+  
+  const focus = useIsFocused();
 
   useEffect(() => {
-     fetchData();
+   fetchData();
   }, [focus]);
-
 
 
     return (

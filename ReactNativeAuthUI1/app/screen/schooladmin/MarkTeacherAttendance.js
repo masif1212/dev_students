@@ -3,18 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions,Divider  } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-// import BouncyCheckbox from 'react-native-bouncy-checkbox'
-// import { RadioButton } from 'react-native-paper';
-// import RadioGroup from 'react-native-radio-buttons-group';
 import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
+import { useSelector } from 'react-redux';
 
 
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const MarkTeacherAttendance = ({ navigation }) => {
+const MarkTeacherAttendance = ({ navigation, route }) => {
   const [columns, setColumns] = useState([
     "Name",
     // "Roll No"
@@ -22,24 +20,20 @@ const MarkTeacherAttendance = ({ navigation }) => {
   
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  
-  const [students,setStudents] =useState('')
+  const [teachers,setTeachers] = useState();
 
-  const fetchPosts = () => {
-    const apiURL = "http://192.168.18.26:8000/getStudentAttendance";
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        setStudents(responseJson);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const newData = useSelector(state => state.schoolAdmin);
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolId}`);
+    const data = await resp.json();
+    setTeachers(data);
   };
+  
   const focus = useIsFocused();
+
   useEffect(() => {
-    fetchPosts();
-    return () => {};
+   console.log(newData)
   }, [focus]);
 
 
@@ -137,7 +131,7 @@ const [ items , setItems ] = useState()
       </View>
     
       <FlatList
-        data={students}
+        data={teachers}
         keyExtractor={(item, index) => index + ""}
         style={{ maxWidth: '100%' }}
         ListHeaderComponent={tableHeader}

@@ -157,6 +157,12 @@ class TeachersController {
     }
 
   }
+  static getTeacher = async (req, res) => {
+    const teacher = await TeachersModel.find({'schoolId': req.params.schoolId});
+    res.send(teacher);
+  }
+
+ 
 }
 
 export default TeachersController
