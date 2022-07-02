@@ -157,6 +157,11 @@ class SchoolAdminController {
     }
 
   }
+
+  static getschoolAdmin = async (req, res) => {
+    const schooladmin = await SchoolAdminModel.find({'schoolId': req.params.schoolId});
+    res.send(schooladmin);
+  }
   
 }
 

@@ -9,22 +9,26 @@ import {
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from 'react-redux';
+import { useIsFocused } from "@react-navigation/native";
 
 
 const SchoolAdmin = ({ navigation, route }) => { 
   const [admin,setAdmin] = useState('');
+  const newData = useSelector(state => state.schoolAdmin);
 
 
-  const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.64:8000/api/user/getSchoolAdmin");
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
     const data = await resp.json();
     setAdmin(data);
   };
+  
+  
+  const focus = useIsFocused();
 
   useEffect(() => {
-     fetchData();
+   fetchData();
   }, [focus]);
 
   

@@ -1,14 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
-import { useGetStudentQuery } from '../../../services/userAuthApi';
 import { useSelector } from 'react-redux';
+import { useIsFocused } from "@react-navigation/native"; 
 
-
-const CreateStudent = ({ navigation }) => {
+const CreateStudent = ({ navigation, route }) => {
   const [columns, setColumns] = useState([
     "RollNo",
     "Name",
@@ -16,16 +15,54 @@ const CreateStudent = ({ navigation }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
+
+
 const[students, setStudents ] = useState('')
+const [ schoolId, setSchoolId] = useState('');
+const [ schoolName, setSchoolName] = useState('');
+const [time, setTime] = useState(Date.now())
 
-  const {data} = useGetStudentQuery();
+const isInitialMount = useRef(true);
 
+const newData = useSelector(state => state.schoolAdmin);
+
+
+useEffect(() => {
+  if (isInitialMount.current) {
+     isInitialMount.current = false;
+  } else {
+    setSchoolId(newData.schoolId);
+    setSchoolName(newData.first_name);
+    console.log(schoolName)
+    console.log(schoolId)
+    console.log('clled')
+  }
+});
+
+const focus = useIsFocused();
+
+
+
+  // useEffect(() => {
+  //   setSchoolId(newData.schoolId);
+  //   setSchoolName(newData.schooName);
+  //   console.log(schoolName)
+  //   console.log(schoolId)
+  //   console.log('clled')
+  // }, [focus])
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getStudents/${newData.schoolId}`);
+    const data = await resp.json();
+    setStudents(data);
+  };
+  
+  
 
   useEffect(() => {
-    setStudents(data);
-  });
-
-  const myData = useSelector(state => state.student)
+   fetchData();
+   console.log(students)
+  }, [focus]);
 
 
   const sortTable = (column) => {

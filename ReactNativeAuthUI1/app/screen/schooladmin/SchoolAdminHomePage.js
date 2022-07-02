@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from "react-redux";
 
 
 
@@ -9,7 +10,15 @@ import { useNavigation } from '@react-navigation/native';
 
 const SchoolAdminHomePage = (route) => {
   const navigation = useNavigation(); 
+  const newData = useSelector(state => state.schoolAdmin);
+  const [ schoolId, setSchoolId] = useState('');
+const [ schoolName, setSchoolName] = useState('');
 
+
+  useEffect(() => {
+    setSchoolId(newData.schoolId);
+    setSchoolName(newData.schoolName);
+  })
 
 
   return (
@@ -64,7 +73,10 @@ const SchoolAdminHomePage = (route) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={()=>navigation.navigate('CreateStudent')}
+        onPress={()=>navigation.navigate('CreateStudent',{
+          schoolId: schoolId,
+          schoolName: schoolName
+        })}
           style={{
             padding: 20,
             borderRadius: 20,
@@ -113,7 +125,10 @@ const SchoolAdminHomePage = (route) => {
       >
        
        <TouchableOpacity
-        onPress={() => navigation.navigate('MarkAttendanceScreen')}
+        onPress={() => navigation.navigate('MarkAttendanceScreen', {
+          schoolId: schoolId,
+          schoolName: schoolName
+        })}
           style={{
             padding: 20,
             borderRadius: 20,

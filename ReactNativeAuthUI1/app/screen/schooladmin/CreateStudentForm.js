@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
@@ -17,6 +17,8 @@ import { useRegisterStudentMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import { useSelector } from 'react-redux';
+
 
 const CreateStudentForm = () => {
 
@@ -33,6 +35,9 @@ const CreateStudentForm = () => {
   const [student_class, setStudent_class] = useState("");
   const [section, setSection] = useState();
   const [city, setCity] = useState();
+  const [schoolId, setSchoolId] = useState();
+  const [schoolName, setSchoolName] = useState();
+
   
 
   const clearTextInput = () => {
@@ -57,6 +62,8 @@ const CreateStudentForm = () => {
     if (image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city) {
         const formData = {
           image,
+          schoolId,
+          schoolName,
           first_name,
           last_name,
           father_name,
@@ -74,7 +81,7 @@ const CreateStudentForm = () => {
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
-          navigation.navigate("CreateStudentForm");
+          navigation.navigate("CreateStudent");
         }
         if (res.data.status === "failed") {
           Toast.show({
@@ -94,7 +101,12 @@ const CreateStudentForm = () => {
       });
     }
   };
+  const newData = useSelector(state => state.schoolAdmin);
 
+  useEffect(() => {
+    setSchoolId(newData.schoolId);
+    setSchoolName(newData.schoolName);
+  })
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -140,6 +152,15 @@ const CreateStudentForm = () => {
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
+        <View>
+            <TextInput
+              style={styleOne.input}
+              value={schoolName}
+              onChangeText={setSchoolName}
+              placeholderTextColor='gray'
+              placeholder="Write Your School Name"
+            />
+          </View>
           <View>
             <TextInput
               style={styleOne.input}

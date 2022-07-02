@@ -9,6 +9,7 @@ import StudentAttendanceController from '../controllers/studentAttendanceControl
 import SchoolAdminController from '../controllers/schoolAdminController.js';
 import TeachersController from '../controllers/teachersController.js'
 import checkTeacherAuth from '../middlewares/teacherMiddleware.js'
+import StudentModel from '../models/StudentModel.js'
 
 
 
@@ -29,6 +30,8 @@ router.get('/loggeduser', UserController.loggedUser)
 //students
 router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
+router.get('/getStudents/:schoolId', StudentController.getStudents)
+
 
 
 //school
@@ -37,6 +40,7 @@ router.get('/getschools', SchoolController.getSchool)
 
 //student attendance
 router.post('/studentattendance', StudentAttendanceController.MarkStudentAttendance)
+
 // router.get('/getstudentsattendancedata', StudentAttendanceController.getStudentsAttendanceData)
 
 
@@ -44,6 +48,7 @@ router.post('/studentattendance', StudentAttendanceController.MarkStudentAttenda
 router.post('/schooladmin', SchoolAdminController.schooladminRegistration)
 router.get('/getschooladmin', SchoolAdminController.getSchoolAdmins)
 
+router.get('/getSchoolAdmin/:schoolId', SchoolAdminController.getschoolAdmin)
 
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
@@ -57,8 +62,22 @@ router.post('/teachersLogin', TeachersController.teachersLogin)
 router.use('/loggedTeachers', checkTeacherAuth)
 router.get('/loggedTeachers', TeachersController.loggedTeachers)
 router.get('/getTeachers', TeachersController.getTeachers)
+router.get('/getteacher/:schoolId', TeachersController.getTeacher)
 
 
+
+
+
+
+// router.get('/getStudents/:schoolId', function(req, res) {
+//     try{
+//         res.send("tagId is set to " + req.params.schoolId);
+//         const students =  StudentModel.findAll({ where : {schoolId: req.params.schoolId}});
+//         res.json(students)
+//       } catch (error) {
+//         console.log(error);
+//       }
+//   });
 
 
 

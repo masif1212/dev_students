@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import { useNavigation } from '@react-navigation/native';
-import { useIsFocused } from "@react-navigation/native"; 
+import { useNavigation } from '@react-navigation/native'; 
 import {Divider} from 'react-native-paper';
-import DropDownClassStudents from '../../Components/dropdown/DropDownClassStudents';
 import { useGetStudentQuery } from '../../../services/userAuthApi';
 import { useSelector } from 'react-redux';
 
