@@ -30,6 +30,8 @@ router.get('/loggeduser', UserController.loggedUser)
 router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
 router.get('/getStudents/:schoolId', StudentController.getStudents)
+router.get('/getSomestudents/:schoolId', StudentController.getSomStudents)
+
 
 
 

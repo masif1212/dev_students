@@ -69,6 +69,11 @@ class StudentController {
       res.send(students);
     }
 
+    static getSomStudents = async (req, res) => {
+      const teacherSome = await StudentModel.find({'schoolId': req.params.schoolId}).select({ "first_name": 1, "_id": 1, "schoolId": 1, "last_name": 1});;
+      res.send(teacherSome);
+    }
+
   
 
 }  

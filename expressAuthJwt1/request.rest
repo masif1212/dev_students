@@ -97,7 +97,7 @@ Content-Type: application/json
 
 ###
 
-GET  http://192.168.18.64:8000/api/user/getStudents/62bdaff18c221a57d7182281
+GET  http://192.168.10.6:8000/api/user/getStudents/62bd734cd42e6cb70ce8187b
 
 ###
 GET  http://192.168.18.64:8000/api/user/getschoolAdmin/62bd734cd42e6cb70ce8187b
@@ -105,11 +105,13 @@ GET  http://192.168.18.64:8000/api/user/getschoolAdmin/62bd734cd42e6cb70ce8187b
 ###
 GET  http://192.168.18.12:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
 
+###
+GET  http://192.168.18.12:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
 
 
 
 ###
-GET  http://192.168.18.12:8000/api/user/getSchoolAdmin
+GET  http://192.168.10.6:8000/api/user/getTeachers
 
 ###
 POST http://192.168.18.12:8000/api/user/teacherattendance
@@ -123,3 +125,6 @@ Content-Type: application/json
     "schoolAdminId": "62bd73bbd42e6cb70ce81882",
     "schoolId": "62bd734cd42e6cb70ce8187b"
   }
+
+###
+GET  http://192.168.10.6:8000/api/user/getSomestudents/62bd734cd42e6cb70ce8187b

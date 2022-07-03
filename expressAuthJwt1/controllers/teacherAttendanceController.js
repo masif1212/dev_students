@@ -13,9 +13,7 @@ class TeacherAttendanceController {
                 attendance: attendance,
                 id: id,
                 schoolAdminId: schoolAdminId,
-                schoolId: schoolId,
-                
-                
+                schoolId: schoolId,  
               })
               await doc.save()
               res.status(201).send({ "status": "success", "message": "Registration Success"})
