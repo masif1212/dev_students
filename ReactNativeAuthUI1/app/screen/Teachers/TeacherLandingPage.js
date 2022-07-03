@@ -39,7 +39,6 @@ const [ schoolName, setSchoolName] = useState('');
     fetchData();
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-    console.log(newData)
   }, [focus])
 
 

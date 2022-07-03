@@ -27,7 +27,7 @@ const TeacherDashboardScreen = () => {
     if (isSuccess) {
       dispatch(
         setTeacherInfo({
-          Teacherid: data.user.id,
+          id: data.user._id,
           schoolId: data.user.schoolId,
           schoolName: data.user.schoolName,
           image: data.user.image,
