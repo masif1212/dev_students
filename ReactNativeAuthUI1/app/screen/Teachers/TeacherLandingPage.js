@@ -21,8 +21,10 @@ const TeacherLandingPage = () => {
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
   const [ schoolId, setSchoolId] = useState('');
-const [ schoolName, setSchoolName] = useState('');
+  const [ schoolName, setSchoolName] = useState('');
   const [students, setStudents] = useState('')
+  const [teacherid, setTeacherId] = useState('')
+
 
 
   const newData = useSelector(state => state.teacher);
@@ -39,6 +41,8 @@ const [ schoolName, setSchoolName] = useState('');
     fetchData();
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
+    setTeacherId(newData.id);
+    
   }, [focus])
 
 
@@ -115,8 +119,9 @@ const [ schoolName, setSchoolName] = useState('');
 
         <TouchableOpacity onPress={ () => navigation.navigate('MarkStudentAttendance',{
              schoolId: schoolId,
-             schoolName: schoolName
-        })} >
+             schoolName: schoolName,
+             teacherid: teacherid
+        })}>
        
           <Text style={{
            

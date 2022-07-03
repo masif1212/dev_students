@@ -29,7 +29,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.10.6:8000/api/user/getSomestudents/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
+   const schAdminId = (data.map(l => l._id ? { ...l, teacherId: route.params.teacherid } : l));
    setAttendanceState(schAdminId)
     
   };
@@ -38,8 +38,8 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   useLayoutEffect(()=>{
-    console.log(attendanceState)
     fetchData();
+    console.log(attendance)
   }, [focus])
 
  
