@@ -27,9 +27,9 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSomestudents/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
+   const schAdminId = (data.map(l => l._id ? { ...l, teacherId: route.params.teacherid } : l));
    setAttendanceState(schAdminId)
     
   };
@@ -39,6 +39,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   useLayoutEffect(()=>{
     fetchData();
+    console.log(attendance)
   }, [focus])
 
  
@@ -77,21 +78,21 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   // };
 
 
-  const onSubmit = () => {
+  // const onSubmit = () => {
     
-    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
-      method: "POST",
-      body: JSON.stringify({attendance}),
-      headers: {
-        'content-type': 'application/json',
-      }
-    })
-    .then((response) => response.json())
-    .catch(err => {
-      console.log(err);
+  //   fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
+  //     method: "POST",
+  //     body: JSON.stringify({attendance}),
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     }
+  //   })
+  //   .then((response) => response.json())
+  //   .catch(err => {
+  //     console.log(err);
 
-  })
-  }
+  // })
+  // }
 
 
 
@@ -147,7 +148,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item?.roll_no}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
               <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
@@ -210,7 +211,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,           
+                        height: 50,
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -267,7 +268,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 <View>
               <TouchableOpacity
               
-                onPress={onSubmit}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",

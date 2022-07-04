@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect  } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
@@ -24,32 +24,9 @@ const [time, setTime] = useState(Date.now())
 
 const isInitialMount = useRef(true);
 
-const newData = useSelector(state => state.schoolAdmin);
-
-
-useEffect(() => {
-  if (isInitialMount.current) {
-     isInitialMount.current = false;
-  } else {
-    setSchoolId(newData.schoolId);
-    setSchoolName(newData.first_name);
-    console.log(schoolName)
-    console.log(schoolId)
-    console.log('clled')
-  }
-});
+const myData = useSelector(state => state.schoolAdmin)
 
 const focus = useIsFocused();
-
-
-
-  // useEffect(() => {
-  //   setSchoolId(newData.schoolId);
-  //   setSchoolName(newData.schooName);
-  //   console.log(schoolName)
-  //   console.log(schoolId)
-  //   console.log('clled')
-  // }, [focus])
 
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudents/${newData.schoolId}`);
@@ -57,11 +34,9 @@ const focus = useIsFocused();
     setStudents(data);
   };
   
-  
-
-  useEffect(() => {
+ 
+  useLayoutEffect(() => {
    fetchData();
-   console.log(students)
   }, [focus]);
 
 

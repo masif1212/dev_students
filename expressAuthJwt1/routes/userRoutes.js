@@ -9,8 +9,7 @@ import StudentAttendanceController from '../controllers/studentAttendanceControl
 import SchoolAdminController from '../controllers/schoolAdminController.js';
 import TeachersController from '../controllers/teachersController.js'
 import checkTeacherAuth from '../middlewares/teacherMiddleware.js'
-import StudentModel from '../models/StudentModel.js'
-
+import TeacherAttendanceController from '../controllers/teacherAttendanceController.js'
 
 
 // ROute Level Middleware - To Protect Route
@@ -31,6 +30,8 @@ router.get('/loggeduser', UserController.loggedUser)
 router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
 router.get('/getStudents/:schoolId', StudentController.getStudents)
+router.get('/getSomestudents/:schoolId', StudentController.getSomStudents)
+
 
 
 
@@ -63,6 +64,8 @@ router.use('/loggedTeachers', checkTeacherAuth)
 router.get('/loggedTeachers', TeachersController.loggedTeachers)
 router.get('/getTeachers', TeachersController.getTeachers)
 router.get('/getteacher/:schoolId', TeachersController.getTeacher)
+router.get('/getSometeacher/:schoolId', TeachersController.getSomeTeacher)
+router.post('/teacherattendance', TeacherAttendanceController.teacherAttendance)
 
 
 

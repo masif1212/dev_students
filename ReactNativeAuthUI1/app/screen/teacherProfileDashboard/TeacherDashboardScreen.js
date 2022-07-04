@@ -27,10 +27,19 @@ const TeacherDashboardScreen = () => {
     if (isSuccess) {
       dispatch(
         setTeacherInfo({
+          id: data.user._id,
+          schoolId: data.user.schoolId,
+          schoolName: data.user.schoolName,
           image: data.user.image,
           email: data.user.email,
           first_name: data.user.first_name,
           last_name: data.user.last_name,
+          address_1: data.user.address_1,
+          address_2: data.user.address_2,
+          contact: data.user.contact,
+          alt_contact: data.user.alt_contact,
+          city: data.user.city,
+          cnic: data.user.cnic,
         })
         
       );
@@ -39,7 +48,7 @@ const TeacherDashboardScreen = () => {
 
   return (
     <View>
-      {/* <Text>{userLToken}</Text> */}
+     
       <CustomCard
         backgroundColor="#5062BD"
         title="Teacher Attendance"

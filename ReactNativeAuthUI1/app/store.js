@@ -7,7 +7,7 @@ import studentReducer from '../features/studentSlice'
 import schoolAdminReducer from '../features/schoolAdminSlice'
 import teacherReducer from '../features/teacherSlice'
 import schoolReducer from '../features/schoolSlice'
-
+import teacherAttendanceReducer from '../features/teachAttendanceSlice'
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +17,8 @@ export const store = configureStore({
     student: studentReducer,
     schoolAdmin: schoolAdminReducer ,
     teacher : teacherReducer,
-    school : schoolReducer
+    school : schoolReducer,
+    teacherAttendance: teacherAttendanceReducer
     
   },
   middleware: (getDefaultMiddleware) =>

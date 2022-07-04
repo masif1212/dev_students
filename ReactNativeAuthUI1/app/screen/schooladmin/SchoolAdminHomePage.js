@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from "react-redux";
+import { useIsFocused } from "@react-navigation/native"; 
 
 
 
@@ -10,14 +11,16 @@ import { useSelector } from "react-redux";
 
 const SchoolAdminHomePage = (route) => {
   const navigation = useNavigation(); 
-  const newData = useSelector(state => state.schoolAdmin);
   const [ schoolId, setSchoolId] = useState('');
 const [ schoolName, setSchoolName] = useState('');
 
 
+const newData = useSelector(state => state.schoolAdmin)
+
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
+    console.log(newData.id)
   })
 
 
@@ -127,7 +130,8 @@ const [ schoolName, setSchoolName] = useState('');
        <TouchableOpacity
         onPress={() => navigation.navigate('MarkAttendanceScreen', {
           schoolId: schoolId,
-          schoolName: schoolName
+          schoolName: schoolName,
+          schoolAdminID: newData.id
         })}
           style={{
             padding: 20,

@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
 import { useNavigation } from '@react-navigation/native'; 
 import {Divider} from 'react-native-paper';
-import { useGetStudentQuery } from '../../../services/userAuthApi';
+import { useIsFocused } from "@react-navigation/native";
 import { useSelector } from 'react-redux';
-
 
 
 
@@ -21,15 +20,30 @@ const TeacherLandingPage = () => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-
+  const [ schoolId, setSchoolId] = useState('');
+  const [ schoolName, setSchoolName] = useState('');
   const [students, setStudents] = useState('')
+  const [teacherid, setTeacherId] = useState('')
 
 
-  const myData = useSelector(state => state.student)
-  const {data} = useGetStudentQuery();
-  useEffect(() => {
+
+  const newData = useSelector(state => state.teacher);
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.10.6:8000/api/user/getStudents/${newData.schoolId}`);
+    const data = await resp.json();
     setStudents(data);
-  });
+  };
+  
+  const focus = useIsFocused();
+
+  useLayoutEffect(()=>{
+    fetchData();
+    setSchoolId(newData.schoolId);
+    setSchoolName(newData.schoolName);
+    setTeacherId(newData.id);
+    
+  }, [focus])
 
 
 
@@ -103,7 +117,11 @@ const TeacherLandingPage = () => {
      
         }}>
 
-        <TouchableOpacity onPress={ () => navigation.navigate('MarkAttendanceScreen')} >
+        <TouchableOpacity onPress={ () => navigation.navigate('MarkStudentAttendance',{
+             schoolId: schoolId,
+             schoolName: schoolName,
+             teacherid: teacherid
+        })}>
        
           <Text style={{
            
