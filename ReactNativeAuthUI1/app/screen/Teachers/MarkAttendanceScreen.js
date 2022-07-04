@@ -25,7 +25,7 @@ const MarkAttendanceScreen = ({ route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
   };
@@ -170,7 +170,7 @@ const MarkAttendanceScreen = ({ route }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,
+                        height: 50,           
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
