@@ -29,6 +29,7 @@ import SingleStudentDetail from './app/screen/singleStudentAttendance/SingleStud
 import SchoolAdmin from './app/screen/schooladmin/SchoolAdmin'
 import SignupSchoolAdmin from './app/screen/schooladmin/SignupSchoolAdmin'
 import MarkAttendanceScreen from './app/screen/Teachers/MarkAttendanceScreen'
+import MarkStudentAttendance from "./app/screen/schooladmin/MarkStudentAttendance";
 import CreateSchoolScreen from './app/screen/Schools/CreateSchoolScreen'
 import SuperAdminProfileScreen from './app/screen/SupAdminFrontPage/SuperAdminProfileScreen'
 import CreateStudent from './app/screen/schooladmin/CreateStudent'
@@ -38,7 +39,7 @@ import TeacherDrawer from "./app/Components/DrawerComponents/TeacherDrawer";
 import MarkAttendanceFilter from './app/screen/Teachers/MarkAttendanceFilter'
 import SchoolAdminProfile from './app/screen/schooladmin/SchoolAdminProfile'
 import SchoolAdminPanelTab from './app/screen/schoolAdminProfile/SchoolAdminPanelTab'
-import MarkTeacherAttendance from "./app/screen/schooladmin/MarkTeacherAttendance";
+import MarkTeacherAttendance from "./app/screen/schooladmin/MarkStudentAttendance";
 import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 import TeacherPannelTab from "./app/screen/teacherProfileDashboard/TeacherPannelTab";
 import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
@@ -90,6 +91,7 @@ const App = ({navigation}) => (
 
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
         <Stack.Screen name="TeacherLandingPage" component={TeacherLandingPage} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
+        <Stack.Screen name="MarkStudentAttendance" component={MarkStudentAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
   
           
 

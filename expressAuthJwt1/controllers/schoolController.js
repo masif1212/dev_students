@@ -38,6 +38,8 @@ class SchoolController {
         console.log(err)
       }
     }
+
+  
 }  
 
 export default SchoolController;

@@ -27,6 +27,13 @@ const SchoolDashboardScreen = () => {
     if (isSuccess) {
       dispatch(
         setSchoolAdminInfo({
+          id: data.user._id,
+          address_1 : data.user.address_1,
+          address_2 : data.user.address_2,
+          contact: data.user.contact,
+          alt_contact: data.user.alt_contact,
+          cnic: data.user.cnic,
+          city: data.user.city,
           schoolName: data.user.schoolName,
           email: data.user.email,
           first_name: data.user.first_name,
