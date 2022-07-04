@@ -8,7 +8,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
 
-
+ 
 
 const  StudentDetail = ({navigation,route})=> {
 
@@ -218,7 +218,7 @@ const  StudentDetail = ({navigation,route})=> {
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode={studentdate.date }
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         />
@@ -262,11 +262,16 @@ const  StudentDetail = ({navigation,route})=> {
         stickyHeaderIndices={[0]}
         renderItem={({item, index})=> {
           return (
+           
+            
             <View>
-              { item.date === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
+              
+              { studentdate=== item.date  ?
+               "":
+              <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
                 <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{item.date}</Text>
                 <Text style={styles.columnRowTxt}>{item.Status}</Text>
-              </View> : <Text>bsd</Text>}
+              </View>   }
               </View>
           )
         }}
