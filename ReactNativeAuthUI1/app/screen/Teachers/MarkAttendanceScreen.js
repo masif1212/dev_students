@@ -27,7 +27,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.64/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
    const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
    setAttendanceState(schAdminId)
@@ -77,22 +77,32 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   // };
 
 
-  const onSubmit = () => {
+  // const onSubmit = () => {
     
-    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
-      method: "POST",
-      body: JSON.stringify({attendance}),
+  //   fetch('http://192.168.18.64/api/user/teacherattendance', {
+  //     method: "POST",
+  //     body: JSON.stringify({attendance}),
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     }
+  //   })
+  //   .then((response) => response.json())
+  //   .catch(err => {
+  //     console.log(err);
+
+  // })
+  // }
+  const onSubmit =() => {
+    fetch('http://192.168.18.64/api/user/teacherattendance', {
+      method: 'POST',
       headers: {
-        'content-type': 'application/json',
-      }
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(attendance)
     })
-    .then((response) => response.json())
-    .catch(err => {
-      console.log(err);
-
-  })
   }
-
+ 
 
 
 
