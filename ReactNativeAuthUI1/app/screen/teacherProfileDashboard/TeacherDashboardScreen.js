@@ -48,7 +48,7 @@ const TeacherDashboardScreen = () => {
 
   return (
     <View>
-      {/* <Text>{userLToken}</Text> */}
+     
       <CustomCard
         backgroundColor="#5062BD"
         title="Teacher Attendance"
