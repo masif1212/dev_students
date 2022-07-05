@@ -163,7 +163,7 @@ class TeachersController {
   }
 
   static getSomeTeacher = async (req, res) => {
-    const teacherSome = await TeachersModel.find({'schoolId': req.params.schoolId}).select({"_id": 1, "first_name": 1,  "schoolId": 1, "last_name": 1,});;
+    const teacherSome = await TeachersModel.find({'schoolId': req.params.schoolId}).select({"teacher_id_att": 1, "first_name": 1,  "schoolId": 1, "last_name": 1, "_id" : 0});;
     res.send(teacherSome);
   }
 

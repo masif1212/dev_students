@@ -6,7 +6,6 @@ import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
 import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
-import Toast from "react-native-toast-message";
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -27,7 +26,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getSomestudents/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSomestudents/${route.params.schoolId}`);
     const data = await resp.json();
    const schAdminId = (data.map(l => l._id ? { ...l, teacherId: route.params.teacherid } : l));
    setAttendanceState(schAdminId)
@@ -60,7 +59,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const handleFormSubmit = async () => {
-  fetch('http://192.168.18.64:8000/api/user/studentattendance', {
+  fetch('http://192.168.10.6:8000/api/user/studentattendance', {
         method: "POST",
         body: JSON.stringify(attendance),
         headers: {

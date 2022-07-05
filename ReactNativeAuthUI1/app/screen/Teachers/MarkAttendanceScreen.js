@@ -8,7 +8,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
 import Toast from "react-native-toast-message";
 import axios from 'axios'
-import { useSelector } from 'react-redux';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -21,39 +21,38 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  const [ teachers , setTeachers] = useState([]);
-  const [ attendance, setAttendance ] = useState()
-  const [ attendanceState, setAttendanceState ] = useState('')
-  const newData = useSelector(state => state.schoolAdmin)
-const myData = useSelector(state => state.teacher)
-  
+  const [teachers, setTeachers] = useState([]);
+  const [attendance, setAttendance] = useState()
+  const [attendanceState, setAttendanceState] = useState('')
+
+  console.log("attendance is:", attendance);
+
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminID: route.params.schoolAdminID, teacherId: route.params.teacherId} : l));
-   setAttendanceState(schAdminId)
-    
+    const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+    setAttendanceState(schAdminId)
+
   };
-  
+
   const focus = useIsFocused();
 
 
-  useLayoutEffect(()=>{     
+  useLayoutEffect(() => {
     fetchData();
-   console.log(route.params.schoolAdminID)
-    
-    
+
+
   }, [focus])
 
- 
+
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l.teacher_id_att === item.teacher_id_att ? { ...l, attendance: S } : l));
     setAttendanceState(attend)
     setAttendance(attend)
-    
+
   }
 
   const [items, setItems] = useState()
@@ -68,18 +67,18 @@ const myData = useSelector(state => state.teacher)
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
+    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),
       headers: {
         'content-type': 'application/json',
       }
     })
-    .then((response) => response)
-    .catch(err => {
-      console.log(err);
+      .then((response) => response)
+      .catch(err => {
+        console.log(err);
 
-  })
+      })
   };
 
 
@@ -102,7 +101,7 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
   // })
   // }
   //
- 
+
 
 
 
@@ -220,7 +219,7 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,           
+                        height: 50,
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -273,39 +272,39 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
         }}
       />
 
-      
-<View>
-              <TouchableOpacity
-               onPress={handleFormSubmit}
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 15,
-                  width: "100%",
-                  marginVertical: 5,
-                  borderRadius: 50,
-                  marginBottom: 60,
-                  fontWeight: "bold",
-                  backgroundColor: "#5062BD",
-                  elevation: 1,
-                  marginTop: 30,
-                  bottom:20,
-                  
-                }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    
-                  }}
-                >
-                  Submit Attendance    
-                </Text>
-              </TouchableOpacity>
-            </View>
-  
+
+      <View>
+        <TouchableOpacity
+          onPress={handleFormSubmit}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 15,
+            width: "100%",
+            marginVertical: 5,
+            borderRadius: 50,
+            marginBottom: 60,
+            fontWeight: "bold",
+            backgroundColor: "#5062BD",
+            elevation: 1,
+            marginTop: 30,
+            bottom: 20,
+
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              justifyContent: "center",
+              alignItems: "center",
+
+            }}
+          >
+            Submit Attendance
+          </Text>
+        </TouchableOpacity>
+      </View>
+
 
     </View>
   );
