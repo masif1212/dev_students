@@ -36,22 +36,21 @@ const myData = useSelector(state => state.teacher)
    setAttendanceState(schAdminId)
     
   };
-
-
+  
   const focus = useIsFocused();
 
 
   useLayoutEffect(()=>{     
     fetchData();
-    console.log(myData)
+   console.log(route.params.schoolAdminID)
+    
+    
   }, [focus])
-
-  
 
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,schoolAdminID: route.params.schoolAdminID,teacherId: route.params.teacherId } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
     setAttendanceState(attend)
     setAttendance(attend)
     

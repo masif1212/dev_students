@@ -18,6 +18,8 @@ const [ schoolName, setSchoolName] = useState('');
 const newData = useSelector(state => state.schoolAdmin)
 const myData = useSelector(state => state.teacher)
 
+
+
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
