@@ -27,7 +27,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolId}`);
     const data = await resp.json();
    const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
    setAttendanceState(schAdminId)
@@ -210,7 +210,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,
+                        height: 50,           
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
