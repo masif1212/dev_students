@@ -7,6 +7,7 @@ import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
 import Toast from "react-native-toast-message";
+import axios from 'axios'
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -27,9 +28,9 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminId: route.params.schoolAdminID } : l));
+   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminID: route.params.schoolAdminID, teacherId: route.params.teacherId} : l));
    setAttendanceState(schAdminId)
     
   };
@@ -37,16 +38,18 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const focus = useIsFocused();
 
 
-  useLayoutEffect(()=>{
+  useLayoutEffect(()=>{     
     fetchData();
+    
   }, [focus])
 
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,teacherId: route.params.teacherId } : l));
     setAttendanceState(attend)
     setAttendance(attend)
+    console.log(attend)
   }
 
   const [items, setItems] = useState()
@@ -60,39 +63,42 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
-  // const handleFormSubmit = async () => {
-  //   console.log(attendance)
-  //       const res = await registerTechAttendance(attendance);
-  //       if (res.data.status === "success") {
-  //         navigation.navigate("SchoolAdminHomePage");
-  //       }
-  //       if (res.data.status === "failed") {
-  //         Toast.show({
-  //           type: "warning",
-  //           position: "top",
-  //           topOffset: 0,
-  //           text1: res.data.message,
-  //         });
-  //       }
-  // };
-
-
-  const onSubmit = () => {
-    
-    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
+  const handleFormSubmit = async () => {
+fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
       method: "POST",
-      body: JSON.stringify({attendance}),
+      body: JSON.stringify(attendance),
       headers: {
         'content-type': 'application/json',
       }
     })
-    .then((response) => response.json())
+    .then((response) => response)
     .catch(err => {
       console.log(err);
 
   })
-  }
+  };
 
+
+  // const onSubmit = () => {
+  //       attendance.forEach((item) => {
+  //       return item
+  //   });
+  //   console.log(attendance)
+  //   fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
+  //     method: "POST",
+  //     body: JSON.stringify(attendance),
+  //     headers: {
+  //       'content-type': 'application/json',
+  //     }
+  //   })
+  //   .then((response) => console.log(response))
+  //   .catch(err => {
+  //     console.log(err);
+
+  // })
+  // }
+  //
+ 
 
 
 
@@ -147,7 +153,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item?.roll_no}</Text>
+              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
               <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
@@ -266,8 +272,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
       
 <View>
               <TouchableOpacity
-              
-                onPress={onSubmit}
+               onPress={handleFormSubmit}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",

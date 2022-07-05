@@ -19,7 +19,7 @@ const SchoolAdmin = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.10.6:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
     const data = await resp.json();
     setAdmin(data);
   };
