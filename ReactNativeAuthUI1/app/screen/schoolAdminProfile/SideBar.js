@@ -23,9 +23,7 @@ const SideBar = ({ ...props }) => {
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
 
-  useEffect(()=>{
-    console.log(myData);
-  })
+ 
 
 
   return (

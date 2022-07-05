@@ -11,7 +11,6 @@ import { unsetUserToken } from '../../../features/authSlice.js';
 const TeacherSideBar = ({ ...props }) => {
 
   const handleLogout = async () => {
-    unsetTeacherInfo({ email: "", first_name: "", last_name: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
     navigation.navigate('Home');

@@ -8,7 +8,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
 import Toast from "react-native-toast-message";
 import axios from 'axios'
-
+import { useSelector } from 'react-redux';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -24,6 +24,8 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [ teachers , setTeachers] = useState([]);
   const [ attendance, setAttendance ] = useState()
   const [ attendanceState, setAttendanceState ] = useState('')
+  const newData = useSelector(state => state.schoolAdmin)
+const myData = useSelector(state => state.teacher)
   
 
 
@@ -34,22 +36,25 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
    setAttendanceState(schAdminId)
     
   };
-  
+
+
   const focus = useIsFocused();
 
 
   useLayoutEffect(()=>{     
     fetchData();
-    
+    console.log(myData)
   }, [focus])
+
+  
 
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,teacherId: route.params.teacherId } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,schoolAdminID: route.params.schoolAdminID,teacherId: route.params.teacherId } : l));
     setAttendanceState(attend)
     setAttendance(attend)
-    console.log(attend)
+    
   }
 
   const [items, setItems] = useState()
