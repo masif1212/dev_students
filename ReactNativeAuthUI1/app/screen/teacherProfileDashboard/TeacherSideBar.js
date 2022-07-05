@@ -23,6 +23,9 @@ const TeacherSideBar = ({ ...props }) => {
   const myData = useSelector(state => state.teacher)
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
+  useEffect(()=>{
+    console.log(myData)
+  })
 
   return (
     <DrawerContentScrollView {...props}>

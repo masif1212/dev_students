@@ -39,7 +39,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   useLayoutEffect(()=>{
     fetchData();
-    console.log(attendance)
   }, [focus])
 
  
@@ -59,23 +58,23 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
     setTeachers(sortedData)
   }
 
-  const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
-  // const handleFormSubmit = async () => {
-  //   console.log(attendance)
-  //       const res = await registerTechAttendance(attendance);
-  //       if (res.data.status === "success") {
-  //         navigation.navigate("SchoolAdminHomePage");
-  //       }
-  //       if (res.data.status === "failed") {
-  //         Toast.show({
-  //           type: "warning",
-  //           position: "top",
-  //           topOffset: 0,
-  //           text1: res.data.message,
-  //         });
-  //       }
-  // };
+  const handleFormSubmit = async () => {
+  fetch('http://192.168.18.64:8000/api/user/studentattendance', {
+        method: "POST",
+        body: JSON.stringify(attendance),
+        headers: {
+          'content-type': 'application/json',
+        }
+      })
+      .then((response) => response)
+      .then(() => navigation.goBack())
+      .catch(err => {
+        console.log(err);
+  
+    })
+    };
+  
 
 
   // const onSubmit = () => {
@@ -267,7 +266,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
       
 <View>
               <TouchableOpacity
-              
+              onPress={handleFormSubmit}
                 style={{
                   justifyContent: "center",
                   alignItems: "center",

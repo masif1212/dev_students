@@ -42,6 +42,7 @@ const TeacherLandingPage = () => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
     setTeacherId(newData.id);
+    console.log(newData.teacherid)
     
   }, [focus])
 
