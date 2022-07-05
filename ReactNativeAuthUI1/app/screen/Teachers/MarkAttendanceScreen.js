@@ -79,7 +79,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const onSubmit = () => {
     
-    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
+    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify({attendance}),
       headers: {
