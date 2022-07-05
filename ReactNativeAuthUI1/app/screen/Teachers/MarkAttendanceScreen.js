@@ -216,7 +216,7 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,
+                        height: 50,           
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
