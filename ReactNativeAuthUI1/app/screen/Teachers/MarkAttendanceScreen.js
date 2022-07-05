@@ -40,14 +40,16 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   useLayoutEffect(()=>{     
     fetchData();
+    
   }, [focus])
 
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,teacherId: route.params.teacherId } : l));
     setAttendanceState(attend)
     setAttendance(attend)
+    console.log(attend)
   }
 
   const [items, setItems] = useState()
@@ -62,7 +64,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-  console.log(attendance)
 fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),

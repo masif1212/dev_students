@@ -39,7 +39,6 @@ export const teacherSlice = createSlice({
       state.city = action.payload.city
     },
     unsetTeacherInfo: (state, action) => {
-      state.teacherid = action.payload.teacherid;
       state.schoolName = action.payload.schoolName;
       state.schoolId = action.payload.schoolId;
       state.email = action.payload.email
