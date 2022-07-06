@@ -36,6 +36,7 @@ const focus = useIsFocused();
 
   useLayoutEffect(() => {
    fetchData();
+   console.log(myData)
   }, [focus]);
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc"

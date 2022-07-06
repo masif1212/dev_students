@@ -25,8 +25,9 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.14:8000/api/user/getSomestudents/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, teacherId: route.params.teacherid } : l));
+   const schAdminId = (data.map(l => l.first_name ? { ...l, teacherId: route.params.teacherid } : l));
    setAttendanceState(schAdminId)
+   console.log(data)
     
   };
   
@@ -40,7 +41,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l.student_id_att === item.student_id_att ? { ...l, attendance: S } : l));
     setAttendanceState(attend)
     setAttendance(attend)
   }
@@ -56,7 +57,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const handleFormSubmit = async () => {
-  fetch('http://192.168.10.6:8000/api/user/studentattendance', {
+  fetch('http://192.168.18.64:8000/api/user/studentattendance', {
         method: "POST",
         body: JSON.stringify(attendance),
         headers: {

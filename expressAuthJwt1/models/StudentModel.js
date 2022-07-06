@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
 
 // Defining Schema
-const userSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
+  student_id_att: {
+    type    : mongoose.Schema.Types.ObjectId,
+    default : mongoose.Types.ObjectId,
+    index   : { unique: true }
+  },
   schoolId :  { type: String, required: true, trim: true},
   schoolName: { type: String, required: true, trim: true },
   image: { type: String, required: true, trim: true },
@@ -20,6 +25,6 @@ const userSchema = new mongoose.Schema({
 })
 
 // Model
-const StudentModel = mongoose.model("student", userSchema)
+const StudentModel = mongoose.model("students", studentSchema)
 
 export default StudentModel
