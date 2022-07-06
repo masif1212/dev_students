@@ -14,24 +14,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3N
 
 ###
 
-POST http://192.168.18.64:8000/api/user/registerTeacher
+POST http://192.168.18.64:8000/api/user/createstudent
 Content-Type: application/json
 
 {
-  "schoolName" : "Teacher",
+  "schoolName" : "adfasdadf",
   "schoolId" : "4834543",
   "image": "image",
  "first_name": "first_name",
  "last_name": "last_name",
-              "email": "emaijadfl@gmail.com",
-              "password": "444444",
-              "confirm_password" : "444444",
+              "father_name": "adfd@gmail.com",
+              "father_cnic": "443454444",
+              "emergency_contact" : "444345444",
               "contact": "44353",
-              "alt_contact": "3453543",
               "address_1": "address_1",
               "address_2": "address_2",
-              "cnic": "443445434",
-              "city": "city"
+              "city": "city",
+              "roll_no" : "roll_no",
+              "student_class" : "student_class",
+              "section": "section"
 }
 
 ###
@@ -97,13 +98,13 @@ Content-Type: application/json
 
 ###
 
-GET  http://192.168.10.6:8000/api/user/getStudents/62bd734cd42e6cb70ce8187b
+GET  http://192.168.18.64:8000/api/user/getStudents/62bd734cd42e6cb70ce8187b
 
 ###
 GET  http://192.168.18.64:8000/api/user/getschoolAdmin/62bd734cd42e6cb70ce8187b
 
 ###
-GET  http://192.168.18.64:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
+GET  http://192.168.18.64:8000/api/user/getSomestudents/62c3ffe678f31b84bdda241e
 
 ###
 GET  http://192.168.18.64:8000/api/user/getSometeacher/62c3ffe678f31b84bdda241e

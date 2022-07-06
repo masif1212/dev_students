@@ -37,6 +37,7 @@ const focus = useIsFocused();
  
   useLayoutEffect(() => {
    fetchData();
+   console.log(myData)
   }, [focus]);
 
 

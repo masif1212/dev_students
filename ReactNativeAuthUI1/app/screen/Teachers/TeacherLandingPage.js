@@ -42,8 +42,6 @@ const TeacherLandingPage = () => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
     setTeacherId(newData.id);
-    console.log(newData.teacherid)
-    
   }, [focus])
 
 
@@ -121,7 +119,7 @@ const TeacherLandingPage = () => {
         <TouchableOpacity onPress={ () => navigation.navigate('MarkStudentAttendance',{
              schoolId: schoolId,
              schoolName: schoolName,
-             teacherid: teacherid
+             teacherid: newData.teacherid
         })}>
        
           <Text style={{

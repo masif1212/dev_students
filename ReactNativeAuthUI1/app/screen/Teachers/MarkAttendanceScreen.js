@@ -25,7 +25,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [attendance, setAttendance] = useState()
   const [attendanceState, setAttendanceState] = useState('')
 
-  console.log("attendance is:", attendance);
 
 
 
