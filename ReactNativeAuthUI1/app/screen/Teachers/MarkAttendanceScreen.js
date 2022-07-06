@@ -28,7 +28,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
    const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminID: route.params.schoolAdminID, teacherId: route.params.teacherId} : l));
    setAttendanceState(schAdminId)
