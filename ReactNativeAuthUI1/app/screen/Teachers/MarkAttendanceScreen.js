@@ -21,35 +21,33 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
-  const [ teachers , setTeachers] = useState([]);
-  const [ attendance, setAttendance ] = useState()
-  const [ attendanceState, setAttendanceState ] = useState('')
-  
+  const [teachers, setTeachers] = useState([]);
+  const [attendance, setAttendance] = useState()
+  const [attendanceState, setAttendanceState] = useState('')
 
+  console.log("attendance is:", attendance);
 
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.14:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
-   const schAdminId = (data.map(l => l._id ? { ...l, schoolAdminID: route.params.schoolAdminID, teacherId: route.params.teacherId} : l));
-   setAttendanceState(schAdminId)
-    
+    const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+    setAttendanceState(schAdminId)
+
   };
-  
+
   const focus = useIsFocused();
 
-
-  useLayoutEffect(()=>{     
+  useLayoutEffect(() => {
     fetchData();
-    
+
+
   }, [focus])
 
- 
-
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S,teacherId: route.params.teacherId } : l));
+    const attend = (attendanceState.map(l => l.teacher_id_att === item.teacher_id_att ? { ...l, attendance: S } : l));
     setAttendanceState(attend)
     setAttendance(attend)
-    console.log(attend)
+
   }
 
   const [items, setItems] = useState()
@@ -64,18 +62,18 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
+    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),
       headers: {
         'content-type': 'application/json',
       }
     })
-    .then((response) => response)
-    .catch(err => {
-      console.log(err);
+      .then((response) => response)
+      .catch(err => {
+        console.log(err);
 
-  })
+      })
   };
 
 
@@ -97,22 +95,14 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
 
   // })
   // }
-  //
- 
-
-
-
+  
   const tableHeader = () => (
 
     <View style={styles.tableHeader} >
-
-
       {
         columns.map((column, index) => {
           {
             return (
-
-
               <TouchableOpacity
                 key={index}
                 style={styles.columnHeader}
@@ -124,8 +114,6 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                   }
                 </Text>
               </TouchableOpacity>
-
-
             )
           }
         })
@@ -135,7 +123,6 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
   )
 
   return (
-
 
     <View style={{ height: windowHeight, width: '100%' }}>
 
@@ -216,7 +203,7 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,           
+                        height: 50,
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -224,7 +211,7 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                         backgroundColor: 'transparent'
                       }}
                     />
-
+                    
                     {/* <BouncyCheckbox
             size={20}
             fillColor="red"
@@ -235,15 +222,12 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
             onPress={()=>MarkAbsent()}
     /> */}
                   </View>
-
-
                   <View style={{
                     left: 5,
                   }}>
                     <CheckBox
                       title='L'
                       checkedColor='gray'
-
                       checked={item.attendance === 'L' ? true : false}
                       checkedIcon='dot-circle-o'
                       unCheckedIcon='circle-o'
@@ -251,14 +235,12 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
                       containerStyle={{
                         alignItems: 'center',
                         justifyContent: 'center',
-
                         height: 50,
                         right: 70,
                         alignItems: 'center',
                         justifyContent: 'center',
                         top: -10,
                         backgroundColor: 'transparent',
-
                       }}
                     />
                   </View>
@@ -268,40 +250,38 @@ fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
           )
         }}
       />
+      <View>
+        <TouchableOpacity
+          onPress={handleFormSubmit}
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 15,
+            width: "100%",
+            marginVertical: 5,
+            borderRadius: 50,
+            marginBottom: 60,
+            fontWeight: "bold",
+            backgroundColor: "#5062BD",
+            elevation: 1,
+            marginTop: 30,
+            bottom: 20,
 
-      
-<View>
-              <TouchableOpacity
-               onPress={handleFormSubmit}
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  padding: 15,
-                  width: "100%",
-                  marginVertical: 5,
-                  borderRadius: 50,
-                  marginBottom: 60,
-                  fontWeight: "bold",
-                  backgroundColor: "#5062BD",
-                  elevation: 1,
-                  marginTop: 30,
-                  bottom:20,
-                  
-                }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    
-                  }}
-                >
-                  Submit Attendance    
-                </Text>
-              </TouchableOpacity>
-            </View>
-  
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+              justifyContent: "center",
+              alignItems: "center",
+
+            }}
+          >
+            Submit Attendance
+          </Text>
+        </TouchableOpacity>
+      </View>
+
 
     </View>
   );

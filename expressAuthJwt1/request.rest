@@ -106,7 +106,7 @@ GET  http://192.168.18.64:8000/api/user/getschoolAdmin/62bd734cd42e6cb70ce8187b
 GET  http://192.168.18.64:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
 
 ###
-GET  http://192.168.18.64:8000/api/user/getSometeacher/62bd734cd42e6cb70ce8187b
+GET  http://192.168.18.64:8000/api/user/getSometeacher/62c3ffe678f31b84bdda241e
 
 
 

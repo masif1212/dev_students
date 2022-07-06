@@ -10,6 +10,16 @@ import { useGetStudentQuery } from '../../../services/userAuthApi';
 // import StudentList from './StudentList';
 // import Hello from './Hello';
 
+// Array you can use to filter which includes class,section and students
+// class selector
+// secion selector
+// useEffect(()=>{
+// it will take update array
+// filter the array
+// updatd array will show belowChart
+
+// },[class && section])
+
 
 const ClassSectionFilter = () => {
   const navigation = useNavigation();
