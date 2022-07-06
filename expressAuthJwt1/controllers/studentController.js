@@ -26,6 +26,7 @@ class StudentController {
               })
               await doc.save()
               res.status(201).send({ "status": "success", "message": "Registration Success"})
+             
             } catch (error) {
               console.log(error)
               res.send({ "status": "failed", "message": "Unable to Register" })
@@ -73,13 +74,7 @@ class StudentController {
       const teacherSome = await StudentModel.find({'schoolId': req.params.schoolId}).select({ "first_name": 1, "_id": 1, "schoolId": 1, "last_name": 1,"roll_no":1, "student_class":1, "section" : 1});;
       res.send(teacherSome);
     }
-
-  
-
 }  
     
-
-
-
 
 export default StudentController;
