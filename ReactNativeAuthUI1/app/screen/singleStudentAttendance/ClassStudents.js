@@ -28,7 +28,7 @@ const ClassStudents = ({ navigation, route }) => {
   const focus = useIsFocused();
   
     const fetchData = async () => {
-      const resp = await fetch(`http://192.168.10.6:8000/api/user/getStudents/${route.params.schoolid}`);
+      const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudents/${route.params.schoolid}`);
       const data = await resp.json();
       setStudents(data);
     };
@@ -107,7 +107,18 @@ const ClassStudents = ({ navigation, route }) => {
 
               <View style={{ width: '100%', flexDirection: 'row' }}>
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('StudentDetail')}
+                onPress={()=>navigation.navigate('StudentDetail',{
+                  first_name:item.first_name,
+                  last_name:item.last_name,
+                  contact:item.contact,
+                  father_name:item.father_name,
+                  father_cnic:item.father_cnic,
+                  student_class:item.student_class,
+                  section:item.section,
+                  address_1:item.address_1,
+                  city:item.city,
+
+                })}
                 style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '30%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>
                   <Text style={{
                     color: 'white'

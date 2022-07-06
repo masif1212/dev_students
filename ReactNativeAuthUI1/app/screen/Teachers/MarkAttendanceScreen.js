@@ -2,7 +2,6 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import ClassSectionFilter from '../singleStudentAttendance/ClassSectionFilter';
 import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
@@ -15,8 +14,9 @@ const windowHeight = Dimensions.get('window').height;
 
 const MarkAttendanceScreen = ({ navigation, route }) => {
   const [columns, setColumns] = useState([
-    "RollNo",
+   
     "Name",
+    "Attendance"
   ])
 
   const [direction, setDirection] = useState('')
@@ -30,7 +30,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.10.6:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
     const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
     setAttendanceState(schAdminId)
@@ -67,7 +67,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    fetch('http://192.168.10.6:8000/api/user/teacherattendance', {
+    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),
       headers: {
@@ -140,11 +140,9 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   return (
 
 
-    <View style={{ height: windowHeight, width: '100%' }}>
+    <View style={{ height: windowHeight, width: '100%',top:20 }}>
 
-      <View >
-        <ClassSectionFilter />
-      </View>
+
 
       <FlatList
         data={attendanceState}
@@ -156,14 +154,14 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         renderItem={({ item, index }) => {
           return (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
-              <Text style={{ ...styles.columnRowTxt }}>{item.first_name}</Text>
+           
+              <Text style={{ ...styles.columnRowTxt }}>{item.first_name + " " + item.last_name}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
                 pagingEnabled={true}
                 style={{ width: '150%' }}
               >
-                <View style={{ flexDirection: 'row', left: 40 }}>
+                <View style={{ flexDirection: 'row', left: 95 }}>
                   <View
                     style={{
                       left: 23
@@ -313,14 +311,14 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
 
   tableHeader: {
-
+   
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: "#5062BD",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
-    height: 50,
+    
 
   },
   tableRow: {
@@ -329,11 +327,15 @@ const styles = StyleSheet.create({
     margin: 2,
     left: 8
   },
+  tableRowtext: {
+    left: 8
+  },
   columnHeader: {
-    width: "16%",
+    width: "20%",
     justifyContent: "center",
     alignItems: "flex-start",
-    margin: 10
+    margin: 10,
+
   },
   columnHeaderTxt: {
     color: "white",
@@ -343,6 +345,7 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "18%",
+    left:30
   }
 
 });
