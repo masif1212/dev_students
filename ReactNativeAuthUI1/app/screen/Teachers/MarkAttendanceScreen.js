@@ -73,7 +73,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         'content-type': 'application/json',
       }
     })
-      .then((response) => response)
+      .then((jsonRes) =>console.log("muzammil", jsonRes))
       .catch(err => {
         console.log(err);
 

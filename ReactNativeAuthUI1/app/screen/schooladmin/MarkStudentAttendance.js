@@ -30,7 +30,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
     const data = await resp.json();
    const schAdminId = (data.map(l => l.first_name ? { ...l, teacherId: route.params.teacherid } : l));
    setAttendanceState(schAdminId)
-   console.log(data)
+   
     
   };
   
@@ -68,7 +68,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         }
       })
       .then((response) => response)
-      .then(() => navigation.goBack())
       .catch(err => {
         console.log(err);
   
