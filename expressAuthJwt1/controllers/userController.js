@@ -5,7 +5,7 @@ import transporter from '../config/emailConfig.js'
 
 class UserController {
   static userRegistration = async (req, res) => {
-    const {disability,disabledetail,gender, firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
+    const {dateofbirth,disability,disabledetail,gender, firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
     const user = await UserModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
@@ -20,6 +20,7 @@ class UserController {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
             const doc = new UserModel({
+              dateofbirth: dateofbirth,
               disability: disability,
               disabledetail:disabledetail,
               firstName: firstName,

@@ -16,13 +16,16 @@ const initialState = {
   city: "",
   gender: "",
   disability: "",
-  disabledetail:""
+  disabledetail:"",
+  dateofbirth: ""
+
 }
 export const studentSlice = createSlice({
   name: 'student_info',
   initialState,
   reducers: {
     setStudentInfo: (state, action) => {
+      state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability
       state.gender = action.payload.gender
@@ -43,6 +46,7 @@ export const studentSlice = createSlice({
       state.city = action.payload.city
     },
     unSetStudentInfo: (state, action) => {
+      state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability
       state.gender = action.payload.gender

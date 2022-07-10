@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
   gender: { type: String, required: true, trim: true },
   tc: { type: Boolean, required: true },
   disability: { type: Boolean},
-  disabledetail: { type:String}
+  disabledetail: { type:String},
+  dateofbirth :{type:String, required: true}
 })
 
 // Model

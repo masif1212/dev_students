@@ -24,7 +24,9 @@ const studentSchema = new mongoose.Schema({
   city: { type: String, required: true, trim: true },
   gender: { type: String, required: true, trim: true },
   disability: { type: Boolean},
-  disabledetail: { type:String}
+  disabledetail: { type:String},
+  dateofbirth :{type:String, required: true}
+
   
 })
 

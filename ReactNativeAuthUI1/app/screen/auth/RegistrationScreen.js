@@ -13,15 +13,19 @@ import {
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles, toastConfig } from "../../../style";
+import { styles, toastConfig } from "../../../style.js";
 import Toast from "react-native-toast-message";
 import Checkbox from "expo-checkbox";
-import { useRegisterUserMutation } from "../../../services/userAuthApi";
-import { storeToken } from "../../../services/AsyncStorageService";
+import { useRegisterUserMutation } from "../../../services/userAuthApi.js";
+import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
-import RadioButton from "../../Components/RadioButton";
-import DateField from 'react-native-datefield';
+import RadioButton from '../../Components/RadioButton.js'
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from "moment";
+
+
+
 
 const RegistrationScreen = () => {
   const [firstName, setFirstName] = useState("");
@@ -41,8 +45,34 @@ const RegistrationScreen = () => {
   const [gender, setGender] = useState("")
   const [disability, setDisability] = useState(false)
   const [disabledetail, setDisableDetail] = useState("")
-  const [date, setDate] = useState(new Date())
+  const [dateofbirth, setDateOfBirth] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+
+
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+
+  };
+
+  const handleConfirm = (dateofbirth) => {
+    setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
+    hideDatePicker();
+    searchFilter(dateofbirth)
+  };
+
+  const getDate = () => {
+    let tempDate = (moment(dateofbirth).toString().split(' '));
+    return dateofbirth !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false ;
+      
+  };
 
 
 
@@ -62,6 +92,7 @@ const RegistrationScreen = () => {
     setGender("");
     setDisability(false);
     setDisableDetail("");
+    setDateOfBirth("")
   };
   const navigation = useNavigation();
 
@@ -88,7 +119,8 @@ const RegistrationScreen = () => {
           tc,
           gender,
           disability,
-          disabledetail
+          disabledetail,
+          dateofbirth
 
 
         };
@@ -196,7 +228,7 @@ const RegistrationScreen = () => {
               onChangeText={setEmail}
               placeholderTextColor='gray'
               placeholder="Write Your Email"
-             
+
             />
           </View>
           <View>
@@ -298,23 +330,40 @@ const RegistrationScreen = () => {
               }} />
           </View>
 
-          <View style={{margin: 10, right: 10}}>
+          {/* <View style={{margin: 10, right: 10}}>
           <Text>Select Date of Birth :</Text>
 
             <DateField
             containerStyle={{marginBottom: 20, marginRight: 20}}
-              labelDate="Input date"
+              labelDate="Input dateofbirth"
               labelMonth="Input month"
               labelYear="Input year"
               onSubmit={(value) => console.log(value)}
               autoFocus={true}
             />
+          </View> */}
+
+          <View style={{ flexDirection: 'row' }}>
+
+            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <TextInput
+             
+                value={getDate()}
+                placeholder="Select DOB (Day| MM | DD | YY)"
+              />
+            </TouchableOpacity>
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              onChangeText={(dateofbirth) => searchFilter(dateofbirth)}
+              is24Hour={false}
+
+            />
+
           </View>
-
-
-
-
-
 
 
 

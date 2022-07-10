@@ -20,6 +20,8 @@ import * as ImagePicker from "expo-image-picker";
 import { useSelector } from 'react-redux';
 import RadioButton from "../../Components/RadioButton";
 import Checkbox from "expo-checkbox";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from "moment";
 
 
 
@@ -42,9 +44,35 @@ const CreateStudentForm = () => {
   const [schoolName, setSchoolName] = useState();
   const [gender, setGender] = useState("")
   const [disability, setDisability] = useState(false)
-   const [disabledetail, setDisableDetail] = useState("")
+  const [disabledetail, setDisableDetail] = useState("")
+  const [dateofbirth, setDateOfBirth] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+
+
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+
+  };
+
+  const handleConfirm = (dateofbirth) => {
+    setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
+    hideDatePicker();
+    searchFilter(dateofbirth)
+  };
+
+  const getDate = () => {
+    let tempDate = (moment(dateofbirth).toString().split(' '));
+    return dateofbirth !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+
 
   const clearTextInput = () => {
     setFirst_Name("");
@@ -62,48 +90,52 @@ const CreateStudentForm = () => {
     setGender("");
     setDisability(false);
     setDisableDetail("");
+    setDateOfBirth("")
+
   };
   const navigation = useNavigation();
 
   const [registerStudent] = useRegisterStudentMutation();
 
   const handleFormSubmit = async () => {
-    if (image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city) {
-        const formData = {
-          image,
-          schoolId,
-          schoolName,
-          first_name,
-          last_name,
-          father_name,
-          father_cnic,
-          contact,
-          roll_no,
-          emergency_contact,
-          address_1,
-          address_2,
-          student_class,
-          city,
-          section,
-          gender,
-          disability,
-          disabledetail
-        };
-        const res = await registerStudent(formData);
-        if (res.data.status === "success") {
-          await storeToken(res.data.token); // Store Token in Storage
-          clearTextInput();
-          navigation.navigate("CreateStudent");
-        }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
-        }
-    
+    if (image, first_name, last_name, father_name, father_cnic, contact, roll_no, emergency_contact, address_1, address_2, student_class, section, city) {
+      const formData = {
+        image,
+        schoolId,
+        schoolName,
+        first_name,
+        last_name,
+        father_name,
+        father_cnic,
+        contact,
+        roll_no,
+        emergency_contact,
+        address_1,
+        address_2,
+        student_class,
+        city,
+        section,
+        gender,
+        disability,
+        disabledetail,
+        dateofbirth
+
+      };
+      const res = await registerStudent(formData);
+      if (res.data.status === "success") {
+        await storeToken(res.data.token); // Store Token in Storage
+        clearTextInput();
+        navigation.navigate("CreateStudent");
+      }
+      if (res.data.status === "failed") {
+        Toast.show({
+          type: "warning",
+          position: "top",
+          topOffset: 0,
+          text1: res.data.message,
+        });
+      }
+
     } else {
       Toast.show({
         type: "warning",
@@ -133,7 +165,7 @@ const CreateStudentForm = () => {
   };
 
   return (
-    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff" }}>
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -164,7 +196,7 @@ const CreateStudentForm = () => {
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
-        <View>
+          <View>
             <TextInput
               style={styleOne.input}
               value={schoolName}
@@ -277,7 +309,7 @@ const CreateStudentForm = () => {
               placeholder="Section"
             />
           </View>
-         
+
           <View>
             <TextInput
               style={styleOne.input}
@@ -288,53 +320,77 @@ const CreateStudentForm = () => {
             />
           </View>
 
-          <View style={{margin: 20, right: 20}}>
-             <RadioButton 
-             gender={gender} 
-             options={['Male', 'Female', 'Other']} 
-             horizontal={true} 
-             onChangeSelect={(opt, i)=>{(opt)
-              setGender(i);
-             }}/>
+          <View style={{ flexDirection: 'row' }}>
+
+            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <TextInput
+
+                value={getDate()}
+                placeholder="Select DOB (Day| MM | DD | YY)"
+              />
+            </TouchableOpacity>
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              onChangeText={(dateofbirth) => searchFilter(dateofbirth)}
+              is24Hour={false}
+
+            />
+
           </View>
 
-    
-          
-          <View style={{ flex: 1, flexDirection: "row"}}>
-        
+          <View style={{ margin: 20, right: 20 }}>
+            <RadioButton
+              gender={gender}
+              options={['Male', 'Female', 'Other']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setGender(i);
+              }} />
+          </View>
+
+
+
+          <View style={{ flex: 1, flexDirection: "row" }}>
+
             <Checkbox
               value={disability}
-              onValueChange={()=>setDisability(!disability)}
+              onValueChange={() => setDisability(!disability)}
               color={disability ? "#5062BD" : undefined}
             />
             <Text style={styles.labelText}>Disable, if Yes</Text>
 
           </View>
-          
-          <View>
-          {
-            disability ? (
-            <View style={{width: '90%', marginTop: 20}}>
-            <TextInput
-              style={{ 
-                backgroundColor: "transparent",
-                padding: 15,
-                 fontSize: 14,
-                fontWeight: "400",
-                borderBottomColor: "gray",
-                borderBottomWidth: 1,
-                 marginBottom: 30,}}
-              value={disabledetail}
-              onChangeText={setDisableDetail}
-              placeholder="Disabilty Detail"
-              placeholderTextColor='gray'
 
-            />
+          <View>
+            {
+              disability ? (
+                <View style={{ width: '90%', marginTop: 20 }}>
+                  <TextInput
+                    style={{
+                      backgroundColor: "transparent",
+                      padding: 15,
+                      fontSize: 14,
+                      fontWeight: "400",
+                      borderBottomColor: "gray",
+                      borderBottomWidth: 1,
+                      marginBottom: 30,
+                    }}
+                    value={disabledetail}
+                    onChangeText={setDisableDetail}
+                    placeholder="Disabilty Detail"
+                    placeholderTextColor='gray'
+
+                  />
+                </View>
+              ) : null
+            }
           </View>
-            ): null
-          }
-          </View>
-         
+
 
         </View>
 
@@ -365,7 +421,7 @@ const CreateStudentForm = () => {
             </Text>
           </TouchableOpacity>
         </View>
-       
+
       </ScrollView>
     </SafeAreaView>
   );

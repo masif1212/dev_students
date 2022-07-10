@@ -4,10 +4,11 @@ import StudentModel from '../models/StudentModel.js'
 
 class StudentController {
     static studentRegistration = async (req, res) => {
-      const {disability, disabledetail,gender,schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city} = req.body
+      const {dateofbirth,disability, disabledetail,gender,schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city} = req.body
         if ( image && first_name && last_name && father_name && father_cnic && contact &&  emergency_contact && address_1 && address_2 && student_class && section && city) {
             try {
               const doc = new StudentModel({
+              dateofbirth: dateofbirth,
                 disability: disability,
                 disabledetail:disabledetail,
                 schoolName: schoolName,
