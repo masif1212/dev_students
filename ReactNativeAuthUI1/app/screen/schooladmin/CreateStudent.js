@@ -24,12 +24,12 @@ const [time, setTime] = useState(Date.now())
 
 const isInitialMount = useRef(true);
 
-const myData = useSelector(state => state.schoolAdmin)
+const newData = useSelector(state => state.schoolAdmin)
 
 const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getStudents/${myData.schoolId}`);
+    const resp = await fetch(`http://192.168.10.12:8000/api/user/getStudents/${newData.schoolId}`);
     const data = await resp.json();
     setStudents(data);
   };
@@ -37,7 +37,6 @@ const focus = useIsFocused();
  
   useLayoutEffect(() => {
    fetchData();
-   console.log(myData)
   }, [focus]);
 
 

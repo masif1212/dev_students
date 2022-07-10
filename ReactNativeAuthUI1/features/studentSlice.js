@@ -13,13 +13,19 @@ const initialState = {
   roll_no: "",
   student_class: "",
   section: "",
-  city: ""
+  city: "",
+  gender: "",
+  disability: "",
+  disabledetail:""
 }
 export const studentSlice = createSlice({
   name: 'student_info',
   initialState,
   reducers: {
     setStudentInfo: (state, action) => {
+      state.disabledetail = action.payload.disabledetail
+      state.disability = action.payload.disability
+      state.gender = action.payload.gender
       state.schoolId = action.payload.schoolId
       state.schoolName = action.payload.schoolName
       state.image = action.payload.image
@@ -37,6 +43,9 @@ export const studentSlice = createSlice({
       state.city = action.payload.city
     },
     unSetStudentInfo: (state, action) => {
+      state.disabledetail = action.payload.disabledetail
+      state.disability = action.payload.disability
+      state.gender = action.payload.gender
       state.schoolId = action.payload.schoolId
       state.schoolName = action.payload.schoolNme
       state.image = action.payload.image

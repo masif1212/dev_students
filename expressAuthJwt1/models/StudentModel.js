@@ -22,6 +22,10 @@ const studentSchema = new mongoose.Schema({
   student_class: { type: String, required: true, trim: true },
   section: { type: String, required: true, trim: true },
   city: { type: String, required: true, trim: true },
+  gender: { type: String, required: true, trim: true },
+  disability: { type: Boolean},
+  disabledetail: { type:String}
+  
 })
 
 // Model

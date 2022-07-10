@@ -18,6 +18,9 @@ import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from 'react-redux';
+import RadioButton from "../../Components/RadioButton";
+import Checkbox from "expo-checkbox";
+
 
 
 const CreateStudentForm = () => {
@@ -37,6 +40,9 @@ const CreateStudentForm = () => {
   const [city, setCity] = useState();
   const [schoolId, setSchoolId] = useState();
   const [schoolName, setSchoolName] = useState();
+  const [gender, setGender] = useState("")
+  const [disability, setDisability] = useState(false)
+   const [disabledetail, setDisableDetail] = useState("")
 
   
 
@@ -53,6 +59,9 @@ const CreateStudentForm = () => {
     setStudent_class("");
     setSection("");
     setCity("");
+    setGender("");
+    setDisability(false);
+    setDisableDetail("");
   };
   const navigation = useNavigation();
 
@@ -76,6 +85,9 @@ const CreateStudentForm = () => {
           student_class,
           city,
           section,
+          gender,
+          disability,
+          disabledetail
         };
         const res = await registerStudent(formData);
         if (res.data.status === "success") {
@@ -275,6 +287,54 @@ const CreateStudentForm = () => {
               placeholder="City"
             />
           </View>
+
+          <View style={{margin: 20, right: 20}}>
+             <RadioButton 
+             gender={gender} 
+             options={['Male', 'Female', 'Other']} 
+             horizontal={true} 
+             onChangeSelect={(opt, i)=>{(opt)
+              setGender(i);
+             }}/>
+          </View>
+
+    
+          
+          <View style={{ flex: 1, flexDirection: "row"}}>
+        
+            <Checkbox
+              value={disability}
+              onValueChange={()=>setDisability(!disability)}
+              color={disability ? "#5062BD" : undefined}
+            />
+            <Text style={styles.labelText}>Disable, if Yes</Text>
+
+          </View>
+          
+          <View>
+          {
+            disability ? (
+            <View style={{width: '90%', marginTop: 20}}>
+            <TextInput
+              style={{ 
+                backgroundColor: "transparent",
+                padding: 15,
+                 fontSize: 14,
+                fontWeight: "400",
+                borderBottomColor: "gray",
+                borderBottomWidth: 1,
+                 marginBottom: 30,}}
+              value={disabledetail}
+              onChangeText={setDisableDetail}
+              placeholder="Disabilty Detail"
+              placeholderTextColor='gray'
+
+            />
+          </View>
+            ): null
+          }
+          </View>
+         
 
         </View>
 

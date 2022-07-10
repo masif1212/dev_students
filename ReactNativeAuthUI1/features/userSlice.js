@@ -9,7 +9,10 @@ const initialState = {
   address_1: "",
   address_2: "",
   CNIC: "",
-  city: ""
+  city: "",
+  gender: "",
+  disability: "",
+  disabledetail:""
 
 }
 export const userSlice = createSlice({
@@ -17,6 +20,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
+      state.disabledetail = action.payload.disabledetail
+      state.disability = action.payload.disability
+      state.gender = action.payload.gender
       state.email = action.payload.email
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName
@@ -29,6 +35,9 @@ export const userSlice = createSlice({
       state.city = action.payload.city
     },
     unSetUserInfo: (state, action) => {
+      state.disabledetail = action.payload.disabledetail
+      state.disability = action.payload.disability
+      state.gender = action.payload.gender
       state.email = action.payload.email
       state.firstName = action.payload.firstName
       state.lastName = action.payload.lastName

@@ -5,17 +5,23 @@ import transporter from '../config/emailConfig.js'
 
 class UserController {
   static userRegistration = async (req, res) => {
-    const { firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
+    const {disability,disabledetail,gender, firstName, lastName, email, password, password_confirmation, contact, alt_contact,image,  address_1, address_2, CNIC, city, tc } = req.body
     const user = await UserModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
-    } else {
+    }
+    const cnic = await UserModel.findOne({CNIC:CNIC})
+    if(cnic){
+      res.send({"status":"failed", "message": "Cnic already exists"})
+    }else{
       if (firstName && email && password && password_confirmation && tc) {
         if (password === password_confirmation) {
           try {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
             const doc = new UserModel({
+              disability: disability,
+              disabledetail:disabledetail,
               firstName: firstName,
               lastName: lastName,
               email: email,
@@ -27,7 +33,8 @@ class UserController {
               CNIC: CNIC,
               city: city,
               image: image,
-              tc: tc
+              tc: tc,
+              gender:gender
             })
             await doc.save()
             const saved_user = await UserModel.findOne({ email: email })
@@ -87,7 +94,7 @@ class UserController {
     } else {
       res.send({ "status": "failed", "message": "All Fields are Required" })
     }
-  }
+  } 
 
   static loggedUser = async (req, res) => {
     res.send({ "user": req.user })
