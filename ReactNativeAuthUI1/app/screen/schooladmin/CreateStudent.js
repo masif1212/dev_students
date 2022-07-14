@@ -23,7 +23,6 @@ const [ schoolName, setSchoolName] = useState('');
 const [time, setTime] = useState(Date.now())
 
 const isInitialMount = useRef(true);
-
 const myData = useSelector(state => state.schoolAdmin)
 
 const focus = useIsFocused();
