@@ -17,14 +17,21 @@ const initialState = {
   gender: "",
   disability: "",
   disabledetail:"",
-  dateofbirth: ""
-
+  dateofbirth: "",
+  currentshift: "",
+  lastschool:"",
+  reasonleft: "",
+  religion :""
 }
 export const studentSlice = createSlice({
   name: 'student_info',
   initialState,
   reducers: {
     setStudentInfo: (state, action) => {
+      state.religion=action.payload.religion
+      state.lastschool = action.payload.lastschool
+      state.reasonleft = action.payload.reasonleft
+      state.currentshift = action.payload.currentshift
       state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability
@@ -46,6 +53,11 @@ export const studentSlice = createSlice({
       state.city = action.payload.city
     },
     unSetStudentInfo: (state, action) => {
+      state.religion=action.payload.religion
+      state.selectreligion=action.payload.selectreligion
+      state.lastschool = action.payload.lastschool
+      state.reasonleft = action.payload.reasonleft
+      state.currentshift = action.payload.currentshift
       state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability

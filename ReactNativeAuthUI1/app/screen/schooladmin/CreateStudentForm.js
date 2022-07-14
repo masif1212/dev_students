@@ -22,6 +22,9 @@ import RadioButton from "../../Components/RadioButton";
 import Checkbox from "expo-checkbox";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
+import DropDownStudent from "../../Components/DropDownStudent.js";
+import DropDownReligion from "../../Components/DropDownReligion.js";
+
 
 
 
@@ -47,16 +50,21 @@ const CreateStudentForm = () => {
   const [disabledetail, setDisableDetail] = useState("")
   const [dateofbirth, setDateOfBirth] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [currentshift, setCurrentShift] = useState(null)
+  const [lastschool, setLastSchool] = useState("")
+  const [reasonleft, setReasonLeft] = useState("")
+  const [religion, setReligion] = useState("")
 
+
+
+
+  //================================DATE PICKER=============================================//
   const showDatePicker = () => {
     setDatePickerVisibility(true);
-
-
   };
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
-
   };
 
   const handleConfirm = (dateofbirth) => {
@@ -65,6 +73,8 @@ const CreateStudentForm = () => {
     searchFilter(dateofbirth)
   };
 
+  
+
   const getDate = () => {
     let tempDate = (moment(dateofbirth).toString().split(' '));
     return dateofbirth !== ''
@@ -72,6 +82,55 @@ const CreateStudentForm = () => {
       : false;
 
   };
+
+
+  //==========================END DATEPICKER===================================//
+  
+  
+
+  //==================DROPDOWN=================================================//
+
+
+  const selectreligion = [
+  {religion : 'Islam'},
+  {religion : 'Hinduism'},
+  {religion : 'Buddhism'},
+  {religion : 'Christianity'},
+  {religion : 'Sikhism'},
+  {religion : 'Ethnic religions'},
+  {religion : 'Irreligious and atheist'},
+  {religion : 'Jews'},
+  {religion : 'Others'}
+]
+
+const onSelectReligion =(item)=> (
+  setReligion(item)
+
+)
+
+
+  const morneven = [
+    {
+      id: 1,
+      currentshift: 'Morning'
+    },
+    {
+      id: 2,
+      currentshift: 'Evening'
+    }
+  ]
+
+  const onSelect =(item)=> (
+    setCurrentShift(item)
+
+  )
+    
+
+  useEffect(() => {
+    console.log(currentshift)
+  }, [])
+
+  //============================DROP DOWN COMPONENT END=========================//
 
 
   const clearTextInput = () => {
@@ -90,7 +149,11 @@ const CreateStudentForm = () => {
     setGender("");
     setDisability(false);
     setDisableDetail("");
-    setDateOfBirth("")
+    setDateOfBirth("");
+    setCurrentShift("");
+    setLastSchool("");
+    setReasonLeft("");
+    setReligion("");
 
   };
   const navigation = useNavigation();
@@ -98,7 +161,7 @@ const CreateStudentForm = () => {
   const [registerStudent] = useRegisterStudentMutation();
 
   const handleFormSubmit = async () => {
-    if (image, first_name, last_name, father_name, father_cnic, contact, roll_no, emergency_contact, address_1, address_2, student_class, section, city) {
+    if (reasonleft,lastschool,currentshift,dateofbirth,disabledetail,disability,gender,image, first_name, last_name, father_name, father_cnic, contact, roll_no, emergency_contact, address_1, address_2, student_class, section, city) {
       const formData = {
         image,
         schoolId,
@@ -118,7 +181,11 @@ const CreateStudentForm = () => {
         gender,
         disability,
         disabledetail,
-        dateofbirth
+        dateofbirth,
+        currentshift,
+        lastschool,
+        reasonleft,
+        religion
 
       };
       const res = await registerStudent(formData);
@@ -310,6 +377,22 @@ const CreateStudentForm = () => {
             />
           </View>
 
+          <View style={{margin: 10}} >
+            <DropDownStudent 
+              value={currentshift}
+              data={morneven}
+              onSelect={onSelect}
+            />
+          </View>
+
+          <View style={{margin: 10}} >
+            <DropDownReligion 
+              value={religion}
+              data={selectreligion}
+              onSelectReligion={onSelectReligion}
+            />
+          </View>
+
           <View>
             <TextInput
               style={styleOne.input}
@@ -324,7 +407,6 @@ const CreateStudentForm = () => {
 
             <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
               <TextInput
-
                 value={getDate()}
                 placeholder="Select DOB (Day| MM | DD | YY)"
               />
@@ -337,10 +419,12 @@ const CreateStudentForm = () => {
               onCancel={hideDatePicker}
               onChangeText={(dateofbirth) => searchFilter(dateofbirth)}
               is24Hour={false}
-
             />
-
           </View>
+
+
+
+
 
           <View style={{ margin: 20, right: 20 }}>
             <RadioButton
@@ -356,14 +440,12 @@ const CreateStudentForm = () => {
 
 
           <View style={{ flex: 1, flexDirection: "row" }}>
-
             <Checkbox
               value={disability}
               onValueChange={() => setDisability(!disability)}
               color={disability ? "#5062BD" : undefined}
             />
             <Text style={styles.labelText}>Disable, if Yes</Text>
-
           </View>
 
           <View>
@@ -389,6 +471,27 @@ const CreateStudentForm = () => {
                 </View>
               ) : null
             }
+          </View>
+
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={lastschool}
+              onChangeText={setLastSchool}
+              placeholderTextColor='gray'
+              placeholder="Name of Previous School"
+            />
+          </View>
+
+          
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={reasonleft}
+              onChangeText={setReasonLeft}
+              placeholderTextColor='gray'
+              placeholder="Reason of Previous School Left"
+            />
           </View>
 
 

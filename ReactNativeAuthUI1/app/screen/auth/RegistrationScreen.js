@@ -23,6 +23,8 @@ import * as ImagePicker from "expo-image-picker";
 import RadioButton from '../../Components/RadioButton.js'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
+import axios from "axios";
+import DropDownCountry from "../../Components/DropDownCountry.js";
 
 
 
@@ -38,7 +40,6 @@ const RegistrationScreen = () => {
   const [address_1, setAdress_1] = useState("");
   const [address_2, setAdress_2] = useState("");
   const [CNIC, setCNIC] = useState("");
-  const [db, setDB] = useState("");
   const [city, setCity] = useState("");
   const [image, setImage] = useState();
   const [tc, setTc] = useState(false);
@@ -47,7 +48,25 @@ const RegistrationScreen = () => {
   const [disabledetail, setDisableDetail] = useState("")
   const [dateofbirth, setDateOfBirth] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [data, setData] = useState([]);
+  const [getcountry, setCountry] = useState([])
 
+
+//country state city api==========================//
+  useEffect(() => {
+    axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err))
+
+  }, [])
+
+  const onSelectCountry =(item)=> (
+    setCountry(item)
+
+  )
+
+  const country = [...new Set(data.map(item => item.country))]
+//=========================================================================//
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -70,8 +89,8 @@ const RegistrationScreen = () => {
     let tempDate = (moment(dateofbirth).toString().split(' '));
     return dateofbirth !== ''
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false ;
-      
+      : false;
+
   };
 
 
@@ -330,6 +349,16 @@ const RegistrationScreen = () => {
               }} />
           </View>
 
+
+         <View>
+         
+         <DropDownCountry
+         data={country.map(items=>({items}))}
+         value={getcountry} 
+         onSelectCountry={onSelectCountry}
+         />
+         </View>
+          
           {/* <View style={{margin: 10, right: 10}}>
           <Text>Select Date of Birth :</Text>
 
@@ -347,7 +376,7 @@ const RegistrationScreen = () => {
 
             <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
               <TextInput
-             
+
                 value={getDate()}
                 placeholder="Select DOB (Day| MM | DD | YY)"
               />
@@ -367,6 +396,7 @@ const RegistrationScreen = () => {
 
 
 
+
           <View style={{ flex: 1, flexDirection: "row" }}>
 
             <Checkbox
@@ -377,6 +407,8 @@ const RegistrationScreen = () => {
             <Text style={styles.labelText}>Disable, if Yes</Text>
 
           </View>
+
+        
 
           <View>
             {
