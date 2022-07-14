@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
   CNIC: { type: String, required: true, trim: true },
   city: { type: String, required: true, trim: true },
   image: { type: String, required: true, trim: true },
-  tc: { type: Boolean, required: true }
+  gender: { type: String, required: true, trim: true },
+  tc: { type: Boolean, required: true },
+  disability: { type: Boolean},
+  disabledetail: { type:String},
+  dateofbirth :{type:String, required: true}
 })
 
 // Model

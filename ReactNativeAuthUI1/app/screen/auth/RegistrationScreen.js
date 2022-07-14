@@ -7,17 +7,27 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Button,
+  onBlur
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles, toastConfig } from "../../../style";
+import { styles, toastConfig } from "../../../style.js";
 import Toast from "react-native-toast-message";
 import Checkbox from "expo-checkbox";
-import { useRegisterUserMutation } from "../../../services/userAuthApi";
-import { storeToken } from "../../../services/AsyncStorageService";
+import { useRegisterUserMutation } from "../../../services/userAuthApi.js";
+import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
+import RadioButton from '../../Components/RadioButton.js'
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from "moment";
+import axios from "axios";
+import DropDownCountry from "../../Components/DropDownCountry.js";
+
+
+
 
 const RegistrationScreen = () => {
   const [firstName, setFirstName] = useState("");
@@ -33,6 +43,57 @@ const RegistrationScreen = () => {
   const [city, setCity] = useState("");
   const [image, setImage] = useState();
   const [tc, setTc] = useState(false);
+  const [gender, setGender] = useState("")
+  const [disability, setDisability] = useState(false)
+  const [disabledetail, setDisableDetail] = useState("")
+  const [dateofbirth, setDateOfBirth] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [data, setData] = useState([]);
+  const [getcountry, setCountry] = useState([])
+
+
+//country state city api==========================//
+  useEffect(() => {
+    axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err))
+
+  }, [])
+
+  const onSelectCountry =(item)=> (
+    setCountry(item)
+
+  )
+
+  const country = [...new Set(data.map(item => item.country))]
+//=========================================================================//
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+
+
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+
+  };
+
+  const handleConfirm = (dateofbirth) => {
+    setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
+    hideDatePicker();
+    searchFilter(dateofbirth)
+  };
+
+  const getDate = () => {
+    let tempDate = (moment(dateofbirth).toString().split(' '));
+    return dateofbirth !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+
+
 
   const clearTextInput = () => {
     setFirstName("");
@@ -47,10 +108,16 @@ const RegistrationScreen = () => {
     setCity("");
     setImage("");
     setTc(false);
+    setGender("");
+    setDisability(false);
+    setDisableDetail("");
+    setDateOfBirth("")
   };
   const navigation = useNavigation();
 
   const [registerUser] = useRegisterUserMutation();
+
+
 
   const handleFormSubmit = async () => {
     if (firstName && email && password && password_confirmation && tc) {
@@ -69,6 +136,12 @@ const RegistrationScreen = () => {
           CNIC,
           city,
           tc,
+          gender,
+          disability,
+          disabledetail,
+          dateofbirth
+
+
         };
         const res = await registerUser(formData);
         if (res.data.status === "success") {
@@ -116,7 +189,7 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff" }}>
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -174,6 +247,7 @@ const RegistrationScreen = () => {
               onChangeText={setEmail}
               placeholderTextColor='gray'
               placeholder="Write Your Email"
+
             />
           </View>
           <View>
@@ -263,7 +337,107 @@ const RegistrationScreen = () => {
 
             />
           </View>
+
+          <View style={{ margin: 20, right: 20 }}>
+            <RadioButton
+              gender={gender}
+              options={['Male', 'Female', 'Other']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setGender(i);
+              }} />
+          </View>
+
+
+         <View>
+         
+         <DropDownCountry
+         data={country.map(items=>({items}))}
+         value={getcountry} 
+         onSelectCountry={onSelectCountry}
+         />
+         </View>
+          
+          {/* <View style={{margin: 10, right: 10}}>
+          <Text>Select Date of Birth :</Text>
+
+            <DateField
+            containerStyle={{marginBottom: 20, marginRight: 20}}
+              labelDate="Input dateofbirth"
+              labelMonth="Input month"
+              labelYear="Input year"
+              onSubmit={(value) => console.log(value)}
+              autoFocus={true}
+            />
+          </View> */}
+
+          <View style={{ flexDirection: 'row' }}>
+
+            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <TextInput
+
+                value={getDate()}
+                placeholder="Select DOB (Day| MM | DD | YY)"
+              />
+            </TouchableOpacity>
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              onChangeText={(dateofbirth) => searchFilter(dateofbirth)}
+              is24Hour={false}
+
+            />
+
+          </View>
+
+
+
+
           <View style={{ flex: 1, flexDirection: "row" }}>
+
+            <Checkbox
+              value={disability}
+              onValueChange={() => setDisability(!disability)}
+              color={disability ? "#5062BD" : undefined}
+            />
+            <Text style={styles.labelText}>Disable, if Yes</Text>
+
+          </View>
+
+        
+
+          <View>
+            {
+              disability ? (
+                <View style={{ width: '90%', marginTop: 20 }}>
+                  <TextInput
+                    style={{
+                      backgroundColor: "transparent",
+                      padding: 15,
+                      fontSize: 14,
+                      fontWeight: "400",
+                      borderBottomColor: "gray",
+                      borderBottomWidth: 1,
+                      marginBottom: 30,
+                    }}
+                    value={disabledetail}
+                    onChangeText={setDisableDetail}
+                    placeholder="Disabilty Detail"
+                    placeholderTextColor='gray'
+
+                  />
+                </View>
+              ) : null
+            }
+          </View>
+
+
+
+          <View style={{ flex: 1, flexDirection: "row", marginTop: 20 }}>
             <Checkbox
               value={tc}
               onValueChange={setTc}
@@ -272,6 +446,7 @@ const RegistrationScreen = () => {
             <Text style={styles.labelText}>I agree to term and condition.</Text>
           </View>
         </View>
+
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity

@@ -4,10 +4,17 @@ import StudentModel from '../models/StudentModel.js'
 
 class StudentController {
     static studentRegistration = async (req, res) => {
-      const { schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city} = req.body
+      const {religion,lastschool,reasonleft,currentshift,dateofbirth,disability, disabledetail,gender,schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city} = req.body
         if ( image && first_name && last_name && father_name && father_cnic && contact &&  emergency_contact && address_1 && address_2 && student_class && section && city) {
             try {
               const doc = new StudentModel({
+                religion:religion,
+                lastschool:lastschool,
+                reasonleft: reasonleft,
+                currentshift: currentshift,
+                dateofbirth: dateofbirth,
+                disability: disability,
+                disabledetail:disabledetail,
                 schoolName: schoolName,
                 schoolId: schoolId,
                 image: image,
@@ -23,6 +30,8 @@ class StudentController {
                 student_class: student_class,
                 section: section,
                 city: city,
+                gender:gender
+
               })
               await doc.save()
               res.status(201).send({ "status": "success", "message": "Registration Success"})

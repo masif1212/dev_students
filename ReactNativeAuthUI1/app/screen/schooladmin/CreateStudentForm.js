@@ -18,6 +18,14 @@ import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from 'react-redux';
+import RadioButton from "../../Components/RadioButton";
+import Checkbox from "expo-checkbox";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from "moment";
+import DropDownStudent from "../../Components/DropDownStudent.js";
+import DropDownReligion from "../../Components/DropDownReligion.js";
+
+
 
 
 const CreateStudentForm = () => {
@@ -37,8 +45,93 @@ const CreateStudentForm = () => {
   const [city, setCity] = useState();
   const [schoolId, setSchoolId] = useState();
   const [schoolName, setSchoolName] = useState();
+  const [gender, setGender] = useState("")
+  const [disability, setDisability] = useState(false)
+  const [disabledetail, setDisableDetail] = useState("")
+  const [dateofbirth, setDateOfBirth] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [currentshift, setCurrentShift] = useState(null)
+  const [lastschool, setLastSchool] = useState("")
+  const [reasonleft, setReasonLeft] = useState("")
+  const [religion, setReligion] = useState("")
+
+
+
+
+  //================================DATE PICKER=============================================//
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (dateofbirth) => {
+    setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
+    hideDatePicker();
+    searchFilter(dateofbirth)
+  };
 
   
+
+  const getDate = () => {
+    let tempDate = (moment(dateofbirth).toString().split(' '));
+    return dateofbirth !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+
+
+  //==========================END DATEPICKER===================================//
+  
+  
+
+  //==================DROPDOWN=================================================//
+
+
+  const selectreligion = [
+  {religion : 'Islam'},
+  {religion : 'Hinduism'},
+  {religion : 'Buddhism'},
+  {religion : 'Christianity'},
+  {religion : 'Sikhism'},
+  {religion : 'Ethnic religions'},
+  {religion : 'Irreligious and atheist'},
+  {religion : 'Jews'},
+  {religion : 'Others'}
+]
+
+const onSelectReligion =(item)=> (
+  setReligion(item)
+
+)
+
+
+  const morneven = [
+    {
+      id: 1,
+      currentshift: 'Morning'
+    },
+    {
+      id: 2,
+      currentshift: 'Evening'
+    }
+  ]
+
+  const onSelect =(item)=> (
+    setCurrentShift(item)
+
+  )
+    
+
+  useEffect(() => {
+    console.log(currentshift)
+  }, [])
+
+  //============================DROP DOWN COMPONENT END=========================//
+
 
   const clearTextInput = () => {
     setFirst_Name("");
@@ -53,45 +146,63 @@ const CreateStudentForm = () => {
     setStudent_class("");
     setSection("");
     setCity("");
+    setGender("");
+    setDisability(false);
+    setDisableDetail("");
+    setDateOfBirth("");
+    setCurrentShift("");
+    setLastSchool("");
+    setReasonLeft("");
+    setReligion("");
+
   };
   const navigation = useNavigation();
 
   const [registerStudent] = useRegisterStudentMutation();
 
   const handleFormSubmit = async () => {
-    if (image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city) {
-        const formData = {
-          image,
-          schoolId,
-          schoolName,
-          first_name,
-          last_name,
-          father_name,
-          father_cnic,
-          contact,
-          roll_no,
-          emergency_contact,
-          address_1,
-          address_2,
-          student_class,
-          city,
-          section,
-        };
-        const res = await registerStudent(formData);
-        if (res.data.status === "success") {
-          await storeToken(res.data.token); // Store Token in Storage
-          clearTextInput();
-          navigation.navigate("CreateStudent");
-        }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
-        }
-    
+    if (reasonleft,lastschool,currentshift,dateofbirth,disabledetail,disability,gender,image, first_name, last_name, father_name, father_cnic, contact, roll_no, emergency_contact, address_1, address_2, student_class, section, city) {
+      const formData = {
+        image,
+        schoolId,
+        schoolName,
+        first_name,
+        last_name,
+        father_name,
+        father_cnic,
+        contact,
+        roll_no,
+        emergency_contact,
+        address_1,
+        address_2,
+        student_class,
+        city,
+        section,
+        gender,
+        disability,
+        disabledetail,
+        dateofbirth,
+        currentshift,
+        lastschool,
+        reasonleft,
+        religion
+
+      };
+      const res = await registerStudent(formData);
+      if (res.data.status === "success") {
+        await storeToken(res.data.token); // Store Token in Storage
+        clearTextInput();
+        navigation.navigate("CreateStudent");
+      }
+      if (res.data.status === "failed") {
+        Toast.show({
+          type: "warning",
+          position: "top",
+          topOffset: 0,
+          text1: res.data.message,
+        });
+      }
+
     } else {
       Toast.show({
         type: "warning",
@@ -121,7 +232,7 @@ const CreateStudentForm = () => {
   };
 
   return (
-    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff" }}>
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -152,7 +263,7 @@ const CreateStudentForm = () => {
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
-        <View>
+          <View>
             <TextInput
               style={styleOne.input}
               value={schoolName}
@@ -265,7 +376,23 @@ const CreateStudentForm = () => {
               placeholder="Section"
             />
           </View>
-         
+
+          <View style={{margin: 10}} >
+            <DropDownStudent 
+              value={currentshift}
+              data={morneven}
+              onSelect={onSelect}
+            />
+          </View>
+
+          <View style={{margin: 10}} >
+            <DropDownReligion 
+              value={religion}
+              data={selectreligion}
+              onSelectReligion={onSelectReligion}
+            />
+          </View>
+
           <View>
             <TextInput
               style={styleOne.input}
@@ -275,6 +402,98 @@ const CreateStudentForm = () => {
               placeholder="City"
             />
           </View>
+
+          <View style={{ flexDirection: 'row' }}>
+
+            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <TextInput
+                value={getDate()}
+                placeholder="Select DOB (Day| MM | DD | YY)"
+              />
+            </TouchableOpacity>
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              onChangeText={(dateofbirth) => searchFilter(dateofbirth)}
+              is24Hour={false}
+            />
+          </View>
+
+
+
+
+
+          <View style={{ margin: 20, right: 20 }}>
+            <RadioButton
+              gender={gender}
+              options={['Male', 'Female', 'Other']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setGender(i);
+              }} />
+          </View>
+
+
+
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <Checkbox
+              value={disability}
+              onValueChange={() => setDisability(!disability)}
+              color={disability ? "#5062BD" : undefined}
+            />
+            <Text style={styles.labelText}>Disable, if Yes</Text>
+          </View>
+
+          <View>
+            {
+              disability ? (
+                <View style={{ width: '90%', marginTop: 20 }}>
+                  <TextInput
+                    style={{
+                      backgroundColor: "transparent",
+                      padding: 15,
+                      fontSize: 14,
+                      fontWeight: "400",
+                      borderBottomColor: "gray",
+                      borderBottomWidth: 1,
+                      marginBottom: 30,
+                    }}
+                    value={disabledetail}
+                    onChangeText={setDisableDetail}
+                    placeholder="Disabilty Detail"
+                    placeholderTextColor='gray'
+
+                  />
+                </View>
+              ) : null
+            }
+          </View>
+
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={lastschool}
+              onChangeText={setLastSchool}
+              placeholderTextColor='gray'
+              placeholder="Name of Previous School"
+            />
+          </View>
+
+          
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={reasonleft}
+              onChangeText={setReasonLeft}
+              placeholderTextColor='gray'
+              placeholder="Reason of Previous School Left"
+            />
+          </View>
+
 
         </View>
 
@@ -305,7 +524,7 @@ const CreateStudentForm = () => {
             </Text>
           </TouchableOpacity>
         </View>
-       
+
       </ScrollView>
     </SafeAreaView>
   );

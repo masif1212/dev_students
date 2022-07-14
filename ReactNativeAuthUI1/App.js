@@ -1,8 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import {
-Button,
-  StyleSheet,
-} from "react-native";
+import {Button,} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UserLoginScreen from "./app/screen/auth/UserLoginScreen";
 import ShopTab from './app/screen/shop/ShopTab'
