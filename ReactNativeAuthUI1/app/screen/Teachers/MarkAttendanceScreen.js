@@ -26,8 +26,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [attendanceState, setAttendanceState] = useState('')
 
 
-
-
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.64:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
@@ -38,14 +36,11 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const focus = useIsFocused();
 
-
   useLayoutEffect(() => {
     fetchData();
 
 
   }, [focus])
-
-
 
   const MarkAttendance = (item, S) => {
     const attend = (attendanceState.map(l => l.teacher_id_att === item.teacher_id_att ? { ...l, attendance: S } : l));
@@ -99,22 +94,14 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   // })
   // }
-  //
-
-
-
-
+  
   const tableHeader = () => (
 
     <View style={styles.tableHeader} >
-
-
       {
         columns.map((column, index) => {
           {
             return (
-
-
               <TouchableOpacity
                 key={index}
                 style={styles.columnHeader}
@@ -126,8 +113,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                   }
                 </Text>
               </TouchableOpacity>
-
-
             )
           }
         })
@@ -138,9 +123,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   return (
 
-
-    <View style={{ height: windowHeight, width: '100%',top:20 }}>
-
+    <View style={{ height: windowHeight, width: '100%' }}>
 
 
       <FlatList
@@ -224,7 +207,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         backgroundColor: 'transparent'
                       }}
                     />
-
+                    
                     {/* <BouncyCheckbox
             size={20}
             fillColor="red"
@@ -235,15 +218,12 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
             onPress={()=>MarkAbsent()}
     /> */}
                   </View>
-
-
                   <View style={{
                     left: 5,
                   }}>
                     <CheckBox
                       title='L'
                       checkedColor='gray'
-
                       checked={item.attendance === 'L' ? true : false}
                       checkedIcon='dot-circle-o'
                       unCheckedIcon='circle-o'
@@ -251,14 +231,12 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                       containerStyle={{
                         alignItems: 'center',
                         justifyContent: 'center',
-
                         height: 50,
                         right: 70,
                         alignItems: 'center',
                         justifyContent: 'center',
                         top: -10,
                         backgroundColor: 'transparent',
-
                       }}
                     />
                   </View>
@@ -268,8 +246,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
           )
         }}
       />
-
-
       <View>
         <TouchableOpacity
           onPress={handleFormSubmit}
