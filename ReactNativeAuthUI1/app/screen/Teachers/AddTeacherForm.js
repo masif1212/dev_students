@@ -94,25 +94,6 @@ const TeacherRegister = () => {
   const navigation = useNavigation();
   const [registerTeacher] = useRegisterTeachersMutation();
 
-  // const selectRegion = [
-  //   {religion : 'Islam'},
-  //   {religion : 'Hinduism'},
-  //   {religion : 'Buddhism'},
-  //   {religion : 'Christianity'},
-  //   {religion : 'Sikhism'},
-  //   {religion : 'Ethnic religions'},
-  //   {religion : 'Irreligious and atheist'},
-  //   {religion : 'Jews'},
-  //   {religion : 'Others'}
-  // ]
-
-  // const onSelectedRegion =(item)=> (
-  //   setCurrentShift(item)
-
-  // )
-  // useEffect(() => {
-  //   console.log(currentshift)
-  // })
 
   const handleFormSubmit = async () => {
     if (first_name && email && password && confirm_password) {

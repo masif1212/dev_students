@@ -1,88 +1,42 @@
-import React, { Component, useState } from "react";
-import { Picker, View, Text, StyleSheet } from "react-native";
+import React from 'react';
 
- const  CategoryScreen = () => {
- const [catagries, setCatagries] = useState({
-    selectedcat: "",
-    category: [
-      {
-        itemName: "Samsung M20"
-      },
-      {
-        itemName: "Nokia"
-      },
-      {
-        itemName: "Apple"
-      },
-      {
-        itemName: "Samsung M23"
-      },
-      {
-        itemName: "Samsung M24"
-      },
-      {
-        itemName: "Samsung M25"
-      }
-    ]
-  });
+import { View } from 'react-native';
 
-  const onValueChangeCat = async (value) => {
-    setCatagries({ selectedcat: value });
-  }
+import DropDownPicker from 'react-native-dropdown-picker';
 
- 
-    return (
-      <View style={styles.viewStyle}>
-        <View style={{ flex: 0.3 }}>
-          <Text style={styles.textStyle}>Categories</Text>
-        </View>
-        <View style={{ flex: 0.7, fontSize: 14 }}>
-          <Picker
-            itemStyle={styles.itemStyle}
-            mode="dropdown"
-            style={styles.pickerStyle}
-            selectedValue={catagries.selectedcat}
-            onValueChange={onValueChangeCat()}
-          >
-            {catagries.category.map((item, index) => (
-              <Picker.Item
-                color="#0087F0"
-                label={item.itemName}
-                value={item.itemName}
-                index={index}
-              />
-            ))}
-          </Picker>
-        </View>
-      </View>
-    );
-  }
+export default function CustomDropdown({zIndex, zIndexInverse, open, setOpen, value, items, setValue, setItems}) {
 
-    export default CategoryScreen;
 
-const styles = StyleSheet.create({
-  viewStyle: {
-    flex: 1,
-    alignSelf: "center",
-    flexDirection: "row",
-    width: "92%",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  itemStyle: {
-    fontSize: 10,
-    fontFamily: "Roboto-Regular",
-    color: "#007aff"
-  },
-  pickerStyle: {
-    width: "100%",
-    height: 40,
-    color: "#007aff",
-    fontSize: 14,
-    fontFamily: "Roboto-Regular"
-  },
-  textStyle: {
-    fontSize: 14,
-    fontFamily: "Roboto-Regular"
-  }
-});
+  
+  return (
+   <View style={{
+    marginVertical: 12
+   }}>
+    <DropDownPicker
+         listMode="SCROLLVIEW"
+        scrollViewProps={{
+          nestedScrollEnabled: true,
+        }}
+        searchable={true}
+        zIndex={zIndex}
+        zIndexInverse={zIndexInverse}
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        containerStyle={{ height: 40, paddingRight: 25}}
+        style={{ backgroundColor: '#ffffff',  }}
+        dropDownStyle={{ backgroundColor: '#fafafa' }}
+        dropDownMaxHeight={300}
+        labelStyle={{ fontSize: 13 }}
+        theme="LIGHT"
+        mode="SIMPLE"
+        closeAfterSelecting={true}
+                // badgeDotColors={["#e76f51", "#00b4d8", "#e9c46a", "#e76f51", "#8ac926", "#00b4d8", "#e9c46a"]}
+      />
+   </View>
+      
+  );
+}
