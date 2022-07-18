@@ -16,12 +16,10 @@ import { useRegisterTeachersMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
-import { useSelector } from "react-redux";
-import { useIsFocused } from "@react-navigation/native";
-import CustomDropDown from '../../Components/CustomDropdown'
-
-
-
+import { useSelector } from 'react-redux';
+import { useIsFocused } from "@react-navigation/native"; 
+import CustomDropdown from '../../Components/CustomDropDown'
+import { LogBox } from 'react-native';
 
 const TeacherRegister = () => {
   const [first_name, setfirst_name] = useState("");
@@ -48,6 +46,11 @@ const TeacherRegister = () => {
     setSchoolName(myData.schoolName);
   }, [focus]);
 
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+}, [])
+
+  
   const clearTextInput = () => {
     setfirst_name("");
     setlast_name("");
@@ -61,8 +64,34 @@ const TeacherRegister = () => {
     setCity("");
     setImage("");
   };
-  const navigation = useNavigation();
 
+  const [open, setOpen] = useState(false);
+  const [region, setRegion] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Banbhore', value: 'Banbhore'},
+    {label: 'Hyderabad', value: 'Hyderabad'},
+    {label: 'Karachi', value: 'Karachi'},
+    {label: 'Sukkur', value: 'Sukkur'},
+    {label: 'Larkana', value: 'Larkana'},
+    {label: 'Mirpur Khas', value: 'Mirpur Khas'},
+    {label: 'Shaheed Benazirabad', value: 'Shaheed Benazirabad'},
+  ]);
+
+  const [show, setShow] = useState(false);
+  const [district, setDistrict] = useState(null);
+  const [allDistrict, setAllDistrict] = useState([
+    {label: 'Banbhore', value: 'Banbhore'},
+    {label: 'Hyderabad', value: 'Hyderabad'},
+    {label: 'Karachi', value: 'Karachi'},
+    {label: 'Sukkur', value: 'Sukkur'},
+    {label: 'Larkana', value: 'Larkana'},
+    {label: 'Mirpur Khas', value: 'Mirpur Khas'},
+    {label: 'Shaheed Benazirabad', value: 'Shaheed Benazirabad'},
+
+
+  ]);
+
+  const navigation = useNavigation();
   const [registerTeacher] = useRegisterTeachersMutation();
 
   // const selectRegion = [
@@ -150,7 +179,7 @@ const TeacherRegister = () => {
   };
 
   return (
-    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff" }}>
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff", flex: 1}}>
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -179,12 +208,37 @@ const TeacherRegister = () => {
         <Toast config={toastConfig} />
       </View>
 
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        style={{ height: "100%" }}
-      >
-        <View style={{ marginLeft: 25 }}>
-          <View>
+      
+
+      <ScrollView nestedScrollEnabled={true}   keyboardShouldPersistTaps="handled" style={{ height: '100%'}}>
+        <View style={{ justifyContent: 'center', marginLeft: 30 }}>
+        <View>
+        <CustomDropdown
+         zIndex={3000}
+        zIndexInverse={1000}
+        open={open}
+        value={region}
+        items={items}
+        setOpen={setOpen}
+        setValue={setRegion}
+        setItems={setItems}
+      />
+        </View>
+
+        <View>
+        <CustomDropdown
+         zIndex={2000}
+        zIndexInverse={500}
+        open={show}
+        value={district}
+        items={allDistrict}
+        setOpen={setShow}
+        setValue={setDistrict}
+        setItems={setAllDistrict}
+      />
+        </View>
+        
+        <View>
             <TextInput
               style={styleOne.input}
               placeholder="School Name"
@@ -192,28 +246,10 @@ const TeacherRegister = () => {
               placeholderTextColor="gray"
             />
           </View>
-
           <View>
             <TextInput
               style={styleOne.input}
-              placeholder="School Code"
-              value={myData.schoolCode}
-              placeholderTextColor="gray"
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View style={{margin: 10}} >
-            <CustomDropDown 
-             
-            />
-          </View>
-    
-
-          <View>
-            <TextInput
-              style={styleOne.input}
-              value={first_name}
+               value={first_name}
               onChangeText={setfirst_name}
               placeholder="Write Your First Name"
               placeholderTextColor="gray"
@@ -318,6 +354,8 @@ const TeacherRegister = () => {
               placeholder="City"
             />
           </View>
+
+          
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -348,6 +386,8 @@ const TeacherRegister = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+
     </SafeAreaView>
   );
 };
