@@ -11,7 +11,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-
+ 
 
 const  StudentDetail = ({navigation,route})=> {
 
@@ -242,7 +242,7 @@ const focus = useIsFocused();
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode={studentdate.date }
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         
@@ -287,6 +287,8 @@ const focus = useIsFocused();
         stickyHeaderIndices={[0]}
         renderItem={({item, index})=> {
           return (
+           
+            
             <View>
               { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
                 <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>

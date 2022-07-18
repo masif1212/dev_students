@@ -5,6 +5,6 @@
   "minify": false,
   "urlRandomness": "me-cvt",
   "https": false,
-  "scheme": null,
+  "scheme": "exp+reactnativeauthui1",
   "devClient": false
 }

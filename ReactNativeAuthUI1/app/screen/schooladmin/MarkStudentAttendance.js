@@ -7,7 +7,6 @@ import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
 
-
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -22,8 +21,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [ teachers , setTeachers] = useState([]);
   const [ attendance, setAttendance ] = useState()
   const [ attendanceState, setAttendanceState ] = useState('')
-  
-
 
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.26:8000/api/user/getSomestudents/${route.params.schoolId}`);
@@ -60,7 +57,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const handleFormSubmit = async () => {
-  fetch('http://192.168.10.12:8000/api/user/studentattendance', {
+  fetch('http://192.168.18.64:8000/api/user/studentattendance', {
         method: "POST",
         body: JSON.stringify(attendance),
         headers: {
