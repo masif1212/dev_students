@@ -23,19 +23,25 @@ const [ schoolName, setSchoolName] = useState('');
 const [time, setTime] = useState(Date.now())
 
 const isInitialMount = useRef(true);
-const myData = useSelector(state => state.schoolAdmin)
+
+const newData = useSelector(state => state.schoolAdmin)
 
 const focus = useIsFocused();
 
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.12:8000/api/user/getStudents/${newData.schoolId}`);
     const data = await resp.json();
-    setStudents(data);
-  };
 
+    setStudents(data);
+
+  };
+  
+ 
   useLayoutEffect(() => {
    fetchData();
   }, [focus]);
+
+
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc"
     const sortedData = _.orderBy(students, [column], [newDirection])
@@ -44,11 +50,16 @@ const focus = useIsFocused();
     setStudents(sortedData)
   }
   const tableHeader = () => (
+
     <View style={styles.tableHeader} >
+
+
       {
         columns.map((column, index) => {
           {
             return (
+
+
               <TouchableOpacity
                 key={index}
                 style={styles.columnHeader}
@@ -60,15 +71,21 @@ const focus = useIsFocused();
                   }
                 </Text>
               </TouchableOpacity>
+
+
             )
           }
         })
       }
     </View>
+
   )
 
   return (
+
+
     <View style={{ height: '100%', width: '100%' }}>
+
       <View >
         <ClassSectionFilter />
       </View>
@@ -82,10 +99,13 @@ const focus = useIsFocused();
 
         renderItem={({ item, index }) => {
           return (
+
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
               <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name+' '+item.last_name}</Text>
+
 
               <View style={{ width: '100%', flexDirection: 'row' }}>
                 <TouchableOpacity 
@@ -99,6 +119,8 @@ const focus = useIsFocused();
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
+                  student_id_att:item.student_id_att
+
                 })}
                 style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '30%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>
                   <Text style={{
@@ -117,6 +139,8 @@ const focus = useIsFocused();
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
+                 
+                 
                  })}
                  style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '24%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>
                   <Text style={{
@@ -124,14 +148,24 @@ const focus = useIsFocused();
                   }}>View Detail</Text>
                 </TouchableOpacity>
               </View>
+
+
             </View>
+
+
+
           )
         }}
       />
       <StatusBar style="auto" />
     </View>
+
+
+
+
   );
 }
+
 const styles = StyleSheet.create({
 
   tableHeader: {

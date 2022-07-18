@@ -31,6 +31,7 @@ router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
 router.get('/getStudents/:schoolId', StudentController.getStudents)
 router.get('/getSomestudents/:schoolId', StudentController.getSomStudents)
+router.get('/getstudentsattendance/:student_id_att', StudentAttendanceController.getStudentsAttendance)
 
 
 
@@ -54,6 +55,8 @@ router.get('/getSchoolAdmin/:schoolId', SchoolAdminController.getschoolAdmin)
 router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
 router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
+
+router.get('/getstudentsattendance/:schoolId', StudentAttendanceController.getStudentsAttendance)
 
 
 
