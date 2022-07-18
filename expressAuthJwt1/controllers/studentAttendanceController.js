@@ -9,6 +9,7 @@ class StudentAttendanceController {
         studentAttendance.save();
       });
       
+      
     };
     static getStudentsAttendance = async (req, res) => {
       const getstudentsattendance = await StudentAttendance.find({'schoolId': req.params.schoolId}).select({ "createdAt":1, "_id" : 0, "attendance":1});
