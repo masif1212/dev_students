@@ -126,9 +126,7 @@ const onSelectReligion =(item)=> (
   )
     
 
-  useEffect(() => {
-    console.log(currentshift)
-  }, [])
+
 
   //============================DROP DOWN COMPONENT END=========================//
 
@@ -382,6 +380,7 @@ const onSelectReligion =(item)=> (
               value={currentshift}
               data={morneven}
               onSelect={onSelect}
+              placeholder="Select Shift"
             />
           </View>
 

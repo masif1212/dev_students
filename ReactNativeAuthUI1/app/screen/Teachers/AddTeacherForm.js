@@ -10,14 +10,15 @@ import {
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {  toastConfig } from "../../../style";
+import { toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
 import { useRegisterTeachersMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
-import { useSelector } from 'react-redux';
-import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from "react-redux";
+import { useIsFocused } from "@react-navigation/native";
+import CustomDropDown from '../../Components/CustomDropdown'
 
 
 
@@ -34,18 +35,19 @@ const TeacherRegister = () => {
   const [address_2, setAdress_2] = useState("");
   const [cnic, setcnic] = useState("");
   const [city, setCity] = useState("");
-  const [image, setImage] = useState('');
-  const [schoolName, setSchoolName] = useState('')
-  const[schoolId, setSchoolId]=useState('');
+  const [image, setImage] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [schoolId, setSchoolId] = useState("");
+  // const [currentshift, setCurrentShift] = useState(null)
+  const [country, setCountry] = useState("");
 
   const focus = useIsFocused();
-  const myData = useSelector(state => state.schoolAdmin)
+  const myData = useSelector((state) => state.schoolAdmin);
   useEffect(() => {
-    setSchoolId(myData.schoolId)
-    setSchoolName(myData.schoolName)
-  }, [focus])
+    setSchoolId(myData.schoolId);
+    setSchoolName(myData.schoolName);
+  }, [focus]);
 
-  
   const clearTextInput = () => {
     setfirst_name("");
     setlast_name("");
@@ -61,15 +63,30 @@ const TeacherRegister = () => {
   };
   const navigation = useNavigation();
 
-
-
-  
   const [registerTeacher] = useRegisterTeachersMutation();
-  
- 
+
+  // const selectRegion = [
+  //   {religion : 'Islam'},
+  //   {religion : 'Hinduism'},
+  //   {religion : 'Buddhism'},
+  //   {religion : 'Christianity'},
+  //   {religion : 'Sikhism'},
+  //   {religion : 'Ethnic religions'},
+  //   {religion : 'Irreligious and atheist'},
+  //   {religion : 'Jews'},
+  //   {religion : 'Others'}
+  // ]
+
+  // const onSelectedRegion =(item)=> (
+  //   setCurrentShift(item)
+
+  // )
+  // useEffect(() => {
+  //   console.log(currentshift)
+  // })
 
   const handleFormSubmit = async () => {
-    if (first_name && email && password && confirm_password ) {
+    if (first_name && email && password && confirm_password) {
       if (password === confirm_password) {
         const formData = {
           schoolName,
@@ -119,8 +136,6 @@ const TeacherRegister = () => {
     }
   };
 
- 
-
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -134,11 +149,8 @@ const TeacherRegister = () => {
     }
   };
 
-
-
-
   return (
-    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
+    <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff" }}>
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -167,17 +179,36 @@ const TeacherRegister = () => {
         <Toast config={toastConfig} />
       </View>
 
-      <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        style={{ height: "100%" }}
+      >
         <View style={{ marginLeft: 25 }}>
-
-        <View>
+          <View>
             <TextInput
               style={styleOne.input}
               placeholder="School Name"
               value={myData.schoolName}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
             />
           </View>
+
+          <View>
+            <TextInput
+              style={styleOne.input}
+              placeholder="School Code"
+              value={myData.schoolCode}
+              placeholderTextColor="gray"
+              keyboardType="numeric"
+            />
+          </View>
+
+          <View style={{margin: 10}} >
+            <CustomDropDown 
+             
+            />
+          </View>
+    
 
           <View>
             <TextInput
@@ -185,15 +216,16 @@ const TeacherRegister = () => {
               value={first_name}
               onChangeText={setfirst_name}
               placeholder="Write Your First Name"
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
             />
           </View>
+
           <View>
             <TextInput
               style={styleOne.input}
               value={last_name}
               onChangeText={setlast_name}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your Last Name"
             />
           </View>
@@ -203,7 +235,7 @@ const TeacherRegister = () => {
               keyboardType="email-address"
               value={email}
               onChangeText={setEmail}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your Email"
             />
           </View>
@@ -212,7 +244,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your Password"
               secureTextEntry={true}
               keyboardType={"default"}
@@ -223,7 +255,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={confirm_password}
               onChangeText={setconfirm_password}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your Confirm Password"
               secureTextEntry={true}
               keyboardType={"default"}
@@ -234,7 +266,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={contact}
               onChangeText={setContact}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Contact"
               keyboardType="numeric"
             />
@@ -244,7 +276,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={alt_contact}
               onChangeText={setAlt_Contact}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Emergency Contact"
               keyboardType="numeric"
             />
@@ -254,7 +286,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={address_1}
               onChangeText={setAdress_1}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Address 1"
             />
           </View>
@@ -263,7 +295,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={address_2}
               onChangeText={setAdress_2}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Address 2"
             />
           </View>
@@ -272,7 +304,7 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={cnic}
               onChangeText={setcnic}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="cnic (XXXXX-XXXXXXX-X)"
               keyboardType="phone-pad"
             />
@@ -282,11 +314,10 @@ const TeacherRegister = () => {
               style={styleOne.input}
               value={city}
               onChangeText={setCity}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="City"
             />
           </View>
-          
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
