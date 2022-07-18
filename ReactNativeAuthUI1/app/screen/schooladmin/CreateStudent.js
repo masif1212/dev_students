@@ -31,7 +31,9 @@ const focus = useIsFocused();
   const fetchData = async () => {
     const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudents/${newData.schoolId}`);
     const data = await resp.json();
+
     setStudents(data);
+
   };
   
  
@@ -117,6 +119,7 @@ const focus = useIsFocused();
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
+                  student_id_att:item.student_id_att
 
                 })}
                 style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '30%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>

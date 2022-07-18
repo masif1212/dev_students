@@ -3,7 +3,7 @@ import React, { useState, useEffect,useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput,Button } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import moment from "moment";
+
 
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
@@ -19,41 +19,42 @@ const  StudentDetail = ({navigation,route})=> {
   
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [students,setStudents] = useState('');
-  const [studentdate,setStudentDate] = useState('');
+  const [studentdate,setStudentDate] = useState(false);
 
-  const newData = useSelector(state => state.schoolAdmin)
+//   const newData = useSelector(state => state.schoolAdmin)
 
-const focus = useIsFocused();
+// const focus = useIsFocused();
 
-  const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${newData.schoolId}`);
-    const data = await resp.json();
-    console.log(data)
-  };
+//   const fetchData = async () => {
+//     const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${newData.schoolId}`);
+//     const data = await resp.json();
+//     console.log(data)
+
+//   };
   
  
-  useLayoutEffect(() => {
-   fetchData();
+//   useLayoutEffect(() => {
+//    fetchData();
    
-  }, [focus]);
+//   }, [focus]);
  
 
 
 // const newData = useSelector(state => state.schoolAdmin)
 
-// const focus = useIsFocused();
+const focus = useIsFocused();
 
-//   const fetchData = async () => {
-//     const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudentsAttendance/${newData.schoolId}`);
-//     const data = await resp.json();
-//     setStudents(data);
-//     setStudentDate(data);
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${route.params.student_id_att}`);
+    const data = await resp.json();
+    setStudents(data);
 
-//   };
+  };
 
-//   useLayoutEffect(() => {
-//    fetchData();
-//   }, [focus]);
+  useLayoutEffect(() => {
+   fetchData();
+
+  }, [focus]);
 
 
 
@@ -68,9 +69,8 @@ const focus = useIsFocused();
 
   const handleConfirm = (date) => {
     setStudentDate(moment(date).utc().format('YYYY-MM-DD'))
-    console.log(studentdate)
     hideDatePicker();
-    console.log(studentdate)
+
   
 
   };
@@ -258,7 +258,7 @@ const focus = useIsFocused();
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode={studentdate.date }
+        mode={studentdate.date}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         
@@ -296,21 +296,35 @@ const focus = useIsFocused();
     </View>
 
       <FlatList 
-        data={studentdate}
+        data={students}
         style={{width:"100%"}}
         keyExtractor={(item, index) => index+""}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
         renderItem={({item, index})=> {
           return (
-           
-            
-            <View>
-              { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-                <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
-                <Text style={styles.columnRowTxt}>{item.attendance}</Text>
-              </View> : <Text></Text>}
-              </View>
+           <>
+           { studentdate ? (
+          <View>
+          { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? 
+          <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
+            <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
+            <Text style={styles.columnRowTxt}>{item.attendance}</Text>
+          </View> :  
+        <Text>No Data</Text>
+          }
+          </View>
+           )
+           : 
+           <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
+            <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
+            <Text style={styles.columnRowTxt}>{item.attendance}</Text>
+          </View> 
+           }
+              
+         
+
+              </>
           )
         }}
       />
