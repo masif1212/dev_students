@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput,Button } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
@@ -7,15 +7,39 @@ import _ from "lodash"
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 
 
 const  StudentDetail = ({navigation,route})=> {
 
-
+  
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [students,setStudents] = useState('');
   const [studentdate,setStudentDate] = useState('');
  
+
+
+const newData = useSelector(state => state.schoolAdmin)
+
+const focus = useIsFocused();
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudentsAttendance/${newData.schoolId}`);
+    const data = await resp.json();
+    setStudents(data);
+    setStudentDate(data);
+
+  };
+
+  useLayoutEffect(() => {
+   fetchData();
+  }, [focus]);
+
+
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -26,8 +50,8 @@ const  StudentDetail = ({navigation,route})=> {
   };
 
   const handleConfirm = (date) => {
-    setStudentDate(date)
-    console.log(date)
+    setStudentDate(moment(date).utc().format('YYYY-MM-DD'))
+    console.log(studentdate)
     hideDatePicker();
 
   };
@@ -43,98 +67,98 @@ const  StudentDetail = ({navigation,route})=> {
   ])
   const [ direction, setDirection ] = useState(null)
   const [ selectedColumn, setSelectedColumn ] = useState(null)
-  const [ students, setStudents ] = useState([
-    {
+  // const [ students, setStudents ] = useState([
+  //   {
     
-      date: "2022-07-01T12:42:08.441Z",
-      Status: "Present"
-    },
-    {
+  //     date: "2022-07-01T12:42:08.441Z",
+  //     Status: "Present"
+  //   },
+  //   {
  
-      date: "2022-07-02T13:03:35.822Z",
-      Status: "Absent"
-    },
-    {
+  //     date: "2022-07-02T13:03:35.822Z",
+  //     Status: "Absent"
+  //   },
+  //   {
       
-      date: "3.6.2022",
-      Status: "Absent"
-    },
-    {
+  //     date: "3.6.2022",
+  //     Status: "Absent"
+  //   },
+  //   {
       
-      date: "4.6.2022",
-      Status: "Present"
-    },
-    {
+  //     date: "4.6.2022",
+  //     Status: "Present"
+  //   },
+  //   {
       
-      date: "5.6.2022",
-      Status: "Absent"
-    },
-    {
+  //     date: "5.6.2022",
+  //     Status: "Absent"
+  //   },
+  //   {
 
-      date: "6.6.2022",
-      Status: "Absent"
-    },
-    {
+  //     date: "6.6.2022",
+  //     Status: "Absent"
+  //   },
+  //   {
      
-      date: "7.6.2022",
-      Status: "Present"
-    },
-    {
+  //     date: "7.6.2022",
+  //     Status: "Present"
+  //   },
+  //   {
 
-      date: "8.6.2022",
-      Status: "Absent"
-    },
-    {
+  //     date: "8.6.2022",
+  //     Status: "Absent"
+  //   },
+  //   {
     
-      date: "9.6.2022",
-      Status: "Present"
-    },
-    {
+  //     date: "9.6.2022",
+  //     Status: "Present"
+  //   },
+  //   {
 
-      date: "10.6.2022",
-      Status: "Present"
-    },
-    {
+  //     date: "10.6.2022",
+  //     Status: "Present"
+  //   },
+  //   {
     
-      date: "11.6.2022",
-      Status: "Present"
-    },
-    {
+  //     date: "11.6.2022",
+  //     Status: "Present"
+  //   },
+  //   {
   
-      date: "12.6.2022",
-      Status: "Absent"
-    },  
-     {
+  //     date: "12.6.2022",
+  //     Status: "Absent"
+  //   },  
+  //    {
      
-        date: "10.6.2022",
-        Status: "Present"
-      },
-      {
+  //       date: "10.6.2022",
+  //       Status: "Present"
+  //     },
+  //     {
 
-        date: "11.6.2022",
-        Status: "Present"
-      },
-      {
+  //       date: "11.6.2022",
+  //       Status: "Present"
+  //     },
+  //     {
      
-        date: "12.6.2022",
-        Status: "Absent"
-      },
-      {
+  //       date: "12.6.2022",
+  //       Status: "Absent"
+  //     },
+  //     {
         
-        date: "10.6.2022",
-        Status: "Present"
-      },
-      {
+  //       date: "10.6.2022",
+  //       Status: "Present"
+  //     },
+  //     {
       
-        date: "11.6.2022",
-        Status: "Present"
-      },
-      {
+  //       date: "11.6.2022",
+  //       Status: "Present"
+  //     },
+  //     {
        
-        date: "12.6.2022",
-        Status: "Absent"
-      }
-  ])
+  //       date: "12.6.2022",
+  //       Status: "Absent"
+  //     }
+  // ])
 
   
 
@@ -221,6 +245,7 @@ const  StudentDetail = ({navigation,route})=> {
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        
         />
       </View>
 
@@ -263,10 +288,10 @@ const  StudentDetail = ({navigation,route})=> {
         renderItem={({item, index})=> {
           return (
             <View>
-              { item.date === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-                <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{item.date}</Text>
-                <Text style={styles.columnRowTxt}>{item.Status}</Text>
-              </View> : <Text>bsd</Text>}
+              { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
+                <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
+                <Text style={styles.columnRowTxt}>{item.attendance}</Text>
+              </View> : <Text></Text>}
               </View>
           )
         }}

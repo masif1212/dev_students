@@ -55,6 +55,8 @@ router.post('/schoolAdminlogin', SchoolAdminController.schoolAdminLogin)
 router.use('/loggedSchoolAdmin', chechSchAdminAuth)
 router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
 
+router.get('/getstudentsattendance/:schoolId', StudentAttendanceController.getStudentsAttendance)
+
 
 
 //TEACHER ROUTES
