@@ -57,7 +57,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const handleFormSubmit = async () => {
-  fetch('http://192.168.10.12:8000/api/user/studentattendance', {
+  fetch('http://192.168.18.14:8000/api/user/studentattendance', {
         method: "POST",
         body: JSON.stringify(attendance),
         headers: {

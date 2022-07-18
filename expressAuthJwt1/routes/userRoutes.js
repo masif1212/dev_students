@@ -31,6 +31,7 @@ router.post('/createstudent', StudentController.studentRegistration);
 router.get('/getstudent',StudentController.studentsGet)
 router.get('/getStudents/:schoolId', StudentController.getStudents)
 router.get('/getSomestudents/:schoolId', StudentController.getSomStudents)
+router.get('/getstudentsattendance/:schoolId', StudentAttendanceController.getStudentsAttendance)
 
 
 

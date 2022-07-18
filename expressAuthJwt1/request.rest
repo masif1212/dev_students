@@ -53,6 +53,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5N
 GET  http://192.168.18.14:8000/api/user/getTeachers
 
 ###
+GET  http://192.168.18.14:8000/api/user/getstudentsattendance/62c542db114bdf03a6800210
+
+###
 GET  http://192.168.18.64:8000/api/user/getschools
 
 ###

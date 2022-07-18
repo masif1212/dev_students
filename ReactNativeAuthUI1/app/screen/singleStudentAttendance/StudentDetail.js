@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState , useLayoutEffect,useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput,Button } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
+import moment from "moment";
 
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-paper';
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from 'react-redux';
 
  
 
@@ -15,6 +18,22 @@ const  StudentDetail = ({navigation,route})=> {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [studentdate,setStudentDate] = useState('');
+
+  const newData = useSelector(state => state.schoolAdmin)
+
+const focus = useIsFocused();
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${newData.schoolId}`);
+    const data = await resp.json();
+    console.log(data)
+  };
+  
+ 
+  useLayoutEffect(() => {
+   fetchData();
+   
+  }, [focus]);
  
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -26,14 +45,12 @@ const  StudentDetail = ({navigation,route})=> {
   };
 
   const handleConfirm = (date) => {
-    setStudentDate(date)
-    console.log(date)
+    setStudentDate(moment(date).utc().format('YYYY-MM-DD'))
     hideDatePicker();
+    console.log(studentdate)
+  
 
   };
-// useEffect (() => {
-//   console.log(studentdate)
-// }) 
 
 
   const [ columns, setColumns ] = useState([
@@ -46,12 +63,12 @@ const  StudentDetail = ({navigation,route})=> {
   const [ students, setStudents ] = useState([
     {
     
-      date: "2022-07-01T12:42:08.441Z",
+      date: "2022-07-01",
       Status: "Present"
     },
     {
  
-      date: "2022-07-02T13:03:35.822Z",
+      date: "2022-07-02",
       Status: "Absent"
     },
     {
@@ -255,7 +272,7 @@ const  StudentDetail = ({navigation,route})=> {
     </View>
 
       <FlatList 
-        data={students}
+        data={studentdate}
         style={{width:"100%"}}
         keyExtractor={(item, index) => index+""}
         ListHeaderComponent={tableHeader}
