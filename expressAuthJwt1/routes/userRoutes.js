@@ -69,6 +69,8 @@ router.get('/getTeachers', TeachersController.getTeachers)
 router.get('/getteacher/:schoolId', TeachersController.getTeacher)
 router.get('/getSometeacher/:schoolId', TeachersController.getSomeTeacher)
 router.post('/teacherattendance', TeacherAttendanceController.teacherAttendance)
+router.get('/getteacherattendance/:teacher_id_att', TeacherAttendanceController.getTeacherAttendance)
+
 
 
 

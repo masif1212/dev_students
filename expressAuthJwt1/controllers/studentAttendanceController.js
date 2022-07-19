@@ -16,6 +16,5 @@ class StudentAttendanceController {
       res.send(getstudentsattendance);
     }
 } 
-console.log(moment().utc().format('YYYY-MM-DD'))
 
 export default StudentAttendanceController;

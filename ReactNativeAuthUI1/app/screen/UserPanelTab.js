@@ -17,7 +17,7 @@ const UserPanelTab = () => {
     <Drawer.Navigator drawerContent={props => <SideBar {...props} />} screenOptions={{ headerStyle: { backgroundColor: '#5062BD' }, headerTintColor: 'white' }}>
        
             <Drawer.Screen name="Dashboard" component={DashboardScreen} />
-      <Drawer.Screen name="Schools" component={Schools} options={({navigation}) => ({ headerShadowVisible: true,headerTintColor:'black',headerRight: () => (
+       <Drawer.Screen name="Schools" component={Schools} options={({navigation}) => ({ headerShadowVisible: true,headerTintColor:'black',headerRight: () => (
    
               <Button
                 onPress={()=> navigation.navigate('CreateSchoolScreen') }
