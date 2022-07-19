@@ -25,7 +25,7 @@ const MarkTeacherAttendance = ({ navigation, route }) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${route.params.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
   };
@@ -38,7 +38,7 @@ const MarkTeacherAttendance = ({ navigation, route }) => {
 
 
   const onSubmit = (any) => {
-    fetch('http://192.168.18.14:8000/studentattendance', {
+    fetch('http://192.168.18.64:8000/studentattendance', {
       method: "POST",
       body: JSON.stringify(any),
       headers: {
