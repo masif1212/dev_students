@@ -40,6 +40,7 @@ import MarkTeacherAttendance from "./app/screen/schooladmin/MarkStudentAttendanc
 import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 import TeacherPannelTab from "./app/screen/teacherProfileDashboard/TeacherPannelTab";
 import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
+import TeacherAttendanceDetails from "./app/screen/Teachers/TeacherAttendanceDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -91,7 +92,7 @@ const App = ({navigation}) => (
         <Stack.Screen name="MarkStudentAttendance" component={MarkStudentAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
   
           
-
+        <Stack.Screen name="TeacherAttendanceDetails" component={TeacherAttendanceDetails} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
 
       </Stack.Navigator>
     </NavigationContainer>

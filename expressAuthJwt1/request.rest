@@ -56,6 +56,9 @@ GET  http://192.168.18.14:8000/api/user/getTeachers
 GET  http://192.168.18.14:8000/api/user/getstudentsattendance/62cd4571b4fe01a9eb882da5
 
 ###
+GET  http://192.168.18.14:8000/api/user/getteacherattendance/62c54aadc3027cd453dd357a
+
+###
 GET  http://192.168.18.64:8000/api/user/getschools
 
 ###

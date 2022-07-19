@@ -13,7 +13,7 @@ const TeacherSideBar = ({ ...props }) => {
   const handleLogout = async () => {
     unsetUserToken({ token: null })
     await removeToken('token')
-    navigation.navigate('Home');
+    navigation.navigate('MONITORING APP');
   }
 
 

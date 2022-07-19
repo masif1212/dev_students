@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
@@ -7,111 +7,42 @@ import _ from "lodash"
 import {Divider} from 'react-native-paper';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useIsFocused } from "@react-navigation/native"; 
 
 
 
 
-const  ViewFullAttendance = ({navigation})=> {
+const  ViewFullAttendance = ({navigation,route})=> {
   const [ columns, setColumns ] = useState([
     "Roll No",
-    "Students",
+    "Date",
     "Status"
 
   ])
+  const [students,setStudents] = useState('');
+  const [studentdate,setStudentDate] = useState(false);
+  
+  const focus = useIsFocused();
+
+  const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${route.params.student_id_att}`);
+    const data = await resp.json();
+    setStudents(data);
+    // console.log(route.params.someArray) 
+
+  };
+
+  useLayoutEffect(() => {
+   fetchData();
+
+  }, [focus]);
+
   const [ direction, setDirection ] = useState(null)
   const [ selectedColumn, setSelectedColumn ] = useState(null)
-  const [ pets, setPets ] = useState([
-    {
-      Roll_No : '1',
-      name: "Saad",
-      Status: "Present"
-    },
-    {
-        Roll_No : '2',
-      name: "Asif",
-      Status: "Absent"
-    },
-    {
-        Roll_No : '3',
-      name: "Mehdi",
-      Status: "Absent"
-    },
-    {
-        Roll_No : '4',
-      name: "Ali",
-      Status: "Present"
-    },
-    {
-        Roll_No : '5',
-      name: "Hamza",
-      Status: "Absent"
-    },
-    {
-        Roll_No : '6',
-      name: "Saad",
-      Status: "Absent"
-    },
-    {
-        Roll_No : '7',
-      name: "Sofia",
-      Status: "Present"
-    },
-    {
-        Roll_No : '8',
-      name: "Sofia",
-      Status: "Absent"
-    },
-    {
-        Roll_No : '9',
-      name: "Mehdi",
-      Status: "Present"
-    },
-    {
-        Roll_No : '10',
-      name: "Salman",
-      Status: "Present"
-    },
-    {
-        Roll_No : '11',
-      name: "Mehdi",
-      Status: "Present"
-    },
-    {
-        Roll_No : '12',
-      name: "Mehdi",
-      Status: "Absent"
-    },  
-     {
-        Roll_No : '13',
-        name: "Alina",
-        Status: "Present"
-      },
-      {
-        Roll_No : '14',
-        name: "Asif",
-        Status: "Present"
-      },
-      {
-        Roll_No : '15',
-        name: "Saad",
-        Status: "Absent"
-      },
-      {
-        Roll_No : '16',
-        name: "Awais",
-        Status: "Present"
-      },
-      {
-        Roll_No : '17',
-        name: "Maryam",
-        Status: "Present"
-      },
-      {
-        Roll_No : '18',
-        name: "Aimen",
-        Status: "Absent"
-      }
-  ])
+ 
+
+  const schAdminId = (route.params.someArray.filter(l => console.log(l.roll_no)));
+
 
 
  
@@ -172,12 +103,12 @@ const  ViewFullAttendance = ({navigation})=> {
       <View>
       <View style={styles.container}>
  
-<View style={{
+{/* <View style={{
     flexDirection: 'row',
     justifyContent: 'flex-end' 
 }}>
   
-</View>
+</View> */}
 
 
   
@@ -224,7 +155,7 @@ const  ViewFullAttendance = ({navigation})=> {
       fontWeight: 'bold',
       left: 5
 
-  }}>Class : 5th</Text>
+  }}>Class : {route.params.someArray.map(l => l.student_class)}</Text>
   <Text style={{
     left: 5
   }} >School Name</Text>
@@ -246,7 +177,7 @@ const  ViewFullAttendance = ({navigation})=> {
     </View>
 
       <FlatList 
-        data={pets}
+        data={students}
         style={{width:"100%"}}
         keyExtractor={(item, index) => index+""}
         ListHeaderComponent={tableHeader}
@@ -254,7 +185,7 @@ const  ViewFullAttendance = ({navigation})=> {
         renderItem={({item, index})=> {
           return (
             <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-             <Text style={{...styles.columnRowTxt, fontWeight:"bold", right: 25}}>{item.roll_no}</Text>
+             <Text style={{...styles.columnRowTxt, fontWeight:"bold", right: 25}}>{item.Roll_No}</Text>
               <Text style={{...styles.columnRowTxt, right:20}}>{item.first_name}</Text>
               <Text style={styles.columnRowTxt}>{item.Status}</Text>
             </View>
