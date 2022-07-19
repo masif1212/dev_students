@@ -62,7 +62,6 @@ const TeacherRegister = () => {
   const [mentionTraining, setMentiontraining] = useState("")
   const [teachingExperience, setTeachingExperience] = useState(false)
   const [experienceStartDate, setExperienceStartDate] = useState('')
-  const [experienceEndDate, setExperienceEndDate] = useState('')
 
 
 
@@ -264,6 +263,24 @@ const TeacherRegister = () => {
 
   ]);
   //=========================end Subject=============================================//
+
+   //=========================Subject=============================================//
+   const [experienceShow, setExperienceShow] = useState(false);
+   const [experience, setExprience] = useState([]);
+   const [experienceTime, setExperienceTime] = useState([
+     { label: 'Biology', value: 'Biology' },
+     { label: 'Chemistry', value: 'Chemistry' },
+     { label: 'Islamiat', value: 'Islamiat' },
+     { label: 'Urdu', value: 'Urdu' },
+     { label: 'Sindhi', value: 'Sindhi' },
+     { label: 'English', value: 'English' },
+     { label: 'Math', value: 'Math' },
+     { label: 'SS', value: 'SS' },
+     { label: 'Science', value: 'Science' },
+     { label: 'IT', value: 'IT' },
+ 
+   ]);
+   //=========================end Subject=============================================//
 
 
 
@@ -471,36 +488,7 @@ const TeacherRegister = () => {
  
    };
    //===================experience starting DATE END====================================//
-    //===============experience  end  DATE=======================================//
-    const [isExperienceEndDateVisible, setExerienceEndDateVisibility] = useState(false);
-
-    const showExperiencEndeDataPicker = () => {
-      setExerienceEndDateVisibility(true);
-    };
-  
-    const hideExperienceEndDatePicker = () => {
-      setExerienceEndDateVisibility(false);
-    };
-  
-    const handleExperienceEndDateConfirm = (experienceEndDate) => {
-      setExperienceEndDate(moment(experienceEndDate).utc().format('YYYY-MM-DD'));
-      hideExperienceEndDatePicker();
-    };
-  
-  
-    const getExpEndDate = () => {
-      let tempDate = (moment(experienceEndDate).toString().split(' '));
-      return experienceEndDate !== ''
-        ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-        : false;
-  
-    };
-    
-    
-    var ms = moment(experienceStartDate,"DD/MM/YYYY").diff(moment(experienceEndDate,"DD/MM/YYYY"));
-    var d = moment.duration(ms);
-    console.log(d)
-    //===================experience end DATE END====================================//
+ 
 
 
   const handleFormSubmit = async () => {
@@ -569,6 +557,7 @@ const TeacherRegister = () => {
     }
   };
 
+ 
 
 
 
@@ -1083,56 +1072,7 @@ const TeacherRegister = () => {
             {
               teachingExperience ? (
                 <>
-                <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={showExperiencStarteDataPicker} style={styleOne.input}>
-                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text>{getExpStartDate()}</Text>
-                        <Icon
-                          style={{
-                            color: "gray",
-                            // left: 160,
-                            // // paddingTop: 30
-                          }}
-                          name="calendar"
-                          color="#c9c9c9"
-                          size={30}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <DateTimePickerModal
-                      isVisible={isExperienceStartDateVisible}
-                      mode="date"
-                      onConfirm={handleExperienceStartDateConfirm}
-                      onCancel={hideExperienceStartDatePicker}
-                      is24Hour={false}
-                    />
-                  </View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity onPress={showExperiencEndeDataPicker} style={styleOne.input}>
-                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text>{getExpEndDate()}</Text>
-                        <Icon
-                          style={{
-                            color: "gray",
-                            // left: 160,
-                            // // paddingTop: 30
-                          }}
-                          name="calendar"
-                          color="#c9c9c9"
-                          size={30}
-                        />
-                      </View>
-                    </TouchableOpacity>
-                    <DateTimePickerModal
-                      isVisible={isExperienceEndDateVisible}
-                      mode="date"
-                      onConfirm={handleExperienceEndDateConfirm}
-                      onCancel={hideExperienceEndDatePicker}
-                      is24Hour={false}
-                    />
-                  </View>
-
-
+             
                   </>
 
               ) : null
