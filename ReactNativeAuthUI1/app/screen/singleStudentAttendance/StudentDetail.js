@@ -45,7 +45,7 @@ const  StudentDetail = ({navigation,route})=> {
 const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${route.params.student_id_att}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getstudentsattendance/${route.params.student_id_att}`);
     const data = await resp.json();
     setStudents(data);
 
@@ -306,12 +306,12 @@ const focus = useIsFocused();
            <>
            { studentdate ? (
           <View>
-          { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? 
+          { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ?
           <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
             <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
             <Text style={styles.columnRowTxt}>{item.attendance}</Text>
           </View> :  
-        <Text>No Data</Text>
+       null
           }
           </View>
            )
