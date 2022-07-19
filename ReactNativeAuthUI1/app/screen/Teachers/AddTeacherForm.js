@@ -26,6 +26,8 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import RadioButton from "../../Components/RadioButton";
 import moment from "moment";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import Checkbox from "expo-checkbox";
+
 
 
 
@@ -49,10 +51,21 @@ const TeacherRegister = () => {
   const [dateofbirth, setDateOfBirth] = useState('');
   const [maritalStatus, setMaritalStatus] = useState("")
   const [dateofJoining, setDataofJoining] = useState('');
+  const [contractstart, setContractStart] = useState("");
+  const [contractend, setContractEnd] = useState("");
+  const [subjectsepecialist, setSubjectSepecialist] = useState(false)
+  const [teachingmedium, setTeachingMedium] = useState("")
+  const [teacherTraining, setTeacherTraining] = useState(false);
+  const [trainingnumber, setTrainingNumber] = useState("")
+  const [lsuTrainingDate, setLsuTrainingDate] = useState("")
+  const [trainInWhichSubject, setTrainInWhichSubject] = useState("")
+  const [mentionTraining, setMentiontraining] = useState("")
+  const [teachingExperience, setTeachingExperience] = useState(false)
+  const [experienceStartDate, setExperienceStartDate] = useState('')
 
 
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
 
   const focus = useIsFocused();
   const myData = useSelector(state => state.schoolAdmin)
@@ -150,6 +163,126 @@ const TeacherRegister = () => {
     { label: 'Head Teacher', value: 'Head Teacher' },
   ]);
   //=========================end programms=============================================//
+  //=========================programs=============================================//
+  const [qualificationshow, setQualificationshow] = useState(false);
+  const [teacherQualification, setTeacherQualification] = useState([]);
+  const [qualifications, setQualifications] = useState([
+    { label: 'Metric', value: 'Metric' },
+    { label: 'Inter', value: 'Inter' },
+    { label: 'B.A', value: 'B.A' },
+    { label: 'BSC', value: 'BSC' },
+    { label: 'BBA', value: 'BBA' },
+    { label: 'BS', value: 'BS' },
+    { label: 'BS Electronic', value: 'BS Electronic' },
+    { label: 'BS IT', value: 'BS IT' },
+    { label: 'BS Telecom', value: 'BS Telecom' },
+    { label: 'BS Zoology', value: 'BS Zoology' },
+    { label: 'MA', value: 'MA' },
+    { label: 'M.SC Chemistry', value: 'M.SC Chemistry' },
+    { label: 'MBA', value: 'MBA' },
+    { label: 'MPA', value: 'MPA' },
+    { label: 'MPhil', value: 'MPhil' },
+
+
+  ]);
+  //=========================end programms=============================================//
+  //=========================programs=============================================//
+  const [professhow, setProfesshow] = useState(false);
+  const [teacherprofessionalqualification, setTeacherProfessionalQualification] = useState([]);
+  const [professionalQualifications, setProfessionalQualifications] = useState([
+    { label: 'B.ED', value: 'B.ED' },
+    { label: 'M.ED', value: 'M.ED' },
+    { label: 'DIT', value: 'DIT' },
+  ]);
+  //=========================end programms=============================================//
+
+  //=========================CURRENT TEACHING CLASS=============================================//
+  const [teachingClassShow, setTeachingClassShow] = useState(false);
+  const [teachingClass, setTeachingClass] = useState([]);
+  const [currentTeachingClass, setCurrentTeachingClass] = useState([
+    { label: 'Head Teacher', value: 'Head Teacher' },
+    { label: 'Academic Coordinator', value: 'Academic Coordinator' },
+    { label: 'Watchman', value: 'Watchman' },
+    { label: 'Peon', value: 'Peon' },
+    { label: 'Driver', value: 'Driver' },
+    { label: 'ECE', value: 'ECE' },
+    { label: 'Aya', value: 'Aya' },
+    { label: '1', value: '1' },
+    { label: '2', value: '2' },
+    { label: '3', value: '3' },
+    { label: '4', value: '4' },
+    { label: '5', value: '5' },
+    { label: '6', value: '6' },
+    { label: '7', value: '7' },
+    { label: '8', value: '8' },
+    { label: '9', value: '9' },
+    { label: '10', value: '10' }
+
+  ]);
+  //=========================END CURRENT TEACHING CLASS=============================================//
+
+  //=========================Subject=============================================//
+  const [teachingSubjectShow, setTeachingSubjectShow] = useState(false);
+  const [teachingSubject, setTeachingSubject] = useState([]);
+  const [currentTeachingSubject, setCurrentTeachingSubject] = useState([
+    { label: 'Head Teacher', value: 'Head Teacher' },
+    { label: 'Academic Coordinator', value: 'Academic Coordinator' },
+    { label: 'Watchman', value: 'Watchman' },
+    { label: 'Peon', value: 'Peon' },
+    { label: 'Driver', value: 'Driver' },
+    { label: 'Biology', value: 'Biology' },
+    { label: 'Chemistry', value: 'Chemistry' },
+    { label: 'Islamiat', value: 'Islamiat' },
+    { label: 'Urdu', value: 'Urdu' },
+    { label: 'Sindhi', value: 'Sindhi' },
+    { label: 'English', value: 'English' },
+    { label: 'Math', value: 'Math' },
+    { label: 'SS', value: 'SS' },
+    { label: 'Science', value: 'Science' },
+    { label: 'IT', value: 'IT' },
+
+
+
+  ]);
+  //=========================end Subject=============================================//
+
+  //=========================Subject=============================================//
+  const [specialitySubjectShow, setSpecialitySubjectShow] = useState(false);
+  const [SubjectSpec, setSubjectSpec] = useState([]);
+  const [subjectSpeciality, setSubjectSpeciality] = useState([
+    { label: 'Biology', value: 'Biology' },
+    { label: 'Chemistry', value: 'Chemistry' },
+    { label: 'Islamiat', value: 'Islamiat' },
+    { label: 'Urdu', value: 'Urdu' },
+    { label: 'Sindhi', value: 'Sindhi' },
+    { label: 'English', value: 'English' },
+    { label: 'Math', value: 'Math' },
+    { label: 'SS', value: 'SS' },
+    { label: 'Science', value: 'Science' },
+    { label: 'IT', value: 'IT' },
+
+  ]);
+  //=========================end Subject=============================================//
+
+   //=========================Subject=============================================//
+   const [experienceShow, setExperienceShow] = useState(false);
+   const [experience, setExprience] = useState([]);
+   const [experienceTime, setExperienceTime] = useState([
+     { label: 'Biology', value: 'Biology' },
+     { label: 'Chemistry', value: 'Chemistry' },
+     { label: 'Islamiat', value: 'Islamiat' },
+     { label: 'Urdu', value: 'Urdu' },
+     { label: 'Sindhi', value: 'Sindhi' },
+     { label: 'English', value: 'English' },
+     { label: 'Math', value: 'Math' },
+     { label: 'SS', value: 'SS' },
+     { label: 'Science', value: 'Science' },
+     { label: 'IT', value: 'IT' },
+ 
+   ]);
+   //=========================end Subject=============================================//
+
+
 
   // const [allDistrict, setAllDistrict] = useState([
   //   { label: 'Badin', value: 'Badin' },
@@ -203,6 +336,7 @@ const TeacherRegister = () => {
   //=====================clear text input================================//
 
   //=====================Date picker function================================//
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -215,21 +349,31 @@ const TeacherRegister = () => {
   const handleConfirm = (dateofbirth) => {
     setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
     hideDatePicker();
-     };
-  
-     
+  };
+
+
   const getDate = () => {
     let tempDate = (moment(dateofbirth).toString().split(' '));
     return dateofbirth !== ''
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
       : false;
 
-  }; 
+  };
+  //===============================END DATE OF BIRTH========================//
+  //=================== date of joining===============================//
+  const [isJoiningDatePickerVisible, setJoiningDatePickerVisibility] = useState(false);
 
-    const handleJoiningConfirm = (dateofJoining) => {
+  const showjoiningDatePicker = () => {
+    setJoiningDatePickerVisibility(true);
+  };
+
+  const hidejoiningDatePicker = () => {
+    setJoiningDatePickerVisibility(false);
+  };
+
+  const handleJoiningConfirm = (dateofJoining) => {
     setDataofJoining(moment(dateofJoining).utc().format('YYYY-MM-DD'));
-    hideDatePicker();
-    
+    hidejoiningDatePicker();
   };
 
 
@@ -240,8 +384,112 @@ const TeacherRegister = () => {
       : false;
 
   };
+  //=========================END DATE OF JOINING=================================//
 
-  //=====================clear text input================================//
+  //===========================Contract START DATE===============================//
+  const [isContractStartDatePickerVisible, setContractStartDatePickerVisibility] = useState(false);
+
+  const showstartcontractDatePicker = () => {
+    setContractStartDatePickerVisibility(true);
+  };
+
+  const hidestartcontractDatePicker = () => {
+    setContractStartDatePickerVisibility(false);
+  };
+
+  const handleContractStartConfirm = (contractstart) => {
+    setContractStart(moment(contractstart).utc().format('YYYY-MM-DD'));
+    hidestartcontractDatePicker();
+  };
+
+
+  const getContractStartDate = () => {
+    let tempDate = (moment(contractstart).toString().split(' '));
+    return contractstart !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+  //===================CONTRACT START DATE END==================================//
+
+  //===============CONTRACT END DATE=======================================//
+  const [isContractEndDatePickerVisible, setContractEndDatePickerVisibility] = useState(false);
+
+  const showcontractendDatePicker = () => {
+    setContractEndDatePickerVisibility(true);
+  };
+
+  const hidecontractendDatePicker = () => {
+    setContractEndDatePickerVisibility(false);
+  };
+
+  const handleContractEndConfirm = (contractend) => {
+    setContractEnd(moment(contractend).utc().format('YYYY-MM-DD'));
+    hidecontractendDatePicker();
+  };
+
+
+  const getContractEndDate = () => {
+    let tempDate = (moment(contractend).toString().split(' '));
+    return contractend !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+  //===================CONTRACT END DATE END====================================//
+  //===============LSU training  DATE=======================================//
+  const [isLsuDatePickerVisibile, setLsuDatePickerVisibility] = useState(false);
+
+  const showLsuDatePicker = () => {
+    setLsuDatePickerVisibility(true);
+  };
+
+  const hideLsuDatePicker = () => {
+    setLsuDatePickerVisibility(false);
+  };
+
+  const handleLsuDateConfirm = (lsuTrainingDate) => {
+    setLsuTrainingDate(moment(lsuTrainingDate).utc().format('YYYY-MM-DD'));
+    hideLsuDatePicker();
+  };
+
+
+  const getLsuDate = () => {
+    let tempDate = (moment(lsuTrainingDate).toString().split(' '));
+    return lsuTrainingDate !== ''
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+
+  };
+  //===================LSU training DATE END====================================//
+
+   //===============experience  start  DATE=======================================//
+   const [isExperienceStartDateVisible, setExerienceStartDateVisibility] = useState(false);
+
+   const showExperiencStarteDataPicker = () => {
+     setExerienceStartDateVisibility(true);
+   };
+ 
+   const hideExperienceStartDatePicker = () => {
+     setExerienceStartDateVisibility(false);
+   };
+ 
+   const handleExperienceStartDateConfirm = (experienceStartDate) => {
+     setExperienceStartDate(moment(experienceStartDate).utc().format('YYYY-MM-DD'));
+     hideExperienceStartDatePicker();
+   };
+ 
+ 
+   const getExpStartDate = () => {
+     let tempDate = (moment(experienceStartDate).toString().split(' '));
+     return experienceStartDate !== ''
+       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+       : false;
+ 
+   };
+   //===================experience starting DATE END====================================//
+ 
+
 
   const handleFormSubmit = async () => {
     if (first_name && email && password && confirm_password) {
@@ -309,6 +557,7 @@ const TeacherRegister = () => {
     }
   };
 
+ 
 
 
 
@@ -361,7 +610,7 @@ const TeacherRegister = () => {
             />
           </View> */}
 
-          
+
 
 
 
@@ -418,7 +667,7 @@ const TeacherRegister = () => {
 
 
 
-         
+
 
 
           <View>
@@ -451,6 +700,7 @@ const TeacherRegister = () => {
               setValue={setPosition}
               setItems={setItems}
               multiple={true}
+              searchable={true}
 
             />
           </View>
@@ -507,6 +757,8 @@ const TeacherRegister = () => {
               }} />
           </View>
 
+
+
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>Marital Status</Text>
             <RadioButton
@@ -520,55 +772,312 @@ const TeacherRegister = () => {
           </View>
 
           <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity  onPress={showDatePicker} style={styleOne.input}>
-           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text>{dateofbirth}</Text>
-            <Icon
-              style={{
-                color: "gray",
-                // left: 160,
-                // // paddingTop: 30
-              }}
-              name="calendar"
-              color="#c9c9c9"
-              size={30}
-            />
-            </View>
+            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>{getDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
             </TouchableOpacity>
-              <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}
-                is24Hour={false}
-              />
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              is24Hour={false}
+            />
           </View>
 
-           <View style={{ flexDirection: 'row' }}>
-            <TouchableOpacity  onPress={showDatePicker} style={styleOne.input}>
-           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text>{dateofJoining}</Text>
-            <Icon
-              style={{
-                color: "gray",
-                // left: 160,
-                // // paddingTop: 30
-              }}
-              name="calendar"
-              color="#c9c9c9"
-              size={30}
-            />
-            </View>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={showjoiningDatePicker} style={styleOne.input}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>{getJoiningDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
             </TouchableOpacity>
-              <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="date"
-                onConfirm={handleJoiningConfirm}
-                onCancel={hideDatePicker}
-                is24Hour={false}
-              />
+            <DateTimePickerModal
+              isVisible={isJoiningDatePickerVisible}
+              mode="date"
+              onConfirm={handleJoiningConfirm}
+              onCancel={hidejoiningDatePicker}
+              is24Hour={false}
+            />
           </View>
 
+
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={showstartcontractDatePicker} style={styleOne.input}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>{getContractStartDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isContractStartDatePickerVisible}
+              mode="date"
+              onConfirm={handleContractStartConfirm}
+              onCancel={hidestartcontractDatePicker}
+              is24Hour={false}
+            />
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity onPress={showcontractendDatePicker} style={styleOne.input}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text>{getContractEndDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isContractEndDatePickerVisible}
+              mode="date"
+              onConfirm={handleContractEndConfirm}
+              onCancel={hidecontractendDatePicker}
+              is24Hour={false}
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Qualification"
+              zIndex={10000}
+              zIndexInverse={1000}
+              open={qualificationshow}
+              value={teacherQualification}
+              items={qualifications}
+              setOpen={setQualificationshow}
+              setValue={setTeacherQualification}
+              setItems={setQualifications}
+
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+
+              placeholder="Professional Qualification"
+              zIndex={5000}
+              zIndexInverse={1000}
+              open={professhow}
+              value={teacherprofessionalqualification}
+              items={professionalQualifications}
+              setOpen={setProfesshow}
+              setValue={setTeacherProfessionalQualification}
+              setItems={setProfessionalQualifications}
+
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Current Teaching Class"
+              zIndex={4000}
+              zIndexInverse={1000}
+              open={teachingClassShow}
+              value={teachingClass}
+              items={currentTeachingClass}
+              setOpen={setTeachingClassShow}
+              setValue={setTeachingClass}
+              setItems={setCurrentTeachingClass}
+              multiple={true}
+
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Subject of Teaching"
+              zIndex={2000}
+              zIndexInverse={1000}
+              open={teachingSubjectShow}
+              value={teachingSubject}
+              items={currentTeachingSubject}
+              setOpen={setTeachingSubjectShow}
+              setValue={setTeachingSubject}
+              setItems={setCurrentTeachingSubject}
+              multiple={true}
+            />
+          </View>
+
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={subjectsepecialist}
+              onValueChange={() => setSubjectSepecialist(!subjectsepecialist)}
+              color={subjectsepecialist ? "#5062BD" : undefined}
+            />
+            <Text> if , any Subject Speciality</Text>
+          </View>
+          <View>
+            {
+              subjectsepecialist ? (
+                <View>
+                  <CustomDropdown
+                    searchable={true}
+                    placeholder="Subject of Teaching"
+                    zIndex={2000}
+                    zIndexInverse={1000}
+                    open={specialitySubjectShow}
+                    value={SubjectSpec}
+                    items={subjectSpeciality}
+                    setOpen={setSpecialitySubjectShow}
+                    setValue={setSubjectSpec}
+                    setItems={setSubjectSpeciality}
+                    multiple={true}
+                  />
+                </View>
+              ) : null
+            }
+          </View>
+
+          <View style={{ margin: 20, right: 20 }}>
+            <Text style={{ marginBottom: 12, marginLeft: 9 }}> Medium of Teaching</Text>
+            <RadioButton
+              gender={teachingmedium}
+              options={['Sindhi', 'Urdu']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setTeachingMedium(i);
+              }} />
+          </View>
+
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={teacherTraining}
+              onValueChange={() => setTeacherTraining(!teacherTraining)}
+              color={teacherTraining ? "#5062BD" : undefined}
+            />
+            <Text> Does teacher do any training ? </Text>
+          </View>
+          <View>
+            {
+              teacherTraining ? (
+                <>
+                  <View style={{ width: '90%' }}>
+                    <TextInput
+                      style={{
+                        backgroundColor: "transparent",
+                        padding: 15,
+                        fontSize: 14,
+                        fontWeight: "400",
+                        borderBottomColor: "gray",
+                        borderBottomWidth: 1,
+                        marginBottom: 10,
+                      }}
+                      value={trainingnumber}
+                      onChangeText={setTrainingNumber}
+                      placeholder="How many training taken in SEF ?"
+                      placeholderTextColor='gray'
+                      keyboardType="numeric"
+                    />
+                  </View>
+
+                  <View style={{ flexDirection: 'row' }}>
+                    <TouchableOpacity onPress={showLsuDatePicker} style={styleOne.input}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text>{getLsuDate()}</Text>
+                        <Icon
+                          style={{
+                            color: "gray",
+                            // left: 160,
+                            // // paddingTop: 30
+                          }}
+                          name="calendar"
+                          color="#c9c9c9"
+                          size={30}
+                        />
+                      </View>
+                    </TouchableOpacity>
+                    <DateTimePickerModal
+                      isVisible={isLsuDatePickerVisibile}
+                      mode="date"
+                      onConfirm={handleLsuDateConfirm}
+                      onCancel={hideLsuDatePicker}
+                      is24Hour={false}
+                    />
+                  </View>
+
+                  <View>
+                    <TextInput
+                      style={styleOne.input}
+                      value={trainInWhichSubject}
+                      onChangeText={setTrainInWhichSubject}
+                      placeholderTextColor='gray'
+                      placeholder="Train in which Subject"
+                    />
+                  </View>
+
+                  <View>
+                    <TextInput
+                      style={styleOne.input}
+                      value={mentionTraining}
+                      onChangeText={setMentiontraining}
+                      placeholderTextColor='gray'
+                      placeholder="Mention any training taken from other dept"
+                    />
+                  </View>
+                </>
+              ) : null
+            }
+          </View>
+
+          
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={teachingExperience}
+              onValueChange={() => setTeachingExperience(!teachingExperience)}
+              color={teachingExperience ? "#5062BD" : undefined}
+            />
+            <Text> if ,have any teaching experience</Text>
+          </View>
+          <View>
+            {
+              teachingExperience ? (
+                <>
+             
+                  </>
+
+              ) : null
+            }
+          </View>
           <View>
             <TextInput
               style={styleOne.input}

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 import DropDownPicker from 'react-native-dropdown-picker';
 
-export default function CustomDropdown({placeholder, multiple , zIndex, zIndexInverse, open, setOpen, value, items, setValue, setItems}) {
+export default function CustomDropdown({searchable ,placeholder, multiple , zIndex, zIndexInverse, open, setOpen, value, items, setValue, setItems}) {
 
 
   
@@ -17,6 +17,7 @@ export default function CustomDropdown({placeholder, multiple , zIndex, zIndexIn
         scrollViewProps={{
           nestedScrollEnabled: true,
         }}
+        searchable={searchable}
         zIndex={zIndex}
         zIndexInverse={zIndexInverse}
         open={open}
@@ -39,7 +40,7 @@ export default function CustomDropdown({placeholder, multiple , zIndex, zIndexIn
         dropDownMaxHeight={300}
         labelStyle={{ fontSize: 13 }}
         theme="LIGHT"
-        mode="SIMPLE"
+        mode="BADGE"
         closeAfterSelecting={true}
         multiple={multiple}
         placeholder={placeholder}
