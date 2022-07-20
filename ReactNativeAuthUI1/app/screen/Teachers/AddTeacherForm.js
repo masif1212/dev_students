@@ -30,7 +30,6 @@ import Checkbox from "expo-checkbox";
 
 
 
-
 const TeacherRegister = () => {
   const [first_name, setfirst_name] = useState("");
   const [last_name, setlast_name] = useState("");
@@ -65,8 +64,6 @@ const TeacherRegister = () => {
 
 
 
-
-
   const focus = useIsFocused();
   const myData = useSelector(state => state.schoolAdmin)
   useEffect(() => {
@@ -78,9 +75,9 @@ const TeacherRegister = () => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, [])
 
-
-
-
+  //=====================================================================//
+  //============================================================================//
+  
   //=========================div district tehsil=============================================//
 
   const [districts, setDistricts] = useState([]);
