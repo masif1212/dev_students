@@ -159,23 +159,7 @@ const SingleStudentDetail = ({route,navigation}) => {
         <Text>{route.params.city}</Text>
       
       </View>
-      <View style={{
-          flexDirection:'row',
-          justifyContent:'flex-end',
-          marginRight:20
-
-      }}>
-            <TouchableOpacity 
-            onPress={() => navigation.navigate('StudentDetail')}
-            style={{
-                backgroundColor:'#5062BD',
-                padding:20,
-                borderRadius:20,
-
-            }}><Text style={{
-                color:'white'
-            }}>View Attendance</Text></TouchableOpacity>
-        </View>
+ 
     </ScrollView>
   );
 };
