@@ -12,15 +12,14 @@ import { useIsFocused } from "@react-navigation/native";
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
-
  
 
-const  StudentDetail = ({navigation,route})=> {
+const  TeacherAttendanceDetails = ({navigation,route})=> {
 
   
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [students,setStudents] = useState('');
-  const [studentdate,setStudentDate] = useState(false);
+  const [teachers,setTeachers] = useState('');
+  const [teacherDate,setTeacherDate] = useState(false);
 
 //   const newData = useSelector(state => state.schoolAdmin)
 
@@ -46,15 +45,14 @@ const  StudentDetail = ({navigation,route})=> {
 const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getstudentsattendance/${route.params.student_id_att}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacherattendance/${route.params.teacher_id_att}`);
     const data = await resp.json();
-    setStudents(data);
+    setTeachers(data);
 
   };
 
   useLayoutEffect(() => {
    fetchData();
-
   }, [focus]);
 
 
@@ -69,7 +67,7 @@ const focus = useIsFocused();
   };
 
   const handleConfirm = (date) => {
-    setStudentDate(moment(date).utc().format('YYYY-MM-DD'))
+    setTeacherDate(moment(date).utc().format('YYYY-MM-DD'))
     hideDatePicker();
 
   
@@ -259,7 +257,7 @@ const focus = useIsFocused();
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode={studentdate.date}
+        mode={teacherDate.date}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         
@@ -285,10 +283,10 @@ const focus = useIsFocused();
 <View style={{flexDirection: 'row', top:10}}>
   <Text  style={{
     left:5
-  }}>Class: {route.params.student_class}th</Text>
+  }}>Class:th</Text>
   <Text style={{
       left: 80
-    }}>Section: {route.params.section}</Text>
+    }}>Section: </Text>
 </View>
 
    <Divider margin={13} />
@@ -297,7 +295,7 @@ const focus = useIsFocused();
     </View>
 
       <FlatList 
-        data={students}
+        data={teachers}
         style={{width:"100%"}}
         keyExtractor={(item, index) => index+""}
         ListHeaderComponent={tableHeader}
@@ -305,14 +303,14 @@ const focus = useIsFocused();
         renderItem={({item, index})=> {
           return (
            <>
-           { studentdate ? (
+           { teacherDate ? (
           <View>
-          { moment(item.createdAt).utc().format('YYYY-MM-DD') === studentdate ? (
+          { moment(item.createdAt).utc().format('YYYY-MM-DD') === teacherDate ? 
           <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
             <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
             <Text style={styles.columnRowTxt}>{item.attendance}</Text>
-          </View>) :  
-        null
+          </View> :  
+        <Text>No Data</Text>
           }
           </View>
            )
@@ -386,4 +384,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentDetail
+export default TeacherAttendanceDetails

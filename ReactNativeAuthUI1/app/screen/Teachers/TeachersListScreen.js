@@ -50,7 +50,8 @@ const TeachersListScreen = ({navigation, route})=> {
                     address_2: item.address_2,
                     contact: item.contact,
                     alt_contact: item.alt_contact,
-                    city: item.city
+                    city: item.city,
+                    teacher_id_att:item.teacher_id_att
                   })
                 }
               >

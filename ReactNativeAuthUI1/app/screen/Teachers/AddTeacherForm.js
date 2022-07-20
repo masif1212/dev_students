@@ -26,10 +26,7 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import RadioButton from "../../Components/RadioButton";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-
-
-
+import Checkbox from "expo-checkbox";
 
 const TeacherRegister = () => {
   const [first_name, setfirst_name] = useState("");
@@ -50,8 +47,22 @@ const TeacherRegister = () => {
   const [religion, setRegion] = useState("");
   const [dateofbirth, setDateOfBirth] = useState("");
   const [maritalStatus, setMaritalStatus] = useState("");
-
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [dateofJoining, setDataofJoining] = useState("");
+  const [contractstart, setContractStart] = useState("");
+  const [contractend, setContractEnd] = useState("");
+  const [subjectsepecialist, setSubjectSepecialist] = useState(false);
+  const [teachingmedium, setTeachingMedium] = useState("");
+  const [teacherTraining, setTeacherTraining] = useState(false);
+  const [trainingnumber, setTrainingNumber] = useState("");
+  const [lsuTrainingDate, setLsuTrainingDate] = useState("");
+  const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
+  const [mentionTraining, setMentiontraining] = useState("");
+  const [teachingExperience, setTeachingExperience] = useState(false);
+  const [experienceStartDate, setExperienceStartDate] = useState("");
+  const [startingSalary, setStartingSalary] = useState("");
+  const [currentSalary, setCurrentSalary] = useState("");
+  const [salaryPaymentMethod, setSalaryPaymentMethod] = useState("");
+  const [bankName, setBankName] = useState("");
 
   const focus = useIsFocused();
   const myData = useSelector((state) => state.schoolAdmin);
@@ -406,6 +417,115 @@ const TeacherRegister = () => {
     { label: "Head Teacher", value: "Head Teacher" },
   ]);
   //=========================end programms=============================================//
+  //=========================programs=============================================//
+  const [qualificationshow, setQualificationshow] = useState(false);
+  const [teacherQualification, setTeacherQualification] = useState([]);
+  const [qualifications, setQualifications] = useState([
+    { label: "Metric", value: "Metric" },
+    { label: "Inter", value: "Inter" },
+    { label: "B.A", value: "B.A" },
+    { label: "BSC", value: "BSC" },
+    { label: "BBA", value: "BBA" },
+    { label: "BS", value: "BS" },
+    { label: "BS Electronic", value: "BS Electronic" },
+    { label: "BS IT", value: "BS IT" },
+    { label: "BS Telecom", value: "BS Telecom" },
+    { label: "BS Zoology", value: "BS Zoology" },
+    { label: "MA", value: "MA" },
+    { label: "M.SC Chemistry", value: "M.SC Chemistry" },
+    { label: "MBA", value: "MBA" },
+    { label: "MPA", value: "MPA" },
+    { label: "MPhil", value: "MPhil" },
+  ]);
+  //=========================end programms=============================================//
+  //=========================programs=============================================//
+  const [professhow, setProfesshow] = useState(false);
+  const [
+    teacherprofessionalqualification,
+    setTeacherProfessionalQualification,
+  ] = useState([]);
+  const [professionalQualifications, setProfessionalQualifications] = useState([
+    { label: "B.ED", value: "B.ED" },
+    { label: "M.ED", value: "M.ED" },
+    { label: "DIT", value: "DIT" },
+  ]);
+  //=========================end programms=============================================//
+
+  //=========================CURRENT TEACHING CLASS=============================================//
+  const [teachingClassShow, setTeachingClassShow] = useState(false);
+  const [teachingClass, setTeachingClass] = useState([]);
+  const [currentTeachingClass, setCurrentTeachingClass] = useState([
+    { label: "Head Teacher", value: "Head Teacher" },
+    { label: "Academic Coordinator", value: "Academic Coordinator" },
+    { label: "Watchman", value: "Watchman" },
+    { label: "Peon", value: "Peon" },
+    { label: "Driver", value: "Driver" },
+    { label: "ECE", value: "ECE" },
+    { label: "Aya", value: "Aya" },
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+    { label: "6", value: "6" },
+    { label: "7", value: "7" },
+    { label: "8", value: "8" },
+    { label: "9", value: "9" },
+    { label: "10", value: "10" },
+  ]);
+  //=========================END CURRENT TEACHING CLASS=============================================//
+
+  //=========================Subject=============================================//
+  const [teachingSubjectShow, setTeachingSubjectShow] = useState(false);
+  const [teachingSubject, setTeachingSubject] = useState([]);
+  const [currentTeachingSubject, setCurrentTeachingSubject] = useState([
+    { label: "Head Teacher", value: "Head Teacher" },
+    { label: "Academic Coordinator", value: "Academic Coordinator" },
+    { label: "Watchman", value: "Watchman" },
+    { label: "Peon", value: "Peon" },
+    { label: "Driver", value: "Driver" },
+    { label: "Biology", value: "Biology" },
+    { label: "Chemistry", value: "Chemistry" },
+    { label: "Islamiat", value: "Islamiat" },
+    { label: "Urdu", value: "Urdu" },
+    { label: "Sindhi", value: "Sindhi" },
+    { label: "English", value: "English" },
+    { label: "Math", value: "Math" },
+    { label: "SS", value: "SS" },
+    { label: "Science", value: "Science" },
+    { label: "IT", value: "IT" },
+  ]);
+  //=========================end Subject=============================================//
+
+  //=========================Subject=============================================//
+  const [specialitySubjectShow, setSpecialitySubjectShow] = useState(false);
+  const [SubjectSpec, setSubjectSpec] = useState([]);
+  const [subjectSpeciality, setSubjectSpeciality] = useState([
+    { label: "Biology", value: "Biology" },
+    { label: "Chemistry", value: "Chemistry" },
+    { label: "Islamiat", value: "Islamiat" },
+    { label: "Urdu", value: "Urdu" },
+    { label: "Sindhi", value: "Sindhi" },
+    { label: "English", value: "English" },
+    { label: "Math", value: "Math" },
+    { label: "SS", value: "SS" },
+    { label: "Science", value: "Science" },
+    { label: "IT", value: "IT" },
+  ]);
+  //=========================end Subject=============================================//
+
+  //=========================Subject=============================================//
+  const [experienceShow, setExperienceShow] = useState(false);
+  const [experience, setExprience] = useState([]);
+  const [experienceTime, setExperienceTime] = useState([
+    { label: "3-6 months", value: "3-6 months" },
+    { label: "6 months - 1 years", value: "6 months - 1 years" },
+    { label: "1-2 years", value: "1-2 years" },
+    { label: "2-3 year", value: "2-3 year" },
+    { label: "3-5 year", value: "3-5 year" },
+    { label: "5 years and above", value: "5 years and above" },
+  ]);
+  //=========================end Subject=============================================//
 
   const navigation = useNavigation();
   const [registerTeacher] = useRegisterTeachersMutation();
@@ -427,6 +547,7 @@ const TeacherRegister = () => {
   //=====================clear text input================================//
 
   //=====================Date picker function================================//
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -447,8 +568,133 @@ const TeacherRegister = () => {
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
       : false;
   };
+  //===============================END DATE OF BIRTH========================//
+  //=================== date of joining===============================//
+  const [isJoiningDatePickerVisible, setJoiningDatePickerVisibility] =
+    useState(false);
 
-  //=====================clear text input================================//
+  const showjoiningDatePicker = () => {
+    setJoiningDatePickerVisibility(true);
+  };
+
+  const hidejoiningDatePicker = () => {
+    setJoiningDatePickerVisibility(false);
+  };
+
+  const handleJoiningConfirm = (dateofJoining) => {
+    setDataofJoining(moment(dateofJoining).utc().format("YYYY-MM-DD"));
+    hidejoiningDatePicker();
+  };
+
+  const getJoiningDate = () => {
+    let tempDate = moment(dateofJoining).toString().split(" ");
+    return dateofJoining !== ""
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+  };
+  //=========================END DATE OF JOINING=================================//
+
+  //===========================Contract START DATE===============================//
+  const [
+    isContractStartDatePickerVisible,
+    setContractStartDatePickerVisibility,
+  ] = useState(false);
+
+  const showstartcontractDatePicker = () => {
+    setContractStartDatePickerVisibility(true);
+  };
+
+  const hidestartcontractDatePicker = () => {
+    setContractStartDatePickerVisibility(false);
+  };
+
+  const handleContractStartConfirm = (contractstart) => {
+    setContractStart(moment(contractstart).utc().format("YYYY-MM-DD"));
+    hidestartcontractDatePicker();
+  };
+
+  const getContractStartDate = () => {
+    let tempDate = moment(contractstart).toString().split(" ");
+    return contractstart !== ""
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+  };
+  //===================CONTRACT START DATE END==================================//
+
+  //===============CONTRACT END DATE=======================================//
+  const [isContractEndDatePickerVisible, setContractEndDatePickerVisibility] =
+    useState(false);
+
+  const showcontractendDatePicker = () => {
+    setContractEndDatePickerVisibility(true);
+  };
+
+  const hidecontractendDatePicker = () => {
+    setContractEndDatePickerVisibility(false);
+  };
+
+  const handleContractEndConfirm = (contractend) => {
+    setContractEnd(moment(contractend).utc().format("YYYY-MM-DD"));
+    hidecontractendDatePicker();
+  };
+
+  const getContractEndDate = () => {
+    let tempDate = moment(contractend).toString().split(" ");
+    return contractend !== ""
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+  };
+  //===================CONTRACT END DATE END====================================//
+  //===============LSU training  DATE=======================================//
+  const [isLsuDatePickerVisibile, setLsuDatePickerVisibility] = useState(false);
+
+  const showLsuDatePicker = () => {
+    setLsuDatePickerVisibility(true);
+  };
+
+  const hideLsuDatePicker = () => {
+    setLsuDatePickerVisibility(false);
+  };
+
+  const handleLsuDateConfirm = (lsuTrainingDate) => {
+    setLsuTrainingDate(moment(lsuTrainingDate).utc().format("YYYY-MM-DD"));
+    hideLsuDatePicker();
+  };
+
+  const getLsuDate = () => {
+    let tempDate = moment(lsuTrainingDate).toString().split(" ");
+    return lsuTrainingDate !== ""
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+  };
+  //===================LSU training DATE END====================================//
+
+  //===============experience  start  DATE=======================================//
+  const [isExperienceStartDateVisible, setExerienceStartDateVisibility] =
+    useState(false);
+
+  const showExperiencStarteDataPicker = () => {
+    setExerienceStartDateVisibility(true);
+  };
+
+  const hideExperienceStartDatePicker = () => {
+    setExerienceStartDateVisibility(false);
+  };
+
+  const handleExperienceStartDateConfirm = (experienceStartDate) => {
+    setExperienceStartDate(
+      moment(experienceStartDate).utc().format("YYYY-MM-DD")
+    );
+    hideExperienceStartDatePicker();
+  };
+
+  const getExpStartDate = () => {
+    let tempDate = moment(experienceStartDate).toString().split(" ");
+    return experienceStartDate !== ""
+      ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
+      : false;
+  };
+  //===================experience starting DATE END====================================//
 
   const handleFormSubmit = async () => {
     if (first_name && email && password && confirm_password) {
@@ -514,13 +760,10 @@ const TeacherRegister = () => {
     }
   };
 
-
-
   return (
     <SafeAreaView
       style={{ height: "100%", backgroundColor: "#ffffff", flex: 1 }}
     >
-     
       <View style={styleOne.buttonContainer}>
         <View style={styleOne.buttonStyle}>
           <TouchableOpacity onPress={pickImage}>
@@ -554,7 +797,6 @@ const TeacherRegister = () => {
         keyboardShouldPersistTaps="handled"
         style={{ height: "100%" }}
       >
-            
         <View style={{ justifyContent: "center", marginLeft: 30 }}>
           {/* <View>
             <CustomDropdown
@@ -662,6 +904,7 @@ const TeacherRegister = () => {
               setValue={setPosition}
               setItems={setItems}
               multiple={true}
+              searchable={true}
             />
           </View>
 
@@ -743,7 +986,7 @@ const TeacherRegister = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <Text>{dateofbirth}</Text>
+                <Text>{getDate()}</Text>
                 <Icon
                   style={{
                     color: "gray",

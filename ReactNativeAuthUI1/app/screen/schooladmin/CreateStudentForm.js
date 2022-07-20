@@ -446,7 +446,6 @@ const onSelectReligion =(item)=> (
             />
             <Text style={styles.labelText}>Disable, if Yes</Text>
           </View>
-
           <View>
             {
               disability ? (
