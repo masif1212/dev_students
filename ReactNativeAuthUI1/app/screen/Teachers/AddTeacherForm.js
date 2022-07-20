@@ -527,6 +527,38 @@ const TeacherRegister = () => {
   ]);
   //=========================end Subject=============================================//
 
+  // const [allDistrict, setAllDistrict] = useState([
+  //   { label: 'Badin', value: 'Badin' },
+  //   { label: 'Dadu', value: 'Dadu' },
+  //   { label: 'Ghotki', value: 'Ghotki' },
+  //   { label: 'Hyderabad', value: 'Hyderabad' },
+  //   { label: 'Jacobabad', value: 'Jacobabad' },
+  //   { label: 'Jamshoro', value: 'Jamshoro' },
+  //   { label: 'Karachi Central', value: 'Karachi Central' },
+  //   { label: 'Kashmore', value: 'Kashmore' },
+  //   { label: 'Khairpur', value: 'Khairpur' },
+  //   { label: 'Larkana', value: 'Larkana' },
+  //   { label: 'Matiari', value: 'Matiari' },
+  //   { label: 'Mirpur Khas', value: 'Mirpur Khas' },
+  //   { label: 'Naushahro Feroze', value: 'Naushahro Feroze' },
+  //   { label: 'Shaheed Benazirabad', value: 'Shaheed Benazirabad' },
+  //   { label: 'Qambar Shahdadkot', value: 'Qambar Shahdadkot' },
+  //   { label: 'Sanghar', value: 'Sanghar' },
+  //   { label: 'Shikarpur', value: 'Shikarpur' },
+  //   { label: 'Sukkur', value: 'Sukkur' },
+  //   { label: 'Tando Allahyar', value: 'Tando Allahyar' },
+  //   { label: 'Tando Muhammad Khan', value: 'Tando Muhammad Khan' },
+  //   { label: 'Tharparkar', value: 'Tharparkar' },
+  //   { label: 'Thatta', value: 'Thatta' },
+  //   { label: 'Umerkot', value: 'Umerkot' },
+  //   { label: 'Sujawal', value: 'Sujawal' },
+  //   { label: 'Karachi East', value: 'Karachi East' },
+  //   { label: 'Karachi South', value: 'Karachi South' },
+  //   { label: 'Karachi West', value: 'Karachi West' },
+  //   { label: 'Korangi', value: 'Korangi' },
+  //   { label: 'Malir', value: 'Malir' },
+  // ]);
+
   const navigation = useNavigation();
   const [registerTeacher] = useRegisterTeachersMutation();
 
@@ -1006,6 +1038,379 @@ const TeacherRegister = () => {
               onCancel={hideDatePicker}
               is24Hour={false}
             />
+          </View>
+
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              onPress={showjoiningDatePicker}
+              style={styleOne.input}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text>{getJoiningDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isJoiningDatePickerVisible}
+              mode="date"
+              onConfirm={handleJoiningConfirm}
+              onCancel={hidejoiningDatePicker}
+              is24Hour={false}
+            />
+          </View>
+
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              onPress={showstartcontractDatePicker}
+              style={styleOne.input}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text>{getContractStartDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isContractStartDatePickerVisible}
+              mode="date"
+              onConfirm={handleContractStartConfirm}
+              onCancel={hidestartcontractDatePicker}
+              is24Hour={false}
+            />
+          </View>
+
+          <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity
+              onPress={showcontractendDatePicker}
+              style={styleOne.input}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text>{getContractEndDate()}</Text>
+                <Icon
+                  style={{
+                    color: "gray",
+                    // left: 160,
+                    // // paddingTop: 30
+                  }}
+                  name="calendar"
+                  color="#c9c9c9"
+                  size={30}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isContractEndDatePickerVisible}
+              mode="date"
+              onConfirm={handleContractEndConfirm}
+              onCancel={hidecontractendDatePicker}
+              is24Hour={false}
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Qualification"
+              zIndex={10000}
+              zIndexInverse={1000}
+              open={qualificationshow}
+              value={teacherQualification}
+              items={qualifications}
+              setOpen={setQualificationshow}
+              setValue={setTeacherQualification}
+              setItems={setQualifications}
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              placeholder="Professional Qualification"
+              zIndex={5000}
+              zIndexInverse={1000}
+              open={professhow}
+              value={teacherprofessionalqualification}
+              items={professionalQualifications}
+              setOpen={setProfesshow}
+              setValue={setTeacherProfessionalQualification}
+              setItems={setProfessionalQualifications}
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Current Teaching Class"
+              zIndex={4000}
+              zIndexInverse={1000}
+              open={teachingClassShow}
+              value={teachingClass}
+              items={currentTeachingClass}
+              setOpen={setTeachingClassShow}
+              setValue={setTeachingClass}
+              setItems={setCurrentTeachingClass}
+              multiple={true}
+            />
+          </View>
+
+          <View>
+            <CustomDropdown
+              searchable={true}
+              placeholder="Subject of Teaching"
+              zIndex={2000}
+              zIndexInverse={1000}
+              open={teachingSubjectShow}
+              value={teachingSubject}
+              items={currentTeachingSubject}
+              setOpen={setTeachingSubjectShow}
+              setValue={setTeachingSubject}
+              setItems={setCurrentTeachingSubject}
+              multiple={true}
+            />
+          </View>
+
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={subjectsepecialist}
+              onValueChange={() => setSubjectSepecialist(!subjectsepecialist)}
+              color={subjectsepecialist ? "#5062BD" : undefined}
+            />
+            <Text> if , any Subject Speciality</Text>
+          </View>
+          <View>
+            {subjectsepecialist ? (
+              <View>
+                <CustomDropdown
+                  searchable={true}
+                  placeholder="Subject of Teaching"
+                  zIndex={2000}
+                  zIndexInverse={1000}
+                  open={specialitySubjectShow}
+                  value={SubjectSpec}
+                  items={subjectSpeciality}
+                  setOpen={setSpecialitySubjectShow}
+                  setValue={setSubjectSpec}
+                  setItems={setSubjectSpeciality}
+                  multiple={true}
+                />
+              </View>
+            ) : null}
+          </View>
+
+          <View style={{ margin: 20, right: 20 }}>
+            <Text style={{ marginBottom: 12, marginLeft: 9 }}>
+              {" "}
+              Medium of Teaching
+            </Text>
+            <RadioButton
+              gender={teachingmedium}
+              options={["Sindhi", "Urdu"]}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                opt;
+                setTeachingMedium(i);
+              }}
+            />
+          </View>
+
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={teacherTraining}
+              onValueChange={() => setTeacherTraining(!teacherTraining)}
+              color={teacherTraining ? "#5062BD" : undefined}
+            />
+            <Text> Does teacher do any training ? </Text>
+          </View>
+          <View>
+            {teacherTraining ? (
+              <>
+                <View style={{ width: "90%" }}>
+                  <TextInput
+                    style={{
+                      backgroundColor: "transparent",
+                      padding: 15,
+                      fontSize: 14,
+                      fontWeight: "400",
+                      borderBottomColor: "gray",
+                      borderBottomWidth: 1,
+                      marginBottom: 10,
+                    }}
+                    value={trainingnumber}
+                    onChangeText={setTrainingNumber}
+                    placeholder="How many training taken in SEF ?"
+                    placeholderTextColor="gray"
+                    keyboardType="numeric"
+                  />
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity
+                    onPress={showLsuDatePicker}
+                    style={styleOne.input}
+                  >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text>{getLsuDate()}</Text>
+                      <Icon
+                        style={{
+                          color: "gray",
+                          // left: 160,
+                          // // paddingTop: 30
+                        }}
+                        name="calendar"
+                        color="#c9c9c9"
+                        size={30}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <DateTimePickerModal
+                    isVisible={isLsuDatePickerVisibile}
+                    mode="date"
+                    onConfirm={handleLsuDateConfirm}
+                    onCancel={hideLsuDatePicker}
+                    is24Hour={false}
+                  />
+                </View>
+
+                <View>
+                  <TextInput
+                    style={styleOne.input}
+                    value={trainInWhichSubject}
+                    onChangeText={setTrainInWhichSubject}
+                    placeholderTextColor="gray"
+                    placeholder="Train in which Subject"
+                  />
+                </View>
+
+                <View>
+                  <TextInput
+                    style={styleOne.input}
+                    value={mentionTraining}
+                    onChangeText={setMentiontraining}
+                    placeholderTextColor="gray"
+                    placeholder="Mention any training taken from other dept"
+                  />
+                </View>
+              </>
+            ) : null}
+          </View>
+
+          <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
+            <Checkbox
+              value={teachingExperience}
+              onValueChange={() => setTeachingExperience(!teachingExperience)}
+              color={teachingExperience ? "#5062BD" : undefined}
+            />
+            <Text> if ,have any teaching experience</Text>
+          </View>
+          <View>
+            {teachingExperience ? (
+              <>
+                <View>
+                  <CustomDropdown
+                    searchable={true}
+                    placeholder="Subject of Teaching"
+                    zIndex={1800}
+                    zIndexInverse={1000}
+                    open={experienceShow}
+                    value={experience}
+                    items={experienceTime}
+                    setOpen={setExperienceShow}
+                    setValue={setExprience}
+                    setItems={setExperienceTime}
+                  />
+                </View>
+              </>
+            ) : null}
+          </View>
+
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={startingSalary}
+              onChangeText={setStartingSalary}
+              placeholderTextColor="gray"
+              placeholder="Starting salary"
+              keyboardType="numeric"
+            />
+          </View>
+
+          <View>
+            <TextInput
+              style={styleOne.input}
+              value={currentSalary}
+              onChangeText={setCurrentSalary}
+              placeholderTextColor="gray"
+              placeholder="Current salary"
+              keyboardType="numeric"
+            />
+          </View>
+
+          <View style={{ margin: 20, right: 20 }}>
+            <Text style={{ marginBottom: 12, marginLeft: 9 }}>
+              {" "}
+              Salary Disbursed
+            </Text>
+            <RadioButton
+              gender={salaryPaymentMethod}
+              options={["Cash", "Online"]}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                opt;
+                setSalaryPaymentMethod(i);
+              }}
+            />
+          </View>
+
+          <View>
+            {salaryPaymentMethod ? (
+              <>
+                <View>
+                  <TextInput
+                    style={styleOne.input}
+                    value={bankName}
+                    onChangeText={setBankName}
+                    placeholderTextColor="gray"
+                    placeholder="Bank Name"
+                  />
+                </View>
+              </>
+            ) : null}
           </View>
 
           <View>
