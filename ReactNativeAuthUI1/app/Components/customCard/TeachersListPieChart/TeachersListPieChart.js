@@ -2,6 +2,7 @@ import React, { useEffect, useState,useLayoutEffect } from "react";
 import { PieChart } from 'react-native-svg-charts'
 import { Text } from 'react-native-svg'
 import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from 'react-redux';
 
 
 const data = [
@@ -66,13 +67,17 @@ const Labels = ({ slices, }) => {
     })
 }
 
-const Pie = ({outerRadius}) => {
+const TeacherListPieChart = ({outerRadius}) => {
+
+    const myData = useSelector(state => state.teachers)
 
     const focus = useIsFocused();
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.26:8000/api/user/getstudentsattendancedashboard`);
+  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/${teacher_id_att}`);
   const students = await resp.json();
+ 
+  
   const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
 
   const attendanceOfPresent = students.filter(x => x.attendance=='P').length;
@@ -94,7 +99,6 @@ const fetchData = async () => {
 
 useLayoutEffect(() => {
  fetchData();
-
 }, [focus]);
 
 
@@ -118,5 +122,5 @@ useLayoutEffect(() => {
 
 
 
-export default Pie
+export default TeacherListPieChart
 

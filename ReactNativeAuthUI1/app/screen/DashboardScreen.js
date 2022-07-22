@@ -1,11 +1,12 @@
 import { View} from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useLayoutEffect } from "react";
 import { getToken } from "../../services/AsyncStorageService";
 import { useGetLoggedUserQuery } from "../../services/userAuthApi";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../features/userSlice";
 import { setUserToken } from "../../features/authSlice";
 import CustomCard from "../Components/customCard/CustomCard";
+import TeacherCustomCard from "../Components/customCard/TeachCustomCard";
 
 
 const DashboardScreen = () => {
@@ -36,10 +37,13 @@ const DashboardScreen = () => {
     }
   });
 
+
+
+
   return (
     <View>
       {/* <Text>{userLToken}</Text> */}
-      <CustomCard
+      <TeacherCustomCard
         backgroundColor="#5062BD"
         title="Teacher Attendance"
         color="white"

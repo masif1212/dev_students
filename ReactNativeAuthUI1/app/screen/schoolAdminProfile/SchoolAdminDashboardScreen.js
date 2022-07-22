@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { setSchoolAdminInfo } from "../../../features/schoolAdminSlice";
 import { setUserToken } from "../../../features/authSlice";
 import CustomCard from "../../Components/customCard/CustomCard";
+import TeacherCustomCardForSchoolAdmin from "../../Components/customCard/SchoolAdminCustomCard/TeacherCustomCard.ForSchoolAdmin";
+import StudentCustomCardForSchoolAdmin from "../../Components/customCard/SchoolAdminCustomCard/StudentCustomCardForSchoolAdmin";
 
 
 const SchoolDashboardScreen = () => {
@@ -49,13 +51,13 @@ const SchoolDashboardScreen = () => {
   return (
     <View>
       {/* <Text>{userLToken}</Text> */}
-      <CustomCard
+      <TeacherCustomCardForSchoolAdmin
         backgroundColor="#5062BD"
         title="Teacher Attendance"
         color="white"
       />
 
-      <CustomCard backgroundColor="#ffffff" title="Student Attendance" />
+      <StudentCustomCardForSchoolAdmin backgroundColor="#ffffff" title="Student Attendance" />
 
    
     </View>

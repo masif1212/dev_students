@@ -5,7 +5,7 @@ import transporter from '../config/emailConfig.js'
 
 class SchoolAdminController {
   static schooladminRegistration = async (req, res) => {
-    const {schoolName,schoolId,first_name,last_name,image, email, password, confirm_password, contact, alt_contact,  address_1, address_2, cnic, city } = req.body
+    const {schoolName,schoolId,first_name,last_name,image, email, password, confirm_password, contact, alt_contact, cnic,S_NO,father_husband,gender,religion,dateofbirth,maritalStatus,bankName,teacherQualification,teacherprofessionalqualification } = req.body
     const user = await SchoolAdminModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
@@ -26,10 +26,17 @@ class SchoolAdminController {
               confirm_password : hashPassword,
               contact: contact,
               alt_contact: alt_contact,
-              address_1: address_1,
-              address_2: address_2,
               cnic: cnic,
-              city: city,
+              S_NO:S_NO,
+              father_husband:father_husband,
+              gender:gender,
+              religion:religion,
+              dateofbirth:dateofbirth,
+              maritalStatus:maritalStatus,
+              bankName:bankName,
+              teacherQualification:teacherQualification,
+              teacherprofessionalqualification:teacherprofessionalqualification
+
              
             })
             await doc.save()
@@ -149,7 +156,7 @@ class SchoolAdminController {
   static getSchoolAdmins = async (req, res) => {
     try{
       const SchoolAdmins = await SchoolAdminModel.find({
-        attributes: ["id", "schoolId", "schoolName","image","first_name", "last_name", "email", "password", "confirm_password", "cnic","contact","alt_contact",  "address_1", "address_2", "city"]
+  attributes: ["id", "schoolId", "schoolName","image","first_name", "last_name", "email", "password", "confirm_password", "cnic","contact","alt_contact","S_NO","father_husband","gender","religion","dateofbirth","maritalStatus","bankName","teacherQualification","teacherprofessionalqualification"]
       });
       res.json(SchoolAdmins)
     } catch (error) {

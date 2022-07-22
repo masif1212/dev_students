@@ -66,12 +66,12 @@ const Labels = ({ slices, }) => {
     })
 }
 
-const Pie = ({outerRadius}) => {
+const TeacherPieChart = ({outerRadius}) => {
 
     const focus = useIsFocused();
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.26:8000/api/user/getstudentsattendancedashboard`);
+  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboard`);
   const students = await resp.json();
   const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
 
@@ -118,5 +118,5 @@ useLayoutEffect(() => {
 
 
 
-export default Pie
+export default TeacherPieChart
 

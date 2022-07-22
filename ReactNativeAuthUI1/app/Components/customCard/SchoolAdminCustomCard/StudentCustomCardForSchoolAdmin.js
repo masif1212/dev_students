@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Card, Button, Icon } from '@rneui/themed';
-import Pie from './PieChart';
+import Pie from '../SchoolAdminCustomCard/StudentPieCharForSchoolAdmin';
 
-const CustomCard = ({title,backgroundColor,color}) => {
+const StudentCustomCardForSchoolAdmin = ({title,backgroundColor,color}) => {
     let bgColor= backgroundColor;
     let fontColor= color
     return (
@@ -37,6 +37,6 @@ const CustomCard = ({title,backgroundColor,color}) => {
     )
 }
 
-export default CustomCard
+export default StudentCustomCardForSchoolAdmin
 
 const styles = StyleSheet.create({})
