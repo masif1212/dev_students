@@ -18,6 +18,19 @@ class TeacherAttendanceController {
     res.send(getTeacherattendance);
   }
 
+  static getTeacherAttendanceDashboard = async (req, res) => {
+    const getteacherattendancedashboard = await TeacherAttendance.find().select({ "first_name": 1, "_id" : 0, "attendance":1,"student_id_att":1});
+    res.send(getteacherattendancedashboard);
+  }
+  static getTeacherAttendanceDashboardBySchoolID = async (req, res) => {
+    const getteacherattendancedashboardbyschoolid = await TeacherAttendance.find({ "schoolId": req.params.schoolId}).select({ "first_name": 1,"last_name": 1, "_id" : 0, "attendance":1,"student_id_att":1});
+    res.send(getteacherattendancedashboardbyschoolid);
+  }
+  static getTeacherAttendanceDashboardByTeacherID = async (req, res) => {
+    const getteacherattendancedashboardbyteacherid = await TeacherAttendance.find({ "teacher_id_att": req.params.teacher_id_att});
+    res.send(getteacherattendancedashboardbyteacherid);
+  }
+
 }
 
 export default TeacherAttendanceController;

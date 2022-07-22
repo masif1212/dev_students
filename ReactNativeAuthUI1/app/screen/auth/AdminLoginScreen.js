@@ -100,9 +100,9 @@ import {
                   alignItems: "center",
                   padding: 15,
                   width: "100%",
-                  marginVertical: 5,
+                  
                   borderRadius: 50,
-                  marginBottom: 60,
+                  marginBottom: 30,
                   fontWeight: "bold",
                   backgroundColor: "#5062BD",
                   elevation: 1,
@@ -122,7 +122,7 @@ import {
             </View>
   
             <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <View style={{ flex: 1, marginBottom: 20 }}>
+              <View style={{  }}>
                 <TouchableWithoutFeedback
                   onPress={() => {
                     navigation.navigate("SendPasswordResetEmail");
@@ -132,15 +132,15 @@ import {
                 </TouchableWithoutFeedback>
               </View>
   
-              <View style={{ flex: 1, marginBottom: 10 }}>
+              {/* <View style={{ flex: 1, marginBottom: 10 }}>
                 <TouchableWithoutFeedback
                   onPress={() => {
                     navigation.navigate("Registration");
                   }}
                 >
-                  <Text style={{ fontWeight: "bold" }}>Sign Up</Text>
+                  <Text style={{ fontWeight: "bold" }}>Sign p</Text>
                 </TouchableWithoutFeedback>
-              </View>
+              </View> */}
             </View>
           </View>
         </ScrollView>

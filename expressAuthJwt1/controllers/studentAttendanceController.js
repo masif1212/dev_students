@@ -15,6 +15,16 @@ class StudentAttendanceController {
       const getstudentsattendance = await StudentAttendance.find({'student_id_att': req.params.student_id_att}).select({ "first_name": 1, "createdAt":1, "_id" : 0, "attendance":1,"student_id_att":1});
       res.send(getstudentsattendance);
     }
+    
+
+    static getStudentsAttendanceDashboard = async (req, res) => {
+      const getstudentsattendancedashboard = await StudentAttendance.find().select({ "first_name": 1, "_id" : 0, "attendance":1,"student_id_att":1});
+      res.send(getstudentsattendancedashboard);
+    }
+    static getStudentsAttendanceDashboardBySchoolId = async (req, res) => {
+      const getstudentsattendancedashboardbyschoolid = await StudentAttendance.find({ "schoolId": req.params.schoolId}).select({ "first_name": 1, "_id" : 0, "attendance":1,"student_id_att":1});
+      res.send(getstudentsattendancedashboardbyschoolid);
+    }
 } 
 
 export default StudentAttendanceController;

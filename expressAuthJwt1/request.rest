@@ -53,7 +53,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5N
 GET  http://192.168.18.14:8000/api/user/getTeachers
 
 ###
-GET  http://192.168.18.14:8000/api/user/getstudentsattendance/62cd4571b4fe01a9eb882da5
+GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboard
+
+###
+GET  http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/62c54aadc3027cd453dd357a
+
+###
+GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboardbyschoolid/62c542db114bdf03a6800210
+
 
 ###
 GET  http://192.168.18.14:8000/api/user/getteacherattendance/62c54aadc3027cd453dd357a
@@ -82,24 +89,32 @@ Content-Type: application/json
 GET http://192.168.18.64:8000/api/user/getstudent
 
 ###
-POST  http://192.168.18.64:8000/api/user/schooladmin
+POST  http://192.168.18.26:8000/api/user/schooladmin
 Content-Type: application/json
 
 {
               "schoolName": "ee",
+              "S_NO":"1",
               "schoolId": "dwd",
               "image": "image",
               "first_name": "first_name",
               "last_name": "last_name",
-              "email": "email1@email.com",
+              "email": "sssss@email.com",
               "password": "dfd",
               "confirm_password" : "dfd",
               "contact": "332423423",
               "alt_contact": "4234234",
-              "address_1": "fdsdf",
-              "address_2": "fsdfsdf",
               "cnic": "32423432",
-              "city": "city"
+              "father_husband":"ayesha",
+              "gender":"M",
+              "religion":"Islam",
+              "maritalStatus":"Single",
+              "dateofbirth":"19/2/2022",
+              "qualifications":"MBBS",
+              "professhow":"MIT",
+              "bankName":"BOP",
+              "salaryPaymentMethod":"online"
+              
 }
 
 ###

@@ -57,6 +57,10 @@ router.use('/loggedSchoolAdmin', chechSchAdminAuth)
 router.get('/loggedSchoolAdmin', SchoolAdminController.loggedSchoolAdmin)
 
 router.get('/getstudentsattendance/:schoolId', StudentAttendanceController.getStudentsAttendance)
+router.get('/getstudentsattendancedashboard', StudentAttendanceController.getStudentsAttendanceDashboard)
+router.get('/getstudentsattendancedashboardbyschoolid/:schoolId', StudentAttendanceController.getStudentsAttendanceDashboardBySchoolId)
+
+
 
 
 
@@ -70,6 +74,12 @@ router.get('/getteacher/:schoolId', TeachersController.getTeacher)
 router.get('/getSometeacher/:schoolId', TeachersController.getSomeTeacher)
 router.post('/teacherattendance', TeacherAttendanceController.teacherAttendance)
 router.get('/getteacherattendance/:teacher_id_att', TeacherAttendanceController.getTeacherAttendance)
+router.get('/getteacherattendancedashboard', TeacherAttendanceController.getTeacherAttendanceDashboard)
+router.get('/getteacherattendancedashboardbyschoolid/:schoolId', TeacherAttendanceController.getTeacherAttendanceDashboardBySchoolID)
+router.get('/getteacherattendancedashboardbyteacherid/:teacher_id_att', TeacherAttendanceController.getTeacherAttendanceDashboardByTeacherID)
+
+
+
 
 
 

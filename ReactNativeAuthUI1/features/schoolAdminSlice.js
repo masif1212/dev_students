@@ -11,10 +11,18 @@ const initialState = {
   password: "",
   confirm_password: "",
   alt_contact: "",
-  address_1: "",
-  address_2: "",
   cnic: "",
-  city: ""
+  S_NO:"",
+  gender:"",
+  religion:"",
+  father_husband:"",
+  dateofbirth:"",
+  maritalStatus:"",
+  salaryPaymentMethod: "",
+  bankName:"",
+  teacherQualification:"",
+  teacherprofessionalqualification:""
+  
 
 }
 export const schoolAdminSlice = createSlice({
@@ -33,10 +41,17 @@ export const schoolAdminSlice = createSlice({
       state.confirm_password = action.payload.confirm_password
       state.contact = action.payload.contact
       state.alt_contact = action.payload.alt_contact
-      state.address_1 = action.payload.address_1
-      state.address_2 = action.payload.address_2
       state.cnic = action.payload.cnic
-      state.city = action.payload.city
+      state.S_NO=action.payload.S_NO
+      state.father_husband=action.payload.father_husband
+      state.gender=action.payload.gender
+      state.religion=action.payload.religion
+      state.dateofbirth=action.payload.dateofbirth
+      state.maritalStatus=action.payload.maritalStatus
+      state.bankName=action.payload.bankName
+      state.teacherQualification=action.payload.teacherQualification
+      state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
+
     },
     unSetSchoolAdminInfo: (state, action) => {
       state.id = action.payload.id;
@@ -50,10 +65,18 @@ export const schoolAdminSlice = createSlice({
       state.image = action.payload.image
       state.contact = action.payload.contact
       state.alt_contact = action.payload.alt_contact
-      state.address_1 = action.payload.address_1
-      state.address_2 = action.payload.address_2
       state.cnic = action.payload.cnic
-      state.city = action.payload.city
+      state.S_NO=action.payload.S_NO
+      state.father_husband=action.payload.father_husband
+      state.gender=action.payload.gender
+      state.religion=action.payload.religion
+      state.dateofbirth=action.payload.dateofbirth
+      state.maritalStatus=action.payload.maritalStatus
+      state.bankName=action.payload.bankName
+      state.teacherQualification=action.payload.teacherQualification
+      state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
+
+  
     },
   }
 })
