@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 
 
-const DropDownStudent = ({ data = [], value = {}, onSelect = () => { }}) => {
+const DropDownStudent = ({ placeholder, data = [], value = {}, onSelect = () => { }}) => {
     const [showOption, setShowOption] = useState(false)
 
     const onSelectedItem  =(val) =>{
@@ -15,7 +15,7 @@ const DropDownStudent = ({ data = [], value = {}, onSelect = () => { }}) => {
         <View >
             <TouchableOpacity  style={styles.DropDownStyle} activeOpacity={0.8} onPress={()=>setShowOption(!showOption)}>
                 {/* if value is null show false if value is value then show values.currentshift or if not show choose */}
-                <Text style={{color:'grey'}}>{!!value ? value?.currentshift : `Select Shift`}</Text>
+                <Text style={{color:'grey'}}>{!!value ? value?.currentshift : placeholder}</Text>
                 <Image source={require('../../assets/images/DrawerIcons/drop.png')} style={{transform:[{rotate: showOption? '180deg' :'0deg'}]}} />
 
             </TouchableOpacity>
