@@ -18,7 +18,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
-import CustomDropdown from "../../Components/CustomDropDown";
 import { LogBox } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -27,6 +26,7 @@ import RadioButton from "../../Components/RadioButton";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Checkbox from "expo-checkbox";
+import CustomDropdown from '../../Components/CustomDropdown.js'
 
 const TeacherRegister = () => {
   const [first_name, setfirst_name] = useState("");

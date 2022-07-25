@@ -25,7 +25,7 @@ const CreateStudent = ({ navigation, route }) => {
 
 const[students, setStudents ] = useState([])
 // const [ schoolId, setSchoolId] = useState('');
-// const [ schoolName, setSchoolName] = useState('');
+// const [ schoolName, setSchoolName] = useState(''); 
 // const [time, setTime] = useState(Date.now())
 
 const isInitialMount = useRef(true);
@@ -35,7 +35,7 @@ const newData = useSelector(state => state.schoolAdmin)
 const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.12:8000/api/user/getStudents/${newData.schoolId}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getStudents/${newData.schoolId}`);
     const data = await resp.json();
 
     setStudents(data);

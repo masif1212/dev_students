@@ -41,7 +41,7 @@ const DashboardScreen = () => {
       {/* <Text>{userLToken}</Text> */}
       <CustomCard
         backgroundColor="#5062BD"
-        title="Teacher Attendance"
+        title="  Attendance"
         color="white"
       />
 
