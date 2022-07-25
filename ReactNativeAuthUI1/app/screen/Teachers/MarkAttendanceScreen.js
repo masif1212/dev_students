@@ -5,8 +5,7 @@ import _ from "lodash"
 import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
-import Toast from "react-native-toast-message";
-import axios from 'axios'
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -27,7 +26,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://1192.168.10.6:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
     const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
     setAttendanceState(schAdminId)

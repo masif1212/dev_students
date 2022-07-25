@@ -13,7 +13,6 @@ dotenv.config()
 
 // CORS Policy
 app.use(cors())
-
 // Database Connection
 connectDB(DATABASE_URL)
 
@@ -24,17 +23,6 @@ app.use(express.json())
 app.use("/api/user", userRoutes)
 
 
-// 404 Handler
-app.use((req, res, next) => {
-  next(createHttpError.NotFound());
-});
-
-// Error Handler
-app.use((error, req, res, next) => {
-  error.status = error.status || 500;
-  res.status(error.status);
-  res.render('error_40x', { error });
-});
 
 app.listen(port, () => {
   console.log(`Server listening at :${port}`)

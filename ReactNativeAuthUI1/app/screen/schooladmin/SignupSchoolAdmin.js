@@ -13,23 +13,18 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles, toastConfig } from "../../../style";
 import Toast from "react-native-toast-message";
-import { useRegisterSchoolAdminMutation } from "../../../services/userAuthApi";
-import { storeToken } from "../../../services/AsyncStorageService";
+import { useRegisterSchoolAdminMutation } from "../../../services/userAuthApi.js";
+import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 
-
-import { useSelector } from "react-redux";
-import { useIsFocused } from "@react-navigation/native";
-import CustomDropdown from "../../Components/CustomDropDown";
-import { LogBox } from "react-native";
+import CustomDropdown from '../../Components/CustomDropdown.js'
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SearchableDropdown from "react-native-searchable-dropdown";
-import RadioButton from "../../Components/RadioButton";
+import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import Checkbox from "expo-checkbox";
 
 const SignUpSchoolAdmin = ({route}) => {
   // const [first_name, setfirst_name] = useState("");

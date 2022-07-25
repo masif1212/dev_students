@@ -17,6 +17,7 @@
     "@material-ui/styles": "^4.11.5",
     "@mui/material": "^5.9.1",
     "@react-native-async-storage/async-storage": "^1.16.1",
+    "@react-native-community/checkbox": "^0.5.12",
     "@react-native-community/datetimepicker": "^6.2.0",
     "@react-navigation/drawer": "^6.3.1",
     "@react-navigation/native": "^6.0.8",
@@ -26,7 +27,6 @@
     "@rneui/themed": "^0.0.0-edge.2",
     "@types/react-native-svg-charts": "^5.0.12",
     "axios": "^0.27.2",
-    "country-state-city": "^3.0.1",
     "expo": "~44.0.0",
     "expo-checkbox": "~2.0.0",
     "expo-dev-client": "~0.8.6",
@@ -42,11 +42,13 @@
     "react-native-date-picker": "^4.2.2",
     "react-native-divider": "^1.0.3",
     "react-native-dropdown-picker": "^5.4.2",
+    "react-native-element-dropdown": "^2.0.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^13.1.2",
     "react-native-modern-datepicker": "^1.0.0-beta.91",
+    "react-native-multi-selectbox": "^1.5.0",
     "react-native-multiple-select": "^0.5.9",
     "react-native-paper": "^4.12.2",
     "react-native-pie": "^1.1.2",
@@ -60,6 +62,7 @@
     "react-native-svg-charts": "^5.4.0",
     "react-native-toast-message": "^2.1.1",
     "react-native-web": "0.17.1",
+    "react-onclickoutside": "^6.12.2",
     "react-redux": "^7.2.6",
     "react-window": "^1.8.7",
     "react-window-infinite-loader": "^1.0.8",
@@ -67,8 +70,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@faker-js/faker": "^7.3.0"
+    "@babel/core": "^7.12.9"
   },
   "private": true
 }
