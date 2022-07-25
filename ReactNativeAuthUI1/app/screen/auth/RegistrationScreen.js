@@ -49,7 +49,7 @@ const RegistrationScreen = () => {
   const [dateofbirth, setDateOfBirth] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = useState([]);
-  const [getcountry, setCountry] = useState([])
+  const [getcountry, setCountry] = useState()
 
 
 //country state city api==========================//

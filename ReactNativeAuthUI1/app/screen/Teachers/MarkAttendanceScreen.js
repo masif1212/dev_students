@@ -5,8 +5,7 @@ import _ from "lodash"
 import { CheckBox } from 'react-native-elements';
 import { useIsFocused } from "@react-navigation/native";
 import { useRegisterTechAttendanceMutation } from '../../../services/userAuthApi';
-import Toast from "react-native-toast-message";
-import axios from 'axios'
+
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -61,7 +60,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
+    fetch('http://192.168.18.14:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),
       headers: {
