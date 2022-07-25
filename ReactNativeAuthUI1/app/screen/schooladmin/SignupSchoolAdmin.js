@@ -859,7 +859,7 @@ const SignUpSchoolAdmin = ({route}) => {
           
             />
           </View>
-          <View>
+          {/* <View>
             <CustomDropdown
               searchable={true}
               placeholder="Qualification"
@@ -888,7 +888,7 @@ const SignUpSchoolAdmin = ({route}) => {
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
             />
-          </View>
+          </View> */}
 
 
           <View style={{ margin: 20, right: 20 }}>

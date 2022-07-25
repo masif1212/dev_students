@@ -35,6 +35,7 @@ const newData = useSelector(state => state.schoolAdmin)
 const focus = useIsFocused();
 
   const fetchData = async () => {
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getStudents/${newData.schoolId}`);
     const data = await resp.json();
 
 

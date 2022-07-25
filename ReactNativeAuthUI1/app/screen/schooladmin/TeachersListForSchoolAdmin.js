@@ -7,11 +7,9 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
-import TeacherListPieChart from "../../Components/customCard/TeachersListPieChart/TeachersListPieChart";
 
 
 
@@ -86,7 +84,8 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                     alt_contact: item.alt_contact,
                     address_1: item.address_1,
                     address_2: item.address_2,
-                    city: item.city
+                    city: item.city,
+                    teacher_id_att:item.teacher_id_att
 
                   })
                 }
@@ -125,7 +124,6 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                    
                     }}
                   >
-                    <TeacherListPieChart outerRadius={'60%'} />
                   </View>
                 </View>
               </TouchableOpacity>

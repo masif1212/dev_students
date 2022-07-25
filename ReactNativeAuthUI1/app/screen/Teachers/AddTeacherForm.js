@@ -1516,7 +1516,7 @@ const TeacherRegister = () => {
               </View>
 
             ) : null}
-          </View>
+          </View> 
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
