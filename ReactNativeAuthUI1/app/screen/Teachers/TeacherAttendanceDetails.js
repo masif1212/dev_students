@@ -1,61 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect,useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity,TextInput,Button } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import _ from "lodash"
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useLayoutEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import _ from "lodash";
 
-
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {Divider} from 'react-native-paper';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Divider } from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useIsFocused } from "@react-navigation/native"; 
-import { useSelector } from 'react-redux';
-import moment from 'moment';
+import { useIsFocused } from "@react-navigation/native";
+import moment from "moment";
+import TeacherListPieChart from "../../Components/customCard/TeachersListPieChart/TeachersListPieChart";
 
- 
+const TeacherAttendanceDetails = ({
+  route,
+  backgroundColor,
+  color,
+}) => {
+  let bgColor = backgroundColor;
+  let fontColor = color;
 
-const  TeacherAttendanceDetails = ({navigation,route})=> {
-
-  
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [teachers,setTeachers] = useState('');
-  const [teacherDate,setTeacherDate] = useState(false);
-
-//   const newData = useSelector(state => state.schoolAdmin)
-
-// const focus = useIsFocused();
-
-//   const fetchData = async () => {
-//     const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendance/${newData.schoolId}`);
-//     const data = await resp.json();
-//     console.log(data)
-
-//   };
-  
- 
-//   useLayoutEffect(() => {
-//    fetchData();
-   
-//   }, [focus]);
- 
+  const [teachers, setTeachers] = useState("");
+  const [teacherDate, setTeacherDate] = useState(false);
 
 
-// const newData = useSelector(state => state.schoolAdmin)
 
-const focus = useIsFocused();
+  const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacherattendance/${route.params.teacher_id_att}`);
+    const resp = await fetch(
+      `http://192.168.18.26:8000/api/user/getteacherattendance/${route.params.teacher_id_att}`
+    );
     const data = await resp.json();
     setTeachers(data);
-
   };
 
   useLayoutEffect(() => {
-   fetchData();
+    fetchData();
   }, [focus]);
-
-
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -63,282 +51,243 @@ const focus = useIsFocused();
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
-
   };
 
   const handleConfirm = (date) => {
-    setTeacherDate(moment(date).utc().format('YYYY-MM-DD'))
+    setTeacherDate(moment(date).utc().format("YYYY-MM-DD"));
     hideDatePicker();
-
-  
-
   };
 
-
-  const [ columns, setColumns ] = useState([
-    "Date",
-    "Status"
-
-  ])
-  const [ direction, setDirection ] = useState(null)
-  const [ selectedColumn, setSelectedColumn ] = useState(null)
-  // const [ students, setStudents ] = useState([
-  //   {
-    
-  //     date: "2022-07-01T12:42:08.441Z",
-  //     Status: "Present"
-  //   },
-  //   {
- 
-  //     date: "2022-07-02T13:03:35.822Z",
-  //     Status: "Absent"
-  //   },
-  //   {
-      
-  //     date: "3.6.2022",
-  //     Status: "Absent"
-  //   },
-  //   {
-      
-  //     date: "4.6.2022",
-  //     Status: "Present"
-  //   },
-  //   {
-      
-  //     date: "5.6.2022",
-  //     Status: "Absent"
-  //   },
-  //   {
-
-  //     date: "6.6.2022",
-  //     Status: "Absent"
-  //   },
-  //   {
-     
-  //     date: "7.6.2022",
-  //     Status: "Present"
-  //   },
-  //   {
-
-  //     date: "8.6.2022",
-  //     Status: "Absent"
-  //   },
-  //   {
-    
-  //     date: "9.6.2022",
-  //     Status: "Present"
-  //   },
-  //   {
-
-  //     date: "10.6.2022",
-  //     Status: "Present"
-  //   },
-  //   {
-    
-  //     date: "11.6.2022",
-  //     Status: "Present"
-  //   },
-  //   {
-  
-  //     date: "12.6.2022",
-  //     Status: "Absent"
-  //   },  
-  //    {
-     
-  //       date: "10.6.2022",
-  //       Status: "Present"
-  //     },
-  //     {
-
-  //       date: "11.6.2022",
-  //       Status: "Present"
-  //     },
-  //     {
-     
-  //       date: "12.6.2022",
-  //       Status: "Absent"
-  //     },
-  //     {
-        
-  //       date: "10.6.2022",
-  //       Status: "Present"
-  //     },
-  //     {
-      
-  //       date: "11.6.2022",
-  //       Status: "Present"
-  //     },
-  //     {
-       
-  //       date: "12.6.2022",
-  //       Status: "Absent"
-  //     }
-  // ])
-
-  
-
-
-  
-  
+  const [columns, setColumns] = useState(["Date", "Status"]);
+  const [direction, setDirection] = useState(null);
+  const [selectedColumn, setSelectedColumn] = useState(null);
 
   const sortTable = (column) => {
-    const newDirection = direction === "desc" ? "asc" : "desc" 
-    const sortedData = _.orderBy(students, [column],[newDirection])
-    setSelectedColumn(column)
-    setDirection(newDirection)
-    setStudents(sortedData)
-  }
+    const newDirection = direction === "desc" ? "asc" : "desc";
+    const sortedData = _.orderBy(teachers, [column], [newDirection]);
+    setSelectedColumn(column);
+    setDirection(newDirection);
+    setTeachers(sortedData);
+  };
   const tableHeader = () => (
     <View style={styles.tableHeader}>
-      {
-        columns.map((column, index) => {
-          {
-            return (
-              <TouchableOpacity 
-                key={index}
-                style={styles.columnHeader} 
-                onPress={()=> sortTable(column)}>
-                <Text style={styles.columnHeaderTxt}>{column + " "} 
-                  { selectedColumn === column && <MaterialCommunityIcons 
-                      name={direction === "desc" ? "arrow-down-drop-circle" : "arrow-up-drop-circle"} 
-                    />
-                  }
-                </Text>
-              </TouchableOpacity>
-            )
-          }
-        })
-      }
+      {columns.map((column, index) => {
+        {
+          return (
+            <TouchableOpacity
+              key={index}
+              style={styles.columnHeader}
+              onPress={() => sortTable(column)}
+            >
+              <Text style={styles.columnHeaderTxt}>
+                {column + " "}
+                {selectedColumn === column && (
+                  <MaterialCommunityIcons
+                    name={
+                      direction === "desc"
+                        ? "arrow-down-drop-circle"
+                        : "arrow-up-drop-circle"
+                    }
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          );
+        }
+      })}
     </View>
-  )
+  );
 
   return (
-    <View style={{height:'100%'}}>
-
-    <View style={{width:"100%"}}>
-    <View style={styles.container}>
+    <View style={{ height: "100%" }}>
+      <View style={{ width: "100%" }}>
+        <View style={styles.container}>
  
-<View style={{
-    flexDirection: 'row',
-    justifyContent: 'flex-end' 
-}}>
 
-
-  
-</View>
-
-
-  <View style={{
-    flexDirection:'row',
-    justifyContent:'flex-end',
-
-  }}>
- 
-          <TouchableOpacity style={{
-             flexDirection:'row',
-             borderRadius:10,
-             backgroundColor:'#5062BD',
-             padding:10,
-             width:'35%',
-             justifyContent:'center'
-             
-    
-          }} 
-          onPress={showDatePicker}>
-             <Icon name="calendar"
-          size={20}
-          color='white'
-          />
-          <Text style={{
-            left:4,
-            color:'white'
-          }}>Select Date</Text> 
-     
-      </TouchableOpacity>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={teacherDate.date}
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-        
-        />
-      </View>
-
-  
-   <Divider borderWidth={0.2} width={'100%'} margin={5}/>
-
-   <View>
-  <Text style={{
-      fontSize:35,
-      fontWeight: 'bold',
-      left: 5
-
-  }}>{route.params.first_name + ' ' + route.params.last_name}</Text>
-  <Text style={{
-    left: 5
-  }} >School Name</Text>
-</View>
-{/* add pie here */}
-
-<View style={{flexDirection: 'row', top:10}}>
-  <Text  style={{
-    left:5
-  }}>Class:th</Text>
-  <Text style={{
-      left: 80
-    }}>Section: </Text>
-</View>
-
-   <Divider margin={13} />
-
-</View>
-    </View>
-
-      <FlatList 
-        data={teachers}
-        style={{width:"100%"}}
-        keyExtractor={(item, index) => index+""}
-        ListHeaderComponent={tableHeader}
-        stickyHeaderIndices={[0]}
-        renderItem={({item, index})=> {
-          return (
-           <>
-           { teacherDate ? (
-          <View>
-          { moment(item.createdAt).utc().format('YYYY-MM-DD') === teacherDate ? 
-          <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-            <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
-            <Text style={styles.columnRowTxt}>{item.attendance}</Text>
-          </View> :  
-        <Text>No Data</Text>
-          }
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                borderRadius: 10,
+                backgroundColor: "#5062BD",
+                padding: 10,
+                width: "35%",
+                justifyContent: "center",
+              }}
+              onPress={showDatePicker}
+            >
+              <Icon name="calendar" size={20} color="white" />
+              <Text
+                style={{
+                  left: 4,
+                  color: "white",
+                }}
+              >
+                Select Date
+              </Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode={teacherDate.date}
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
           </View>
-           )
-           : 
-           <View style={{...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",width:'100%'}}>
-            <Text style={{...styles.columnRowTxt, fontWeight:"bold"}}>{moment(item.createdAt).utc().format('YYYY-MM-DD')}</Text>
-            <Text style={styles.columnRowTxt}>{item.attendance}</Text>
-          </View> 
-           }
-              
+
+          <Divider borderWidth={0.2} width={"100%"} margin={5} />
+
+          <View>
+            <Text
+              style={{
+                fontSize: 35,
+                fontWeight: "bold",
+                left: 5,
+              }}
+            >
+              {route.params.first_name + " " + route.params.last_name}
+            </Text>
+            </View>
+          
+          {/* add pie here */}
+          
+    
+       <View style={{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        right:40,
+        bottom:15
+        
+       }}>
+        <View>
+           <TeacherListPieChart
+              outerRadius={"70%"}
+              teacherId={route.params.teacher_id_att}
+            />
+            </View>
+         
          
 
-              </>
-          )
+            <View style={{
+              right:80
+            }}>
+              <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{ width: 40, height: 15, backgroundColor: "#A4C3DA" }}
+                />
+                <Text
+                  style={[
+                    { left: 5, bottom: 2, fontWeight: "bold" },
+                    { color: fontColor },
+                    fontColor ? { color: fontColor } : {},
+                  ]}
+                >
+                  Present (%){" "}
+                </Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{ width: 40, height: 15, backgroundColor: "#D2F790" }}
+                />
+                <Text
+                  style={[
+                    { left: 5, bottom: 2, fontWeight: "bold" },
+                    { color: fontColor },
+                    fontColor ? { color: fontColor } : {},
+                  ]}
+                >
+                  Absent (%){" "}
+                </Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <View
+                  style={{ width: 40, height: 15, backgroundColor: "gray" }}
+                />
+                <Text
+                  style={[
+                    { left: 5, bottom: 2, fontWeight: "bold" },
+                    { color: fontColor },
+                    fontColor ? { color: fontColor } : {},
+                  ]}
+                >
+                  Leave (%){" "}
+                </Text>
+            
+              </View>
+              <Text>Overall Attendance %</Text>
+            </View>
+          
+              </View>
+             
+
+
+           
+
+          
+          </View>
+        </View>
+    
+      <FlatList
+        data={teachers}
+        style={{ width: "100%" }}
+        keyExtractor={(item, index) => index + ""}
+        ListHeaderComponent={tableHeader}
+        stickyHeaderIndices={[0]}
+        renderItem={({ item, index }) => {
+          return (
+            <>
+              {teacherDate ? (
+                <View>
+                  {moment(item.createdAt).utc().format("YYYY-MM-DD") ===
+                  teacherDate ? (
+                    <View
+                      style={{
+                        ...styles.tableRow,
+                        backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        style={{ ...styles.columnRowTxt, fontWeight: "bold" }}
+                      >
+                        {moment(item.createdAt).utc().format("YYYY-MM-DD")}
+                      </Text>
+                      <Text style={styles.columnRowTxt}>{item.attendance}</Text>
+                    </View>
+                  ) : null}
+                </View>
+              ) : (
+                <View
+                  style={{
+                    ...styles.tableRow,
+                    backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",
+                    width: "100%",
+                  }}
+                >
+                  <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>
+                    {moment(item.createdAt).utc().format("YYYY-MM-DD")}
+                  </Text>
+                  <Text style={styles.columnRowTxt}>{item.attendance}</Text>
+                </View>
+              )}
+            </>
+          );
         }}
       />
 
-      
       <StatusBar style="auto" />
-      </View>
-      
-  
-   
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-
   tableHeader: {
     flexDirection: "row",
     justifyContent: "space-evenly",
@@ -348,40 +297,37 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 10,
     height: 50,
     width: "100%",
-
   },
   tableRow: {
     flexDirection: "row",
     height: 40,
-    alignItems:"center",
+    alignItems: "center",
   },
   columnHeader: {
     width: "50%",
     justifyContent: "center",
-    alignItems:"center",
- 
+    alignItems: "center",
   },
   columnHeaderTxt: {
     color: "white",
     fontWeight: "bold",
   },
   columnRowTxt: {
-    width:"50%",
-    textAlign:"center",
+    width: "50%",
+    textAlign: "center",
   },
   container: {
-    padding: 15
-
+    padding: 10,
+    top:15
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#8099F7',
+    borderColor: "#8099F7",
     marginBottom: 5,
     padding: 3,
     marginLeft: 4,
     borderRadius: 10,
-    
   },
 });
 
-export default TeacherAttendanceDetails
+export default TeacherAttendanceDetails;

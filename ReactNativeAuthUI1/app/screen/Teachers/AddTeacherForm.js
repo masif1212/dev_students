@@ -18,7 +18,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
-import CustomDropdown from "../../Components/CustomDropDown";
 import { LogBox } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -924,7 +923,7 @@ const TeacherRegister = () => {
             />
           </View>
 
-          <View>
+          {/* <View>
             <CustomDropdown
               placeholder="Select a Staff Position"
               zIndex={9000}
@@ -952,8 +951,8 @@ const TeacherRegister = () => {
               setValue={setFormerProgramm}
               setItems={setProgramm}
             />
-          </View>
-          <View>
+          </View> */}
+          {/* <View>
             <CustomDropdown
               placeholder="Select a Staff"
               zIndex={2000}
@@ -965,7 +964,7 @@ const TeacherRegister = () => {
               setValue={setSchoolStaff}
               setItems={setStaff}
             />
-          </View>
+          </View> */}
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
@@ -1139,7 +1138,7 @@ const TeacherRegister = () => {
             />
           </View>
 
-          <View>
+          {/* <View>
             <CustomDropdown
               searchable={true}
               placeholder="Qualification"
@@ -1152,9 +1151,9 @@ const TeacherRegister = () => {
               setValue={setTeacherQualification}
               setItems={setQualifications}
             />
-          </View>
+          </View> */}
 
-          <View>
+          {/* <View>
             <CustomDropdown
               placeholder="Professional Qualification"
               zIndex={5000}
@@ -1166,9 +1165,9 @@ const TeacherRegister = () => {
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
             />
-          </View>
+          </View> */}
 
-          <View>
+          {/* <View>
             <CustomDropdown
               searchable={true}
               placeholder="Current Teaching Class"
@@ -1198,7 +1197,7 @@ const TeacherRegister = () => {
               setItems={setCurrentTeachingSubject}
               multiple={true}
             />
-          </View>
+          </View> */}
 
           <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
             <Checkbox
@@ -1208,7 +1207,7 @@ const TeacherRegister = () => {
             />
             <Text> if , any Subject Speciality</Text>
           </View>
-          <View>
+          {/* <View>
             {subjectsepecialist ? (
               <View>
                 <CustomDropdown
@@ -1226,7 +1225,7 @@ const TeacherRegister = () => {
                 />
               </View>
             ) : null}
-          </View>
+          </View> */}
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>

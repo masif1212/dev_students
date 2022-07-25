@@ -67,14 +67,15 @@ const Labels = ({ slices, }) => {
     })
 }
 
-const TeacherListPieChart = ({outerRadius}) => {
+const TeacherListPieChart = ({outerRadius,teacherId}) => {
 
-    const myData = useSelector(state => state.teachers)
 
     const focus = useIsFocused();
+//   const [teachers,setTeachers] = useState('');
+ 
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/${teacher_id_att}`);
+  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/${teacherId}`);
   const students = await resp.json();
  
   
