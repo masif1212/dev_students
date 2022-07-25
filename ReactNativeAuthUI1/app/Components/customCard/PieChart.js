@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState,useLayoutEffect } from "react";
 import { PieChart } from 'react-native-svg-charts'
 import { Text } from 'react-native-svg'
+import { useIsFocused } from "@react-navigation/native"; 
+
 
 const data = [
     {   
@@ -11,10 +13,16 @@ const data = [
         svg: { fill: '#D2F790' },
     },
     {
-        attendance :"p",
+        attendance :"A",
         key: 2,
-        status: 60  ,
+        status: 30  ,
         svg: { fill: '#A4C3DA' }
+    },
+    {
+        attendance :"L",
+        key: 3,
+        status: 30  ,
+        svg: { fill: 'gray' }
     },
 ]
 
@@ -30,6 +38,8 @@ var out = data.filter(person => {
 
 
 console.log(out)
+
+
 
 
 const Labels = ({ slices, }) => {
@@ -57,6 +67,37 @@ const Labels = ({ slices, }) => {
 }
 
 const Pie = ({outerRadius}) => {
+
+    const focus = useIsFocused();
+
+const fetchData = async () => {
+  const resp = await fetch(`http://192.168.18.26:8000/api/user/getstudentsattendancedashboard`);
+  const students = await resp.json();
+  const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
+
+  const attendanceOfPresent = students.filter(x => x.attendance=='P').length;
+  
+  const attendanceOfLeave = students.filter(x => x.attendance=='L').length;
+  
+  const attendanceOfTotalStudents = students.filter(x => x.attendance).length;
+  
+  const absentaverage = attendanceOfAbsent/attendanceOfTotalStudents*100;
+  
+  const presentaverage = attendanceOfPresent/attendanceOfTotalStudents*100;
+  
+  const leaveAverage = attendanceOfLeave/attendanceOfTotalStudents*100;
+  
+      data[0].status = Math.round(absentaverage) ;
+      data[1].status = Math.round(presentaverage);
+      data[2].status = Math.round(leaveAverage);
+};
+
+useLayoutEffect(() => {
+ fetchData();
+
+}, [focus]);
+
+
  
         return (
             <PieChart

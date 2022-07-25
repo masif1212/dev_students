@@ -11,6 +11,7 @@ import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
+import TeacherListPieChart from "../../Components/customCard/TeachersListPieChart/TeachersListPieChart";
 
 
 
@@ -118,12 +119,13 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                   </View>
                   <View
                     style={{
-                      marginLeft: 220,
-                      bottom: 150,
+                      left: 120,
+                      bottom: 154,
+                      // position:"absolute"
                    
                     }}
                   >
-                    <Pie outerRadius={'50%'} />
+                    <TeacherListPieChart outerRadius={'60%'} />
                   </View>
                 </View>
               </TouchableOpacity>

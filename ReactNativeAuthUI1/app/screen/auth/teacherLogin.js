@@ -101,7 +101,7 @@ import {
                   width: "100%",
                   marginVertical: 5,
                   borderRadius: 50,
-                  marginBottom: 60,
+                  marginBottom: 30,
                   fontWeight: "bold",
                   backgroundColor: "#5062BD",
                   elevation: 1,
@@ -121,7 +121,7 @@ import {
             </View>
   
             <View style={{ alignItems: "center", justifyContent: "center" }}>
-              <View style={{ flex: 1, marginBottom: 20 }}>
+              <View>
                 <TouchableWithoutFeedback
                   onPress={() => {
                     navigation.navigate("SendPasswordResetEmail");

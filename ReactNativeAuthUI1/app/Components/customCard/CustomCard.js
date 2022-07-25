@@ -25,6 +25,11 @@ const CustomCard = ({title,backgroundColor,color}) => {
                                  <View style={{ width: 40, height: 15, backgroundColor: '#D2F790' }} />
                                  <Text style={[{ left: 5, bottom: 2, fontWeight: 'bold'},{color:fontColor}, fontColor ? {color:fontColor} : {}]} >Absent  (%) </Text>
                            </View>
+                           
+                           <View style={{flexDirection:'row', }}>
+                                 <View style={{ width: 40, height: 15, backgroundColor: 'gray' }} />
+                                 <Text style={[{ left: 5, bottom: 2, fontWeight: 'bold'},{color:fontColor}, fontColor ? {color:fontColor} : {}]} >Leave  (%) </Text>
+                           </View>
                     </View>
                 </View>
             </Card>

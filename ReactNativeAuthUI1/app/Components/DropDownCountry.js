@@ -24,8 +24,7 @@ const DropDownCountry = ({ data = [], value = {}, onSelectCountry = () => { } })
             {showOption && (<View style={{
                 backgroundColor:'orange',
                 borderRadius: 6,
-                padding: 3,
-                maxHeight: 120 ,
+               
             }}>
 
                     <ScrollView>
