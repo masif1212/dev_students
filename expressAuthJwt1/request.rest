@@ -36,6 +36,25 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://192.168.18.26:8000/api/user/createschool
+Content-Type: application/json
+
+{
+  "address_1": "Hsbz",  
+  "address_2": "Hzhz",  
+  "categories":"strong",      
+  "level": "sef",
+  "partnername": "Vsvs",
+  "school_name": "Hahs",
+  "schoolcode": "123",
+  "selectedDistricts": "Jamshoro District",
+  "selectedTehsil": "Khoski Tehsil",
+  "uc": "Hsbd",
+  "village": "Bzbz"
+  }
+
+###
 POST http://192.168.18.26:8000/api/user/teachersLogin
 Content-Type: application/json
 
@@ -66,7 +85,7 @@ GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboardbyschoolid
 GET  http://192.168.18.14:8000/api/user/getteacherattendance/62c54aadc3027cd453dd357a
 
 ###
-GET  http://192.168.18.64:8000/api/user/getschools
+GET  http://192.168.18.26:8000/api/user/getschools
 
 ###
 GET  http://192.168.18.26:8000/api/user/getSchoolAdmin

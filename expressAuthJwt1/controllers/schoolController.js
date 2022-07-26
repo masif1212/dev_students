@@ -4,17 +4,22 @@ import SchoolRegistrationModel from "../models/schoolregisterModel.js"
 
 class SchoolController {
     static schoolRegistration = async (req, res) => {
-      const {  school_name, contact_no, district, province, address_1, address_2, city} = req.body
-        if (school_name && contact_no && district && province && address_2 && address_1 && city) {
+      const {  school_name, selectedDistricts, address_1, address_2,schoolcode,level,categories,selectedTehsil,uc,village,partnername} = req.body
+        if (school_name && selectedDistricts && address_1 && address_2 && schoolcode && level && partnername && categories && selectedTehsil && uc && village ) {
             try {
               const doc = new SchoolRegistrationModel({
                 school_name: school_name,
-                contact_no: contact_no,
-                district: district,
-                province: province,
+                selectedDistricts: selectedDistricts,
                 address_1: address_1,
                 address_2: address_2,
-                city: city,
+                schoolcode:schoolcode,
+                level:level,
+                categories:categories,
+                partnername:partnername,
+                selectedTehsil:selectedTehsil,
+                uc:uc,
+                village:village
+
               })
               await doc.save()
               res.status(201).send({ "status": "success", "message": "Registration Success"})
@@ -31,7 +36,7 @@ class SchoolController {
     static getSchool = async(req,res)=>{
       try{
         const school = await SchoolRegistrationModel.find({
-          attributes: [ "school_name","contact_no","address_1","address_2","province","distrct",'city']
+          attributes: [ "school_name","address_1","address_2","selectedDistricts","schoolcode","level","categories","partnername","selectedTehsil","uc","village"]
         })
         res.json(school)
       }catch(err) {

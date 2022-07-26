@@ -1286,7 +1286,7 @@ const TeacherRegister = () => {
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
-              Select Gender
+              Select Category
             </Text>
             <RadioButton
               gender={gender}
