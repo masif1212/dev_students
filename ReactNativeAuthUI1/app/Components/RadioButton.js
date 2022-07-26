@@ -10,9 +10,9 @@ const RadioButton = ({options=[] , horizontal = false, onChangeSelect, gender}) 
             onPress={()=> onChangeSelect(opt, index )} 
             style={[styles.optContainer,{marginLeft: horizontal ? 10 : 0, marginTop : horizontal ? 0 : 10}]}>
             <View style={styles.outlinecircle}>
-              {gender === index  &&  <View style={styles.innerCircle}/>}
+              {gender === opt  &&  <View style={styles.innerCircle}/>}
             </View>
-            <Text style={[styles.txt, {color : gender === index ? '#444':  '#777'}]}>{opt}</Text>
+            <Text style={[styles.txt, {color : gender === opt ? '#444':  '#777'}]}>{opt}</Text>
 
             </TouchableOpacity>
         ))
