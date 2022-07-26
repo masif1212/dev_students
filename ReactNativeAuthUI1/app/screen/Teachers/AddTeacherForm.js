@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Picker,
-  Platform
+  Platform,
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -25,10 +25,7 @@ import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Checkbox from "expo-checkbox";
-import CustomDropDown from '../../Components/CustomDropdown'
-
-
-
+import CustomDropDown from "../../Components/CustomDropdown";
 
 const TeacherRegister = () => {
   const [staff_name, setStaff_Name] = useState("");
@@ -62,19 +59,19 @@ const TeacherRegister = () => {
   const [startingSalary, setStartingSalary] = useState("");
   const [currentSalary, setCurrentSalary] = useState("");
   const [salaryPaymentMethod, setSalaryPaymentMethod] = useState("");
-  const [accounttitle, setAccountTitle] = useState("")
-  const [ibanAccount, setIbanAccount] = useState("")
-  const [bankaccountnumber, setBankAccountNumber] = useState("")
+  const [accounttitle, setAccountTitle] = useState("");
+  const [ibanAccount, setIbanAccount] = useState("");
+  const [bankaccountnumber, setBankAccountNumber] = useState("");
   const [vaccinated, setVaccinated] = useState(false);
-  const [vaccineshots, setVaccineShots] = useState("")
-  const [vacinatedstatus, setVaccinatedStatus] = useState("")
+  const [vaccineshots, setVaccineShots] = useState("");
+  const [vacinatedstatus, setVaccinatedStatus] = useState("");
 
   const focus = useIsFocused();
   const myData = useSelector((state) => state.schoolAdmin);
   useEffect(() => {
     setSchoolId(myData.schoolId);
     setSchoolName(myData.schoolName);
-    console.log(programm)
+    console.log(programm);
   }, [focus]);
 
   useEffect(() => {
@@ -84,318 +81,246 @@ const TeacherRegister = () => {
   //=========================================================================//
 
   var headers = new Headers();
-  headers.append("X-CSCAPI-KEY", "ZWYzM2l0dXYzWENaS2dKM2lWR0ZRV3hBRXlTSFd0NlFHMlgyMDVVVA==");
+  headers.append(
+    "X-CSCAPI-KEY",
+    "ZWYzM2l0dXYzWENaS2dKM2lWR0ZRV3hBRXlTSFd0NlFHMlgyMDVVVA=="
+  );
 
   var requestOptions = {
-    method: 'GET',
+    method: "GET",
     headers: headers,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   useEffect(() => {
-    fetch("https://api.countrystatecity.in/v1/countries/PK/cities", requestOptions)
-      .then(response => response.json())
-      .then(result => setBankCities(result))
-      .catch(error => console.log('error', error));
-  })
-
-   //=====================================fetch api end====================================//
-   const [selectDivision, setSelectDivision] = useState([]);
-   const [division, setDivision] = useState([
-    { title: "Select Region" },
-     { title: "Banbhore" },
-     { title: "Hyderabad" },
-     { title: "Karachi" },
-     { title: "Sukkur" },
-     { title: "Larkana" },
-     { title: "Mirpur Khas" },
-     { title: "Shaheed Benazirabad" }
-   ])
- 
-   //=========================div district tehsil=============================================//
+    fetch(
+      "https://api.countrystatecity.in/v1/countries/PK/cities",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setBankCities(result))
+      .catch((error) => console.log("error", error));
+  });
 
   //=====================================fetch api end====================================//
-  const [selectedTehsil, setSeletctedTehsil] = useState([]);
-  const [tehsil, setTehsil] = useState([
-    { title: "Select Tehsil" },
-    { title: "Badin Tehsil" },
-    { title: "Khoski Tehsil" },
-    { title: "Matli Tehsil" },
-    { title: "Shaheed Fazil Rahu Tehsil" },
-    { title: "Talhar Tehsil" },
-    { title: "Tando Bago Tehsil" },
-    { title: "Jati Tehsil" },
-    { title: "Kharo Chan Tehsil" },
-    { title: "Mirpur Bathoro Tehsil" },
-    { title: "Shah Bandar Tehsil" },
-    { title: "Sujawal Tehsil" },
-    { title: "Ghorabari Tehsil" },
-    { title: "Keti Bunder" },
-    { title: "Mirpur Sakro Tehsil" },
-    { title: "Thatta Tehsil" },
-    { title: "Dadu Tehsil" },
-    { title: "Johi Tehsil" },
-    { title: "Khairpur Nathan Shah Tehsil" },
-    { title: "Mehar Tehsil" },
-    { title: "Hyderabad City Tehsil" },
-    { title: "Hyderabad Tehsil" },
-    { title: "Latifabad Tehsil" },
-    { title: "Qasimabad Tehsil" },
-    { title: "Jamshoro Tehsil" },
-    { title: "Sehwan Tehsil" },
-    { title: "Kotri Tehsil" },
-    { title: "Manjhand Tehsil" },
-    { title: "Thana Bulla Khan Tehsil" },
-    { title: "Hala Tehsil" },
-    { title: "Matiari Tehsil" },
-    { title: "Saeedabad Tehsil" },
-    { title: "Chamber Tehsil" },
-    { title: "Jhando Mari Tehsil" },
-    { title: "Tando Allahyar Tehsil " },
-    { title: "Nasarpur Tehsil" },
-    { title: "Bulri Shah Karim Tehsil" },
-    { title: "Tando Ghulam Hyder Tehsil" },
-    { title: "Tando Mohammad Khan Tehsil" },
-    { title: "Gulberg Town" },
-    { title: "Liaquatabad Town" },
-    { title: "New Karachi Town" },
-    { title: "North Nazimabad Town" },
-    { title: "Nazimabad" },
-    { title: "Gulshan Town" },
-    { title: "Jamshed Town" },
-    { title: "Ferozabad" },
-    { title: "Gulshan-E-Iqbal" },
-    { title: "Gulzar-E-Hijri" },
-    { title: "Lyari Town" },
-    { title: "Saddar Town" },
-    { title: "Aram Bagh" },
-    { title: "Civil Line" },
-    { title: "Garden" },
-    { title: "Orangi Town" },
-    { title: "Manghopir" },
-    { title: "Maripur" },
-    { title: "Mominabad" },
-    { title: "Model Colony" },
-    { title: "Shah Faisal Town" },
-    { title: "Landhi Town" },
-    { title: "Korangi Town" },
-    { title: "Bin Qasim Town" },
-    { title: "Gadap Town" },
-    { title: "Malir Town" },
-    { title: "Jinnah" },
-    { title: "Ibrahim Hyderi" },
-    { title: "Murad Memon" },
-    { title: "Shah Murad" },
-    { title: "Keamari Town" },
-    { title: "Baldia Town" },
-    { title: "S.I.T.E. Town" },
-    { title: "Karachi Fish Harbour" },
-    { title: "Garhi Khairo Tehsil" },
-    { title: "Jacobabad Tehsil" },
-    { title: "Thul Tehsil" },
-    { title: "Tangwani Tehsil" },
-    { title: "Kashmore Tehsil" },
-    { title: "Kandhkot Tehsil" },
-    { title: "Bakrani Tehsil" },
-    { title: "Dokri Tehsil" },
-    { title: "Larkana Tehsil" },
-    { title: "Ratodero Tehsil" },
-    { title: "Mirokhan Tehsil" },
-    { title: "Nasirabad Tehsil" },
-    { title: "Qambar Tehsil" },
-    { title: "Qubo Saeed Khan Tehsil" },
-    { title: "Shahdadkot Tehsil" },
-    { title: "Sijawal Junejo Tehsil" },
-    { title: "Warah Tehsil" },
-    { title: "Garhi Yasin Tehsil" },
-    { title: "Khanpur Tehsil" },
-    { title: "Lakhi Tehsil" },
-    { title: "Shikarpur Tehsil" },
-    { title: "Digri Tehsil" },
-    { title: "Jhuddo Tehsil" },
-    { title: "Kot Ghulam Muhammad Tehsil" },
-    { title: "Mirpur Khas Tehsil" },
-    { title: "Shujabad Tehsil" },
-    { title: "Sindhri Tehsil" },
-    { title: "Chachro Tehsil" },
-    { title: "Dahli Tehsil" },
-    { title: "Diplo Tehsil" },
-    { title: "Kaloi Tehsil" },
-    { title: "Islamkot Tehsil" },
-    { title: "Mithi Tehsil" },
-    { title: "Nagarparkar Tehsil" },
-    { title: "Kunri Tehsil" },
-    { title: "Pithoro Tehsil" },
-    { title: "Samaro Tehsil" },
-    { title: "Umerkot Tehsil" },
-    { title: "Daharki Tehsil" },
-    { title: "Ghotki Tehsil" },
-    { title: "Khangarh Tehsil (Khanpur)" },
-    { title: "Mirpur Mathelo Tehsil" },
-    { title: "Ubauro Tehsil" },
-    { title: "Faiz Ganj Tehsil" },
-    { title: "Gambat Tehsil" },
-    { title: "Khairpur Tehsil Mirs" },
-    { title: "Kingri Tehsil" },
-    { title: "Kot Diji Tehsil" },
-    { title: "Nara Tehsil" },
-    { title: "Sobho Dero Tehsil" },
-    { title: "Thari Mirwah Tehsil" },
-    { title: "New Sukkur Tehsil" },
-    { title: "Pano Aqil Tehsil" },
-    { title: "Rohri Tehsil" },
-    { title: "Salehpat Tehsil" },
-    { title: "Sukkur Tehsil" },
-    { title: "Bhiria Tehsil" },
-    { title: "Kandioro Tehsil" },
-    { title: "Mehrabpur Tehsil" },
-    { title: "Moro Tehsil" },
-    { title: "Naushahro Feroze Tehsil" },
-    { title: "Daulatpur Tehsil (Qazi Ahmed)" },
-    { title: "Daur Tehsil" },
-    { title: "Nawabshah Tehsil" },
-    { title: "Sakrand Tehsil" },
-    { title: "Jam Nawaz Ali Tehsil" },
-    { title: "Khipro Tehsil" },
-    { title: "Sanghar Tehsil" },
-    { title: "Shahdadpur Tehsil" },
-    { title: "Sinjhoro Tehsil" },
-    { title: "Tando Adam Khan Tehsil" },
-  ])
+  const [divisionShow, setDivisionShow] = useState("");
+  const [selectDivision, setSelectDivision] = useState([]);
+  const [division, setDivision] = useState([
+    { label: "Banbhore", value: "Banbhore" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Karachi", value: "Karachi" },
+    { label: "Sukkur", value: "Sukkur" },
+    { label: "Larkana", value: "Larkana" },
+    { label: "Mirpur Khas", value: "Mirpur Khas" },
+    { label: "Shaheed Benazirabad", value: "Shaheed Benazirabad" },
+  ]);
 
   //=========================div district tehsil=============================================//
-  const [selectedDistricts, setSelectedDistricts] = useState("")
-  const [districts, setDistricts] = useState([
-    {
-      title: "Select District :",
-    },
-    {
-      title: "Badin District",
-    },
-    {
-      title: "Sujawal District",
 
-    },
+  //=====================================fetch api end====================================//
+  const [tehsilShow, setTehsilShow] = useState("");
+  const [selectedTehsil, setSeletctedTehsil] = useState([]);
+  const [tehsil, setTehsil] = useState([
+    { label: "Select Tehsil", value: "Select Tehsil" },
+    { label: "Badin Tehsil", value: "Badin Tehsil" },
+    { label: "Khoski Tehsil", value: "Khoski Tehsil" },
+    { label: "Matli Tehsil", value: "Matli Tehsil" },
+    { label: "Shaheed Fazil Rahu Tehsil", value: "Shaheed Fazil Rahu Tehsil" },
+    { label: "Talhar Tehsil", value: "Talhar Tehsil" },
+    { label: "Tando Bago Tehsil", value: "Tando Bago Tehsil" },
+    { label: "Jati Tehsil", value: "Jati Tehsil" },
+    { label: "Kharo Chan Tehsil", value: "Kharo Chan Tehsil" },
+    { label: "Mirpur Bathoro Tehsil", value: "Mirpur Bathoro Tehsil" },
+    { label: "Shah Bandar Tehsil", value: "Shah Bandar Tehsil" },
+    { label: "Sujawal Tehsil", value: "Sujawal Tehsil" },
+    { label: "Ghorabari Tehsil", value: "Ghorabari Tehsil" },
+    { label: "Keti Bunder", value: "Keti Bunder" },
+    { label: "Mirpur Sakro Tehsil", value: "Mirpur Sakro Tehsil" },
+    { label: "Thatta Tehsil", value: "Thatta Tehsil" },
+    { label: "Dadu Tehsil", value: "Dadu Tehsil" },
+    { label: "Johi Tehsil", value: "Johi Tehsil" },
     {
-      title: "Thatta District",
-
+      label: "Khairpur Nathan Shah Tehsil",
+      value: "Khairpur Nathan Shah Tehsil",
     },
+    { label: "Mehar Tehsil", value: "Mehar Tehsil" },
+    { label: "Hyderabad City Tehsil", value: "Hyderabad City Tehsil" },
+    { label: "Hyderabad Tehsil", value: "Hyderabad Tehsil" },
+    { label: "Latifabad Tehsil", value: "Latifabad Tehsil" },
+    { label: "Qasimabad Tehsil", value: "Qasimabad Tehsil" },
+    { label: "Jamshoro Tehsil", value: "Jamshoro Tehsil" },
+    { label: "Sehwan Tehsil", value: "Sehwan Tehsil" },
+    { label: "Kotri Tehsil", value: "Kotri Tehsil" },
+    { label: "Manjhand Tehsil", value: "Manjhand Tehsil" },
+    { label: "Thana Bulla Khan Tehsil", value: "Thana Bulla Khan Tehsil" },
+    { label: "Hala Tehsil", value: "Hala Tehsil" },
+    { label: "Matiari Tehsil", value: "Matiari Tehsil" },
+    { label: "Saeedabad Tehsil", value: "Saeedabad Tehsil" },
+    { label: "Chamber Tehsil", value: "Chamber Tehsil" },
+    { label: "Jhando Mari Tehsil", value: "Jhando Mari Tehsil" },
+    { label: "Tando Allahyar Tehsil ", value: "Tando Allahyar Tehsil" },
+    { label: "Nasarpur Tehsil", value: "Nasarpur Tehsil" },
+    { label: "Bulri Shah Karim Tehsil", value: "Bulri Shah Karim Tehsil" },
+    { label: "Tando Ghulam Hyder Tehsil", value: "Tando Ghulam Hyder Tehsil" },
     {
-      title: "Dadu District",
-
+      label: "Tando Mohammad Khan Tehsil",
+      value: "Tando Mohammad Khan Tehsil",
     },
+    { label: "Gulberg Town", value: "Gulberg Town" },
+    { label: "Liaquatabad Town", value: "Liaquatabad Town" },
+    { label: "New Karachi Town", value: "New Karachi Town" },
+    { label: "North Nazimabad Town", value: "North Nazimabad Town" },
+    { label: "Nazimabad", value: "Nazimabad" },
+    { label: "Gulshan Town", value: "Gulshan Town" },
+    { label: "Jamshed Town", value: "Jamshed Town" },
+    { label: "Ferozabad", value: "Ferozabad" },
+    { label: "Gulshan-E-Iqbal", value: "Gulshan-E-Iqbal" },
+    { label: "Gulzar-E-Hijri", value: "Gulzar-E-Hijri" },
+    { label: "Lyari Town", value: "Lyari Town" },
+    { label: "Saddar Town", value: "Saddar Town" },
+    { label: "Aram Bagh", value: "Aram Bagh" },
+    { label: "Civil Line", value: "Civil Line" },
+    { label: "Garden", value: "Garden" },
+    { label: "Orangi Town", value: "Orangi Town" },
+    { label: "Manghopir", value: "Manghopir" },
+    { label: "Maripur", value: "Maripur" },
+    { label: "Mominabad", value: "Mominabad" },
+    { label: "Model Colony", value: "Model Colony" },
+    { label: "Shah Faisal Town", value: "Shah Faisal Town" },
+    { label: "Landhi Town", value: "Landhi Town" },
+    { label: "Korangi Town", value: "Korangi Town" },
+    { label: "Bin Qasim Town", value: "Bin Qasim Town" },
+    { label: "Gadap Town", value: "Gadap Town" },
+    { label: "Malir Town", value: "Malir Town" },
+    { label: "Jinnah", value: "Jinnah" },
+    { label: "Ibrahim Hyderi", value: "Ibrahim Hyderi" },
+    { label: "Murad Memon", value: "Murad Memon" },
+    { label: "Shah Murad", value: "Shah Murad" },
+    { label: "Keamari Town", value: "Keamari Town" },
+    { label: "Baldia Town", value: "Baldia Town" },
+    { label: "S.I.T.E. Town", value: "S.I.T.E Town" },
+    { label: "Karachi Fish Harbour", value: "Karachi Fish Harbour" },
+    { label: "Garhi Khairo Tehsil", value: "Garhi Khairo Tehsil" },
+    { label: "Jacobabad Tehsil", value: "Jacobabad Tehsil" },
+    { label: "Thul Tehsil", value: "Thul Tehsil" },
+    { label: "Tangwani Tehsil", value: "Tangwani Tehsil" },
+    { label: "Kashmore Tehsil", value: "Kashmore Tehsil" },
+    { label: "Kandhkot Tehsil", value: "Kandhkot Tehsil" },
+    { label: "Bakrani Tehsil", value: "Bakrani Tehsil" },
+    { label: "Dokri Tehsil", value: "Dokri Tehsil" },
+    { label: "Larkana Tehsil", value: "Larkana Tehsil" },
+    { label: "Ratodero Tehsil", value: "Ratodero Tehsil" },
+    { label: "Mirokhan Tehsil", value: "Mirokhan Tehsil" },
+    { label: "Nasirabad Tehsil", value: "Nasirabad Tehsil" },
+    { label: "Qambar Tehsil", value: "Qambar Tehsil" },
+    { label: "Qubo Saeed Khan Tehsil", value: "Qubo Saeed Khan Tehsil" },
+    { label: "Shahdadkot Tehsil", value: "Shahdadkot Tehsil" },
+    { label: "Sijawal Junejo Tehsil", value: "Sijawal Junejo Tehsil" },
+    { label: "Warah Tehsil", value: "Warah Tehsil" },
+    { label: "Garhi Yasin Tehsil", value: "Garhi Yasin Tehsil" },
+    { label: "Khanpur Tehsil", value: "Khanpur Tehsil" },
+    { label: "Lakhi Tehsil", value: "Lakhi Tehsil" },
+    { label: "Shikarpur Tehsil", value: "Shikarpur Tehsil" },
+    { label: "Digri Tehsil", value: "Digri Tehsil" },
+    { label: "Jhuddo Tehsil", value: "Jhuddo Tehsil" },
     {
-      title: "Hyderabad District",
-
+      label: "Kot Ghulam Muhammad Tehsil",
+      value: "Kot Ghulam Muhammad Tehsil",
     },
+    { label: "Mirpur Khas Tehsil", value: "Mirpur Khas Tehsil" },
+    { label: "Shujabad Tehsil", value: "Shujabad Tehsil" },
+    { label: "Sindhri Tehsil", value: "Sindhri Tehsil" },
+    { label: "Chachro Tehsil", value: "Chachro Tehsil" },
+    { label: "Dahli Tehsil", value: "Dahli Tehsil" },
+    { label: "Diplo Tehsil", value: "Diplo Tehsil" },
+    { label: "Kaloi Tehsil", value: "Kaloi Tehsil" },
+    { label: "Islamkot Tehsil", value: "Islamkot Tehsil" },
+    { label: "Mithi Tehsil", value: "Mithi Tehsil" },
+    { label: "Nagarparkar Tehsil", value: "Nagarparkar Tehsil" },
+    { label: "Kunri Tehsil", value: "Kunri Tehsil" },
+    { label: "Pithoro Tehsil", value: "Pithoro Tehsil" },
+    { label: "Samaro Tehsil", value: "Samaro Tehsil" },
+    { label: "Umerkot Tehsil", value: "Umerkot Tehsil" },
+    { label: "Daharki Tehsil", value: "Daharki Tehsil" },
+    { label: "Ghotki Tehsil", value: "Ghotki Tehsil" },
+    { label: "Khangarh Tehsil (Khanpur)", value: "Khangarh Tehsil (Khanpur)" },
+    { label: "Mirpur Mathelo Tehsil", value: "Mirpur Mathelo Tehsil" },
+    { label: "Ubauro Tehsil", value: "Ubauro Tehsil" },
+    { label: "Faiz Ganj Tehsil", value: "Faiz Ganj Tehsil" },
+    { label: "Gambat Tehsil", value: "Gambat Tehsil" },
+    { label: "Khairpur Tehsil Mirs", value: "Khairpur Tehsil Mirs" },
+    { label: "Kingri Tehsil", value: "Kingri Tehsil" },
+    { label: "Kot Diji Tehsil", value: "Kot Diji Tehsil" },
+    { label: "Nara Tehsil", value: "Nara Tehsil" },
+    { label: "Sobho Dero Tehsil", value: "Sobho Dero Tehsil" },
+    { label: "Thari Mirwah Tehsil", value: "Thari Mirwah Tehsil" },
+    { label: "New Sukkur Tehsil", value: "New Sukkur Tehsil" },
+    { label: "Pano Aqil Tehsil", value: "Pano Aqil Tehsil" },
+    { label: "Rohri Tehsil", value: "Rohri Tehsil" },
+    { label: "Salehpat Tehsil", value: "Salehpat Tehsil" },
+    { label: "Sukkur Tehsil", value: "Sukkur Tehsil" },
+    { label: "Bhiria Tehsil", value: "Bhiria Tehsil" },
+    { label: "Kandioro Tehsil", value: "Kandioro Tehsil" },
+    { label: "Mehrabpur Tehsil", value: "Mehrabpur Tehsil" },
+    { label: "Moro Tehsil", value: "Moro Tehsil" },
+    { label: "Naushahro Feroze Tehsil", value: "Naushahro Feroze Tehsil" },
     {
-      title: "Jamshoro District",
-
+      label: "Daulatpur Tehsil (Qazi Ahmed)",
+      value: "Daulatpur Tehsil (Qazi Ahmed)",
     },
-    {
-      title: "Matiari District",
-
-    },
-    {
-      title: "Tando Allahyar District",
-
-    },
-    {
-      title: "Tando Muhammad Khan District",
-
-    },
-    {
-      title: "Karachi Central District",
-
-    },
-    {
-      title: "Karachi East District",
-
-    },
-    {
-      title: "Karachi South District",
-
-    },
-    {
-      title: "Karachi West District",
-
-    },
-    {
-      title: "Korangi District",
-
-    },
-    {
-      title: "Malir District",
-
-    },
-    {
-      title: "Keamari District",
-
-    },
-    {
-      title: "Jacobabad District",
-
-    },
-    {
-      title: "Kashmore District",
-
-    },
-    {
-      title: "Larkana District",
-
-    },
-    {
-      title: "Qambar-Shahdadkot District",
-
-    },
-    {
-      title: "Shikarpur District",
-
-    },
-    {
-      title: "Mirpur Khas District",
-
-    },
-    {
-      title: "Tharparkar District",
-
-    },
-    {
-      title: "Umerkot District",
-
-    },
-    {
-      title: "Ghotki District",
-
-    },
-    {
-      title: "Khairpur Mirs District",
-
-    },
-    {
-      title: "Sukkur District",
-
-    },
-    {
-      title: "Naushahro Feroze District",
-
-    },
-    {
-      title: "Shaheed Benazir Abad District",
-
-    },
-    {
-      title: "Sanghar District",
-
-    },
+    { label: "Daur Tehsil", value: "Daur Tehsil" },
+    { label: "Nawabshah Tehsil", value: "Nawabshah Tehsil" },
+    { label: "Sakrand Tehsil", value: "Sakrand Tehsil" },
+    { label: "Jam Nawaz Ali Tehsil", value: "Jam Nawaz Ali Tehsil" },
+    { label: "Khipro Tehsil", value: "Khipro Tehsil" },
+    { label: "Sanghar Tehsil", value: "Sanghar Tehsil" },
+    { label: "Shahdadpur Tehsil", value: "Shahdadpur Tehsil" },
+    { label: "Sinjhoro Tehsil", value: "Sinjhoro Tehsil" },
+    { label: "Tando Adam Khan Tehsil", value: "Tando Adam Khan Tehsil" },
   ]);
-  
+
+  //=========================div district tehsil=============================================//
+  const [districtShow, setDistrictsShow] = useState("");
+  const [selectedDistricts, setSelectedDistricts] = useState("");
+  const [districts, setDistricts] = useState([
+    { label: "Badin", value: "Badin" },
+    { label: "Dadu", value: "Dadu" },
+    { label: "Ghotki", value: "Ghotki" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Jacobabad", value: "Jacobabad" },
+    { label: "Jamshoro", value: "Jamshoro" },
+    { label: "Karachi Central", value: "Karachi Central" },
+    { label: "Kashmore", value: "Kashmore" },
+    { label: "Khairpur", value: "Khairpur" },
+    { label: "Larkana", value: "Larkana" },
+    { label: "Matiari", value: "Matiari" },
+    { label: "Mirpur Khas", value: "Mirpur Khas" },
+    { label: "Naushahro Feroze", value: "Naushahro Feroze" },
+    { label: "Shaheed Benazirabad", value: "Shaheed Benazirabad" },
+    { label: "Qambar Shahdadkot", value: "Qambar Shahdadkot" },
+    { label: "Sanghar", value: "Sanghar" },
+    { label: "Shikarpur", value: "Shikarpur" },
+    { label: "Sukkur", value: "Sukkur" },
+    { label: "Tando Allahyar", value: "Tando Allahyar" },
+    { label: "Tando Muhammad Khan", value: "Tando Muhammad Khan" },
+    { label: "Tharparkar", value: "Tharparkar" },
+    { label: "Thatta", value: "Thatta" },
+    { label: "Umerkot", value: "Umerkot" },
+    { label: "Sujawal", value: "Sujawal" },
+    { label: "Karachi East", value: "Karachi East" },
+    { label: "Karachi South", value: "Karachi South" },
+    { label: "Karachi West", value: "Karachi West" },
+    { label: "Korangi", value: "Korangi" },
+    { label: "Malir", value: "Malir" },
+  ]);
+
   //=========================div district tehsil end=============================================//
 
   //=========================staff position=============================================//
+  const [positionShow, setPositionShow] = useState("");
+
   const [staffPosition, setStaffPosition] = useState([]);
-  const [items, setItems] = useState([
-    { label: "Select Position", value: "Select Position" },
+  const [postionsItem, setPositionsItem] = useState([
     { label: "Accademic Coordinator", value: "Accademic Coordinator" },
     { label: "Chowkidar", value: "Chowkidar" },
     { label: "Driver", value: "Driver" },
@@ -410,7 +335,7 @@ const TeacherRegister = () => {
   //=========================staff position end =============================================//
 
   //=========================programs=============================================//
-  const [formerProgrammOpen, setFormerProgrammOpen] = useState("")
+  const [formerProgrammOpen, setFormerProgrammOpen] = useState("");
   const [formerProgram, setFormerProgramm] = useState({});
   // const [programm, setProgramm] = useState([
   //   { id: "PPRS", value: "PPRS" },
@@ -422,11 +347,12 @@ const TeacherRegister = () => {
     { id: "PPRS", name: "PPRS" },
     { id: "SAS", name: "SAS" },
     { id: "SMHS", name: "SMHS" },
-    { id: "AALTP", name: "AALTP" }]
-
+    { id: "AALTP", name: "AALTP" },
+  ];
 
   //=========================end programms=============================================//
   //=========================programs=============================================//
+  const [schoolStaffShow, setSchoolStaffShow] = useState("");
   const [schoolstaff, setSchoolStaff] = useState([]);
   const [staff, setStaff] = useState([
     { label: "Select Staff", value: "Select Staff" },
@@ -436,6 +362,7 @@ const TeacherRegister = () => {
   ]);
   //=========================end programms=============================================//
   //=========================programs=============================================//
+  const[teacherQualificationShow, setTeacherQualificationShow]=useState("")
   const [teacherQualification, setTeacherQualification] = useState([]);
   const [qualifications, setQualifications] = useState([
     { label: "Select Qualificaton", value: "Select Qualificaton" },
@@ -458,21 +385,29 @@ const TeacherRegister = () => {
   //=========================end programms=============================================//
 
   //=========================programs=============================================//
-  const [teacherprofessionalQualificationshow, setTeacherProfessionalQualificationShow] = useState("")
-  const [teacherprofessionalqualification, setTeacherProfessionalQualification] = useState([]);
+  const [
+    teacherprofessionalQualificationshow,
+    setTeacherProfessionalQualificationShow,
+  ] = useState("");
+  const [
+    teacherprofessionalqualification,
+    setTeacherProfessionalQualification,
+  ] = useState([]);
   const [professionalQualifications, setProfessionalQualifications] = useState([
-    { label: "Select Professional Qualification", value: "Select Professional Qualification" },
+    {
+      label: "Select Professional Qualification",
+      value: "Select Professional Qualification",
+    },
     { label: "B.ED", value: "B.ED" },
     { label: "M.ED", value: "M.ED" },
     { label: "DIT", value: "DIT" },
   ]);
   //=========================end programms=============================================//
 
-
   //=========================CURRENT TEACHING CLASS=============================================//
-  const [teachingClassShow, setTeachingClassShow] = useState("")
+  const [teachingClassShow, setTeachingClassShow] = useState("");
   const [teachingClass, setTeachingClass] = useState([]);
-  const[ currentTeachingClass, setCurrentTeachingClass] = useState([
+  const [currentTeachingClass, setCurrentTeachingClass] = useState([
     { label: "Select Teaching Classes", value: "Select Teaching Classes" },
     { label: "Head Teacher", value: "Head Teacher" },
     { label: "Academic Coordinator", value: "Academic Coordinator" },
@@ -495,10 +430,10 @@ const TeacherRegister = () => {
   //=========================END CURRENT TEACHING CLASS=============================================//
 
   //=========================Subject=============================================//
-  
-  const [teachingSubjectShow, setTeachingSubjectShow] = useState('');
+
+  const [teachingSubjectShow, setTeachingSubjectShow] = useState("");
   const [teachingSubject, setTeachingSubject] = useState([]);
-  const [currentTeachingSubject, setCurrentTeachingSubject] =useState([
+  const [currentTeachingSubject, setCurrentTeachingSubject] = useState([
     { label: "Select teaching Subjects", value: "Select teaching Subjects" },
     { label: "Head Teacher", value: "Head Teacher" },
     { label: "Academic Coordinator", value: "Academic Coordinator" },
@@ -515,14 +450,17 @@ const TeacherRegister = () => {
     { label: "SS", value: "SS" },
     { label: "Science", value: "Science" },
     { label: "IT", value: "IT" },
-  ]) ;
+  ]);
   //=========================end Subject=============================================//
 
   //=========================Subject=============================================//
-  const [subjectSpecShow, setSubjectSpecShow] = useState("")
+  const [subjectSpecShow, setSubjectSpecShow] = useState("");
   const [SubjectSpec, setSubjectSpec] = useState([]);
   const [subjectspecial, setSubjectSpecial] = useState([
-    { label: "Select Subject of Speciality", value: "Select Subject of Speciality" },
+    {
+      label: "Select Subject of Speciality",
+      value: "Select Subject of Speciality",
+    },
     { label: "Biology", value: "Biology" },
     { label: "Chemistry", value: "Chemistry" },
     { label: "Islamiat", value: "Islamiat" },
@@ -537,9 +475,13 @@ const TeacherRegister = () => {
   //=========================end Subject=============================================//
 
   //=========================Subject=============================================//
+  const [experienceDurationShow, setExperienceDurationShow] = useState([]);
   const [experienceDuration, setExperienceDuration] = useState([]);
   const [experienceTime, setExperienceTime] = useState([
-    { label: "Select Experience duration", value: "Select Experience duration" },
+    {
+      label: "Select Experience duration",
+      value: "Select Experience duration",
+    },
     { label: "3-6 months", value: "3-6 months" },
     { label: "6 months - 1 years", value: "6 months - 1 years" },
     { label: "1-2 years", value: "1-2 years" },
@@ -549,6 +491,7 @@ const TeacherRegister = () => {
   ]);
   //=========================end Subject=============================================//
   //=========================Bank Names=============================================//
+  const [bankNameShow, setBankNameShow] = useState("");
   const [bankname, setBankName] = useState("");
   const [banknames, setBankNames] = useState([
     { label: "Select Bank Name", value: "Select Bank Name" },
@@ -557,35 +500,56 @@ const TeacherRegister = () => {
     { label: "Askari Bank", value: "Askari Bank" },
     { label: "Bank Alfalah Limited", value: "Bank Alfalah Limited" },
     { label: "Bank Al Habib Limited", value: "Bank Al Habib Limited" },
-    { label: "BankIslami Pakistan Limited", value: "BankIslami Pakistan Limited" },
+    {
+      label: "BankIslami Pakistan Limited",
+      value: "BankIslami Pakistan Limited",
+    },
     { label: "Citi Bank", value: "Citi Bank" },
     { label: "Deutsche Bank A.G", value: "Deutsche Bank A.G" },
-    { label: "The Bank of Tokyo-Mitsubishi UFJ", value: "The Bank of Tokyo-Mitsubishi UFJ" },
-    { label: "Dubai Islamic Bank Pakistan Limited", value: "Dubai Islamic Bank Pakistan Limited" },
+    {
+      label: "The Bank of Tokyo-Mitsubishi UFJ",
+      value: "The Bank of Tokyo-Mitsubishi UFJ",
+    },
+    {
+      label: "Dubai Islamic Bank Pakistan Limited",
+      value: "Dubai Islamic Bank Pakistan Limited",
+    },
     { label: "Faysal Bank Limited", value: "Faysal Bank Limited" },
     { label: "First Women Bank Limited", value: "First Women Bank Limited" },
     { label: "Habib Bank Limited", value: "Habib Bank Limited" },
-    { label: "Standard Chartered Bank Limited", value: "Standard Chartered Bank Limited" },
-    { label: "Habib Mteropolitan Bank Limited", value: "Habib Mteropolitan Bank Limited" },
-    { label: "Industrial and commercial Bank of China", value: "Industrial and commercial Bank of China" },
-    { label: "Industrial Developmnet Bank of Pakistan", value: "Industrial Developmnet Bank of Pakistan" },
+    {
+      label: "Standard Chartered Bank Limited",
+      value: "Standard Chartered Bank Limited",
+    },
+    {
+      label: "Habib Mteropolitan Bank Limited",
+      value: "Habib Mteropolitan Bank Limited",
+    },
+    {
+      label: "Industrial and commercial Bank of China",
+      value: "Industrial and commercial Bank of China",
+    },
+    {
+      label: "Industrial Developmnet Bank of Pakistan",
+      value: "Industrial Developmnet Bank of Pakistan",
+    },
     { label: "JS Bank Limited", value: "JS Bank Limited" },
     { label: "MCB Bank Limited", value: "MCB Bank Limited" },
     { label: "MCB Islamic  Bank Limited", value: "MCB Islamic  Bank Limited" },
     { label: "Mezan Bank Limited", value: "Mezan Bank Limited" },
     { label: "National Bank of Pakistan", value: "National Bank of Pakistan" },
-
-
   ]);
   //=========================end Bank Names=============================================//
 
   //=========================Bank Names=============================================//
+  const [bankCityShow, setBankCityShow] = useState([]);
   const [bankcity, setBankCity] = useState([]);
   const [bankCities, setBankCities] = useState([
-    { label: 'Select Bank City', value: 'Select Bank City', id: 1 },
+    { label: "Select Bank City", value: "Select Bank City", id: 1 },
   ]);
   //=========================end Bank Names=============================================//
   //=========================Bank Names=============================================//
+  const [bankDistrictShow, setBankDistrictShow] = useState([]);
   const [bankdistrict, setBankDistrict] = useState([]);
   const [bankdistricts, setBankDistricts] = useState([
     { label: "Select District", label: "Select District" },
@@ -663,7 +627,10 @@ const TeacherRegister = () => {
     { label: "VEHARI DISTRICT", value: "VEHARI DISTRICT" },
     { label: "JACOBABAD DISTRICT", value: "JACOBABAD DISTRICT" },
     { label: "KASHMOR DISTRICT", value: "KASHMOR DISTRICT" },
-    { label: "KAMBAR SHAHDAD KOT DISTRICT", value: "KAMBAR SHAHDAD KOT DISTRICT" },
+    {
+      label: "KAMBAR SHAHDAD KOT DISTRICT",
+      value: "KAMBAR SHAHDAD KOT DISTRICT",
+    },
     { label: "LARKANA DISTRICT", value: "LARKANA DISTRICT" },
     { label: "SHIKARPUR DISTRICT", value: "SHIKARPUR DISTRICT" },
     { label: "GHOTKI DISTRICT", value: "GHOTKI DISTRICT" },
@@ -676,7 +643,10 @@ const TeacherRegister = () => {
     { label: "MATIARI DISTRICT", value: "MATIARI DISTRICT" },
     { label: "SUJAWAL DISTRICT", value: "SUJAWAL DISTRICT" },
     { label: "TANDO ALLAHYAR DISTRICT", value: "TANDO ALLAHYAR DISTRICT" },
-    { label: "TANDO MUHAMMAD KHAN DISTRICT", value: "TANDO MUHAMMAD KHAN DISTRICT" },
+    {
+      label: "TANDO MUHAMMAD KHAN DISTRICT",
+      value: "TANDO MUHAMMAD KHAN DISTRICT",
+    },
     { label: "THATTA DISTRICT", value: "THATTA DISTRICT" },
     { label: "KARACHI CENTRAL DISTRICT", value: "KARACHI CENTRAL DISTRICT" },
     { label: "KARACHI EAST DISTRICT", value: "KARACHI EAST DISTRICT" },
@@ -689,7 +659,10 @@ const TeacherRegister = () => {
     { label: "UMER KOT DISTRICT", value: "UMER KOT DISTRICT" },
     { label: "SANGHAR DISTRICT", value: "SANGHAR DISTRICT" },
     { label: "NAUSHAHRO FEROZE DISTRICT", value: "NAUSHAHRO FEROZE DISTRICT" },
-    { label: "SHAHEED BENAZIRABAD DISTRICT", value: "SHAHEED BENAZIRABAD DISTRICT" },
+    {
+      label: "SHAHEED BENAZIRABAD DISTRICT",
+      value: "SHAHEED BENAZIRABAD DISTRICT",
+    },
     { label: "AWARAN DISTRICT", value: "AWARAN DISTRICT" },
     { label: "KALAT DISTRICT", value: "KALAT DISTRICT" },
     { label: "KHARAN DISTRICT", value: "KHARAN DISTRICT" },
@@ -722,20 +695,20 @@ const TeacherRegister = () => {
     { label: "SHERANI DISTRICT", value: "SHERANI DISTRICT" },
     { label: "ZHOB DISTRICT", value: "ZHOB DISTRICT" },
     { label: "ISLAMABAD", value: "ISLAMABAD" },
-  ])
+  ]);
   //=========================end Bank Names=============================================//
   const ittems = [
     {
       id: 1,
-      value: 'Pulp Fiction',
+      value: "Pulp Fiction",
     },
     {
       id: 2,
-      value: 'The Prestige',
+      value: "The Prestige",
     },
     {
       id: 3,
-      value: 'Blade Runner 2049',
+      value: "Blade Runner 2049",
     },
   ];
   // const [allDistrict, setAllDistrict] = useState([
@@ -772,7 +745,6 @@ const TeacherRegister = () => {
 
   const navigation = useNavigation();
   const [registerTeacher] = useRegisterTeachersMutation();
-
 
   //=====================Date picker function================================//
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -897,12 +869,10 @@ const TeacherRegister = () => {
   };
   //===================LSU training DATE END====================================//
 
-
-
   //=====================clear text input================================//
   const clearTextInput = () => {
     setDistricts(" ");
-    setSeletctedTehsil("")
+    setSeletctedTehsil("");
     setStaff_Name("");
     setStaffPosition("");
     setFormerProgramm("");
@@ -935,7 +905,7 @@ const TeacherRegister = () => {
     setBankCity("");
     setAccountTitle("");
     setIbanAccount("");
-    setBankAccountNumber("")
+    setBankAccountNumber("");
     setFather_Name("");
     setEmail("");
     setPassword("");
@@ -1006,7 +976,6 @@ const TeacherRegister = () => {
           vaccinated,
           vaccineshots,
           vacinatedstatus,
-
         };
         const res = await registerTeacher(formData);
         if (res.data.status === "success") {
@@ -1053,8 +1022,6 @@ const TeacherRegister = () => {
     }
   };
 
-
-
   return (
     <SafeAreaView
       style={{ height: "100%", backgroundColor: "#ffffff", flex: 1 }}
@@ -1092,73 +1059,48 @@ const TeacherRegister = () => {
         keyboardShouldPersistTaps="handled"
         style={{ height: "100%" }}
       >
-
-       
-
-
         <View style={{ justifyContent: "center", marginLeft: 30 }}>
-
-        <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-        <Text>Select Language</Text>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={selectDivision}
-              onValueChange={setSelectDivision}
-            >
-              {division.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.title}
-                  value={item.title}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 20 }) }}>
+            <CustomDropDown
+              zIndexInverse={6000}
+              zIndex={10000000}
+              placeholder="Select Region"
+              open={divisionShow}
+              value={selectDivision}
+              items={division}
+              setOpen={setDivisionShow}
+              setValue={setSelectDivision}
+              setItems={setDivision}
+              searchable
+            />
           </View>
 
-
-          <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={selectedDistricts}
-              onValueChange={setSelectedDistricts}
-            >
-              {districts.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.title}
-                  value={item.title}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+            <CustomDropDown
+              placeholder="Select District"
+              zIndex={32000}
+              open={districtShow}
+              value={selectedDistricts}
+              items={districts}
+              setOpen={setDistrictsShow}
+              setValue={setSelectedDistricts}
+              setItems={setDistricts}
+              searchable
+            />
           </View>
 
-
-
-
-
-          <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={selectedTehsil}
-              onValueChange={setSeletctedTehsil}
-            >
-              {tehsil.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.title}
-                  value={item.title}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 9 }) }}>
+            <CustomDropDown
+              placeholder="Select Tehsil"
+              zIndex={22000}
+              open={tehsilShow}
+              value={selectedTehsil}
+              items={tehsil}
+              setOpen={setTehsilShow}
+              setValue={setSeletctedTehsil}
+              setItems={setTehsil}
+              searchable
+            />
           </View>
 
           <View>
@@ -1179,25 +1121,18 @@ const TeacherRegister = () => {
             />
           </View>
 
-
-          <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              placeholder="Select a former Programm"
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={staffPosition}
-              onValueChange={setStaffPosition}
-            >
-              {items.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.label}
-                  value={item.value}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 6 }) }}>
+            <CustomDropDown
+              placeholder="Select Position"
+              zIndex={1000}
+              open={positionShow}
+              value={staffPosition}
+              items={postionsItem}
+              setOpen={setPositionShow}
+              setValue={setStaffPosition}
+              setItems={setPositionsItem}
+              searchable
+            />
           </View>
           {/* 
 
@@ -1219,21 +1154,19 @@ const TeacherRegister = () => {
               ))}
             </Picker>
           </View> */}
-          <View>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}>
             <CustomDropDown
               placeholder="Select Current Teaching Class"
-              zIndex={11000}
+              zIndex={900}
               open={teachingClassShow}
               value={teachingClass}
               items={currentTeachingClass}
               setOpen={setTeachingClassShow}
               setValue={setTeachingClass}
               setItems={setTeachingClass}
-              multiple={true} />
-          </View> 
-
-
-        
+              multiple={true}
+            />
+          </View>
 
           {/* <View>
             <CustomDropDown
@@ -1250,39 +1183,32 @@ const TeacherRegister = () => {
 
           </View> */}
 
-          <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={schoolstaff}
-              onValueChange={setSchoolStaff}
-            >
-              {staff.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.label}
-                  value={item.value}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 4 }) }}>
+            <CustomDropDown
+              placeholder="Select School staff"
+              zIndex={800}
+              open={schoolStaffShow}
+              value={schoolstaff}
+              items={staff}
+              setOpen={setSchoolStaffShow}
+              setValue={setSchoolStaff}
+              setItems={setStaff}
+            />
           </View>
 
-
-          <View>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
             <CustomDropDown
               placeholder="Select teaching subject"
-              zIndex={10000}
+              zIndex={700}
               open={teachingSubjectShow}
               value={teachingSubject}
               items={currentTeachingSubject}
               setOpen={setTeachingSubjectShow}
               setValue={setTeachingSubject}
               setItems={setTeachingSubject}
-              multiple={true} />
-          </View> 
-        
+              multiple={true}
+            />
+          </View>
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
@@ -1456,41 +1382,35 @@ const TeacherRegister = () => {
             />
           </View>
 
-          <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-            <Picker
-              itemStyle={styleOne.itemStyle}
-              mode="dropdown"
-              style={styleOne.pickerStyle}
-              selectedValue={teacherQualification}
-              onValueChange={setTeacherQualification}
-            >
-              {qualifications.map((item, index) => (
-                <Picker.Item
-                  color="gray"
-                  label={item.label}
-                  value={item.value}
-                  index={index}
-                />
-              ))}
-            </Picker>
+          
+
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 7 }) }}>
+            <CustomDropDown
+              zIndex={14000}
+              placeholder="Select Qualification"
+              open={teacherprofessionalQualificationshow}
+              value={teacherQualification}
+              items={qualifications}
+              setOpen={setTeacherProfessionalQualificationShow}
+              setValue={setTeacherQualification}
+              setItems={setQualifications}
+              multiple={true}
+            />
           </View>
 
-         
-          <View>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }} >
             <CustomDropDown
-              zIndex={10000}
+              zIndex={11000}
               placeholder="Select a Proffesional Qualification"
-              open={teacherprofessionalQualificationshow}
+              open={teacherQualificationShow}
               value={teacherprofessionalqualification}
               items={professionalQualifications}
-              setOpen={setTeacherProfessionalQualificationShow}
+              setOpen={setTeacherQualificationShow}
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
-              multiple={true} />
-
-          </View> 
-         
-         
+              multiple={true}
+            />
+          </View>
 
           <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
             <Checkbox
@@ -1502,21 +1422,21 @@ const TeacherRegister = () => {
           </View>
           <View>
             {subjectSpeciality ? (
-              <View >
+              <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
                 <CustomDropDown
                   placeholder="Subject Speciality"
-                  zIndex={5000}
+                  zIndex={9000}
                   open={subjectSpecShow}
                   value={SubjectSpec}
                   items={subjectspecial}
                   setOpen={setSubjectSpecShow}
                   setValue={setSubjectSpec}
                   setItems={setSubjectSpecial}
-                  multiple={true} />
+                  multiple={true}
+                />
               </View>
-
             ) : null}
-          </View> 
+          </View>
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
@@ -1631,24 +1551,18 @@ const TeacherRegister = () => {
           <View>
             {teachingExperience ? (
               <>
-                <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-                  <Picker
-                    itemStyle={styleOne.itemStyle}
-                    mode="dropdown"
-                    style={styleOne.pickerStyle}
-                    selectedValue={experienceDuration}
-                    onValueChange={setExperienceDuration}
-                  >
-                    {experienceTime.map((item, index) => (
-                      <Picker.Item
-                        color="gray"
-                        label={item.label}
-                        value={item.value}
-                        index={index}
-                      />
-                    ))}
-                  </Picker>
-                </View>
+                <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
+                <CustomDropDown
+                  placeholder="Experience Duration"
+                  zIndex={9000}
+                  open={experienceDurationShow}
+                  value={experienceDuration}
+                  items={experienceTime}
+                  setOpen={setExperienceDurationShow}
+                  setValue={setExperienceDuration}
+                  setItems={setExperienceTime}
+                />
+              </View>
               </>
             ) : null}
           </View>
@@ -1662,7 +1576,6 @@ const TeacherRegister = () => {
               placeholder="Starting salary"
               keyboardType="numeric"
             />
-
           </View>
 
           <View>
@@ -1695,63 +1608,45 @@ const TeacherRegister = () => {
           <View>
             {salaryPaymentMethod ? (
               <>
-                <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-                  <Picker
-                    itemStyle={styleOne.itemStyle}
-                    mode="dropdown"
-                    style={styleOne.pickerStyle}
-                    selectedValue={bankname}
-                    onValueChange={setBankName}
-                  >
-                    {banknames.map((item, index) => (
-                      <Picker.Item
-                        color="gray"
-                        label={item.label}
-                        value={item.value}
-                        index={index}
-                      />
-                    ))}
-                  </Picker>
-                </View>
+               <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+                <CustomDropDown
+                  placeholder="Bank Name"
+                  zIndex={14000}
+                  open={bankNameShow}
+                  value={bankname}
+                  items={banknames}
+                  setOpen={setBankNameShow}
+                  setValue={setBankName}
+                  setItems={setBankNames}
+                />
+              </View>
+             
 
-                <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-                  <Picker
-                    itemStyle={styleOne.itemStyle}
-                    mode="dropdown"
-                    style={styleOne.pickerStyle}
-                    onValueChange={setBankDistrict}
-                    selectedValue={bankdistrict}
-                  >
-                    {bankdistricts.map((item, index) => (
-                      <Picker.Item
-                        color="gray"
-                        label={item.label}
-                        value={item.value}
-                        index={index}
-                      />
-                    ))}
-                  </Picker>
-                </View>
+              <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}>
+                <CustomDropDown
+                  placeholder="Bank District"
+                  zIndex={11000}
+                  open={bankDistrictShow}
+                  value={bankdistrict}
+                  items={bankdistricts}
+                  setOpen={setBankDistrictShow}
+                  setValue={setBankDistrict}
+                  setItems={setBankDistricts}
+                />
+              </View>
 
-                <View style={{ width: "90%", flex: 0.7, fontSize: 14, borderBottomWidth: 1, marginHorizontal: 5, marginVertical: 10 }}>
-                  <Picker
-                    itemStyle={styleOne.itemStyle}
-                    mode= "dropdown"
-                    style={styleOne.pickerStyle}
-                    selectedValue={bankcity}
-                    onValueChange={setBankCity}
-                  >
-                    {bankCities.map((item, index) => (
-                      <Picker.Item
-                        color="gray"
-                        label={item.name}
-                        value={item.name}
-                        index={index}
-                      />
-                    ))}
-                  </Picker>
-                </View>
-
+              <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
+                <CustomDropDown
+                  placeholder="Bank City"
+                  zIndex={9000}
+                  open={bankCityShow}
+                  value={bankcity}
+                  items={bankCities}
+                  setOpen={setBankCityShow}
+                  setValue={setBankCity}
+                  setItems={setBankCities}
+                />
+              </View>
 
                 <View>
                   <TextInput
@@ -1780,7 +1675,6 @@ const TeacherRegister = () => {
                     placeholderTextColor="gray"
                   />
                 </View>
-
               </>
             ) : null}
           </View>
@@ -1875,7 +1769,6 @@ const TeacherRegister = () => {
             />
           </View>
 
-
           <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
             <Checkbox
               value={vaccinated}
@@ -1889,7 +1782,6 @@ const TeacherRegister = () => {
             {vaccinated ? (
               <>
                 <View style={{ marginLeft: 20, marginTop: 10 }}>
-
                   <RadioButton
                     gender={vaccineshots}
                     options={["One Shot", "Two Shot"]}
@@ -1901,7 +1793,6 @@ const TeacherRegister = () => {
                   />
                 </View>
                 <View style={{ marginLeft: 20, marginTop: 10 }}>
-
                   <RadioButton
                     gender={vacinatedstatus}
                     options={["Fully Vaccinated", "Partially Vaccinated"]}
@@ -1913,10 +1804,8 @@ const TeacherRegister = () => {
                   />
                 </View>
               </>
-
             ) : null}
           </View>
-
 
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <TouchableOpacity
@@ -1947,7 +1836,6 @@ const TeacherRegister = () => {
           </View>
         </View>
       </ScrollView>
-
     </SafeAreaView>
   );
 };
@@ -2022,21 +1910,19 @@ const styleOne = StyleSheet.create({
 
   itemStyle: {
     fontSize: 10,
-    color: "#007aff"
+    color: "#007aff",
   },
   pickerStyle: {
-    width:  "95%" ,
-    height: (Platform.OS === 'ios') ? 20 : 40,
+    width: "95%",
+    height: Platform.OS === "ios" ? 20 : 40,
     color: "black",
-    borderBottomWidth: (Platform.OS === 'ios') ? 0 : 1,
+    borderBottomWidth: Platform.OS === "ios" ? 0 : 1,
     fontSize: 14,
   },
   textStyle: {
     fontSize: 14,
-    fontFamily: "Roboto-Regular"
+    fontFamily: "Roboto-Regular",
   },
-
- 
 });
 
 export default TeacherRegister;
