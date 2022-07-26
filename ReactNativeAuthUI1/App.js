@@ -41,6 +41,7 @@ import TeacherLoginScreen from "./app/screen/auth/teacherLogin";
 import TeacherPannelTab from "./app/screen/teacherProfileDashboard/TeacherPannelTab";
 import TeacherLandingPage from "./app/screen/Teachers/TeacherLandingPage";
 import TeacherAttendanceDetails from "./app/screen/Teachers/TeacherAttendanceDetails";
+import AddTeacherForm2 from "./app/screen/Teachers/AddTeacherFormStep_2";
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +70,7 @@ const App = ({navigation}) => (
         <Stack.Screen name="SchoolAdminHomePage" component={SchoolAdminHomePage} options={{  headerShown:true,  headerStyle: { backgroundColor: "white",  },  }}  />
         <Stack.Screen name="TeachersListForSchoolAdmin" component={TeachersListForSchoolAdmin} options={{  headerShown:true,  headerStyle: { backgroundColor: "#5062BD",  },  }}  />
         <Stack.Screen  name="AddTeacherForm"  component={AddTeacherForm} options={{ headerShown:true, headerStyle: { backgroundColor: "#5062BD",  }, }}/>
+        
         <Stack.Screen name="ViewFullAttendance" component={ViewFullAttendance} options={{ headerShown:true,  headerStyle: { backgroundColor: "#5062BD", }, }}  />
         <Stack.Screen name="ClassStudents" component={ClassStudents} options={{  headerShown:true,headerStyle: {  backgroundColor: "#5062BD", }, }} />
         <Stack.Screen name="SingleStudentDetail" component={SingleStudentDetail} options={{  headerShown:true,   headerTintColor:'black',  headerStyle: {  backgroundColor: "white",  },   }} />
@@ -93,6 +95,7 @@ const App = ({navigation}) => (
   
           
         <Stack.Screen name="TeacherAttendanceDetails" component={TeacherAttendanceDetails} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />
+        <Stack.Screen  name="AddTeacherFormStep2"  component={AddTeacherForm2} options={{ headerShown:true, headerStyle: { backgroundColor: "#5062BD",  }, }}/>
 
       </Stack.Navigator>
     </NavigationContainer>
