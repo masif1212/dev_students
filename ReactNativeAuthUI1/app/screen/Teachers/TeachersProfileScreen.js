@@ -64,7 +64,8 @@ const TeachersProfileScreen = ({route,navigation}) => {
         >
           General Information
         </Text>
-        {/* <View
+
+        <View
           style={{
               marginTop:10,
             borderBottomColor: "gray",
@@ -75,8 +76,9 @@ const TeachersProfileScreen = ({route,navigation}) => {
         <Text style={{
             marginTop:5,
             fontWeight:'bold'
-        }} >Father Name</Text>
-        <Text>{route.params.father_name}</Text> */}
+        }} >School Name</Text>
+        <Text>{route.params.schoolName}</Text>
+        
         <View
           style={{
               marginTop:10,
@@ -117,34 +119,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
             fontWeight:'bold'
         }} >Address 2</Text>
         <Text>{route.params.address_2}</Text>
-        {/* <View
-          style={{
-              marginTop:10,
-            borderBottomColor: "gray",
-            borderBottomWidth: 1,
-            width:'95%'
-          }}
-        />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Qualification</Text>
-        <Text>Ms Computer Science</Text> */}
-  
-     
-        {/* <View
-          style={{
-              marginTop:10,
-            borderBottomColor: "gray",
-            borderBottomWidth: 1,
-            width:'95%'
-          }}
-        />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Date of Birth</Text>
-        <Text>10/10/1990</Text> */}
+       
         <View
           style={{
               marginTop:10,
@@ -184,10 +159,183 @@ const TeachersProfileScreen = ({route,navigation}) => {
         <Text style={{
             marginTop:5,
             fontWeight:'bold'
-        }} >City</Text>
-        <Text> {route.params.city}</Text>
+        }} >Staff Name</Text>
+        <Text> {route.params.staff_name}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Staff Position</Text>
+        <Text> {route.params.staffPosition}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Contract Start Date</Text>
+        <Text> {route.params.contractstart}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Contract End Date</Text>
+        <Text> {route.params.contractend}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Teacher Qualification</Text>
+        <Text> {route.params.teacherQualification}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Teacher Professional Qualification</Text>
+        <Text> {route.params.teacherprofessionalqualification}</Text>
+
+        
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Teaching Class</Text>
+        <Text> {route.params.teachingClass}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Teaching Subject</Text>
+        <Text> {route.params.teachingSubject}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Subject Specification</Text>
+        <Text> {route.params.SubjectSpec}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >District</Text>
+        <Text> {route.params.districts}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Tehsil</Text>
+        <Text> {route.params.selectedTehsil}</Text>
+
+        
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Religion</Text>
+        <Text> {route.params.religion}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Gender</Text>
+        <Text> {route.params.gender}</Text>
       
       </View>
+
+
       <View style={{
           flexDirection:'row',
           justifyContent:'flex-end',

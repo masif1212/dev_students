@@ -76,6 +76,19 @@ const SingleStudentDetail = ({route,navigation}) => {
         <Text style={{
             marginTop:5,
             fontWeight:'bold'
+        }} >School Name</Text>
+        <Text>{route.params.schoolName}</Text>
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
         }} >Father Name</Text>
         <Text>{route.params.father_name }</Text>
         <View
@@ -157,8 +170,93 @@ const SingleStudentDetail = ({route,navigation}) => {
             fontWeight:'bold'
         }} >City</Text>
         <Text>{route.params.city}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Roll No</Text>
+        <Text>{route.params.roll_no}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Gender</Text>
+        <Text>{route.params.gender}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Date of Birth</Text>
+        <Text>{route.params.dateofbirth}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Current Shift</Text>
+        <Text>{route.params.currentshift}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Religion</Text>
+        <Text>{route.params.religion}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Date of Admission</Text>
+        <Text>{route.params.religion}</Text>
       
       </View>
+      
  
     </ScrollView>
   );

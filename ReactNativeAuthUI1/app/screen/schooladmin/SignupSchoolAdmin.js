@@ -18,17 +18,13 @@ import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 
-
-import { useSelector } from "react-redux";
-import { useIsFocused } from "@react-navigation/native";
-// import CustomDropdown from "../../Components/CustomDropDown";
-import { LogBox } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import CustomDropdown from "../../Components/CustomDropdown";
 
 const SignUpSchoolAdmin = ({route}) => {
   // const [first_name, setfirst_name] = useState("");
@@ -109,8 +105,8 @@ const SignUpSchoolAdmin = ({route}) => {
 
    //=========================end programms=============================================//
   //=========================programs=============================================//
-  const [qualificationshow, setQualificationshow] = useState([]);
-  const [teacherQualification, setTeacherQualification] = useState([]);
+  const [qualificationshow, setQualificationshow] = useState('');
+  const [teacherQualification, setTeacherQualification] = useState('');
   const [qualifications, setQualifications] = useState([
     { label: "Metric", value: "Metric" },
     { label: "Inter", value: "Inter" },
@@ -597,18 +593,18 @@ const SignUpSchoolAdmin = ({route}) => {
         style={{ height: "100%" }}
       >
         <View style={{ justifyContent: "center", marginLeft: 30 }}>
-          {/* <View>
+          <View>
             <CustomDropdown
               zIndex={3000}
               zIndexInverse={1000}
-              open={open}
-              value={region}
-              items={items}
-              setOpen={setOpen}
-              setValue={setRegion}
-              setItems={setItems}
+              open={qualificationshow}
+              value={teacherQualification}
+              items={qualifications}
+              setOpen={setQualifications}
+              setValue={setTeacherQualification}
+              setItems={setQualifications}
             />
-          </View> */}
+          </View>
 
         
 
@@ -863,7 +859,7 @@ const SignUpSchoolAdmin = ({route}) => {
           
             />
           </View>
-          {/* <View>
+          <View>
             <CustomDropdown
               searchable={true}
               placeholder="Qualification"
@@ -892,7 +888,7 @@ const SignUpSchoolAdmin = ({route}) => {
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
             />
-          </View> */}
+          </View>
 
 
           <View style={{ margin: 20, right: 20 }}>
