@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userAuthApi = createApi({
   reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.18.26:8000/api/user/'
+    baseUrl: 'http://192.168.18.14:8000/api/user/'
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -14,6 +14,7 @@ export const userAuthApi = createApi({
           body: user,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -24,9 +25,11 @@ export const userAuthApi = createApi({
         return {
           url: 'schooladmin',
           method: 'POST',
-          body: schooladmin,
+          body: JSON.stringify(schooladmin),
           headers: {
+            'Accept': 'application/json, tet/plain',
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -40,6 +43,7 @@ export const userAuthApi = createApi({
           body: schooladmin,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -63,6 +67,7 @@ export const userAuthApi = createApi({
           body: student,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -83,6 +88,7 @@ export const userAuthApi = createApi({
           body: any,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -100,6 +106,7 @@ export const userAuthApi = createApi({
           body: user,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -120,6 +127,7 @@ export const userAuthApi = createApi({
         method: 'GET',
         headers: {
           'authorization': `Bearer ${token}`,
+          
         },
       })
     }),
@@ -133,6 +141,7 @@ export const userAuthApi = createApi({
           body: user,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -145,6 +154,7 @@ export const userAuthApi = createApi({
           body: formdata,
           headers: {
             'authorization': `Bearer ${userLToken}`,
+            
           }
         }
       }
@@ -159,6 +169,7 @@ export const userAuthApi = createApi({
           body: teacher,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -172,6 +183,7 @@ export const userAuthApi = createApi({
           body: teacher,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }
@@ -184,6 +196,7 @@ export const userAuthApi = createApi({
         body: addSchools,
         headers: {
           'Content-type': 'application/json',
+          
 
         }
       })
@@ -202,6 +215,7 @@ export const userAuthApi = createApi({
         method: 'GET',
         headers: {
           'authorization': `Bearer ${token}`,
+          
         },
       })
     }),
@@ -223,6 +237,7 @@ export const userAuthApi = createApi({
           body: attendance,
           headers: {
             'Content-type': 'application/json',
+            
           }
         }
       }

@@ -24,7 +24,7 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import CustomDropdown from "../../Components/CustomDropdown";
+import CustomDropDown from "../../Components/CustomDropdown";
 
 const SignUpSchoolAdmin = ({route}) => {
   // const [first_name, setfirst_name] = useState("");
@@ -59,8 +59,10 @@ const SignUpSchoolAdmin = ({route}) => {
   const [religion, setRegion] = useState("");
   const [dateofbirth, setDateOfBirth] = useState("");
   const [maritalStatus, setMaritalStatus] = useState("");
+  const [accounttitle, setAccountTitle] = useState("");
   const [salaryPaymentMethod, setSalaryPaymentMethod] = useState("");
-  const [bankName, setBankName] = useState("");
+  const [ibanAccount, setIbanAccount] = useState("");
+  const [bankaccountnumber, setBankAccountNumber] = useState("");
   
   // const focus = useIsFocused();
   // const myData = useSelector((state) => state.schoolAdmin);
@@ -103,15 +105,15 @@ const SignUpSchoolAdmin = ({route}) => {
   //===============================END DATE OF BIRTH========================//
   //=================== date of joining===============================//
 
-   //=========================end programms=============================================//
   //=========================programs=============================================//
-  const [qualificationshow, setQualificationshow] = useState('');
-  const [teacherQualification, setTeacherQualification] = useState('');
+  const[teacherQualificationShow, setTeacherQualificationShow]=useState("")
+  const [teacherQualification, setTeacherQualification] = useState([]);
   const [qualifications, setQualifications] = useState([
+    { label: "Select Qualificaton", value: "Select Qualificaton" },
     { label: "Metric", value: "Metric" },
     { label: "Inter", value: "Inter" },
     { label: "B.A", value: "B.A" },
-    { label: "BSC", value: "BSC" },
+    { label: "BSC", value: "BSC" }, 
     { label: "BBA", value: "BBA" },
     { label: "BS", value: "BS" },
     { label: "BS Electronic", value: "BS Electronic" },
@@ -124,24 +126,259 @@ const SignUpSchoolAdmin = ({route}) => {
     { label: "MPA", value: "MPA" },
     { label: "MPhil", value: "MPhil" },
   ]);
-
-   
   //=========================end programms=============================================//
-  //=========================programs=============================================//
 
   //=========================programs=============================================//
-  const [professhow, setProfesshow] = useState("");
+  const [
+    teacherprofessionalQualificationshow,
+    setTeacherProfessionalQualificationShow,
+  ] = useState("");
   const [
     teacherprofessionalqualification,
     setTeacherProfessionalQualification,
   ] = useState([]);
   const [professionalQualifications, setProfessionalQualifications] = useState([
+    {
+      label: "Select Professional Qualification",
+      value: "Select Professional Qualification",
+    },
     { label: "B.ED", value: "B.ED" },
     { label: "M.ED", value: "M.ED" },
     { label: "DIT", value: "DIT" },
   ]);
-
   //=========================end programms=============================================//
+
+  var headers = new Headers();
+  headers.append(
+    "X-CSCAPI-KEY",
+    "ZWYzM2l0dXYzWENaS2dKM2lWR0ZRV3hBRXlTSFd0NlFHMlgyMDVVVA=="
+  );
+
+  var requestOptions = {
+    method: "GET",
+    headers: headers,
+    redirect: "follow",
+  };
+
+  useEffect(() => {
+    fetch(
+      "https://api.countrystatecity.in/v1/countries/PK/cities",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setBankCities(result))
+      .catch((error) => console.log("error", error));
+  });
+
+ //=========================Bank Names=============================================//
+ const [bankNameShow, setBankNameShow] = useState("");
+ const [bankname, setBankName] = useState("");
+ const [banknames, setBankNames] = useState([
+   { label: "Select Bank Name", value: "Select Bank Name" },
+   { label: "Al Baraka Bank Limited", value: "Al Baraka Bank Limited" },
+   { label: "Allied Bank Limited", value: "Allied Bank Limited" },
+   { label: "Askari Bank", value: "Askari Bank" },
+   { label: "Bank Alfalah Limited", value: "Bank Alfalah Limited" },
+   { label: "Bank Al Habib Limited", value: "Bank Al Habib Limited" },
+   {
+     label: "BankIslami Pakistan Limited",
+     value: "BankIslami Pakistan Limited",
+   },
+   { label: "Citi Bank", value: "Citi Bank" },
+   { label: "Deutsche Bank A.G", value: "Deutsche Bank A.G" },
+   {
+     label: "The Bank of Tokyo-Mitsubishi UFJ",
+     value: "The Bank of Tokyo-Mitsubishi UFJ",
+   },
+   {
+     label: "Dubai Islamic Bank Pakistan Limited",
+     value: "Dubai Islamic Bank Pakistan Limited",
+   },
+   { label: "Faysal Bank Limited", value: "Faysal Bank Limited" },
+   { label: "First Women Bank Limited", value: "First Women Bank Limited" },
+   { label: "Habib Bank Limited", value: "Habib Bank Limited" },
+   {
+     label: "Standard Chartered Bank Limited",
+     value: "Standard Chartered Bank Limited",
+   },
+   {
+     label: "Habib Mteropolitan Bank Limited",
+     value: "Habib Mteropolitan Bank Limited",
+   },
+   {
+     label: "Industrial and commercial Bank of China",
+     value: "Industrial and commercial Bank of China",
+   },
+   {
+     label: "Industrial Developmnet Bank of Pakistan",
+     value: "Industrial Developmnet Bank of Pakistan",
+   },
+   { label: "JS Bank Limited", value: "JS Bank Limited" },
+   { label: "MCB Bank Limited", value: "MCB Bank Limited" },
+   { label: "MCB Islamic  Bank Limited", value: "MCB Islamic  Bank Limited" },
+   { label: "Mezan Bank Limited", value: "Mezan Bank Limited" },
+   { label: "National Bank of Pakistan", value: "National Bank of Pakistan" },
+ ]);
+ //=========================end Bank Names=============================================//
+
+ //=========================Bank Names=============================================//
+ const [bankCityShow, setBankCityShow] = useState("");
+ const [bankcity, setBankCity] = useState("");
+ const [bankCities, setBankCities] = useState([
+   { label: "Select Bank City", value: "Select Bank City", id: 1 },
+ ]);
+ //=========================end Bank Names=============================================//
+ //=========================Bank Names=============================================//
+ const [bankDistrictShow, setBankDistrictShow] = useState("");
+ const [bankdistrict, setBankDistrict] = useState("");
+ const [bankdistricts, setBankDistricts] = useState([
+   { label: "Select District", label: "Select District" },
+   { label: "BANNU DISTRICT", label: "BANNU DISTRICT" },
+   { label: "DERA ISMAIL KHAN DISTRICT", label: "DERA ISMAIL KHAN DISTRICT" },
+   { label: "LAKKI MARWAT DISTRICT", value: "LAKKI MARWAT DISTRICT" },
+   { label: "TANK DISTRICT", value: "TANK DISTRICT" },
+   { label: "ABBOTTABAD DISTRICT", value: "ABBOTTABAD DISTRICT" },
+   { label: "BATAGRAM DISTRICT", value: "BATAGRAM DISTRICT" },
+   { label: "HARIPUR DISTRICT", value: "HARIPUR DISTRICT" },
+   { label: "MANSEHRA DISTRICT", value: "MANSEHRA DISTRICT" },
+   { label: "TORGHAR DISTRICT", value: "TORGHAR DISTRICT" },
+   { label: "KOHISTAN DISTRICT", value: "KOHISTAN DISTRICT" },
+   { label: "HANGU DISTRICT", value: "HANGU DISTRICT" },
+   { label: "KARAK DISTRICT", value: "KARAK DISTRICT" },
+   { label: "KOHAT DISTRICT", value: "KOHAT DISTRICT" },
+   { label: "MARDAN DISTRICT", value: "MARDAN DISTRICT" },
+   { label: "SWABI DISTRICT", value: "SWABI DISTRICT" },
+   { label: "CHARSADDA DISTRICT", value: "CHARSADDA DISTRICT" },
+   { label: "NOWSHERA DISTRICT", value: "NOWSHERA DISTRICT" },
+   { label: "PESHAWAR DISTRICT", value: "PESHAWAR DISTRICT" },
+   { label: "BUNER DISTRICT", value: "BUNER DISTRICT" },
+   { label: "CHITRAL DISTRICT", value: "CHITRAL DISTRICT" },
+   { label: "SHANGLA DISTRICT", value: "SHANGLA DISTRICT" },
+   { label: "SWAT DISTRICT", value: "SWAT DISTRICT" },
+   { label: "MALAKAND PROTECTED AREA", value: "MALAKAND PROTECTED AREA" },
+   { label: "KHYBER AGENCY", value: "KHYBER AGENCY" },
+   { label: "KURRAM AGENCY", value: "KURRAM AGENCY" },
+   { label: "MOHMAND AGENCY", value: "MOHMAND AGENCY" },
+   { label: "NORTH WAZIRISTAN AGENCY", value: "NORTH WAZIRISTAN AGENCY" },
+   { label: "ORAKZAI AGENCY", value: "ORAKZAI AGENCY" },
+   { label: "SOUTH WAZIRISTAN AGENCY", value: "SOUTH WAZIRISTAN AGENCY" },
+   { label: "BAJAUR AGENCY", value: "BAJAUR AGENCY" },
+   { label: "BANNU", value: "FR BANNU" },
+   { label: "D.I.KHAN", value: "FR D.I.KHAN" },
+   { label: "KOHAT", value: "KOHAT" },
+   { label: "LAKKI MARWAT", value: "LAKKI MARWAT" },
+   { label: "PESHAWAR", value: "PESHAWAR" },
+   { label: "TANK", value: "TANK" },
+   { label: "ATTOCK DISTRICT", value: "ATTOCK DISTRICT" },
+   { label: "CHAKWAL DISTRICT", value: "CHAKWAL DISTRICT" },
+   { label: "JHELUM DISTRICT", value: "JHELUM DISTRICT" },
+   { label: "RAWALPINDI DISTRICT", value: "RAWALPINDI DISTRICT" },
+   { label: "BHAKKAR DISTRICT", value: "BHAKKAR DISTRICT" },
+   { label: "KHUSHAB DISTRICT", value: "KHUSHAB DISTRICT" },
+   { label: "SARGODHA DISTRICT", value: "SARGODHA DISTRICT" },
+   { label: "MIANWALI DISTRICT", value: "MIANWALI DISTRICT" },
+   { label: "GUJRANWALA DISTRICT", value: "GUJRANWALA DISTRICT" },
+   { label: "GUJRAT DISTRICT", value: "GUJRAT DISTRICT" },
+   { label: "HAFIZABAD DISTRICT", value: "HAFIZABAD DISTRICT" },
+   { label: "MANDI BAHAUDDIN DISTRICT", value: "MANDI BAHAUDDIN DISTRICT" },
+   { label: "NAROWAL DISTRICT", value: "NAROWAL DISTRICT" },
+   { label: "SIALKOT DISTRICT", value: "SIALKOT DISTRICT" },
+   { label: "LAHORE DISTRICT", value: "LAHORE DISTRICT" },
+   { label: "KASUR DISTRICT", value: "KASUR DISTRICT" },
+   { label: "NANKANA SAHIB DISTRICT", value: "NANKANA SAHIB DISTRICT" },
+   { label: "SHEIKHUPURA DISTRICT", value: "SHEIKHUPURA DISTRICT" },
+   { label: "FAISALABAD DISTRICT", value: "FAISALABAD DISTRICT" },
+   { label: "CHINIOT DISTRICT", value: "CHINIOT DISTRICT" },
+   { label: "JHANG DISTRICT", value: "JHANG DISTRICT" },
+   { label: "TOBA TEK SINGH DISTRICT", value: "TOBA TEK SINGH DISTRICT" },
+   { label: "SAHIWAL DISTRICT", value: "SAHIWAL DISTRICT" },
+   { label: "OKARA DISTRICT", value: "OKARA DISTRICT" },
+   { label: "PAKPATTAN DISTRICT", value: "PAKPATTAN DISTRICT" },
+   { label: "BAHAWALNAGAR DISTRICT", value: "BAHAWALNAGAR DISTRICT" },
+   { label: "BAHAWALPUR DISTRICT", value: "BAHAWALPUR DISTRICT" },
+   { label: "RAHIM YAR KHAN DISTRICT", value: "RAHIM YAR KHAN DISTRICT" },
+   { label: "DERA GHAZI KHAN DISTRICT", value: "DERA GHAZI KHAN DISTRICT" },
+   { label: "RAJANPUR DISTRICT", value: "RAJANPUR DISTRICT" },
+   { label: "LAYYAH DISTRICT", value: "LAYYAH DISTRICT" },
+   { label: "MUZAFFARGARH DISTRICT", value: "MUZAFFARGARH DISTRICT" },
+   { label: "MULTAN DISTRICT", value: "MULTAN DISTRICT" },
+   { label: "KHANEWAL DISTRICT", value: "KHANEWAL DISTRICT" },
+   { label: "LODHRAN DISTRICT", value: "LODHRAN DISTRICT" },
+   { label: "VEHARI DISTRICT", value: "VEHARI DISTRICT" },
+   { label: "JACOBABAD DISTRICT", value: "JACOBABAD DISTRICT" },
+   { label: "KASHMOR DISTRICT", value: "KASHMOR DISTRICT" },
+   {
+     label: "KAMBAR SHAHDAD KOT DISTRICT",
+     value: "KAMBAR SHAHDAD KOT DISTRICT",
+   },
+   { label: "LARKANA DISTRICT", value: "LARKANA DISTRICT" },
+   { label: "SHIKARPUR DISTRICT", value: "SHIKARPUR DISTRICT" },
+   { label: "GHOTKI DISTRICT", value: "GHOTKI DISTRICT" },
+   { label: "KHAIRPUR DISTRICT", value: "KHAIRPUR DISTRICT" },
+   { label: "SUKKUR DISTRICT", value: "SUKKUR DISTRICT" },
+   { label: "BADIN DISTRICT", value: "BADIN DISTRICT" },
+   { label: "DADU DISTRICT", value: "DADU DISTRICT" },
+   { label: "HYDERABAD DISTRICT", value: "HYDERABAD DISTRICT" },
+   { label: "JAMSHORO DISTRICT", value: "JAMSHORO DISTRICT" },
+   { label: "MATIARI DISTRICT", value: "MATIARI DISTRICT" },
+   { label: "SUJAWAL DISTRICT", value: "SUJAWAL DISTRICT" },
+   { label: "TANDO ALLAHYAR DISTRICT", value: "TANDO ALLAHYAR DISTRICT" },
+   {
+     label: "TANDO MUHAMMAD KHAN DISTRICT",
+     value: "TANDO MUHAMMAD KHAN DISTRICT",
+   },
+   { label: "THATTA DISTRICT", value: "THATTA DISTRICT" },
+   { label: "KARACHI CENTRAL DISTRICT", value: "KARACHI CENTRAL DISTRICT" },
+   { label: "KARACHI EAST DISTRICT", value: "KARACHI EAST DISTRICT" },
+   { label: "KARACHI SOUTH DISTRICT", value: "KARACHI SOUTH DISTRICT" },
+   { label: "KARACHI WEST DISTRICT", value: "KARACHI WEST DISTRICT" },
+   { label: "KORANGI DISTRICT", value: "KORANGI DISTRICT" },
+   { label: "MALIR DISTRICT", value: "MALIR DISTRICT" },
+   { label: "MIRPUR KHAS DISTRICT", value: "MIRPUR KHAS DISTRICT" },
+   { label: "THARPARKAR DISTRICT", value: "THARPARKAR DISTRICT" },
+   { label: "UMER KOT DISTRICT", value: "UMER KOT DISTRICT" },
+   { label: "SANGHAR DISTRICT", value: "SANGHAR DISTRICT" },
+   { label: "NAUSHAHRO FEROZE DISTRICT", value: "NAUSHAHRO FEROZE DISTRICT" },
+   {
+     label: "SHAHEED BENAZIRABAD DISTRICT",
+     value: "SHAHEED BENAZIRABAD DISTRICT",
+   },
+   { label: "AWARAN DISTRICT", value: "AWARAN DISTRICT" },
+   { label: "KALAT DISTRICT", value: "KALAT DISTRICT" },
+   { label: "KHARAN DISTRICT", value: "KHARAN DISTRICT" },
+   { label: "KHUZDAR DISTRICT", value: "KHUZDAR DISTRICT" },
+   { label: "LASBELA DISTRICT", value: "LASBELA DISTRICT" },
+   { label: "MASTUNG DISTRICT", value: "MASTUNG DISTRICT" },
+   { label: "WASHUK DISTRICT", value: "WASHUK DISTRICT" },
+   { label: "GWADAR DISTRICT", value: "GWADAR DISTRICT" },
+   { label: "KECH DISTRICT", value: "KECH DISTRICT" },
+   { label: "PANJGUR DISTRICT", value: "PANJGUR DISTRICT" },
+   { label: "JAFFARABAD DISTRICT", value: "JAFFARABAD DISTRICT" },
+   { label: "JHAL MAGSI DISTRICT", value: "JHAL MAGSI DISTRICT" },
+   { label: "KACHHI DISTRICT", value: "KACHHI DISTRICT" },
+   { label: "NASIRABAD DISTRICT", value: "NASIRABAD DISTRICT" },
+   { label: "SOHBATPUR DISTRICT", value: "SOHBATPUR DISTRICT" },
+   { label: "CHAGAI DISTRICT", value: "CHAGAI DISTRICT" },
+   { label: "KILLA ABDULLAH DISTRICT", value: "KILLA ABDULLAH DISTRICT" },
+   { label: "NUSHKI DISTRICT", value: "NUSHKI DISTRICT" },
+   { label: "PISHIN DISTRICT", value: "PISHIN DISTRICT" },
+   { label: "QUETTA DISTRICT", value: "QUETTA DISTRICT" },
+   { label: "DERA BUGTI DISTRICT", value: "DERA BUGTI DISTRICT" },
+   { label: "HARNAI DISTRICT", value: "HARNAI DISTRICT" },
+   { label: "KOHLU DISTRICT", value: "KOHLU DISTRICT" },
+   { label: "SIBI DISTRICT", value: "SIBI DISTRICT" },
+   { label: "ZIARAT DISTRICT", value: "ZIARAT DISTRICT" },
+   { label: "BARKHAN DISTRICT", value: "BARKHAN DISTRICT" },
+   { label: "KILLA SAIFULLAH DISTRICT", value: "KILLA SAIFULLAH DISTRICT" },
+   { label: "LORALAI DISTRICT", value: "LORALAI DISTRICT" },
+   { label: "MUSAKHEL DISTRICT", value: "MUSAKHEL DISTRICT" },
+   { label: "SHERANI DISTRICT", value: "SHERANI DISTRICT" },
+   { label: "ZHOB DISTRICT", value: "ZHOB DISTRICT" },
+   { label: "ISLAMABAD", value: "ISLAMABAD" },
+ ]);
+ //=========================end Bank Names=============================================//
+
+
 
 
 
@@ -167,9 +404,14 @@ const SignUpSchoolAdmin = ({route}) => {
     setDateOfBirth("");
     setTeacherQualification("");
     setTeacherProfessionalQualification("");
-    setBankName("");
-    setSalaryPaymentMethod("");
-
+    // setBankName("");
+    // setSalaryPaymentMethod("");
+    // setAccountTitle("");
+    // setIbanAccount("");
+    // setBankAccountNumber("");
+    // setBankDistrict("");
+    // setBankCity("");
+    setSelectedDistricts("");
 
   };
   const navigation = useNavigation();
@@ -198,10 +440,28 @@ const SignUpSchoolAdmin = ({route}) => {
           dateofbirth,
           teacherQualification,
           teacherprofessionalqualification,
-          bankName,
-          father_husband
+          // bankname,
+          father_husband,
+          // accounttitle,
+          // ibanAccount,
+          // bankaccountnumber,
+          // bankcity,
+          // bankdistrict,
+          // salaryPaymentMethod,
+          selectedDistricts
+
         };
-        const res = await registerSchoolAdmin(formData);
+
+        fetch('http://192.168.18.14:8000/api/user/schooladmin', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        
+        
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
@@ -250,311 +510,44 @@ const SignUpSchoolAdmin = ({route}) => {
     }
   };
 
-  // Distrct Section Here
-  const [districts, setDistricts] = useState([]);
-  const [tehsil, setTehsil] = useState([]);
+    //=========================div district tehsil=============================================//
+    const [districtShow, setDistrictsShow] = useState("");
+    const [selectedDistricts, setSelectedDistricts] = useState("");
+    const [districts, setDistricts] = useState([
+      { label: "Badin", value: "Badin" },
+      { label: "Dadu", value: "Dadu" },
+      { label: "Ghotki", value: "Ghotki" },
+      { label: "Hyderabad", value: "Hyderabad" },
+      { label: "Jacobabad", value: "Jacobabad" },
+      { label: "Jamshoro", value: "Jamshoro" },
+      { label: "Karachi Central", value: "Karachi Central" },
+      { label: "Kashmore", value: "Kashmore" },
+      { label: "Khairpur", value: "Khairpur" },
+      { label: "Larkana", value: "Larkana" },
+      { label: "Matiari", value: "Matiari" },
+      { label: "Mirpur Khas", value: "Mirpur Khas" },
+      { label: "Naushahro Feroze", value: "Naushahro Feroze" },
+      { label: "Shaheed Benazirabad", value: "Shaheed Benazirabad" },
+      { label: "Qambar Shahdadkot", value: "Qambar Shahdadkot" },
+      { label: "Sanghar", value: "Sanghar" },
+      { label: "Shikarpur", value: "Shikarpur" },
+      { label: "Sukkur", value: "Sukkur" },
+      { label: "Tando Allahyar", value: "Tando Allahyar" },
+      { label: "Tando Muhammad Khan", value: "Tando Muhammad Khan" },
+      { label: "Tharparkar", value: "Tharparkar" },
+      { label: "Thatta", value: "Thatta" },
+      { label: "Umerkot", value: "Umerkot" },
+      { label: "Sujawal", value: "Sujawal" },
+      { label: "Karachi East", value: "Karachi East" },
+      { label: "Karachi South", value: "Karachi South" },
+      { label: "Karachi West", value: "Karachi West" },
+      { label: "Korangi", value: "Korangi" },
+      { label: "Malir", value: "Malir" },
+    ]);
+  
+    //=========================div district tehsil end=============================================//
 
-  const citiesDropdownRef = useRef();
-  useEffect(() => {
-    setTimeout(() => {
-      setDistricts([
-        {
-          title: "Badin District",
-          tehsil: [
-            { title: "Badin Tehsil" },
-            { title: "Khoski Tehsil" },
-            { title: "Matli Tehsil" },
-            { title: "Shaheed Fazil Rahu Tehsil" },
-            { title: "Talhar Tehsil" },
-            { title: "Tando Bago Tehsil" },
-          ],
-        },
-        {
-          title: "Sujawal District",
-          tehsil: [
-            { title: "Jati Tehsil" },
-            { title: "Kharo Chan Tehsil" },
-            { title: "Mirpur Bathoro Tehsil" },
-            { title: "Shah Bandar Tehsil" },
-            { title: "Sujawal Tehsil" },
-          ],
-        },
-        {
-          title: "Thatta District",
-          tehsil: [
-            { title: "Ghorabari Tehsil" },
-            { title: "Keti Bunder" },
-            { title: "Mirpur Sakro Tehsil" },
-            { title: "Thatta Tehsil" },
-          ],
-        },
-        {
-          title: "Dadu District",
-          tehsil: [
-            { title: "Dadu Tehsil" },
-            { title: "Johi Tehsil" },
-            { title: "Khairpur Nathan Shah Tehsil" },
-            { title: "Mehar Tehsil" },
-          ],
-        },
-        {
-          title: "Hyderabad District",
-          tehsil: [
-            { title: "Hyderabad City Tehsil" },
-            { title: "Hyderabad Tehsil" },
-            { title: "Latifabad Tehsil" },
-            { title: "Qasimabad Tehsil" },
-          ],
-        },
-        {
-          title: "Jamshoro District",
-          tehsil: [
-            { title: "Jamshoro Tehsil" },
-            { title: "Sehwan Tehsil" },
-            { title: "Kotri Tehsil" },
-            { title: "Manjhand Tehsil" },
-            { title: "Thana Bulla Khan Tehsil" },
-          ],
-        },
-        {
-          title: "Matiari District",
-          tehsil: [
-            { title: "Hala Tehsil" },
-            { title: "Matiari Tehsil" },
-            { title: "Saeedabad Tehsil" },
-          ],
-        },
-        {
-          title: "Tando Allahyar District",
-          tehsil: [
-            { title: "Chamber Tehsil" },
-            { title: "Jhando Mari Tehsil" },
-            { title: "Tando Allahyar Tehsil " },
-            { title: "Nasarpur Tehsil" },
-          ],
-        },
-        {
-          title: "Tando Muhammad Khan District",
-          tehsil: [
-            { title: "Bulri Shah Karim Tehsil" },
-            { title: "Tando Ghulam Hyder Tehsil" },
-            { title: "Tando Mohammad Khan Tehsil" },
-          ],
-        },
-        {
-          title: "Karachi Central District",
-          tehsil: [
-            { title: "Gulberg Town" },
-            { title: "Liaquatabad Town" },
-            { title: "New Karachi Town" },
-            { title: "North Nazimabad Town" },
-            { title: "Nazimabad" },
-          ],
-        },
-        {
-          title: "Karachi East District",
-          tehsil: [
-            { title: "Gulshan Town" },
-            { title: "Jamshed Town" },
-            { title: "Ferozabad" },
-            { title: "Gulshan-E-Iqbal" },
-            { title: "Gulzar-E-Hijri" },
-          ],
-        },
-        {
-          title: "Karachi South District",
-          tehsil: [
-            { title: "Lyari Town" },
-            { title: "Saddar Town" },
-            { title: "Aram Bagh" },
-            { title: "Civil Line" },
-            { title: "Garden" },
-          ],
-        },
-        {
-          title: "Karachi West District",
-          tehsil: [
-            { title: "Orangi Town" },
-            { title: "Manghopir" },
-            { title: "Maripur" },
-            { title: "Mominabad" },
-          ],
-        },
-        {
-          title: "Korangi District",
-          tehsil: [
-            { title: "Model Colony" },
-            { title: "Shah Faisal Town" },
-            { title: "Landhi Town" },
-            { title: "Korangi Town" },
-          ],
-        },
-        {
-          title: "Malir District",
-          tehsil: [
-            { title: "Bin Qasim Town" },
-            { title: "Gadap Town" },
-            { title: "Malir Town" },
-            { title: "Jinnah" },
-            { title: "Ibrahim Hyderi" },
-            { title: "Murad Memon" },
-            { title: "Shah Murad" },
-          ],
-        },
-        {
-          title: "Keamari District",
-          tehsil: [
-            { title: "Keamari Town" },
-            { title: "Baldia Town" },
-            { title: "S.I.T.E. Town" },
-            { title: "Karachi Fish Harbour" },
-          ],
-        },
-        {
-          title: "Jacobabad District",
-          tehsil: [
-            { title: "Garhi Khairo Tehsil" },
-            { title: "Jacobabad Tehsil" },
-            { title: "Thul Tehsil" },
-          ],
-        },
-        {
-          title: "Kashmore District",
-          tehsil: [
-            { title: "Tangwani Tehsil" },
-            { title: "Kashmore Tehsil" },
-            { title: "Kandhkot Tehsil" },
-          ],
-        },
-        {
-          title: "Larkana District",
-          tehsil: [
-            { title: "Bakrani Tehsil" },
-            { title: "Dokri Tehsil" },
-            { title: "Larkana Tehsil" },
-            { title: "Ratodero Tehsil" },
-          ],
-        },
-        {
-          title: "Qambar-Shahdadkot District",
-          tehsil: [
-            { title: "Mirokhan Tehsil" },
-            { title: "Nasirabad Tehsil" },
-            { title: "Qambar Tehsil" },
-            { title: "Qubo Saeed Khan Tehsil" },
-            { title: "Shahdadkot Tehsil" },
-            { title: "Sijawal Junejo Tehsil" },
-            { title: "Warah Tehsil" },
-          ],
-        },
-        {
-          title: "Shikarpur District",
-          tehsil: [
-            { title: "Garhi Yasin Tehsil" },
-            { title: "Khanpur Tehsil" },
-            { title: "Lakhi Tehsil" },
-            { title: "Shikarpur Tehsil" },
-          ],
-        },
-        {
-          title: "Mirpur Khas District",
-          tehsil: [
-            { title: "Digri Tehsil" },
-            { title: "Jhuddo Tehsil" },
-            { title: "Kot Ghulam Muhammad Tehsil" },
-            { title: "Mirpur Khas Tehsil" },
-            { title: "Shujabad Tehsil" },
-            { title: "Sindhri Tehsil" },
-          ],
-        },
-        {
-          title: "Tharparkar District",
-          tehsil: [
-            { title: "Chachro Tehsil" },
-            { title: "Dahli Tehsil" },
-            { title: "Diplo Tehsil" },
-            { title: "Kaloi Tehsil" },
-            { title: "Islamkot Tehsil" },
-            { title: "Mithi Tehsil" },
-            { title: "Nagarparkar Tehsil" },
-          ],
-        },
-        {
-          title: "Umerkot District",
-          tehsil: [
-            { title: "Kunri Tehsil" },
-            { title: "Pithoro Tehsil" },
-            { title: "Samaro Tehsil" },
-            { title: "Umerkot Tehsil" },
-          ],
-        },
-        {
-          title: "Ghotki District",
-          tehsil: [
-            { title: "Daharki Tehsil" },
-            { title: "Ghotki Tehsil" },
-            { title: "Khangarh Tehsil (Khanpur)" },
-            { title: "Mirpur Mathelo Tehsil" },
-            { title: "Ubauro Tehsil" },
-          ],
-        },
-        {
-          title: "Khairpur Mirs District",
-          tehsil: [
-            { title: "Faiz Ganj Tehsil" },
-            { title: "Gambat Tehsil" },
-            { title: "Khairpur Tehsil Mirs" },
-            { title: "Kingri Tehsil" },
-            { title: "Kot Diji Tehsil" },
-            { title: "Nara Tehsil" },
-            { title: "Sobho Dero Tehsil" },
-            { title: "Thari Mirwah Tehsil" },
-          ],
-        },
-        {
-          title: "Sukkur District",
-          tehsil: [
-            { title: "New Sukkur Tehsil" },
-            { title: "Pano Aqil Tehsil" },
-            { title: "Rohri Tehsil" },
-            { title: "Salehpat Tehsil" },
-            { title: "Sukkur Tehsil" },
-          ],
-        },
-        {
-          title: "Naushahro Feroze District",
-          tehsil: [
-            { title: "Bhiria Tehsil" },
-            { title: "Kandioro Tehsil" },
-            { title: "Mehrabpur Tehsil" },
-            { title: "Moro Tehsil" },
-            { title: "Naushahro Feroze Tehsil" },
-          ],
-        },
-        {
-          title: "Shaheed Benazir Abad District",
-          tehsil: [
-            { title: "Daulatpur Tehsil (Qazi Ahmed)" },
-            { title: "Daur Tehsil" },
-            { title: "Nawabshah Tehsil" },
-            { title: "Sakrand Tehsil" },
-          ],
-        },
-        {
-          title: "Sanghar District",
-          tehsil: [
-            { title: "Jam Nawaz Ali Tehsil" },
-            { title: "Khipro Tehsil" },
-            { title: "Sanghar Tehsil" },
-            { title: "Shahdadpur Tehsil" },
-            { title: "Sinjhoro Tehsil" },
-            { title: "Tando Adam Khan Tehsil" },
-          ],
-        },
-      ]);
-    }, 1000);
-  }, []);
-  // Distrct Section End 
+
 
   return (
     <SafeAreaView style={{ height: "100%", backgroundColor: "#ffffff"}}>
@@ -593,18 +586,6 @@ const SignUpSchoolAdmin = ({route}) => {
         style={{ height: "100%" }}
       >
         <View style={{ justifyContent: "center", marginLeft: 30 }}>
-          <View>
-            <CustomDropdown
-              zIndex={3000}
-              zIndexInverse={1000}
-              open={qualificationshow}
-              value={teacherQualification}
-              items={qualifications}
-              setOpen={setQualifications}
-              setValue={setTeacherQualification}
-              setItems={setQualifications}
-            />
-          </View>
 
         
 
@@ -626,66 +607,17 @@ const SignUpSchoolAdmin = ({route}) => {
               keyboardType="numeric"
             />
           </View>
-          <View style={styleOne.dropdownsRow}>
-            <SelectDropdown
-              data={districts}
-              onSelect={(selectedItem, index) => {
-                citiesDropdownRef.current.reset();
-                setTehsil([]);
-                setTehsil(selectedItem.tehsil);
-              }}
-              defaultButtonText={"Select Province"}
-              buttonTextAfterSelection={(selectedItem, index) => {
-                return selectedItem.title;
-              }}
-              rowTextForSelection={(item, index) => {
-                return item.title;
-              }}
-              buttonStyle={styleOne.dropdown1BtnStyle}
-              buttonTextStyle={styleOne.dropdown1BtnTxtStyle}
-              renderDropdownIcon={(isOpened) => {
-                return (
-                  <FontAwesome
-                    name={isOpened ? "chevron-up" : "chevron-down"}
-                    color={"#444"}
-                    size={18}
-                  />
-                );
-              }}
-              dropdownIconPosition={"right"}
-              dropdownStyle={styleOne.dropdown1DropdownStyle}
-              rowStyle={styleOne.dropdown1RowStyle}
-              rowTextStyle={styleOne.dropdown1RowTxtStyle}
-            />
-            <View style={styleOne.divider} />
-            <SearchableDropdown
-              ref={citiesDropdownRef}
-              data={tehsil}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              defaultButtonText={"Select District"}
-              buttonTextAfterSelection={(selectedItem, index) => {
-                return selectedItem.title;
-              }}
-              rowTextForSelection={(item, index) => {
-                return item.title;
-              }}
-              buttonStyle={styleOne.dropdown2BtnStyle}
-              buttonTextStyle={styleOne.dropdown2BtnTxtStyle}
-              renderDropdownIcon={(isOpened) => {
-                return (
-                  <FontAwesome
-                    name={isOpened ? "chevron-up" : "chevron-down"}
-                    color={"#444"}
-                    size={18}
-                  />
-                );
-              }}
-              dropdownIconPosition={"right"}
-              dropdownStyle={styleOne.dropdown2DropdownStyle}
-              rowStyle={styleOne.dropdown2RowStyle}
-              rowTextStyle={styleOne.dropdown2RowTxtStyle}
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+            <CustomDropDown
+              placeholder="Select District"
+              zIndex={32000}
+              open={districtShow}
+              value={selectedDistricts}
+              items={districts}
+              setOpen={setDistrictsShow}
+              setValue={setSelectedDistricts}
+              setItems={setDistricts}
+              searchable
             />
           </View>
           <View>
@@ -786,9 +718,9 @@ const SignUpSchoolAdmin = ({route}) => {
               gender={gender}
               options={["Male", "Female", "Other"]}
               horizontal={true}
-              onChangeSelect={(opt, i) => {
+              onChangeSelect={(opt) => {
                 opt;
-                setGender(i);
+                setGender(opt);
               }}
             />
           </View>
@@ -800,9 +732,9 @@ const SignUpSchoolAdmin = ({route}) => {
               gender={religion}
               options={["Muslim", "Non-Muslim"]}
               horizontal={true}
-              onChangeSelect={(opt, i) => {
+              onChangeSelect={(opt) => {
                 opt;
-                setRegion(i);
+                setRegion(opt);
               }}
             />
           </View>
@@ -816,9 +748,9 @@ const SignUpSchoolAdmin = ({route}) => {
               gender={maritalStatus}
               options={["Married", "Un-married"]}
               horizontal={true}
-              onChangeSelect={(opt, i) => {
+              onChangeSelect={(opt) => {
                 opt;
-                setMaritalStatus(i);
+                setMaritalStatus(opt);
               }}
             />
           </View>
@@ -859,39 +791,38 @@ const SignUpSchoolAdmin = ({route}) => {
           
             />
           </View>
-          <View>
-            <CustomDropdown
-              searchable={true}
-              placeholder="Qualification"
-              zIndex={10000}
-              zIndexInverse={1000}
-              open={qualificationshow}
+    
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 7 }) }}>
+            <CustomDropDown
+              zIndex={14000}
+              placeholder="Select Qualification"
+              open={teacherprofessionalQualificationshow}
               value={teacherQualification}
               items={qualifications}
-              setOpen={setQualificationshow}
+              setOpen={setTeacherProfessionalQualificationShow}
               setValue={setTeacherQualification}
               setItems={setQualifications}
+              multiple={true}
             />
-            
           </View>
           
 
-          <View>
-            <CustomDropdown
-              placeholder="Professional Qualification"
-              zIndex={5000}
-              zIndexInverse={1000}
-              open={professhow}
+    
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }} >
+            <CustomDropDown
+              zIndex={11000}
+              placeholder="Select a Proffesional Qualification"
+              open={teacherQualificationShow}
               value={teacherprofessionalqualification}
               items={professionalQualifications}
-              setOpen={setProfesshow}
+              setOpen={setTeacherQualificationShow}
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
+              multiple={true}
             />
           </View>
 
-
-          <View style={{ margin: 20, right: 20 }}>
+          {/* <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
               {" "}
               Salary Disbursed
@@ -900,28 +831,90 @@ const SignUpSchoolAdmin = ({route}) => {
               gender={salaryPaymentMethod}
               options={["Cash", "Online"]}
               horizontal={true}
-              onChangeSelect={(opt, i) => {
+              onChangeSelect={(opt) => {
                 opt;
-                setSalaryPaymentMethod(i);
+                setSalaryPaymentMethod(opt);
               }}
             />
           </View>
 
+              
           <View>
-            {salaryPaymentMethod ? (
+            {salaryPaymentMethod === 'Online' ? (
               <>
+               <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+                <CustomDropDown
+                  placeholder="Bank Name"
+                  zIndex={14000}
+                  open={bankNameShow}
+                  value={bankname}
+                  items={banknames}
+                  setOpen={setBankNameShow}
+                  setValue={setBankName}
+                  setItems={setBankNames}
+                />
+              </View>
+             
+
+              <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}>
+                <CustomDropDown
+                  placeholder="Bank District"
+                  zIndex={11000}
+                  open={bankDistrictShow}
+                  value={bankdistrict}
+                  items={bankdistricts}
+                  setOpen={setBankDistrictShow}
+                  setValue={setBankDistrict}
+                  setItems={setBankDistricts}
+                />
+              </View>
+
+              <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
+                <CustomDropDown
+                  placeholder="Bank City"
+                  zIndex={9000}
+                  open={bankCityShow}
+                  value={bankcity}
+                  items={bankCities}
+                  setOpen={setBankCityShow}
+                  setValue={setBankCity}
+                  setItems={setBankCities}
+                />
+              </View>
+
                 <View>
                   <TextInput
                     style={styleOne.input}
-                    value={bankName}
-                    onChangeText={setBankName}
+                    value={accounttitle}
+                    onChangeText={setAccountTitle}
+                    placeholder="Account Title"
                     placeholderTextColor="gray"
-                    placeholder="Bank Name"
+                  />
+                </View>
+                <View>
+                  <TextInput
+                    style={styleOne.input}
+                    value={ibanAccount}
+                    onChangeText={setIbanAccount}
+                    placeholder="Bank account IBAN"
+                    placeholderTextColor="gray"
+                  />
+                </View>
+                <View>
+                  <TextInput
+                    style={styleOne.input}
+                    value={bankaccountnumber}
+                    onChangeText={setBankAccountNumber}
+                    placeholder="Bank account Number"
+                    placeholderTextColor="gray"
                   />
                 </View>
               </>
             ) : null}
-          </View>
+          </View> */}
+
+
+
       
      
         </View>

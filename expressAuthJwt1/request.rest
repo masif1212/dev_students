@@ -108,32 +108,34 @@ Content-Type: application/json
 GET http://192.168.18.64:8000/api/user/getstudent
 
 ###
-POST  http://192.168.18.26:8000/api/user/schooladmin
+POST  http://192.168.18.14:8000/api/user/schooladmin
 Content-Type: application/json
 
 {
-              "schoolName": "ee",
-              "S_NO":"1",
-              "schoolId": "dwd",
-              "image": "image",
-              "first_name": "first_name",
-              "last_name": "last_name",
-              "email": "sssss@email.com",
-              "password": "dfd",
-              "confirm_password" : "dfd",
-              "contact": "332423423",
-              "alt_contact": "4234234",
-              "cnic": "32423432",
-              "father_husband":"ayesha",
-              "gender":"M",
-              "religion":"Islam",
-              "maritalStatus":"Single",
-              "dateofbirth":"19/2/2022",
-              "qualifications":"MBBS",
-              "professhow":"MIT",
-              "bankName":"BOP",
-              "salaryPaymentMethod":"online"
-              
+  "S_NO": "6494",
+  "alt_contact": "8797",
+  "cnic": "979797",
+  "confirm_password": "1234",
+  "contact": "9797",
+  "dateofbirth": "2022-07-26",
+  "email": "Vsvsvs@gmail.com",
+  "father_husband": "Vzvz",
+  "first_name": "Gsvs",
+  "gender": "Male",
+  "image": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540mehdi_hasan%252FReactNativeAuthUI1/ImagePicker/312772bd-43b6-4cad-983a-f41d4e97b62b.mp4",
+  "last_name": "Gsgs",
+  "maritalStatus": "Married",
+  "password": "1234",
+  "religion": "Muslim",
+  "schoolId": "62c542db114bdf03a6800210",
+  "schoolName": "The Educators",
+  "selectedDistricts": "Badin",
+  "teacherQualification":  [
+    "Metric"
+  ],
+  "teacherprofessionalqualification":  [
+    "B.ED"
+  ]
 }
 
 ###

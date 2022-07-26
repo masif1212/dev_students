@@ -19,9 +19,16 @@ const initialState = {
   dateofbirth:"",
   maritalStatus:"",
   salaryPaymentMethod: "",
-  bankName:"",
+  // bankname:"",
   teacherQualification:"",
-  teacherprofessionalqualification:""
+  teacherprofessionalqualification:"",
+  // accounttitle:"",
+  // ibanAccount:"",
+  // bankaccountnumber:"",
+  // bankcity:"",
+  // bankdistrict:"",
+  // salaryPaymentMethod:"",
+  selectedDistricts:""
   
 
 }
@@ -48,9 +55,18 @@ export const schoolAdminSlice = createSlice({
       state.religion=action.payload.religion
       state.dateofbirth=action.payload.dateofbirth
       state.maritalStatus=action.payload.maritalStatus
-      state.bankName=action.payload.bankName
+      // state.bankname=action.payload.bankname
       state.teacherQualification=action.payload.teacherQualification
       state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
+      // state.accounttitle=action.payload.accounttitle
+      // state.ibanAccount=action.payload.ibanAccount
+      // state.bankaccountnumber=action.payload.bankaccountnumber
+      // state.bankcity=action.payload.bankcity
+      // state.bankdistrict=action.payload.bankdistrict
+      // state.salaryPaymentMethod=action.payload.salaryPaymentMethod
+      state.selectedDistricts=action.payload.selectedDistricts
+
+
 
     },
     unSetSchoolAdminInfo: (state, action) => {
@@ -72,9 +88,18 @@ export const schoolAdminSlice = createSlice({
       state.religion=action.payload.religion
       state.dateofbirth=action.payload.dateofbirth
       state.maritalStatus=action.payload.maritalStatus
-      state.bankName=action.payload.bankName
+      // state.bankname=action.payload.bankname
       state.teacherQualification=action.payload.teacherQualification
       state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
+      // state.accounttitle=action.payload.accounttitle
+      // state.ibanAccount=action.payload.ibanAccount
+      // state.bankaccountnumber=action.payload.bankaccountnumber
+      // state.bankcity=action.payload.bankcity
+      // state.bankdistrict=action.payload.bankdistrict
+      // state.salaryPaymentMethod=action.payload.salaryPaymentMethod
+      state.selectedDistricts=action.payload.selectedDistricts
+
+
 
   
     },
