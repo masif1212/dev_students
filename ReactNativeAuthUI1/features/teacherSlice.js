@@ -14,7 +14,8 @@ const initialState = {
   address_1: "",
   address_2: "",
   cnic: "",
-  city: ""
+  city: "",
+  
 
 }
 export const teacherSlice = createSlice({

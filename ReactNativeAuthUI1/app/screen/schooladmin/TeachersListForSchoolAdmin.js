@@ -86,7 +86,8 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                     alt_contact: item.alt_contact,
                     address_1: item.address_1,
                     address_2: item.address_2,
-                    city: item.city
+                    city: item.city,
+                    teacher_id_att:item.teacher_id_att
 
                   })
                 }
@@ -125,7 +126,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                    
                     }}
                   >
-                    <TeacherListPieChart outerRadius={'60%'} />
+                    {/* <TeacherListPieChart  outerRadius={'60%'} teacherId = {item.teacher_id_att}/> */}
                   </View>
                 </View>
               </TouchableOpacity>

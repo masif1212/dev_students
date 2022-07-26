@@ -56,7 +56,7 @@ GET  http://192.168.18.14:8000/api/user/getTeachers
 GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboard
 
 ###
-GET  http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/62c54aadc3027cd453dd357a
+GET  http://192.168.18.12:8000/api/user/getteacherattendancedashboardbyteacherid/62c54aadc3027cd453dd357a
 
 ###
 GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboardbyschoolid/62c542db114bdf03a6800210

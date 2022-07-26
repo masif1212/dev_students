@@ -21,7 +21,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
-import CustomDropdown from "../../Components/CustomDropDown";
+// import CustomDropdown from "../../Components/CustomDropDown";
 import { LogBox } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";

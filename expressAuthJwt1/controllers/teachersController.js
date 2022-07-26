@@ -168,10 +168,6 @@ class TeachersController {
   }
 
  
-
-
-
- 
 }
 
 export default TeachersController
