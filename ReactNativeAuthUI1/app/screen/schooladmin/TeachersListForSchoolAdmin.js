@@ -7,11 +7,9 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
-import TeacherListPieChart from "../../Components/customCard/TeachersListPieChart/TeachersListPieChart";
 
 
 
