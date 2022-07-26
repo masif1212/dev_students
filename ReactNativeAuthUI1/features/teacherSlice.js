@@ -48,9 +48,8 @@ const initialState = {
   address_1: "",
   address_2: "",
   cnic: "",
-  vaccinated: "",
-  vaccineshots: "",
-  vacinatedstatus: ""
+  city: "",
+  
 
 }
 export const teacherSlice = createSlice({

@@ -124,6 +124,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                    
                     }}
                   >
+                    {/* <TeacherListPieChart  outerRadius={'60%'} teacherId = {item.teacher_id_att}/> */}
                   </View>
                 </View>
               </TouchableOpacity>

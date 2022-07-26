@@ -18,7 +18,11 @@ import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 
-import CustomDropdown from '../../Components/CustomDropdown.js'
+
+import { useSelector } from "react-redux";
+import { useIsFocused } from "@react-navigation/native";
+// import CustomDropdown from "../../Components/CustomDropDown";
+import { LogBox } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SearchableDropdown from "react-native-searchable-dropdown";

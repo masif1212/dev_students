@@ -67,20 +67,19 @@ const Labels = ({ slices, }) => {
     })
 }
 
-const TeacherListPieChart = ({outerRadius,teacherId}) => {
+const TeacherListPieChart = ({outerRadius, teacherId}) => {
 
+    const newData = useSelector(state => state.teacherAttendance)
 
+    
     const focus = useIsFocused();
-//   const [teachers,setTeachers] = useState('');
- 
+    
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboardbyteacherid/${teacherId}`);
+  const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacherattendancedashboardbyteacherid/${teacherId}`);
   const students = await resp.json();
- 
-  
   const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
-
+    console.log(attendanceOfAbsent)
   const attendanceOfPresent = students.filter(x => x.attendance=='P').length;
   
   const attendanceOfLeave = students.filter(x => x.attendance=='L').length;
@@ -88,11 +87,14 @@ const fetchData = async () => {
   const attendanceOfTotalStudents = students.filter(x => x.attendance).length;
   
   const absentaverage = attendanceOfAbsent/attendanceOfTotalStudents*100;
+//   console.log(absentaverage)
   
   const presentaverage = attendanceOfPresent/attendanceOfTotalStudents*100;
+//   console.log(presentaverage)
   
   const leaveAverage = attendanceOfLeave/attendanceOfTotalStudents*100;
-  
+//   console.log(leaveAverage)
+
       data[0].status = Math.round(absentaverage) ;
       data[1].status = Math.round(presentaverage);
       data[2].status = Math.round(leaveAverage);
@@ -100,6 +102,7 @@ const fetchData = async () => {
 
 useLayoutEffect(() => {
  fetchData();
+    console.log(teacherId)
 }, [focus]);
 
 
