@@ -76,6 +76,20 @@ const SchoolAdminProfile = ({route}) => {
         <Text style={{
             marginTop:5,
             fontWeight:'bold'
+        }} >School Name</Text>
+        <Text>{route.params.schoolName}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
         }} >Email</Text>
         <Text>{route.params.email}</Text>
         <View
@@ -143,8 +157,53 @@ const SchoolAdminProfile = ({route}) => {
         <Text style={{
             marginTop:5,
             fontWeight:'bold'
-        }} >City</Text>
-        <Text>{route.params.city}</Text>
+        }} >Qualification</Text>
+        <Text>{route.params.teacherQualification}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Professional Qualification</Text>
+        <Text>{route.params.teacherprofessionalqualification}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Religion</Text>
+        <Text>{route.params.religion}</Text>
+
+        <View
+          style={{
+              marginTop:10,
+            borderBottomColor: "gray",
+            borderBottomWidth: 1,
+            width:'95%'
+          }}
+        />
+        <Text style={{
+            marginTop:5,
+            fontWeight:'bold'
+        }} >Gender</Text>
+        <Text>{route.params.gender}</Text>
+
+
+        
       
       </View>
       <View style={{

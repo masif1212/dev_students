@@ -19,7 +19,7 @@ const SchoolAdmin = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
     const data = await resp.json();
     setAdmin(data);
   };
@@ -86,7 +86,14 @@ const SchoolAdmin = ({ navigation, route }) => {
                     alt_contact:item.alt_contact,
                     cnic:item.cnic,
                     address_1:item.address_1,
-                    city:item.city
+                    address_2:item.address_2,
+                    schoolName:item.schoolName,
+                    gender: item.gender,
+                    religion:item.religion,
+                    maritalStatus:item.maritalStatus,
+                    teacherQualification:item.teacherQualification,
+                    teacherprofessionalqualification:item.teacherprofessionalqualification
+
                   })
                 }
               >

@@ -17,7 +17,7 @@ const TeachersListScreen = ({navigation, route})=> {
   const [teachers,setTeachers] = useState();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolid}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacher/${route.params.schoolid}`);
     const data = await resp.json();
     setTeachers(data);
   };
@@ -51,7 +51,24 @@ const TeachersListScreen = ({navigation, route})=> {
                     contact: item.contact,
                     alt_contact: item.alt_contact,
                     city: item.city,
-                    teacher_id_att:item.teacher_id_att
+                    teacher_id_att:item.teacher_id_att,
+                    schoolName:item.schoolName,
+                    gender: item.gender,
+                    religion:item.religion,
+                    maritalStatus:item.maritalStatus,
+                    staff_name:item.staff_name,
+                    staffPosition:item.staffPosition,
+                    dateofJoining:item.dateofJoining,
+                    contractstart:item.contractstart,
+                    contractend:item.contractend,
+                    teacherQualification:item.teacherQualification,
+                    teacherprofessionalqualification:item.teacherprofessionalqualification,
+                    teachingClass:item.teachingClass,
+                    teachingSubject:item.teachingSubject,
+                    SubjectSpec:item.SubjectSpec,
+                    father_name:item.father_name,
+                    districts:item.districts,
+                    selectedTehsil:item.selectedTehsil,
                   })
                 }
               >
