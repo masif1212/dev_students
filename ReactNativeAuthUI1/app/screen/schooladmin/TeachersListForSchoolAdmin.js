@@ -24,7 +24,6 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
     const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
-    console.log(data)
   };
   
   const focus = useIsFocused();

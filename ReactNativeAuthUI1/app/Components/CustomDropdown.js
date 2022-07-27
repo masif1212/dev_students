@@ -13,6 +13,10 @@ export default function CustomDropdown({searchable ,placeholder, multiple , zInd
     marginVertical: 12
    }}>
     <DropDownPicker
+          placeholderStyle={{
+              color: "grey",
+               fontWeight: "bold"
+                }}
          listMode="SCROLLVIEW"
         scrollViewProps={{
           nestedScrollEnabled: true,

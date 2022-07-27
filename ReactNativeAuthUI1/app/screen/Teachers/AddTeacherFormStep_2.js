@@ -2180,9 +2180,9 @@ const schoolId = route.params.schoolId;
 
   const getDate = () => {
     let tempDate = moment(dateofbirth).toString().split(" ");
-    return dateofbirth !== ""
+    return dateofbirth ? dateofbirth !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Date of Birth</Text>;
   };
   //===============================END DATE OF BIRTH========================//
   //=================== date of joining===============================//
@@ -2204,9 +2204,9 @@ const schoolId = route.params.schoolId;
 
   const getJoiningDate = () => {
     let tempDate = moment(dateofJoining).toString().split(" ");
-    return dateofJoining !== ""
+    return dateofJoining ? dateofJoining !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Joining Date</Text>;
   };
   //=========================END DATE OF JOINING=================================//
 
@@ -2231,9 +2231,9 @@ const schoolId = route.params.schoolId;
 
   const getContractStartDate = () => {
     let tempDate = moment(contractstart).toString().split(" ");
-    return contractstart !== ""
+    return contractstart ? contractstart !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Contract Start Date</Text>;
   };
   //===================CONTRACT START DATE END==================================//
 
@@ -2256,9 +2256,9 @@ const schoolId = route.params.schoolId;
 
   const getContractEndDate = () => {
     let tempDate = moment(contractend).toString().split(" ");
-    return contractend !== ""
+    return contractend ? contractend !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Contract End Date</Text>;
   };
   //===================CONTRACT END DATE END====================================//
   const [registerTeacher] = useRegisterTeachersMutation();
@@ -2330,7 +2330,7 @@ const schoolId = route.params.schoolId;
                 body: JSON.stringify(formData)
               }).then(res =>res.json())
                 .then(res => setMessage(res.message))
-                .then((res) => message !== "Email already exists" && "Unable to Register" ? navigation.navigate('TeachersListForSchoolAdmin') : null);     
+                .then((res) => message == "Email already exists" && "Unable to Register" ? null :  navigation.navigate('TeachersListForSchoolAdmin') );     
       } else {
         Toast.show({
           type: "warning",
@@ -2413,7 +2413,7 @@ const schoolId = route.params.schoolId;
     <SafeAreaView
       style={{ height: "100%", backgroundColor: "#ffffff", flex: 1 }}
     >
-    <View  style={{ marginTop: 40}}>
+    <View  style={{ marginTop: 40 , zIndex: 99}}>
     <Toast config={toastConfig} />
     </View>
     { message ?<Text style={{ fontSize: 15, paddingLeft: 30, color: 'green', fontWeight: 'bold'}}>{message}</Text> : null}
@@ -2430,6 +2430,7 @@ const schoolId = route.params.schoolId;
           <View style={{ ...(Platform.OS !== "android" && { zIndex: 6 }) }}>
             <CustomDropDown
               placeholder="Select Position"
+              
               zIndex={1000}
               open={positionShow}
               value={staffPosition}
@@ -2715,8 +2716,8 @@ const schoolId = route.params.schoolId;
               gender={salaryPaymentMethod}
               options={["Cash", "Online"]}
               horizontal={true}
-              onChangeSelect={(opt) => {
-                opt;
+              onChangeSelect={(opt, i) => {
+                i;
                 setSalaryPaymentMethod(opt);
               }}
             />
@@ -2737,6 +2738,7 @@ const schoolId = route.params.schoolId;
                     setOpen={setBankNameShow}
                     setValue={setBankName}
                     setItems={setBankNames}
+                    searchable
                   />
                 </View>
 
@@ -2752,6 +2754,7 @@ const schoolId = route.params.schoolId;
                     setOpen={setBankDistrictShow}
                     setValue={setBankDistrict}
                     setItems={setBankDistricts}
+                    searchable
                   />
                 </View>
 
@@ -2767,6 +2770,7 @@ const schoolId = route.params.schoolId;
                     setOpen={setBankCityShow}
                     setValue={setBankCity}
                     setItems={setBankCities}
+                    searchable
                   />
                 </View>
 
