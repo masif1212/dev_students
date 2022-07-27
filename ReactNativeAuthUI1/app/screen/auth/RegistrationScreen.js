@@ -133,7 +133,8 @@ const RegistrationScreen = () => {
         };
         const res = await registerUser(formData);
         if (res.data.status === "success") {
-          await storeToken(res.data.token); // Store Token in Storage
+          await storeToken(res.data.token); 
+          console.log(formData)// Store Token in Storage
           clearTextInput();
           navigation.navigate("UserPanelTab");
         }

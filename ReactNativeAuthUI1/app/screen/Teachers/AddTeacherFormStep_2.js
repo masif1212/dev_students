@@ -16,6 +16,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import RadioButton from "../../Components/RadioButton.js";
 import { useRegisterTeachersMutation } from "../../../services/userAuthApi.js";
 import Toast from "react-native-toast-message";
+import { toastConfig } from "../../../style";
+
 
 
 const AddTeacherForm2 = ({ navigation , route}) => {
@@ -37,66 +39,66 @@ const AddTeacherForm2 = ({ navigation , route}) => {
   const [bankaccountnumber, setBankAccountNumber] = useState("");
 
 // ================================================================================
+const [ message, setMessage ] = useState("");
+// const [staff_name, setStaff_Name] = useState("");
+//   const [father_name, setFather_Name] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [confirm_password, setconfirm_password] = useState("");
+//   const [contact, setContact] = useState("");
+//   const [alt_contact, setAlt_Contact] = useState("");
+//   const [address_1, setAdress_1] = useState("");
+//   const [address_2, setAdress_2] = useState("");
+//   const [cnic, setcnic] = useState("");
+//   const [image, setImage] = useState("");
+//   const [schoolName, setSchoolName] = useState("");
+//   const [schoolId, setSchoolId] = useState("");
+//   const [gender, setGender] = useState("");
+//   cons [religion, setReligion] = useState("");
+//   const [maritalStatus, setMaritalStatus] = useState("");
+//   const [teacherTraining, setTeacherTraining] = useState("");
+//   const [trainingnumber, setTrainingNumber] = useState("");
+//   const [lsuTrainingDate, setLsuTrainingDate] = useState("");
+//   const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
+//   const [mentionTraining, setMentiontraining] = useState("");
+//   const [selectDivision, setSelectDivision] = useState();
+//   const [selectedTehsil, setSeletctedTehsil] = useState();
+//   const [selectedDistricts, setSelectedDistricts] = useState();
+//   const [formerProgram, setFormerProgramm] = useState();
+//   const [teacherQualification, setTeacherQualification] = useState();
+//   const [
+//     teacherprofessionalqualification,
+//     setTeacherProfessionalQualification,
+//   ] = useState();
+const staffName = route.params.staff_name;
+const father_Name = route.params.father_name;
+const email = route.params.email;
+const password = route.params.password;
+const confirm_password = route.params.confirm_password;
+const contact = route.params.contact;
+const alt_contact = route.params.alt_contact;
+const address_1 = route.params.address_1;
+const address_2 = route.params.address_2;
+const cnic = route.params.cnic;
+const image = route.params.image;
+const schoolName = route.params.schoolName;
+const gender = route.params.gender;
+const religion = route.params.religion;
+const maritalStatus = route.params.maritalStatus;
+const teacherTraining = route.params.teacherTraining;
+const trainingNumber = route.params.trainingnumber;
+const lsuTrainingDate = route.params.lsuTrainingDate;
+const trainInWhichSubject = route.params.trainingInWhichSubject;
+const mentiontraining = route.params.mentionTraining;
+const selectDivision = route.params.division;
+const selectedDistricts = route.params.district;
+const seletctedTehsil = route.params.tehsil;
+const formerProgramm = route.params.formerProgram;
+const teacherQualification = route.params.teacherQualification;
+const teacherProfessionalQualification = route.params.teacherprofessionalqualification;
+const schoolId = route.params.schoolId;
 
-const [staff_name, setStaff_Name] = useState("");
-  const [father_name, setFather_Name] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm_password, setconfirm_password] = useState("");
-  const [contact, setContact] = useState("");
-  const [alt_contact, setAlt_Contact] = useState("");
-  const [address_1, setAdress_1] = useState("");
-  const [address_2, setAdress_2] = useState("");
-  const [cnic, setcnic] = useState("");
-  const [image, setImage] = useState("");
-  const [schoolName, setSchoolName] = useState("");
-  const [schoolId, setSchoolId] = useState("");
-  const [gender, setGender] = useState("");
-  const [religion, setReligion] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [teacherTraining, setTeacherTraining] = useState(false);
-  const [trainingnumber, setTrainingNumber] = useState("");
-  const [lsuTrainingDate, setLsuTrainingDate] = useState("");
-  const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
-  const [mentionTraining, setMentiontraining] = useState("");
-  const [selectDivision, setSelectDivision] = useState([]);
-  const [selectedTehsil, setSeletctedTehsil] = useState([]);
-  const [selectedDistricts, setSelectedDistricts] = useState("");
-  const [formerProgram, setFormerProgramm] = useState([]);
-  const [teacherQualification, setTeacherQualification] = useState([]);
-  const [
-    teacherprofessionalqualification,
-    setTeacherProfessionalQualification,
-  ] = useState([]);
 
-
-  useEffect(()=>{
-    setStaff(route.params.staff_name)
-    setFather_Name(route.params.father_name)
-    setEmail(route.params.email)
-    setPassword(route.params.password)
-    setconfirm_password(route.params.confirm_password)
-    setContact(route.params.contact)
-    setAdress_1(route.params.address_1)
-    setAdress_2(route.params.address_2)
-    setcnic(route.params.cnic)
-    setImage(route.params.image)
-    setSchoolName(route.params.schoolName)
-    setGender(route.params.gender)
-    setReligion(route.params.religion)
-    setMaritalStatus(route.params.maritalStatus)
-    setTeacherTraining(route.params.teacherTraining)
-    setTrainingNumber(route.params.trainingnumber)
-    setLsuTrainingDate(route.params.lsuTrainingDate)
-    setTrainInWhichSubject(route.params.trainingInWhichSubject)
-    setMentiontraining(route.params.mentionTraining)
-    setSelectDivision(route.params.division)
-    setSelectedDistricts(route.params.district)
-    setSeletctedTehsil(route.params.tehsil)
-    setFormerProgramm(route.params.formerProgram)
-    setTeacherQualification(route.params.teacherQualification)
-    setTeacherProfessionalQualification(route.params.teacherprofessionalqualification)
-  })
   const [subjectSpecShow, setSubjectSpecShow] = useState("");
   const [SubjectSpec, setSubjectSpec] = useState([]);
   const [subjectspecial, setSubjectSpecial] = useState([
@@ -203,7 +205,7 @@ const [staff_name, setStaff_Name] = useState("");
   // -==============================================================================================
   //=========================Bank Names=============================================//
   const [bankNameShow, setBankNameShow] = useState("");
-  const [bankname, setBankName] = useState("");
+  const [bankname, setBankName] = useState([]);
   const [banknames, setBankNames] = useState([
     { label: "Select Bank Name", value: "Select Bank Name" },
     { label: "Al Baraka Bank Limited", value: "Al Baraka Bank Limited" },
@@ -2178,9 +2180,9 @@ const [staff_name, setStaff_Name] = useState("");
 
   const getDate = () => {
     let tempDate = moment(dateofbirth).toString().split(" ");
-    return dateofbirth !== ""
+    return dateofbirth ? dateofbirth !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Date of Birth</Text>;
   };
   //===============================END DATE OF BIRTH========================//
   //=================== date of joining===============================//
@@ -2202,9 +2204,9 @@ const [staff_name, setStaff_Name] = useState("");
 
   const getJoiningDate = () => {
     let tempDate = moment(dateofJoining).toString().split(" ");
-    return dateofJoining !== ""
+    return dateofJoining ? dateofJoining !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Joining Date</Text>;
   };
   //=========================END DATE OF JOINING=================================//
 
@@ -2229,9 +2231,9 @@ const [staff_name, setStaff_Name] = useState("");
 
   const getContractStartDate = () => {
     let tempDate = moment(contractstart).toString().split(" ");
-    return contractstart !== ""
+    return contractstart ? contractstart !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Contract Start Date</Text>;
   };
   //===================CONTRACT START DATE END==================================//
 
@@ -2254,9 +2256,9 @@ const [staff_name, setStaff_Name] = useState("");
 
   const getContractEndDate = () => {
     let tempDate = moment(contractend).toString().split(" ");
-    return contractend !== ""
+    return contractend ? contractend !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Contract End Date</Text>;
   };
   //===================CONTRACT END DATE END====================================//
   const [registerTeacher] = useRegisterTeachersMutation();
@@ -2267,24 +2269,24 @@ const [staff_name, setStaff_Name] = useState("");
         const formData = {
           selectDivision,
           selectedDistricts,
-          selectedTehsil,
+          seletctedTehsil,
           schoolName,
-          staff_name,
+          staffName,
           gender,
           religion,
           maritalStatus,
-          formerProgram,
+          formerProgramm,
           teacherQualification,
-          teacherprofessionalqualification,
+          teacherProfessionalQualification,
           teacherTraining,
           lsuTrainingDate,
           trainInWhichSubject,
-          mentionTraining,
-          trainingnumber,
+          mentiontraining,
+          trainingNumber,
           cnic,
           address_1,
           address_2,
-          father_name,
+          father_Name,
           email,
           password,
           confirm_password,
@@ -2292,9 +2294,13 @@ const [staff_name, setStaff_Name] = useState("");
           alt_contact,
           schoolId,
           image,
+          staffPosition,
+          teachingClass,
           subjectSpeciality,
+          SubjectSpec,
           teachingmedium,
           teachingExperience,
+          experienceDuration,
           dateofbirth,
           dateofJoining,
           contractstart,
@@ -2311,35 +2317,20 @@ const [staff_name, setStaff_Name] = useState("");
           bankcity,
           ibanAccount,
           bankaccountnumber,
+          schoolstaff,
+          teachingSubject
         };
-
-            console.log(formData)
 
               fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
                 method: 'POST',
                 headers: {
-                  'Accept': 'application/json, text/plain, /',
+                  'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData)
-              }).then(res => res.json())
-                .then(res => console.log(res));
-              
-             
-
-        if (res.data.status === "success") {
-          await storeToken(res.data.token); // Store Token in Storage
-          clearTextInput();
-          navigation.goBack();
-        }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
-        }
+              }).then(res =>res.json())
+                .then(res => setMessage(res.message))
+                .then((res) => message == "Email already exists" && "Unable to Register" ? null :  navigation.navigate('TeachersListForSchoolAdmin') );     
       } else {
         Toast.show({
           type: "warning",
@@ -2405,19 +2396,31 @@ const [staff_name, setStaff_Name] = useState("");
     setconfirm_password("");
     setContact("");
     setAlt_Contact("");
-    setAdress_1("");
-    setAdress_2("");
+    setAddress_1("");
+    setAddress_2("");
     setcnic("");
     setImage("");
     setVaccinated("");
     setVaccineShots("");
     setVaccinatedStatus("");
+    setStaffPosition("");
+    setTeachingClass("");
+    setSchoolStaff("");
+    setTeachingSubject("")
   };
   //=====================clear text input================================//
   return (
     <SafeAreaView
       style={{ height: "100%", backgroundColor: "#ffffff", flex: 1 }}
     >
+    <View  style={{ marginTop: 40 , zIndex: 99}}>
+    <Toast config={toastConfig} />
+    </View>
+    { message ?<Text style={{ fontSize: 15, paddingLeft: 30, color: 'green', fontWeight: 'bold'}}>{message}</Text> : null}
+
+        
+
+
       <ScrollView
         nestedScrollEnabled={true}
         keyboardShouldPersistTaps="handled"
@@ -2427,6 +2430,7 @@ const [staff_name, setStaff_Name] = useState("");
           <View style={{ ...(Platform.OS !== "android" && { zIndex: 6 }) }}>
             <CustomDropDown
               placeholder="Select Position"
+              
               zIndex={1000}
               open={positionShow}
               value={staffPosition}
@@ -2474,7 +2478,7 @@ const [staff_name, setStaff_Name] = useState("");
               items={currentTeachingSubject}
               setOpen={setTeachingSubjectShow}
               setValue={setTeachingSubject}
-              setItems={setTeachingSubject}
+              setItems={setCurrentTeachingSubject}
               multiple={true}
             />
           </View>
@@ -2712,8 +2716,8 @@ const [staff_name, setStaff_Name] = useState("");
               gender={salaryPaymentMethod}
               options={["Cash", "Online"]}
               horizontal={true}
-              onChangeSelect={(opt) => {
-                opt;
+              onChangeSelect={(opt, i) => {
+                i;
                 setSalaryPaymentMethod(opt);
               }}
             />
@@ -2734,6 +2738,7 @@ const [staff_name, setStaff_Name] = useState("");
                     setOpen={setBankNameShow}
                     setValue={setBankName}
                     setItems={setBankNames}
+                    searchable
                   />
                 </View>
 
@@ -2749,6 +2754,7 @@ const [staff_name, setStaff_Name] = useState("");
                     setOpen={setBankDistrictShow}
                     setValue={setBankDistrict}
                     setItems={setBankDistricts}
+                    searchable
                   />
                 </View>
 
@@ -2764,6 +2770,7 @@ const [staff_name, setStaff_Name] = useState("");
                     setOpen={setBankCityShow}
                     setValue={setBankCity}
                     setItems={setBankCities}
+                    searchable
                   />
                 </View>
 
@@ -2835,7 +2842,9 @@ const [staff_name, setStaff_Name] = useState("");
               </>
             ) : null}
           </View>
+
         </View>
+
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity

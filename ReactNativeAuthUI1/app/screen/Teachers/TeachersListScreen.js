@@ -79,7 +79,7 @@ const TeachersListScreen = ({navigation, route})=> {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} source={{ uri: item.image }} />
+                    <Image style={styles.image} />
                   </View>
                   <View
                     style={{

@@ -388,9 +388,9 @@ const TeacherRegister = ({ navigation,routes }) => {
 
   const getLsuDate = () => {
     let tempDate = moment(lsuTrainingDate).toString().split(" ");
-    return lsuTrainingDate !== ""
+    return lsuTrainingDate ? lsuTrainingDate !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>LSU Date</Text>;
   };
   //===================LSU training DATE END====================================//
 
@@ -440,7 +440,6 @@ const TeacherRegister = ({ navigation,routes }) => {
             )}
           </TouchableOpacity>
         </View>
-        <Toast config={toastConfig} />
       </View>
 
       <ScrollView
@@ -498,6 +497,10 @@ const TeacherRegister = ({ navigation,routes }) => {
               placeholder="School Name"
               value={myData.schoolName}
               placeholderTextColor="gray"
+              placeholderStyle={{
+              color: "grey",
+               fontWeight: "bold"
+                }}
             />
           </View>
           <View>

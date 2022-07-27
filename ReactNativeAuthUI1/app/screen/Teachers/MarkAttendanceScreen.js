@@ -121,22 +121,22 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   )
 
   return (
-
-    <View style={{ height: windowHeight, width: '100%' }}>
-    
+    <>
+    <View style={{ paddingBottom: 70}}>
       <FlatList
         data={attendanceState}
         keyExtractor={(item, index) => index + ""}
-        style={{ maxWidth: '100%' }}
+        style={{ maxWidth: '100%', height:'100%', }}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
         extraData={attendanceState}
         renderItem={({ item, index }) => {
           return (
+           
+            
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%' }}>
            
-              <Text style={{ ...styles.columnRowTxt }}>{item.first_name + " " + item.last_name}</Text>
-              <ScrollView>
+              <Text style={{ ...styles.columnRowTxt }}>{item.staffName}</Text>
                 <View style={{ flexDirection: 'row', left: 95 }}>
                   <View
                     style={{
@@ -156,7 +156,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,
+                        height: 60,
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -193,7 +193,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
 
-                        height: 50,
+                        height: 60,
                         right: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -225,7 +225,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                       containerStyle={{
                         alignItems: 'center',
                         justifyContent: 'center',
-                        height: 50,
+                        height: 60,
                         right: 70,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -233,14 +233,19 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         backgroundColor: 'transparent',
                       }}
                     />
+                    
                   </View>
                 </View>
-              </ScrollView>
             </View>
           )
         }}
       />
-      <View>
+    
+    
+
+
+    </View>
+    <View>
         <TouchableOpacity
           onPress={handleFormSubmit}
           style={{
@@ -248,12 +253,13 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
             padding: 15,
             width: "90%",
             borderRadius: 40,
-            bottom:85,
-            
+            bottom:75,
             fontWeight: "bold",
             backgroundColor: "#5062BD",
             elevation: 1,
-            left:17
+            left:17,
+            position: 'relative'
+
 
           }}
         >
@@ -269,9 +275,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
           </Text>
         </TouchableOpacity>
       </View>
-
-
-    </View>
+    </>
   );
 }
 
@@ -285,14 +289,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#5062BD",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
+  
+    
+    
 
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
-    margin: 2,
+    padding:5,
     left: 8,
-   
+    
+  
   },
   tableRowtext: {
     left: 8

@@ -149,7 +149,7 @@ const TeacherAttendanceDetails = ({
                 left: 5,
               }}
             >
-              {route.params.first_name + " " + route.params.last_name}
+              {route.params.staffName}
             </Text>
             </View>
           
@@ -159,7 +159,7 @@ const TeacherAttendanceDetails = ({
        <View style={{bottom:19}}>
         <View style ={{left:100,bottom:1}}>
            <TeacherListPieChart
-              outerRadius={"90%"}
+              outerRadius={"70%"}
               teacherId={route.params.teacher_id_att}
             />
             </View>
@@ -229,7 +229,7 @@ const TeacherAttendanceDetails = ({
       <FlatList
         data={teachers}
         style={{ width: "100%" }}
-        keyExtractor={(item, index) => index + ""}
+        keyExtractor={(staffName) => staffName}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
         renderItem={({ item, index }) => {

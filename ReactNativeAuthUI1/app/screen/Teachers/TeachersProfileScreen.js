@@ -44,7 +44,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
           fontSize:20,
           top:-12
           
-        }}>{route.params.first_name + ' ' + route.params.last_name}
+        }}>{route.params.staffName}
         </Text>
         
         </View>
@@ -148,19 +148,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
         }} >alt_Contact</Text>
         <Text>+92 {route.params.alt_contact}</Text>
 
-        <View
-          style={{
-              marginTop:10,
-            borderBottomColor: "gray",
-            borderBottomWidth: 1,
-            width:'95%'
-          }}
-        />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Staff Name</Text>
-        <Text> {route.params.staff_name}</Text>
+
 
         <View
           style={{
@@ -218,20 +206,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
         }} >Teacher Qualification</Text>
         <Text> {route.params.teacherQualification}</Text>
 
-        <View
-          style={{
-              marginTop:10,
-            borderBottomColor: "gray",
-            borderBottomWidth: 1,
-            width:'95%'
-          }}
-        />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Teacher Professional Qualification</Text>
-        <Text> {route.params.teacherprofessionalqualification}</Text>
-
+        
         
         <View
           style={{
@@ -287,7 +262,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >District</Text>
-        <Text> {route.params.districts}</Text>
+        <Text> {route.params.selectedDistricts}</Text>
 
         <View
           style={{
@@ -301,7 +276,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Tehsil</Text>
-        <Text> {route.params.selectedTehsil}</Text>
+        <Text> {route.params.seletctedTehsil}</Text>
 
         
 
@@ -349,8 +324,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
 
             }}
             onPress= {()=> navigation.navigate("TeacherAttendanceDetails",{
-              first_name:route.params.first_name,
-              last_name:route.params.last_name,
+              staffName:route.params.staffName,
               teacher_id_att:route.params.teacher_id_att,
               
             }) }
