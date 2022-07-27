@@ -2205,7 +2205,7 @@ const SignUpSchoolAdmin = ({route}) => {
 
         };
 
-        fetch('http://192.168.18.26:8000/api/user/schooladmin', {
+        fetch('http://192.168.18.14:8000/api/user/schooladmin', {
           method: 'POST',
           headers: {
             Accept: 'application/json',

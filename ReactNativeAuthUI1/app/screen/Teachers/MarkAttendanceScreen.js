@@ -26,7 +26,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getSometeacher/${route.params.schoolId}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getSometeacher/${route.params.schoolId}`);
     const data = await resp.json();
     const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
     setAttendanceState(schAdminId)
@@ -60,7 +60,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
+    fetch('http://192.168.18.14:8000/api/user/teacherattendance', {
       method: "POST",
       body: JSON.stringify(attendance),
       headers: {
@@ -123,19 +123,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   return (
 
     <View style={{ height: windowHeight, width: '100%' }}>
-    <View style={{
-      alignItems:'center',
-      top:12
-    }}>
-    <Text style={
-      {
-        fontSize:18,
-        fontWeight:'bold',
-      }
-    }>
-      Mark Teacher Attendance
-      </Text>
-      </View>
+    
       <FlatList
         data={attendanceState}
         keyExtractor={(item, index) => index + ""}
@@ -145,14 +133,10 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         extraData={attendanceState}
         renderItem={({ item, index }) => {
           return (
-            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
+            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%' }}>
            
               <Text style={{ ...styles.columnRowTxt }}>{item.first_name + " " + item.last_name}</Text>
-              <ScrollView horizontal={true}
-                showsHorizontalScrollIndicator={true}
-                pagingEnabled={true}
-                style={{ width: '150%' }}
-              >
+              <ScrollView>
                 <View style={{ flexDirection: 'row', left: 95 }}>
                   <View
                     style={{
@@ -265,6 +249,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
             width: "90%",
             borderRadius: 40,
             bottom:85,
+            
             fontWeight: "bold",
             backgroundColor: "#5062BD",
             elevation: 1,
@@ -300,8 +285,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#5062BD",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
-    top:30
-    
 
   },
   tableRow: {
@@ -309,7 +292,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 2,
     left: 8,
-    top:34
+   
   },
   tableRowtext: {
     left: 8

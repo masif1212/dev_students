@@ -182,7 +182,19 @@ Content-Type: application/json
   
 
 ###
-POST http://192.168.18.64:8000/api/user/registerTeacher
+POST http://192.168.18.14:8000/api/user/send-reset-password-email
+Content-Type: application/json
 
+ {
+    "email":"hedits43@gmail.com"
+  }
 
-{:[["division","Hyderabad"],["districts",null],["tehsil","Talhar Tehsil"],["schoolName","The Educators"],["schoolId","62c542db114bdf03a6800210"],["staff_name","Hshs"],["gender","Female"],["religion","Muslim"],["maritalStatus","Un-married"],["teacherQualification","MPhil"],["formerProgramm",null],["teacherprofessionalqualification",false],["teacherTraining",true],["trainingnumber","50"],["lsuTrainingDate","2022-07-27"],["trainInWhichSubject","Gshss"],["mentionTraining","Susx"],["father_name","Dydyd"],["email","Afss@gmail.com"],["password","1111"],["confirm_password","1111"],["contact","44387080"],["alt_contact","74083086"],["image","file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FReactNativeAuthUI1-b31d29fe-6845-4839-939b-f2087d22be5a/ImagePicker/2793615f-5189-49f2-b5b6-4d4366c50b00.jpg"],["address_1","Gsgzx"],["address_2","Zuzud"],["staffPosition","Head Teacher"],["schoolstaff","Head Teacher"],["dateofbirth","2022-07-18"],["dateofJoining","2022-07-10"],["contractstart","2022-07-08"],["contractend","2022-07-09"],["teachingClass",["Academic Coordinator","Head Teacher"]],["teachingSubject",["Head Teacher","Academic Coordinator"]],["subjectSpeciality",true],["SubjectSpec",["IT","Science","SS"]],["teachingmedium","Urdu"],["teachingExperience",true],["experienceDuration","5 years and above"],["startingSalary","2000000008"],["currentSalary","20000808888549484"],["salaryPaymentMethod","Online"],["bankname","First Women Bank Limited"],["bankdistrict","LAKKI MARWAT DISTRICT"],["bankcity","Athmuqam"],["accounttitle","Sgvsd"],["ibanAccount","Dushd"],["bankaccountnumber","Shehd"],["vaccinated",true],["vaccineshots","Two Shot"],["vacinatedstatus","Partially Vaccinated"]]}
+###
+POST http://192.168.18.14:8000/api/user/reset-password/62d932616b322e7b3f958823/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmQ5MzI2MTZiMzIyZTdiM2Y5NTg4MjMiLCJpYXQiOjE2NTg5MjA1NDMsImV4cCI6MTY1ODkyMTQ0M30.33A4GBSUBoqtlIX6lLKKdDxSmubb7GfJizFlj6nXm_g
+Content-Type: application/json
+
+ {
+    "password":"12345",
+    "password_confirmation":"12345"
+
+  }
