@@ -11,13 +11,13 @@ const data = [
 
         key: 1,
         status:  40 , 
-        svg: { fill: '#D2F790' },
+        svg: { fill: '#A4C3DA' },
     },
     {
         attendance :"A",
         key: 2,
         status: 30  ,
-        svg: { fill: '#A4C3DA' }
+        svg: { fill: 'red' }
     },
     {
         attendance :"L",

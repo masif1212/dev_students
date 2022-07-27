@@ -156,25 +156,17 @@ const TeacherAttendanceDetails = ({
           {/* add pie here */}
           
     
-       <View style={{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        right:40,
-        bottom:15
-        
-       }}>
-        <View>
+       <View style={{bottom:19}}>
+        <View style ={{left:100,bottom:1}}>
            <TeacherListPieChart
-              outerRadius={"70%"}
+              outerRadius={"90%"}
               teacherId={route.params.teacher_id_att}
             />
             </View>
-         
-         
 
             <View style={{
-              right:80
+              bottom: 100,
+              left:10
             }}>
               <View style={{ flexDirection: "row" }}>
                 <View
@@ -221,15 +213,15 @@ const TeacherAttendanceDetails = ({
                 </Text>
             
               </View>
-              <Text>Overall Attendance %</Text>
+              <Text style={{
+                fontSize:18,
+                fontWeight:'bold',
+                top:8
+              }}>Overall Attendance %</Text>
             </View>
           
               </View>
              
-
-
-           
-
           
           </View>
         </View>
@@ -318,7 +310,8 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    top:15
+    top:10,
+    height:'38%'
   },
   textInput: {
     borderWidth: 1,

@@ -130,7 +130,7 @@ const SchoolAdmin = ({ navigation, route }) => {
                    
                     }}
                   >
-                    <Pie outerRadius={'50%'} />
+                    {/* <Pie outerRadius={'50%'} /> */}
                   </View>
                 </View>
               </TouchableOpacity>
