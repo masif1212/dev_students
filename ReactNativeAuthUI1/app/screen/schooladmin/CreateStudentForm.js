@@ -22,8 +22,8 @@ import RadioButton from "../../Components/RadioButton";
 import Checkbox from "expo-checkbox";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
-import DropDownStudent from "../../Components/DropDownStudent.js";
-import DropDownReligion from "../../Components/DropDownReligion.js";
+import CustomDropDown from "../../Components/CustomDropdown";
+
 
 
 
@@ -91,40 +91,219 @@ const CreateStudentForm = () => {
   //==================DROPDOWN=================================================//
 
 
-  const selectreligion = [
-  {religion : 'Islam'},
-  {religion : 'Hinduism'},
-  {religion : 'Buddhism'},
-  {religion : 'Christianity'},
-  {religion : 'Sikhism'},
-  {religion : 'Ethnic religions'},
-  {religion : 'Irreligious and atheist'},
-  {religion : 'Jews'},
-  {religion : 'Others'}
-]
+      //=====================================fetch api end====================================//
+  const [divisionShow, setDivisionShow] = useState("");
+  const [selectDivision, setSelectDivision] = useState([]);
+  const [division, setDivision] = useState([
+    { label: "Banbhore", value: "Banbhore" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Karachi", value: "Karachi" },
+    { label: "Sukkur", value: "Sukkur" },
+    { label: "Larkana", value: "Larkana" },
+    { label: "Mirpur Khas", value: "Mirpur Khas" },
+    { label: "Shaheed Benazirabad", value: "Shaheed Benazirabad" },
+  ]);
 
-const onSelectReligion =(item)=> (
-  setReligion(item)
+  //=========================div district tehsil=============================================//
 
-)
-
-
-  const morneven = [
+  //=====================================fetch api end====================================//
+  const [tehsilShow, setTehsilShow] = useState("");
+  const [selectedTehsil, setSeletctedTehsil] = useState([]);
+  const [tehsil, setTehsil] = useState([
+    { label: "Select Tehsil", value: "Select Tehsil" },
+    { label: "Badin Tehsil", value: "Badin Tehsil" },
+    { label: "Khoski Tehsil", value: "Khoski Tehsil" },
+    { label: "Matli Tehsil", value: "Matli Tehsil" },
+    { label: "Shaheed Fazil Rahu Tehsil", value: "Shaheed Fazil Rahu Tehsil" },
+    { label: "Talhar Tehsil", value: "Talhar Tehsil" },
+    { label: "Tando Bago Tehsil", value: "Tando Bago Tehsil" },
+    { label: "Jati Tehsil", value: "Jati Tehsil" },
+    { label: "Kharo Chan Tehsil", value: "Kharo Chan Tehsil" },
+    { label: "Mirpur Bathoro Tehsil", value: "Mirpur Bathoro Tehsil" },
+    { label: "Shah Bandar Tehsil", value: "Shah Bandar Tehsil" },
+    { label: "Sujawal Tehsil", value: "Sujawal Tehsil" },
+    { label: "Ghorabari Tehsil", value: "Ghorabari Tehsil" },
+    { label: "Keti Bunder", value: "Keti Bunder" },
+    { label: "Mirpur Sakro Tehsil", value: "Mirpur Sakro Tehsil" },
+    { label: "Thatta Tehsil", value: "Thatta Tehsil" },
+    { label: "Dadu Tehsil", value: "Dadu Tehsil" },
+    { label: "Johi Tehsil", value: "Johi Tehsil" },
     {
-      id: 1,
-      currentshift: 'Morning'
+      label: "Khairpur Nathan Shah Tehsil",
+      value: "Khairpur Nathan Shah Tehsil",
     },
+    { label: "Mehar Tehsil", value: "Mehar Tehsil" },
+    { label: "Hyderabad City Tehsil", value: "Hyderabad City Tehsil" },
+    { label: "Hyderabad Tehsil", value: "Hyderabad Tehsil" },
+    { label: "Latifabad Tehsil", value: "Latifabad Tehsil" },
+    { label: "Qasimabad Tehsil", value: "Qasimabad Tehsil" },
+    { label: "Jamshoro Tehsil", value: "Jamshoro Tehsil" },
+    { label: "Sehwan Tehsil", value: "Sehwan Tehsil" },
+    { label: "Kotri Tehsil", value: "Kotri Tehsil" },
+    { label: "Manjhand Tehsil", value: "Manjhand Tehsil" },
+    { label: "Thana Bulla Khan Tehsil", value: "Thana Bulla Khan Tehsil" },
+    { label: "Hala Tehsil", value: "Hala Tehsil" },
+    { label: "Matiari Tehsil", value: "Matiari Tehsil" },
+    { label: "Saeedabad Tehsil", value: "Saeedabad Tehsil" },
+    { label: "Chamber Tehsil", value: "Chamber Tehsil" },
+    { label: "Jhando Mari Tehsil", value: "Jhando Mari Tehsil" },
+    { label: "Tando Allahyar Tehsil ", value: "Tando Allahyar Tehsil" },
+    { label: "Nasarpur Tehsil", value: "Nasarpur Tehsil" },
+    { label: "Bulri Shah Karim Tehsil", value: "Bulri Shah Karim Tehsil" },
+    { label: "Tando Ghulam Hyder Tehsil", value: "Tando Ghulam Hyder Tehsil" },
     {
-      id: 2,
-      currentshift: 'Evening'
-    }
-  ]
+      label: "Tando Mohammad Khan Tehsil",
+      value: "Tando Mohammad Khan Tehsil",
+    },
+    { label: "Gulberg Town", value: "Gulberg Town" },
+    { label: "Liaquatabad Town", value: "Liaquatabad Town" },
+    { label: "New Karachi Town", value: "New Karachi Town" },
+    { label: "North Nazimabad Town", value: "North Nazimabad Town" },
+    { label: "Nazimabad", value: "Nazimabad" },
+    { label: "Gulshan Town", value: "Gulshan Town" },
+    { label: "Jamshed Town", value: "Jamshed Town" },
+    { label: "Ferozabad", value: "Ferozabad" },
+    { label: "Gulshan-E-Iqbal", value: "Gulshan-E-Iqbal" },
+    { label: "Gulzar-E-Hijri", value: "Gulzar-E-Hijri" },
+    { label: "Lyari Town", value: "Lyari Town" },
+    { label: "Saddar Town", value: "Saddar Town" },
+    { label: "Aram Bagh", value: "Aram Bagh" },
+    { label: "Civil Line", value: "Civil Line" },
+    { label: "Garden", value: "Garden" },
+    { label: "Orangi Town", value: "Orangi Town" },
+    { label: "Manghopir", value: "Manghopir" },
+    { label: "Maripur", value: "Maripur" },
+    { label: "Mominabad", value: "Mominabad" },
+    { label: "Model Colony", value: "Model Colony" },
+    { label: "Shah Faisal Town", value: "Shah Faisal Town" },
+    { label: "Landhi Town", value: "Landhi Town" },
+    { label: "Korangi Town", value: "Korangi Town" },
+    { label: "Bin Qasim Town", value: "Bin Qasim Town" },
+    { label: "Gadap Town", value: "Gadap Town" },
+    { label: "Malir Town", value: "Malir Town" },
+    { label: "Jinnah", value: "Jinnah" },
+    { label: "Ibrahim Hyderi", value: "Ibrahim Hyderi" },
+    { label: "Murad Memon", value: "Murad Memon" },
+    { label: "Shah Murad", value: "Shah Murad" },
+    { label: "Keamari Town", value: "Keamari Town" },
+    { label: "Baldia Town", value: "Baldia Town" },
+    { label: "S.I.T.E. Town", value: "S.I.T.E Town" },
+    { label: "Karachi Fish Harbour", value: "Karachi Fish Harbour" },
+    { label: "Garhi Khairo Tehsil", value: "Garhi Khairo Tehsil" },
+    { label: "Jacobabad Tehsil", value: "Jacobabad Tehsil" },
+    { label: "Thul Tehsil", value: "Thul Tehsil" },
+    { label: "Tangwani Tehsil", value: "Tangwani Tehsil" },
+    { label: "Kashmore Tehsil", value: "Kashmore Tehsil" },
+    { label: "Kandhkot Tehsil", value: "Kandhkot Tehsil" },
+    { label: "Bakrani Tehsil", value: "Bakrani Tehsil" },
+    { label: "Dokri Tehsil", value: "Dokri Tehsil" },
+    { label: "Larkana Tehsil", value: "Larkana Tehsil" },
+    { label: "Ratodero Tehsil", value: "Ratodero Tehsil" },
+    { label: "Mirokhan Tehsil", value: "Mirokhan Tehsil" },
+    { label: "Nasirabad Tehsil", value: "Nasirabad Tehsil" },
+    { label: "Qambar Tehsil", value: "Qambar Tehsil" },
+    { label: "Qubo Saeed Khan Tehsil", value: "Qubo Saeed Khan Tehsil" },
+    { label: "Shahdadkot Tehsil", value: "Shahdadkot Tehsil" },
+    { label: "Sijawal Junejo Tehsil", value: "Sijawal Junejo Tehsil" },
+    { label: "Warah Tehsil", value: "Warah Tehsil" },
+    { label: "Garhi Yasin Tehsil", value: "Garhi Yasin Tehsil" },
+    { label: "Khanpur Tehsil", value: "Khanpur Tehsil" },
+    { label: "Lakhi Tehsil", value: "Lakhi Tehsil" },
+    { label: "Shikarpur Tehsil", value: "Shikarpur Tehsil" },
+    { label: "Digri Tehsil", value: "Digri Tehsil" },
+    { label: "Jhuddo Tehsil", value: "Jhuddo Tehsil" },
+    {
+      label: "Kot Ghulam Muhammad Tehsil",
+      value: "Kot Ghulam Muhammad Tehsil",
+    },
+    { label: "Mirpur Khas Tehsil", value: "Mirpur Khas Tehsil" },
+    { label: "Shujabad Tehsil", value: "Shujabad Tehsil" },
+    { label: "Sindhri Tehsil", value: "Sindhri Tehsil" },
+    { label: "Chachro Tehsil", value: "Chachro Tehsil" },
+    { label: "Dahli Tehsil", value: "Dahli Tehsil" },
+    { label: "Diplo Tehsil", value: "Diplo Tehsil" },
+    { label: "Kaloi Tehsil", value: "Kaloi Tehsil" },
+    { label: "Islamkot Tehsil", value: "Islamkot Tehsil" },
+    { label: "Mithi Tehsil", value: "Mithi Tehsil" },
+    { label: "Nagarparkar Tehsil", value: "Nagarparkar Tehsil" },
+    { label: "Kunri Tehsil", value: "Kunri Tehsil" },
+    { label: "Pithoro Tehsil", value: "Pithoro Tehsil" },
+    { label: "Samaro Tehsil", value: "Samaro Tehsil" },
+    { label: "Umerkot Tehsil", value: "Umerkot Tehsil" },
+    { label: "Daharki Tehsil", value: "Daharki Tehsil" },
+    { label: "Ghotki Tehsil", value: "Ghotki Tehsil" },
+    { label: "Khangarh Tehsil (Khanpur)", value: "Khangarh Tehsil (Khanpur)" },
+    { label: "Mirpur Mathelo Tehsil", value: "Mirpur Mathelo Tehsil" },
+    { label: "Ubauro Tehsil", value: "Ubauro Tehsil" },
+    { label: "Faiz Ganj Tehsil", value: "Faiz Ganj Tehsil" },
+    { label: "Gambat Tehsil", value: "Gambat Tehsil" },
+    { label: "Khairpur Tehsil Mirs", value: "Khairpur Tehsil Mirs" },
+    { label: "Kingri Tehsil", value: "Kingri Tehsil" },
+    { label: "Kot Diji Tehsil", value: "Kot Diji Tehsil" },
+    { label: "Nara Tehsil", value: "Nara Tehsil" },
+    { label: "Sobho Dero Tehsil", value: "Sobho Dero Tehsil" },
+    { label: "Thari Mirwah Tehsil", value: "Thari Mirwah Tehsil" },
+    { label: "New Sukkur Tehsil", value: "New Sukkur Tehsil" },
+    { label: "Pano Aqil Tehsil", value: "Pano Aqil Tehsil" },
+    { label: "Rohri Tehsil", value: "Rohri Tehsil" },
+    { label: "Salehpat Tehsil", value: "Salehpat Tehsil" },
+    { label: "Sukkur Tehsil", value: "Sukkur Tehsil" },
+    { label: "Bhiria Tehsil", value: "Bhiria Tehsil" },
+    { label: "Kandioro Tehsil", value: "Kandioro Tehsil" },
+    { label: "Mehrabpur Tehsil", value: "Mehrabpur Tehsil" },
+    { label: "Moro Tehsil", value: "Moro Tehsil" },
+    { label: "Naushahro Feroze Tehsil", value: "Naushahro Feroze Tehsil" },
+    {
+      label: "Daulatpur Tehsil (Qazi Ahmed)",
+      value: "Daulatpur Tehsil (Qazi Ahmed)",
+    },
+    { label: "Daur Tehsil", value: "Daur Tehsil" },
+    { label: "Nawabshah Tehsil", value: "Nawabshah Tehsil" },
+    { label: "Sakrand Tehsil", value: "Sakrand Tehsil" },
+    { label: "Jam Nawaz Ali Tehsil", value: "Jam Nawaz Ali Tehsil" },
+    { label: "Khipro Tehsil", value: "Khipro Tehsil" },
+    { label: "Sanghar Tehsil", value: "Sanghar Tehsil" },
+    { label: "Shahdadpur Tehsil", value: "Shahdadpur Tehsil" },
+    { label: "Sinjhoro Tehsil", value: "Sinjhoro Tehsil" },
+    { label: "Tando Adam Khan Tehsil", value: "Tando Adam Khan Tehsil" },
+  ]);
 
-  const onSelect =(item)=> (
-    setCurrentShift(item)
+  //=========================div district tehsil=============================================//
+  const [districtShow, setDistrictsShow] = useState("");
+  const [selectedDistricts, setSelectedDistricts] = useState("");
+  const [districts, setDistricts] = useState([
+    { label: "Badin", value: "Badin" },
+    { label: "Dadu", value: "Dadu" },
+    { label: "Ghotki", value: "Ghotki" },
+    { label: "Hyderabad", value: "Hyderabad" },
+    { label: "Jacobabad", value: "Jacobabad" },
+    { label: "Jamshoro", value: "Jamshoro" },
+    { label: "Karachi Central", value: "Karachi Central" },
+    { label: "Kashmore", value: "Kashmore" },
+    { label: "Khairpur", value: "Khairpur" },
+    { label: "Larkana", value: "Larkana" },
+    { label: "Matiari", value: "Matiari" },
+    { label: "Mirpur Khas", value: "Mirpur Khas" },
+    { label: "Naushahro Feroze", value: "Naushahro Feroze" },
+    { label: "Shaheed Benazirabad", value: "Shaheed Benazirabad" },
+    { label: "Qambar Shahdadkot", value: "Qambar Shahdadkot" },
+    { label: "Sanghar", value: "Sanghar" },
+    { label: "Shikarpur", value: "Shikarpur" },
+    { label: "Sukkur", value: "Sukkur" },
+    { label: "Tando Allahyar", value: "Tando Allahyar" },
+    { label: "Tando Muhammad Khan", value: "Tando Muhammad Khan" },
+    { label: "Tharparkar", value: "Tharparkar" },
+    { label: "Thatta", value: "Thatta" },
+    { label: "Umerkot", value: "Umerkot" },
+    { label: "Sujawal", value: "Sujawal" },
+    { label: "Karachi East", value: "Karachi East" },
+    { label: "Karachi South", value: "Karachi South" },
+    { label: "Karachi West", value: "Karachi West" },
+    { label: "Korangi", value: "Korangi" },
+    { label: "Malir", value: "Malir" },
+  ]);
 
-  )
-    
+  //=========================div district tehsil end=============================================//
 
 
 
@@ -152,6 +331,9 @@ const onSelectReligion =(item)=> (
     setLastSchool("");
     setReasonLeft("");
     setReligion("");
+    setSelectDivision("");
+    setSelectedDistricts("");
+    setSeletctedTehsil("");
 
   };
   const navigation = useNavigation();
@@ -183,7 +365,10 @@ const onSelectReligion =(item)=> (
         currentshift,
         lastschool,
         reasonleft,
-        religion
+        religion,
+        selectDivision,
+        selectedTehsil,
+        selectedDistricts
 
       };
       const res = await registerStudent(formData);
@@ -273,6 +458,15 @@ const onSelectReligion =(item)=> (
           <View>
             <TextInput
               style={styleOne.input}
+              value={roll_no}
+              onChangeText={setRoll_no}
+              placeholderTextColor='gray'
+              placeholder="Set Student Roll No."
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styleOne.input}
               value={first_name}
               onChangeText={setFirst_Name}
               placeholderTextColor='gray'
@@ -347,15 +541,7 @@ const onSelectReligion =(item)=> (
               placeholder="Address 2"
             />
           </View>
-          <View>
-            <TextInput
-              style={styleOne.input}
-              value={roll_no}
-              onChangeText={setRoll_no}
-              placeholderTextColor='gray'
-              placeholder="Set Student Roll No."
-            />
-          </View>
+      
           <View>
             <TextInput
               style={styleOne.input}
@@ -375,22 +561,29 @@ const onSelectReligion =(item)=> (
             />
           </View>
 
-          <View style={{margin: 10}} >
-            <DropDownStudent 
-              value={currentshift}
-              data={morneven}
-              onSelect={onSelect}
-              placeholder="Select Shift"
-            />
+          <View style={{ margin: 20, right: 20 }}>
+            <RadioButton
+              gender={currentshift}
+              options={['Morning', 'Evening']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setCurrentShift(opt);
+              }} />
+          </View>
+          <View style={styleOne.input}></View>
+          <View style={{ margin: 20, right: 20 }}>
+            <RadioButton
+              gender={religion}
+              options={['Muslim', 'Non Muslim']}
+              horizontal={true}
+              onChangeSelect={(opt, i) => {
+                (opt)
+                setReligion(opt);
+              }} />
           </View>
 
-          <View style={{margin: 10}} >
-            <DropDownReligion 
-              value={religion}
-              data={selectreligion}
-              onSelectReligion={onSelectReligion}
-            />
-          </View>
+      
 
           <View>
             <TextInput
@@ -401,6 +594,50 @@ const onSelectReligion =(item)=> (
               placeholder="City"
             />
           </View>
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 20 }) }}>
+            <CustomDropDown
+              zIndexInverse={6000}
+              zIndex={10000000}
+              placeholder="Select Region"
+              open={divisionShow}
+              value={selectDivision}
+              items={division}
+              setOpen={setDivisionShow}
+              setValue={setSelectDivision}
+              setItems={setDivision}
+              searchable
+            />
+          </View>
+
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+            <CustomDropDown
+              placeholder="Select District"
+              zIndex={32000}
+              open={districtShow}
+              value={selectedDistricts}
+              items={districts}
+              setOpen={setDistrictsShow}
+              setValue={setSelectedDistricts}
+              setItems={setDistricts}
+              searchable
+            />
+          </View>
+
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 9 }) }}>
+            <CustomDropDown
+              placeholder="Select Tehsil"
+              zIndex={22000}
+              open={tehsilShow}
+              value={selectedTehsil}
+              items={tehsil}
+              setOpen={setTehsilShow}
+              setValue={setSeletctedTehsil}
+              setItems={setTehsil}
+              searchable
+            />
+          </View>
+
+
 
           <View style={{ flexDirection: 'row' }}>
 
@@ -432,13 +669,13 @@ const onSelectReligion =(item)=> (
               horizontal={true}
               onChangeSelect={(opt, i) => {
                 (opt)
-                setGender(i);
+                setGender(opt);
               }} />
           </View>
 
 
 
-          <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{left:12, flex: 1, flexDirection: "row" }}>
             <Checkbox
               value={disability}
               onValueChange={() => setDisability(!disability)}
