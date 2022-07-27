@@ -21,7 +21,10 @@ const initialState = {
   currentshift: "",
   lastschool:"",
   reasonleft: "",
-  religion :""
+  religion :"",
+  selectDivision:"",
+  selectedTehsil:"",
+  selectedDistricts:""
 }
 export const studentSlice = createSlice({
   name: 'student_info',
@@ -51,6 +54,12 @@ export const studentSlice = createSlice({
       state.student_class = action.payload.student_class
       state.section = action.payload.section
       state.city = action.payload.city
+      state.selectDivision = action.payload.selectDivision
+      state.selectedDistricts = action.payload.selectedDistricts
+      state.selectedTehsil = action.payload.selectedDistricts
+
+
+
     },
     unSetStudentInfo: (state, action) => {
       state.religion=action.payload.religion
@@ -77,6 +86,10 @@ export const studentSlice = createSlice({
       state.student_class = action.payload.student_class
       state.section = action.payload.section
       state.city = action.payload.city
+      state.selectDivision = action.payload.selectDivision
+      state.selectedDistricts = action.payload.selectedDistricts
+      state.selectedTehsil = action.payload.selectedDistricts
+
     },
   }
 })

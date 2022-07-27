@@ -36,7 +36,7 @@ const SideBar = ({ ...props }) => {
         justifyContent:'center',
         bottom:10
         }}>
-     { Image.length> 0 ? <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : myData.image }}/> : null }
+     <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : myData.image }}/>
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white",}}>{myData.firstName + " "+myData.lastName}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" ,}}>{myData.email}</Text>
         

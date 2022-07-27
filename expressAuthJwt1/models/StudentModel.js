@@ -26,12 +26,14 @@ const studentSchema = new mongoose.Schema({
   disability: { type: Boolean},
   disabledetail: { type:String},
   dateofbirth :{type:String, required: true},
-  currentshift:{type: Map, of: String},
-  religion:{type: Map, of: String, required: true},
+  currentshift:{type:String},
+  religion:{ type:String},
   date_of_admission:  {type: Date, default: Date.now},
   lastschool : { type: String, required: true, trim: true},
   reasonleft: { type: String, required: true, trim: true},
-
+  selectDivision: { type: String, required: true, trim: true},
+  selectedTehsil: { type: String, required: true, trim: true},
+  selectedDistricts: { type: String, required: true, trim: true}
 })
 
 // Model
