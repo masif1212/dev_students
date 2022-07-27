@@ -27,6 +27,7 @@ const SchoolDashboardScreen = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (isSuccess) {
+      
       dispatch(
         setSchoolAdminInfo({
           id: data.user._id,

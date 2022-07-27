@@ -21,7 +21,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${newData.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
   };
@@ -76,17 +76,33 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("TeachersProfile", {
-                    schoolName:item.schoolName,
-                    image: item.image,
-                    first_name: item.first_name,
-                    last_name: item.last_name,
+                    teacher_id_att:item.teacher_id_att,
+                    staffName:item.staffName,
                     email: item.email,
-                    contact:item.contact,
-                    alt_contact: item.alt_contact,
+                    image: item.image,
                     address_1: item.address_1,
                     address_2: item.address_2,
+                    contact: item.contact,
+                    alt_contact: item.alt_contact,
                     city: item.city,
-                    teacher_id_att:item.teacher_id_att
+                    teacher_id_att:item.teacher_id_att,
+                    schoolName:item.schoolName,
+                    gender: item.gender,
+                    religion:item.religion,
+                    maritalStatus:item.maritalStatus,
+                    staff_name:item.staff_name,
+                    staffPosition:item.staffPosition,
+                    dateofJoining:item.dateofJoining,
+                    contractstart:item.contractstart,
+                    contractend:item.contractend,
+                    teacherQualification:item.teacherQualification,
+                    teacherprofessionalqualification:item.teacherprofessionalqualification,
+                    teachingClass:item.teachingClass,
+                    teachingSubject:item.teachingSubject,
+                    SubjectSpec:item.SubjectSpec,
+                    father_name:item.father_name,
+                    selectedDistricts:item.selectedDistricts,
+                    seletctedTehsil:item.seletctedTehsil,
 
                   })
                 }
@@ -98,7 +114,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} source={{ uri: item.image }} />
+                    <Image style={styles.image} preview={{ preview: item.image }} />
                   </View>
                   <View
                     style={{
@@ -107,7 +123,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                    
                     }}
                   >
-                    <Text style={styles.username}>{item.first_name}</Text>
+                    <Text style={styles.username}>{item.staffName}</Text>
                   </View>
                   <View
                     style={{

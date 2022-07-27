@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userAuthApi = createApi({
   reducerPath: 'userAuthApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://192.168.18.64:8000/api/user/'
+    baseUrl: 'http://192.168.18.26:8000/api/user/'
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -121,16 +121,7 @@ export const userAuthApi = createApi({
       })
     }),
 
-    getLoggedTeachers: builder.query({
-      query: (token) => ({
-        url: 'loggedTeachers',
-        method: 'GET',
-        headers: {
-          'authorization': `Bearer ${token}`,
-          
-        },
-      })
-    }),
+  
 
 
     sendPasswordResetEmail: builder.mutation({
@@ -189,6 +180,17 @@ export const userAuthApi = createApi({
       }
     }),
 
+    loggedTeachers: builder.query({
+      query: (token) => ({
+        url: 'loggedTeachers',
+        method: 'GET',
+        headers: {
+          'authorization': `Bearer ${token}`,
+          
+        },
+      })
+    }),
+
     schoolRegister: builder.mutation({
       query:(addSchools) =>({
         url: 'createschool',
@@ -209,16 +211,7 @@ export const userAuthApi = createApi({
       })
     }),
 
-    getLoggedTeachers: builder.query({
-      query: (token) => ({
-        url: 'loggedTeachers',
-        method: 'GET',
-        headers: {
-          'authorization': `Bearer ${token}`,
-          
-        },
-      })
-    }),
+ 
 
 
     getTeachers: builder.query({
@@ -246,4 +239,4 @@ export const userAuthApi = createApi({
   }),
 })
 
-export const {useLoginTeacherMutation,useRegisterTeachersMutation, useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation, useGetTeachersQuery, useGetLoggedTeachersQuery, useSchoolRegisterMutation, useGetschoolsQuery, useRegisterTechAttendanceMutation } = userAuthApi
+export const {useLoginTeacherMutation,useRegisterTeachersMutation, useRegisterUserMutation,useRegisterSchoolAdminMutation, useSchoolAdminLoginMutation, useLoggedSchoolAdminQuery, useRegisterStudentMutation , useLoginUserMutation, useGetLoggedUserQuery, useGetStudentQuery , useSendPasswordResetEmailMutation, useChangeUserPasswordMutation, useGetTeachersQuery, useLoggedTeachersQuery, useSchoolRegisterMutation, useGetschoolsQuery, useRegisterTechAttendanceMutation } = userAuthApi

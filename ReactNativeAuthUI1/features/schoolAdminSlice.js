@@ -67,10 +67,6 @@ export const schoolAdminSlice = createSlice({
       state.salaryPaymentMethod=action.payload.salaryPaymentMethod
       state.selectedDistricts=action.payload.selectedDistricts
       state.address_1=action.payload.address_1
-
-
-
-
     },
     unSetSchoolAdminInfo: (state, action) => {
       state.id = action.payload.id;
@@ -102,12 +98,7 @@ export const schoolAdminSlice = createSlice({
       state.salaryPaymentMethod=action.payload.salaryPaymentMethod
       state.selectedDistricts=action.payload.selectedDistricts
       state.address_1=action.payload.address_1
-
-
-
-
-  
-    },
+    }
   }
 })
 

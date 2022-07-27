@@ -64,7 +64,7 @@ const teacherSchema = new mongoose.Schema({
   bankaccountnumber:{ type: String},
   vaccinated:{ type: String},
   vaccineshots:{ type: String},
-  vacinatedstatus:{ type: String},
+  vacinatedstatus:{ type: String}
 })
 
 // Model

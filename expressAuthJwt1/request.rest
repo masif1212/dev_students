@@ -4,13 +4,13 @@ POST http://192.168.18.64:8000/api/user/schoolAdminlogin
 Content-Type: application/json
 
 {
-  "email": "aneeshassayyn1299@gmail.com",
- "password":"66666"
+  "email": "admin@gmail.com",
+ "password":"1234"
 }
 
 ###
-GET  http://192.168.18.12:8000/api/user/loggedSchoolAdmin
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI3NzFmMGQ3YTU4ZjlhMjgxZGRiZWMiLCJpYXQiOjE2NTY1ODIzMTUsImV4cCI6MTY1NzAxNDMxNX0.6kdNgqyDzwtq7BJN_Jk9xg0FA1ttByzjMYlYRfHXIAM
+GET  http://192.168.18.26:8000/api/user/loggedSchoolAdmin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmM1NDMwMzExNGJkZjAzYTY4MDAyMTciLCJpYXQiOjE2NTg5Mzc5MjYsImV4cCI6MTY1OTM2OTkyNn0.-YR4cmoAuqb1kRj9ATFeQZi2HIIr6JnHBsdXOnfJB3Q
 
 ###
 
@@ -59,20 +59,26 @@ POST http://192.168.18.26:8000/api/user/teachersLogin
 Content-Type: application/json
 
 {
-  "email": "email@gmail.com",
- "password":"444444"
+  "email": "Qasim@gmail.com",
+ "password":"1234"
 }
 
 
 ###
 GET  http://192.168.18.26:8000/api/user/loggedTeachers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTY0MTQ0NjQsImV4cCI6MTY1Njg0NjQ2NH0.0B3EBycxVnSWMY8bFegFYZe7tNoJMd1irSnaz-E29kE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMTNmOGNhNmUzYjQ2ZjhhZTUzZGEiLCJpYXQiOjE2NTg5MjQxNjEsImV4cCI6MTY1OTM1NjE2MX0.aVJ-NO96oec3HYOCaOt5VM82nI0egzNVx-DOnDbz8xU
 
 ###
 GET  http://192.168.18.14:8000/api/user/getTeachers
 
+
+
 ###
-GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboard
+GET  http://192.168.18.26:8000/api/user/getteacherattendance/62e113f8ca6e3b46f8ae53db
+
+
+
+//62c542db114bdf03a6800210
 
 ###
 GET  http://192.168.18.12:8000/api/user/getteacherattendancedashboardbyteacherid/62c54aadc3027cd453dd357a
@@ -105,7 +111,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://192.168.18.64:8000/api/user/getstudent
+GET http://192.168.18.26:8000/api/user/getStudents/62c542db114bdf03a6800210
 
 ###
 POST  http://192.168.18.14:8000/api/user/schooladmin
@@ -182,7 +188,7 @@ Content-Type: application/json
   
 
 ###
-POST http://192.168.18.64:8000/api/user/registerTeacher
+POST http://192.168.18.26:8000/api/user/registerTeacher
 Content-Type: application/json
 
  {
@@ -206,12 +212,12 @@ Content-Type: application/json
               "address_1":"address_1",
               "address_2":"address_2",
               "father_Name":"father_Name",
-              "email":"email",
+              "email":"emaisssssssl@gmail.com",
               "password":"123",
               "confirm_password":"123",
               "contact":"contact",
               "alt_contact":"alt_contact",
-              "schoolId":"schoolId",
+              "schoolId":"62c542db114bdf03a6800210",
               "image" :"image",
               "staffPosition":"staffPosition",
               "teachingClass":"teachingClass",
