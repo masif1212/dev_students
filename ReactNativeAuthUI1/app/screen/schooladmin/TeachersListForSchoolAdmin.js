@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from 'react-redux';
@@ -20,9 +21,10 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${newData.schoolId}`);
+    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
+    console.log(data)
   };
   
   const focus = useIsFocused();

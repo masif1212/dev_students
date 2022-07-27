@@ -22,13 +22,13 @@ const schoolAdminSchema = new mongoose.Schema({
   dateofbirth: { type: String, required: true, trim: true },
   maritalStatus: { type: String, required: true, trim: true },
   bankname: { type: String, trim: true },
-  teacherQualification: [{ type: String, required: true, trim: true }],
-  teacherprofessionalqualification: [{ type: String, required: true, trim: true }],
+  teacherQualification: { type: String, required: true, trim: true },
+  teacherprofessionalqualification: { type: String, required: true, trim: true },
   accounttitle: { type: String, trim: true },
   ibanAccount: { type: String, trim: true },
   bankaccountnumber: { type: String, trim: true },
-  bankcity: [{ type: String, trim: true }],
-  bankdistrict: [{ type: String, trim: true }],
+  bankcity: { type: String, trim: true },
+  bankdistrict: { type: String, trim: true },
   salaryPaymentMethod: { type: String},
   selectedDistricts: { type: String, required: true, trim: true }
 

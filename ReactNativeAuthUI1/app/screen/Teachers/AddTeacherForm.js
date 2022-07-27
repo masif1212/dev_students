@@ -440,7 +440,6 @@ const TeacherRegister = ({ navigation,routes }) => {
             )}
           </TouchableOpacity>
         </View>
-        <Toast config={toastConfig} />
       </View>
 
       <ScrollView
