@@ -71,7 +71,7 @@ const TeacherPieChart = ({outerRadius}) => {
     const focus = useIsFocused();
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacherattendancedashboard`);
+  const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacherattendancedashboard`);
   const students = await resp.json();
   const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
 
