@@ -36,25 +36,67 @@ const AddTeacherForm2 = ({ navigation , route}) => {
   const [ibanAccount, setIbanAccount] = useState("");
   const [bankaccountnumber, setBankAccountNumber] = useState("");
 
+// ================================================================================
+
+const [staff_name, setStaff_Name] = useState("");
+  const [father_name, setFather_Name] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setconfirm_password] = useState("");
+  const [contact, setContact] = useState("");
+  const [alt_contact, setAlt_Contact] = useState("");
+  const [address_1, setAdress_1] = useState("");
+  const [address_2, setAdress_2] = useState("");
+  const [cnic, setcnic] = useState("");
+  const [image, setImage] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [schoolId, setSchoolId] = useState("");
+  const [gender, setGender] = useState("");
+  const [religion, setReligion] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [teacherTraining, setTeacherTraining] = useState(false);
+  const [trainingnumber, setTrainingNumber] = useState("");
+  const [lsuTrainingDate, setLsuTrainingDate] = useState("");
+  const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
+  const [mentionTraining, setMentiontraining] = useState("");
+  const [selectDivision, setSelectDivision] = useState([]);
+  const [selectedTehsil, setSeletctedTehsil] = useState([]);
+  const [selectedDistricts, setSelectedDistricts] = useState("");
+  const [formerProgram, setFormerProgramm] = useState([]);
+  const [teacherQualification, setTeacherQualification] = useState([]);
+  const [
+    teacherprofessionalqualification,
+    setTeacherProfessionalQualification,
+  ] = useState([]);
 
 
-
- const postData =() => {
-  fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json, text/plain, /',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  }).then(res => res.json())
-    .then(res => console.log(res));
-  
- }
- 
-
-
-
+  useEffect(()=>{
+    setStaff(route.params.staff_name)
+    setFather_Name(route.params.father_name)
+    setEmail(route.params.email)
+    setPassword(route.params.password)
+    setconfirm_password(route.params.confirm_password)
+    setContact(route.params.contact)
+    setAdress_1(route.params.address_1)
+    setAdress_2(route.params.address_2)
+    setcnic(route.params.cnic)
+    setImage(route.params.image)
+    setSchoolName(route.params.schoolName)
+    setGender(route.params.gender)
+    setReligion(route.params.religion)
+    setMaritalStatus(route.params.maritalStatus)
+    setTeacherTraining(route.params.teacherTraining)
+    setTrainingNumber(route.params.trainingnumber)
+    setLsuTrainingDate(route.params.lsuTrainingDate)
+    setTrainInWhichSubject(route.params.trainingInWhichSubject)
+    setMentiontraining(route.params.mentionTraining)
+    setSelectDivision(route.params.division)
+    setSelectedDistricts(route.params.district)
+    setSeletctedTehsil(route.params.tehsil)
+    setFormerProgramm(route.params.formerProgram)
+    setTeacherQualification(route.params.teacherQualification)
+    setTeacherProfessionalQualification(route.params.teacherprofessionalqualification)
+  })
   const [subjectSpecShow, setSubjectSpecShow] = useState("");
   const [SubjectSpec, setSubjectSpec] = useState([]);
   const [subjectspecial, setSubjectSpecial] = useState([
@@ -2222,63 +2264,56 @@ const AddTeacherForm2 = ({ navigation , route}) => {
   const handleFormSubmit = async () => {
     if ( route.params.email && route.params.password && route.params.confirm_password) {
       if (route.params.password === route.params.confirm_password) {
-        const formData = new FormData();
-            formData.append('division', route.params.division);
-            formData.append('districts', route.params.districts);
-            formData.append('tehsil', route.params.tehsil);
-            formData.append('schoolName', route.params.schoolName);
-            formData.append('schoolId', route.params.schoolId);
-            formData.append('staff_name', route.params.staff_name);
-            formData.append('gender', route.params.gender);
-            formData.append('religion', route.params.religion);
-            formData.append('maritalStatus', route.params.maritalStatus);
-            formData.append('teacherQualification', route.params.teacherQualification);
-            formData.append('formerProgramm', route.params.formerProgramm);
-            formData.append('teacherprofessionalqualification', route.params.teacherprofessionalqualification);
-            formData.append('teacherTraining', route.params.teacherTraining);
-            formData.append('trainingnumber', route.params.trainingnumber);
-            formData.append('lsuTrainingDate', route.params.lsuTrainingDate);
-            formData.append('trainInWhichSubject', route.params.trainInWhichSubject);
-            formData.append('mentionTraining', route.params.mentionTraining);
-            formData.append('father_name', route.params.father_name);
-            formData.append('email', route.params.email);
-            formData.append('password', route.params.password);
-            formData.append('confirm_password', route.params.confirm_password);
-            formData.append('contact', route.params.contact);
-            formData.append('alt_contact', route.params.alt_contact);
-            formData.append('image', route.params.image);
-            formData.append('address_1', route.params.address_1);
-            formData.append('address_2', route.params.address_2);
-            formData.append('staffPosition', staffPosition);
-            formData.append('schoolstaff', schoolstaff);
-            formData.append('dateofbirth', dateofbirth);
-            formData.append('dateofJoining', dateofJoining);
-            formData.append('contractstart', contractstart);
-            formData.append('contractend', contractend);
-            formData.append('teachingClass', teachingClass);
-            formData.append('teachingSubject', teachingSubject);
-            formData.append('subjectSpeciality', subjectSpeciality);
-            formData.append('SubjectSpec', SubjectSpec);
-            formData.append('teachingmedium', teachingmedium);
-            formData.append('teachingExperience', teachingExperience);
-            formData.append('experienceDuration', experienceDuration);
-            formData.append('startingSalary', startingSalary);
-            formData.append('currentSalary', currentSalary);
-            formData.append('salaryPaymentMethod', salaryPaymentMethod);
-            formData.append('bankname', bankname);
-            formData.append('bankdistrict', bankdistrict);
-            formData.append('bankcity', bankcity);
-            formData.append('accounttitle', accounttitle);
-            formData.append('ibanAccount', ibanAccount);
-            formData.append('bankaccountnumber', bankaccountnumber);
-            formData.append('vaccinated', vaccinated);
-            formData.append('vaccineshots', vaccineshots);
-            formData.append('vacinatedstatus', vacinatedstatus);
-           
-            var object = {};
-            formData.forEach((value, key) => object[key] = value);
-            var json = JSON.stringify(object);           
-            console.log(json)
+        const formData = {
+          selectDivision,
+          selectedDistricts,
+          selectedTehsil,
+          schoolName,
+          staff_name,
+          gender,
+          religion,
+          maritalStatus,
+          formerProgram,
+          teacherQualification,
+          teacherprofessionalqualification,
+          teacherTraining,
+          lsuTrainingDate,
+          trainInWhichSubject,
+          mentionTraining,
+          trainingnumber,
+          cnic,
+          address_1,
+          address_2,
+          father_name,
+          email,
+          password,
+          confirm_password,
+          contact,
+          alt_contact,
+          schoolId,
+          image,
+          subjectSpeciality,
+          teachingmedium,
+          teachingExperience,
+          dateofbirth,
+          dateofJoining,
+          contractstart,
+          contractend,
+          vaccinated,
+          vaccineshots,
+          vacinatedstatus,
+          startingSalary,
+          currentSalary,
+          salaryPaymentMethod,
+          bankname,
+          accounttitle,
+          bankdistrict,
+          bankcity,
+          ibanAccount,
+          bankaccountnumber,
+        };
+
+            console.log(formData)
 
               fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
                 method: 'POST',

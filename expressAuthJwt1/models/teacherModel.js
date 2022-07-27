@@ -10,13 +10,13 @@ var validateEmail = function (email) {
 const teacherSchema = new mongoose.Schema({
   districts: [{ type: String, required: true, trim: true }],
   selectedTehsil: [{ type: String, required: true, trim: true }],
-  teacher_id_att: [{
+  teacher_id_att: {
     type: mongoose.Schema.Types.ObjectId,
     default: mongoose.Types.ObjectId,
     index: { unique: true }
-  }],
+  },
   division: [{ type: String, required: true, trim: true }],
-  schoolId: [{ type: String, required: true, trim: true }],
+  schoolId: { type: String, required: true, trim: true },
   schoolName: [{ type: String, required: true, trim: true }],
   image: [{ type: String, required: true, trim: true }],
   staff_name: { type: String, required: true, trim: true, description: "must be a string and is required" },
