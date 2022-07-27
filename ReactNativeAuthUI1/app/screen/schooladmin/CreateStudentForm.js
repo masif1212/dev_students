@@ -331,6 +331,9 @@ const CreateStudentForm = () => {
     setLastSchool("");
     setReasonLeft("");
     setReligion("");
+    setSelectDivision("");
+    setSelectedDistricts("");
+    setSeletctedTehsil("");
 
   };
   const navigation = useNavigation();
@@ -362,7 +365,10 @@ const CreateStudentForm = () => {
         currentshift,
         lastschool,
         reasonleft,
-        religion
+        religion,
+        selectDivision,
+        selectedTehsil,
+        selectedDistricts
 
       };
       const res = await registerStudent(formData);

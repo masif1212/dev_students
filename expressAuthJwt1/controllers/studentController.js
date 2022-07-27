@@ -4,7 +4,8 @@ import StudentModel from '../models/StudentModel.js'
 
 class StudentController {
     static studentRegistration = async (req, res) => {
-      const {religion,lastschool,reasonleft,currentshift,dateofbirth,disability, disabledetail,gender,schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city} = req.body
+      const {religion,lastschool,reasonleft,currentshift,dateofbirth,disability, disabledetail,gender,schoolId, schoolName, image, first_name, last_name, father_name, father_cnic, contact,roll_no,  emergency_contact, address_1, address_2, student_class, section ,city,selectDivision,
+        selectedTehsil,selectedDistricts} = req.body
         if ( image && first_name && last_name && father_name && father_cnic && contact &&  emergency_contact && address_1 && address_2 && student_class && section && city) {
             try {
               const doc = new StudentModel({
@@ -30,7 +31,10 @@ class StudentController {
                 student_class: student_class,
                 section: section,
                 city: city,
-                gender:gender
+                gender:gender,
+                selectDivision:selectDivision,
+                selectedDistricts:selectedDistricts,
+                selectedTehsil:selectedTehsil
 
               })
               await doc.save()
