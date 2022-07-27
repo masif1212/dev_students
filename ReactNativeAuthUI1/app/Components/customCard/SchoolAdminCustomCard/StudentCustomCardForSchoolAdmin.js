@@ -17,12 +17,12 @@ const StudentCustomCardForSchoolAdmin = ({title,backgroundColor,color}) => {
 
                     <View>
                           <View style={{ flexDirection: 'row', }}>
-                                 <View style={{ width: 40, height: 15, backgroundColor: '#A4C3DA' }} />
+                                 <View style={{ width: 40, height: 15, backgroundColor: '#D2F790' }} />
                                      <Text style={[{left: 5, bottom: 2, fontWeight: 'bold'},{color:fontColor}, fontColor ? {color:fontColor} : {}]}>Present (%) </Text>
                           </View>
 
                            <View style={{flexDirection:'row', }}>
-                                 <View style={{ width: 40, height: 15, backgroundColor: '#D2F790' }} />
+                                 <View style={{ width: 40, height: 15, backgroundColor: '#A4C3DA' }} />
                                  <Text style={[{ left: 5, bottom: 2, fontWeight: 'bold'},{color:fontColor}, fontColor ? {color:fontColor} : {}]} >Absent  (%) </Text>
                            </View>
                            

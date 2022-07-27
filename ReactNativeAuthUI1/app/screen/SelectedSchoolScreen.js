@@ -61,7 +61,7 @@ const SelectedSchoolScreen = ({navigation, route}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-        onPress={() => navigation.navigate('TeachersList', {
+        onPress={() => navigation.navigate('TeachersListForSchoolAdmin', {
           schoolid : route.params.schoolid,
           schoolName: route.params.title
         })}

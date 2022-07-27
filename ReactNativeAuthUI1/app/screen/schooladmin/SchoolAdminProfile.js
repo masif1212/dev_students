@@ -206,7 +206,7 @@ const SchoolAdminProfile = ({route}) => {
         
       
       </View>
-      <View style={{
+      {/* <View style={{
           flexDirection:'row',
           justifyContent:'flex-end',
           marginRight:20
@@ -220,7 +220,7 @@ const SchoolAdminProfile = ({route}) => {
             }}><Text style={{
                 color:'white'
             }}>View Attendance</Text></TouchableOpacity>
-        </View>
+        </View> */}
     </ScrollView>
   );
 };

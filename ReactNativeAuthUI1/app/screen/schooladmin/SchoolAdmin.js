@@ -72,7 +72,7 @@ const SchoolAdmin = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
           data={admin}
-          keyExtractor={(item) => item.item}
+          keyExtractor={(item) => item.key}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
@@ -130,7 +130,7 @@ const SchoolAdmin = ({ navigation, route }) => {
                    
                     }}
                   >
-                    <Pie outerRadius={'50%'} />
+                    {/* <Pie outerRadius={'50%'} /> */}
                   </View>
                 </View>
               </TouchableOpacity>
