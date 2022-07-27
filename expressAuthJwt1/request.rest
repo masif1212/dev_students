@@ -59,20 +59,26 @@ POST http://192.168.18.26:8000/api/user/teachersLogin
 Content-Type: application/json
 
 {
-  "email": "email@gmail.com",
- "password":"444444"
+  "email": "Qasim@gmail.com",
+ "password":"1234"
 }
 
 
 ###
 GET  http://192.168.18.26:8000/api/user/loggedTeachers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmI5NjYxZjY2OWQyZjIwNjdhMGJhMmIiLCJpYXQiOjE2NTY0MTQ0NjQsImV4cCI6MTY1Njg0NjQ2NH0.0B3EBycxVnSWMY8bFegFYZe7tNoJMd1irSnaz-E29kE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMTNmOGNhNmUzYjQ2ZjhhZTUzZGEiLCJpYXQiOjE2NTg5MjQxNjEsImV4cCI6MTY1OTM1NjE2MX0.aVJ-NO96oec3HYOCaOt5VM82nI0egzNVx-DOnDbz8xU
 
 ###
 GET  http://192.168.18.14:8000/api/user/getTeachers
 
+
+
 ###
-GET  http://192.168.18.26:8000/api/user/getstudentsattendancedashboard
+GET  http://192.168.18.26:8000/api/user/getteacherattendance/62e113f8ca6e3b46f8ae53db
+
+
+
+//62c542db114bdf03a6800210
 
 ###
 GET  http://192.168.18.12:8000/api/user/getteacherattendancedashboardbyteacherid/62c54aadc3027cd453dd357a
