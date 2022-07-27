@@ -123,8 +123,19 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   return (
 
     <View style={{ height: windowHeight, width: '100%' }}>
-
-
+    <View style={{
+      alignItems:'center',
+      top:12
+    }}>
+    <Text style={
+      {
+        fontSize:18,
+        fontWeight:'bold',
+      }
+    }>
+      Mark Teacher Attendance
+      </Text>
+      </View>
       <FlatList
         data={attendanceState}
         keyExtractor={(item, index) => index + ""}
@@ -249,18 +260,15 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         <TouchableOpacity
           onPress={handleFormSubmit}
           style={{
-            justifyContent: "center",
             alignItems: "center",
             padding: 15,
-            width: "100%",
-            marginVertical: 5,
-            borderRadius: 50,
-            marginBottom: 60,
+            width: "90%",
+            borderRadius: 40,
+            bottom:85,
             fontWeight: "bold",
             backgroundColor: "#5062BD",
             elevation: 1,
-            marginTop: 30,
-            bottom: 20,
+            left:17
 
           }}
         >
@@ -292,6 +300,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5062BD",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
+    top:30
     
 
   },
@@ -299,7 +308,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     margin: 2,
-    left: 8
+    left: 8,
+    top:34
   },
   tableRowtext: {
     left: 8
