@@ -332,12 +332,12 @@ const TeacherRegister = ({ navigation,routes }) => {
 
   //=========================programs=============================================//
   const [formerProgrammOpen, setFormerProgrammOpen] = useState("");
-  const [formerProgram, setFormerProgramm] = useState({});
+  const [formerProgram, setFormerProgramm] = useState([]);
   const [programm, setProgramm] = useState([
-    { id: "PPRS", value: "PPRS" },
-    { id: "SAS", value: "SAS" },
-    { id: "SMHS", value: "SMHS" },
-    { id: "AALTP", value: "AALTP" },
+    { label: "PPRS", value: "PPRS" },
+    { label: "SAS", value: "SAS" },
+    { label: "SMHS", value: "SMHS" },
+    { label: "AALTP", value: "AALTP" },
   ]);
 
   //=========================end programms=============================================//
@@ -2947,10 +2947,23 @@ const TeacherRegister = ({ navigation,routes }) => {
               is24Hour={false}
             />
           </View> */}
+          
+          <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
+            <CustomDropDown
+              zIndex={14000}
+              placeholder="Select Former Programm"
+              open={formerProgrammOpen}
+              value={formerProgram}
+              items={programm}
+              setOpen={setFormerProgrammOpen}
+              setValue={setFormerProgramm}
+              setItems={setProgramm}
+            />
+          </View>
 
           <View style={{ ...(Platform.OS !== "android" && { zIndex: 7 }) }}>
             <CustomDropDown
-              zIndex={14000}
+              zIndex={11000}
               placeholder="Select Qualification"
               open={teacherprofessionalQualificationshow}
               value={teacherQualification}
@@ -2958,13 +2971,12 @@ const TeacherRegister = ({ navigation,routes }) => {
               setOpen={setTeacherProfessionalQualificationShow}
               setValue={setTeacherQualification}
               setItems={setQualifications}
-              multiple={true}
             />
           </View>
 
           <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}>
             <CustomDropDown
-              zIndex={11000}
+              zIndex={9000}
               placeholder="Select a Proffesional Qualification"
               open={teacherQualificationShow}
               value={teacherprofessionalqualification}
@@ -2972,7 +2984,6 @@ const TeacherRegister = ({ navigation,routes }) => {
               setOpen={setTeacherQualificationShow}
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
-              multiple={true}
             />
           </View>
           {/* <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
@@ -3401,6 +3412,7 @@ const TeacherRegister = ({ navigation,routes }) => {
                     maritalStatus: maritalStatus,
                     teacherQualification: teacherQualification,
                     teacherprofessionalqualification: teacherprofessionalQualificationshow,
+                    formerProgram: formerProgram,
                     teacherTraining: teacherTraining,
                     trainingnumber: trainingnumber,
                     lsuTrainingDate: lsuTrainingDate,

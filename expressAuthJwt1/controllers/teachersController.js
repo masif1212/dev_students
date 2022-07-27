@@ -6,6 +6,7 @@ import transporter from '../config/emailConfig.js'
 class TeachersController {
   static teachersRegistration = async (req, res) => {
     const { 
+      division,
       districts,
       selectedTehsil,
       schoolId, 
@@ -66,6 +67,7 @@ class TeachersController {
             const salt = await bcrypt.genSalt(10)
             const hashPassword = await bcrypt.hash(password, salt)
             const doc = new TeachersModel({
+              division: division,
               districts:districts,
               selectedTehsil: selectedTehsil,
               schoolId: schoolId,

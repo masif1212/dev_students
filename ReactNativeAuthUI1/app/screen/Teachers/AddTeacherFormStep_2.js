@@ -37,8 +37,23 @@ const AddTeacherForm2 = ({ navigation , route}) => {
   const [bankaccountnumber, setBankAccountNumber] = useState("");
 
 
- 
+
+
+ const postData =() => {
+  fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, /',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  }).then(res => res.json())
+    .then(res => console.log(res));
   
+ }
+ 
+
+
 
   const [subjectSpecShow, setSubjectSpecShow] = useState("");
   const [SubjectSpec, setSubjectSpec] = useState([]);
@@ -2209,6 +2224,7 @@ const AddTeacherForm2 = ({ navigation , route}) => {
       if (route.params.password === route.params.confirm_password) {
         const formData = new FormData();
             formData.append('division', route.params.division);
+            formData.append('districts', route.params.districts);
             formData.append('tehsil', route.params.tehsil);
             formData.append('schoolName', route.params.schoolName);
             formData.append('schoolId', route.params.schoolId);
@@ -2217,6 +2233,7 @@ const AddTeacherForm2 = ({ navigation , route}) => {
             formData.append('religion', route.params.religion);
             formData.append('maritalStatus', route.params.maritalStatus);
             formData.append('teacherQualification', route.params.teacherQualification);
+            formData.append('formerProgramm', route.params.formerProgramm);
             formData.append('teacherprofessionalqualification', route.params.teacherprofessionalqualification);
             formData.append('teacherTraining', route.params.teacherTraining);
             formData.append('trainingnumber', route.params.trainingnumber);
@@ -2258,15 +2275,23 @@ const AddTeacherForm2 = ({ navigation , route}) => {
             formData.append('vaccineshots', vaccineshots);
             formData.append('vacinatedstatus', vacinatedstatus);
            
+            var object = {};
+            formData.forEach((value, key) => object[key] = value);
+            var json = JSON.stringify(object);           
+            console.log(json)
 
+              fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json, text/plain, /',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+              }).then(res => res.json())
+                .then(res => console.log(res));
+              
+             
 
-
-            
-
-           
-       
-        const res = await registerTeacher(formData);
-        console.log(JSON.stringify(formData))
         if (res.data.status === "success") {
           await storeToken(res.data.token); // Store Token in Storage
           clearTextInput();
@@ -2318,6 +2343,7 @@ const AddTeacherForm2 = ({ navigation , route}) => {
     setContractEnd("");
     setTeacherQualification("");
     setTeacherProfessionalQualification("");
+    setFormerProgramm("");
     setTeachingClass("");
     setTeachingSubject("");
     setSubjectSpeciality("");
