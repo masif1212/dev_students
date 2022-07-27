@@ -1,55 +1,57 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  districts: "",
-  selectedTehsil: "",
-  teacherid: "",
-  schoolName: "",
-  schoolId: "",
-  staff_name: "",
+  selectDivision:"",
+  selectedDistricts:"",
+  seletctedTehsil:"",
+  schoolName:"",
+  staffName:"",
+  gender:"",
+  religion:"",
+  maritalStatus:"",
+  formerProgramm:"",
+  teacherQualification:"",
+  teacherProfessionalQualification:"",
+  teacherTraining:"",
+  lsuTrainingDate:"",
+  trainInWhichSubject:"",
+  mentiontraining:"",
+  trainingNumber:"",
+  cnic:"",
+  address_1:"",
+  address_2:"",
+  father_Name:"",
+  email:"",
+  password:"",
+  confirm_password:"",
+  contact:"",
+  alt_contact:"",
+  schoolId:"",
+  image:"",
   staffPosition:"",
-  formerProgram: "",
-  schoolstaff: "",
-  gender: "",
-  religion: "",
-  maritalStatus: "",
-  dateofbirth: "",
-  dateofJoining: "",
-  contractstart: "",
-  contractend: "",
-  teacherQualification: "",
-  teacherprofessionalqualification: "",
-  teachingClass: "",
-  teachingSubject: "",
-  subjectSpeciality: "",
-  SubjectSpec: "",
-  teachingmedium: "",
-  teacherTraining: "",
-  trainingnumber: "",
-  trainInWhichSubject: "",
-  mentionTraining: "",
-  teachingExperience: "",
-  experienceDuration: "",
-  startingSalary: "",
-  currentSalary: "",
-  salaryPaymentMethod: "",
-  bankname: "",
-  bankdistrict: "",
-  bankcity: "",
-  accounttitle: "",
-  ibanAccount: "",
-  bankaccountnumber: "",
-  father_name: "",
-  image: "",
-  email: "",
-  contact: "",
-  password: "",
-  confirm_password: "",
-  alt_contact: "",
-  address_1: "",
-  address_2: "",
-  cnic: "",
-  city: "",
-  
+  teachingClass:"",
+  subjectSpeciality:"",
+  SubjectSpec:"",
+  teachingmedium:"",
+  teachingExperience:"",
+  experienceDuration:"",
+  dateofbirth:"",
+  dateofJoining:"",
+  contractstart:"",
+  contractend:"",
+  vaccinated:"",
+  vaccineshots:"",
+  vacinatedstatus:"",
+  startingSalary:"",
+  currentSalary:"",
+  salaryPaymentMethod:"",
+  bankname:"",
+  accounttitle:"",
+  bankdistrict:"",
+  bankcity:"",
+  ibanAccount:"",
+  bankaccountnumber:"",
+  schoolstaff:"",
+  teachingSubject:""
 
 }
 export const teacherSlice = createSlice({
@@ -57,14 +59,15 @@ export const teacherSlice = createSlice({
   initialState,
   reducers: {
     setTeacherInfo: (state, action) => {
-      state.districts = action.payload.districts;
-      state.selectedTehsil = action.payload.selectedTehsil;
+      state.selectDivision = action.payload.selectDivision;
+      state.selectedDistricts = action.payload.selectedDistricts;
+      state.seletctedTehsil = action.payload.seletctedTehsil;
       state.teacherid = action.payload.teacherid;
       state.schoolName = action.payload.schoolName;
       state.schoolId = action.payload.schoolId;
-      state.staff_name = action.payload.first_name;
+      state.staffName = action.payload.staffName;
       state.staffPosition = action.payload.staffPosition;
-      state.formerProgram = action.payload.formerProgram;
+      state.formerProgramm = action.payload.formerProgramm;
       state.schoolstaff = action.payload.schoolstaff;
       state.gender = action.payload.gender;
       state.religion = action.payload.religion;
@@ -74,16 +77,16 @@ export const teacherSlice = createSlice({
       state.contractstart = action.payload.contractstart;
       state.contractend = action.payload.contractend;
       state.teacherQualification = action.payload.teacherQualification;
-      state.teacherprofessionalqualification = action.payload.teacherprofessionalqualification;
+      state.teacherProfessionalQualification = action.payload.teacherProfessionalQualification;
       state.teachingClass = action.payload.teachingClass;
       state.teachingSubject = action.payload.teachingSubject;
       state.subjectSpeciality = action.payload.subjectSpecial;
       state.SubjectSpec = action.payload.SubjectSpec;
       state.teachingmedium = action.payload.teachingmedium;
       state.teacherTraining = action.payload.teacherTraining;
-      state.trainingnumber = action.payload.trainingnumber;
+      state.trainingNumber = action.payload.trainingNumber;
       state.trainInWhichSubject = action.payload.trainInWhichSubject;
-      state.mentionTraining = action.payload.mentionTraining;
+      state.mentiontraining = action.payload.mentiontraining;
       state.teachingExperience = action.payload.teachingExperience;
       state.experienceDuration = action.payload.experienceDuration
       state.startingSalary = action.payload.startingSalary;
@@ -95,7 +98,7 @@ export const teacherSlice = createSlice({
       state.accounttitle = action.payload.accounttitle;
       state.ibanAccount = action.payload.ibanAccount;
       state.bankaccountnumber = action.payload.bankaccountnumber
-      state.father_name = action.payload.last_name;
+      state.father_Name = action.payload.father_Name;
       state.image = action.payload.image;
       state.email = action.payload.email;
       state.password = action.payload.password;
@@ -110,11 +113,15 @@ export const teacherSlice = createSlice({
       state.vacinatedstatus = action.payload.vacinatedstatus
     },
     unsetTeacherInfo: (state, action) => {
+      state.selectDivision = action.payload.selectDivision;
+      state.selectedDistricts = action.payload.selectedDistricts;
+      state.seletctedTehsil = action.payload.seletctedTehsil;
+      state.bankdistrict = action.payload.bankdistrict;
       state.schoolName = action.payload.schoolName;
       state.schoolId = action.payload.schoolId;
-      state.staff_name = action.payload.first_name;
+      state.staffName = action.payload.staffName;
       state.staffPosition = action.payload.staffPosition;
-      state.formerProgram = action.payload.formerProgram;
+      state.formerProgramm = action.payload.formerProgramm;
       state.schoolstaff = action.payload.schoolstaff;
       state.gender = action.payload.gender;
       state.religion = action.payload.religion;
@@ -124,16 +131,16 @@ export const teacherSlice = createSlice({
       state.contractstart = action.payload.contractstart;
       state.contractend = action.payload.contractend;
       state.teacherQualification = action.payload.teacherQualification;
-      state.teacherprofessionalqualification = action.payload.teacherprofessionalqualification;
+      state.teacherProfessionalQualification = action.payload.teacherProfessionalQualification;
       state.teachingClass = action.payload.teachingClass;
       state.teachingSubject = action.payload.teachingSubject;
       state.subjectSpeciality = action.payload.subjectSpecial;
       state.SubjectSpec = action.payload.SubjectSpec;
       state.teachingmedium = action.payload.teachingmedium;
       state.teacherTraining = action.payload.teacherTraining;
-      state.trainingnumber = action.payload.trainingnumber;
+      state.trainingNumber = action.payload.trainingNumber;
       state.trainInWhichSubject = action.payload.trainInWhichSubject;
-      state.mentionTraining = action.payload.mentionTraining;
+      state.mentiontraining = action.payload.mentiontraining;
       state.teachingExperience = action.payload.teachingExperience;
       state.experienceDuration = action.payload.experienceDuration
       state.startingSalary = action.payload.startingSalary;
@@ -145,7 +152,7 @@ export const teacherSlice = createSlice({
       state.accounttitle = action.payload.accounttitle;
       state.ibanAccount = action.payload.ibanAccount;
       state.bankaccountnumber = action.payload.bankaccountnumber;
-      state.father_name = action.payload.last_name;
+      state.father_Name = action.payload.father_Name;
       state.password = action.payload.password;
       state.confirm_password = action.payload.confirm_password;
       state.image = action.payload.image;

@@ -21,7 +21,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.64:8000/api/user/getteacher/${newData.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
     console.log(data)
@@ -78,8 +78,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                 onPress={() =>
                   navigation.navigate("TeachersProfile", {
                     teacher_id_att:item.teacher_id_att,
-                    first_name: item.first_name,
-                    last_name:item.last_name,
+                    staffName:item.staffName,
                     email: item.email,
                     image: item.image,
                     address_1: item.address_1,
@@ -103,8 +102,8 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                     teachingSubject:item.teachingSubject,
                     SubjectSpec:item.SubjectSpec,
                     father_name:item.father_name,
-                    districts:item.districts,
-                    selectedTehsil:item.selectedTehsil,
+                    selectedDistricts:item.selectedDistricts,
+                    seletctedTehsil:item.seletctedTehsil,
 
                   })
                 }
@@ -125,7 +124,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                    
                     }}
                   >
-                    <Text style={styles.username}>{item.first_name}</Text>
+                    <Text style={styles.username}>{item.staffName}</Text>
                   </View>
                   <View
                     style={{

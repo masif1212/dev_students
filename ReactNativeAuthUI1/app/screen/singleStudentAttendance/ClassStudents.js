@@ -260,7 +260,7 @@ const ClassStudents = ({ navigation, route }) => {
           <Text style={{
             left: 25
           }}>Section : {section.name}</Text>
-          <View style={{
+          {/* <View style={{
             backgroundColor: '#5062BD',
             borderRadius: 7,
             left: 40
@@ -280,7 +280,7 @@ const ClassStudents = ({ navigation, route }) => {
               }}>View full class Attendance</Text>
 
             </TouchableOpacity>
-          </View>
+          </View> */}
 
         </View>
       </View>

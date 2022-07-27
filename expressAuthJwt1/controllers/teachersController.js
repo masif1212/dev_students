@@ -240,7 +240,7 @@ class TeachersController {
   static getTeachers = async (req, res) => {
     try{
       const teachers = await TeachersModel.find({
-        attributes: [ "id", "first_name","last_name","image", "email", "password", "confirm_password", "contact", "alt_contact",  "address_1", "address_2", "cnic", "city"]
+        attributes: [ "id", "staffName","image", "email", "password", "confirm_password", "contact", "alt_contact",  "address_1", "address_2", "cnic", "city"]
       });
       res.json(teachers)
     } catch (error) {
@@ -254,7 +254,7 @@ class TeachersController {
   }
 
   static getSomeTeacher = async (req, res) => {
-    const teacherSome = await TeachersModel.find({'schoolId': req.params.schoolId}).select({"teacher_id_att": 1, "first_name": 1,  "schoolId": 1, "last_name": 1, "_id" : 0});;
+    const teacherSome = await TeachersModel.find({'schoolId': req.params.schoolId}).select({"teacher_id_att": 1, "staffName": 1,  "schoolId": 1, "last_name": 1, "_id" : 0});;
     res.send(teacherSome);
   }
 

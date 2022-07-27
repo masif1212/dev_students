@@ -142,7 +142,7 @@ const [ items , setItems ] = useState()
         
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>   
               {/* <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.id}</Text> */}
-              <Text style={{ ...styles.columnRowTxt }}>{item.first_name+' '+item.last_name}</Text>
+              <Text style={{ ...styles.columnRowTxt }}>{item.staffName}</Text>
               <ScrollView horizontal={true}
                 showsHorizontalScrollIndicator={true}
                 pagingEnabled={true}
