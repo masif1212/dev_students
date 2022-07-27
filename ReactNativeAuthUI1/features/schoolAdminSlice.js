@@ -19,16 +19,17 @@ const initialState = {
   dateofbirth:"",
   maritalStatus:"",
   salaryPaymentMethod: "",
-  // bankname:"",
+  bankname:"",
   teacherQualification:"",
   teacherprofessionalqualification:"",
-  // accounttitle:"",
-  // ibanAccount:"",
-  // bankaccountnumber:"",
-  // bankcity:"",
-  // bankdistrict:"",
-  // salaryPaymentMethod:"",
-  selectedDistricts:""
+  accounttitle:"",
+  ibanAccount:"",
+  bankaccountnumber:"",
+  bankcity:"",
+  bankdistrict:"",
+  salaryPaymentMethod:"",
+  selectedDistricts:"",
+  address_1:"",
   
 
 }
@@ -55,16 +56,18 @@ export const schoolAdminSlice = createSlice({
       state.religion=action.payload.religion
       state.dateofbirth=action.payload.dateofbirth
       state.maritalStatus=action.payload.maritalStatus
-      // state.bankname=action.payload.bankname
+      state.bankname=action.payload.bankname
       state.teacherQualification=action.payload.teacherQualification
       state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
-      // state.accounttitle=action.payload.accounttitle
-      // state.ibanAccount=action.payload.ibanAccount
-      // state.bankaccountnumber=action.payload.bankaccountnumber
-      // state.bankcity=action.payload.bankcity
-      // state.bankdistrict=action.payload.bankdistrict
-      // state.salaryPaymentMethod=action.payload.salaryPaymentMethod
+      state.accounttitle=action.payload.accounttitle
+      state.ibanAccount=action.payload.ibanAccount
+      state.bankaccountnumber=action.payload.bankaccountnumber
+      state.bankcity=action.payload.bankcity
+      state.bankdistrict=action.payload.bankdistrict
+      state.salaryPaymentMethod=action.payload.salaryPaymentMethod
       state.selectedDistricts=action.payload.selectedDistricts
+      state.address_1=action.payload.address_1
+
 
 
 
@@ -88,16 +91,18 @@ export const schoolAdminSlice = createSlice({
       state.religion=action.payload.religion
       state.dateofbirth=action.payload.dateofbirth
       state.maritalStatus=action.payload.maritalStatus
-      // state.bankname=action.payload.bankname
+      state.bankname=action.payload.bankname
       state.teacherQualification=action.payload.teacherQualification
       state.teacherprofessionalqualification=action.payload.teacherprofessionalqualification
-      // state.accounttitle=action.payload.accounttitle
-      // state.ibanAccount=action.payload.ibanAccount
-      // state.bankaccountnumber=action.payload.bankaccountnumber
-      // state.bankcity=action.payload.bankcity
-      // state.bankdistrict=action.payload.bankdistrict
-      // state.salaryPaymentMethod=action.payload.salaryPaymentMethod
+      state.accounttitle=action.payload.accounttitle
+      state.ibanAccount=action.payload.ibanAccount
+      state.bankaccountnumber=action.payload.bankaccountnumber
+      state.bankcity=action.payload.bankcity
+      state.bankdistrict=action.payload.bankdistrict
+      state.salaryPaymentMethod=action.payload.salaryPaymentMethod
       state.selectedDistricts=action.payload.selectedDistricts
+      state.address_1=action.payload.address_1
+
 
 
 

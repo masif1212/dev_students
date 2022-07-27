@@ -53,19 +53,7 @@ const RegistrationScreen = () => {
 
 
 //country state city api==========================//
-  useEffect(() => {
-    axios.get('https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json')
-      .then(res => setData(res.data))
-      .catch(err => console.log(err))
 
-  }, [])
-
-  const onSelectCountry =(item)=> (
-    setCountry(item)
-
-  )
-
-  const country = [...new Set(data.map(item => item.country))]
 //=========================================================================//
 
   const showDatePicker = () => {
@@ -343,21 +331,14 @@ const RegistrationScreen = () => {
               gender={gender}
               options={['Male', 'Female', 'Other']}
               horizontal={true}
-              onChangeSelect={(opt, i) => {
+              onChangeSelect={(opt) => {
                 (opt)
-                setGender(i);
+                setGender(opt);
               }} />
           </View>
 
 
-         <View>
-         
-         <DropDownCountry
-         data={country.map(items=>({items}))}
-         value={getcountry} 
-         onSelectCountry={onSelectCountry}
-         />
-         </View>
+
           
           {/* <View style={{margin: 10, right: 10}}>
           <Text>Select Date of Birth :</Text>
@@ -375,11 +356,13 @@ const RegistrationScreen = () => {
           <View style={{ flexDirection: 'row' }}>
 
             <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
+              <View>
               <TextInput
 
                 value={getDate()}
                 placeholder="Select DOB (Day| MM | DD | YY)"
               />
+              </View>
             </TouchableOpacity>
 
             <DateTimePickerModal

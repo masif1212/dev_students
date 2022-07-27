@@ -5,7 +5,7 @@ import transporter from '../config/emailConfig.js'
 
 class SchoolAdminController {
   static schooladminRegistration = async (req, res) => {
-    const {schoolName,schoolId,first_name,last_name,image, email, password, confirm_password, contact, alt_contact, cnic,S_NO,father_husband,gender,religion,dateofbirth,maritalStatus,bankname,teacherQualification,teacherprofessionalqualification,bankcity,bankdistrict,bankaccountnumber,ibanAccount,accounttitle,salaryPaymentMethod,selectedDistricts} = req.body
+    const {schoolName,schoolId,first_name,last_name,image, email, password, confirm_password, contact, alt_contact, cnic,S_NO,father_husband,gender,religion,dateofbirth,maritalStatus,bankname,teacherQualification,teacherprofessionalqualification,bankcity,bankdistrict,bankaccountnumber,ibanAccount,accounttitle,salaryPaymentMethod,selectedDistricts,address_1} = req.body
     const user = await SchoolAdminModel.findOne({ email: email })
     if (user) {
       res.send({ "status": "failed", "message": "Email already exists" })
@@ -33,16 +33,17 @@ class SchoolAdminController {
               religion:religion,
               dateofbirth:dateofbirth,
               maritalStatus:maritalStatus,
-              // bankname:bankname,
+              bankname:bankname,
               teacherQualification:teacherQualification,
               teacherprofessionalqualification:teacherprofessionalqualification,
-              // bankcity:bankcity,
-              // bankdistrict:bankdistrict,
-              // bankaccountnumber:bankaccountnumber,
-              // ibanAccount:ibanAccount,
-              // accounttitle:accounttitle,
-              // salaryPaymentMethod:salaryPaymentMethod,
-              selectedDistricts:selectedDistricts
+              bankcity:bankcity,
+              bankdistrict:bankdistrict,
+              bankaccountnumber:bankaccountnumber,
+              ibanAccount:ibanAccount,
+              accounttitle:accounttitle,
+              salaryPaymentMethod:salaryPaymentMethod,
+              selectedDistricts:selectedDistricts,
+              address_1:address_1
             })
             
             await doc.save()
@@ -162,7 +163,7 @@ class SchoolAdminController {
   static getSchoolAdmins = async (req, res) => {
     try{
       const SchoolAdmins = await SchoolAdminModel.find({
-  attributes: ["id", "schoolId", "schoolName","image","first_name", "last_name", "email", "password", "confirm_password", "cnic","contact","alt_contact","S_NO","father_husband","gender","religion","dateofbirth","maritalStatus","bankName","teacherQualification","teacherprofessionalqualification","bankcity","bankdistrict","bankaccountnumber","ibanAccount","accounttitle"]
+  attributes: ["id", "schoolId", "schoolName","image","first_name", "last_name", "email", "password", "confirm_password", "cnic","contact","alt_contact","S_NO","father_husband","gender","religion","dateofbirth","maritalStatus","bankName","teacherQualification","teacherprofessionalqualification","bankcity","bankdistrict","bankaccountnumber","ibanAccount","accounttitle","address_1"]
       });
       res.json(SchoolAdmins)
     } catch (error) {
