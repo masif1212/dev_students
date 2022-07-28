@@ -21,8 +21,10 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacher/${newData.schoolId}`);
+    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
+    console.log(data)
+
     setTeachers(data);
   };
   
@@ -114,7 +116,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} preview={{ preview: item.image }} />
+                    <Image style={styles.image} source={{ uri: item.image }} />
                   </View>
                   <View
                     style={{

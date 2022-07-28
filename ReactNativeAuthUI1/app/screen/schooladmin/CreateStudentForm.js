@@ -372,7 +372,7 @@ const CreateStudentForm = () => {
         selectedDistricts
 
       };
-      fetch('http://192.168.18.64:8000/api/user/createstudent', {
+      fetch('http://192.168.18.26:8000/api/user/createstudent', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',

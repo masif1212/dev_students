@@ -69,7 +69,7 @@ GET  http://192.168.18.26:8000/api/user/loggedTeachers
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMTNmOGNhNmUzYjQ2ZjhhZTUzZGEiLCJpYXQiOjE2NTg5ODg4MjUsImV4cCI6MTY1OTQyMDgyNX0.YDnI1_hSUJazhbjqTAPLVXove-oXD7Bz6pEK_FBE_VY
 
 ###
-GET  http://192.168.18.14:8000/api/user/getTeachers
+GET  http://192.168.18.26:8000/api/user/getTeachers
 
 
 
