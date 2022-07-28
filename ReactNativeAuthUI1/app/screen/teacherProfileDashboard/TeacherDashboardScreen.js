@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setTeacherInfo } from "../../../features/teacherSlice.js";
 import { setUserToken } from "../../../features/authSlice";
 import CustomCard from "../../Components/customCard/CustomCard";
+import TeacherLandingPage from "../Teachers/TeacherLandingPage";
 
 
 const TeacherDashboardScreen = () => {
@@ -24,7 +25,6 @@ const TeacherDashboardScreen = () => {
   // Store User Data in Redux Store
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(data.user.address_1)
     if (isSuccess) {
       dispatch(
         setTeacherInfo({
@@ -89,13 +89,14 @@ const TeacherDashboardScreen = () => {
   return (
     <View>
      
-      <CustomCard
+      {/* <CustomCard
         backgroundColor="#5062BD"
         title="Teacher Attendance"
         color="white"
       />
 
-      <CustomCard backgroundColor="#ffffff" title="Student Attendance" />
+      <CustomCard backgroundColor="#ffffff" title="Student Attendance" /> */}
+      <TeacherLandingPage />
 
    
     </View>

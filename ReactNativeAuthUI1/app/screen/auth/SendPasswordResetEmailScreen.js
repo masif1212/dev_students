@@ -22,6 +22,7 @@ const SendPasswordResetEmailScreen = () => {
           type: 'done',
           position: 'top',
           topOffset: 0,
+          
           text1: "Password Reset Email Sent. Please Check Your Email..."
         });
       }
@@ -45,8 +46,8 @@ const SendPasswordResetEmailScreen = () => {
   }
   return (
     <SafeAreaView>
-      <Toast config={toastConfig} />
 
+<Toast config={toastConfig} />
 
       <View style={{ marginHorizontal: 30, marginVertical: 200 }}>
 

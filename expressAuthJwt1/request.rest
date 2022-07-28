@@ -66,7 +66,7 @@ Content-Type: application/json
 
 ###
 GET  http://192.168.18.26:8000/api/user/loggedTeachers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMTNmOGNhNmUzYjQ2ZjhhZTUzZGEiLCJpYXQiOjE2NTg5MjQxNjEsImV4cCI6MTY1OTM1NjE2MX0.aVJ-NO96oec3HYOCaOt5VM82nI0egzNVx-DOnDbz8xU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMTNmOGNhNmUzYjQ2ZjhhZTUzZGEiLCJpYXQiOjE2NTg5ODg4MjUsImV4cCI6MTY1OTQyMDgyNX0.YDnI1_hSUJazhbjqTAPLVXove-oXD7Bz6pEK_FBE_VY
 
 ###
 GET  http://192.168.18.26:8000/api/user/getTeachers
@@ -188,60 +188,19 @@ Content-Type: application/json
   
 
 ###
-POST http://192.168.18.26:8000/api/user/registerTeacher
+POST http://192.168.18.14:8000/api/user/send-reset-password-email
 Content-Type: application/json
 
  {
-  "selectDivision": "selectDivision",
-              "selectedDistricts": "selectedDistricts",
-              "seletctedTehsil": "seletctedTehsil",
-              "schoolName":"schoolName",
-              "staffName":"staffName",
-              "gender":"gender",
-              "religion":"religion",
-              "maritalStatus":"maritalStatus",
-              "formerProgramm":"formerProgramm",
-              "teacherQualification":"teacherQualification",
-              "teacherProfessionalQualification":"teacherProfessionalQualification",
-              "teacherTraining":"teacherTraining",
-              "lsuTrainingDate":"lsuTrainingDate",
-              "trainInWhichSubject":"trainInWhichSubject",
-              "mentiontraining":"mentiontraining",
-              "trainingNumber":"trainingNumber",
-              "cnic":"cnic",
-              "address_1":"address_1",
-              "address_2":"address_2",
-              "father_Name":"father_Name",
-              "email":"emaisssssssl@gmail.com",
-              "password":"123",
-              "confirm_password":"123",
-              "contact":"contact",
-              "alt_contact":"alt_contact",
-              "schoolId":"62c542db114bdf03a6800210",
-              "image" :"image",
-              "staffPosition":"staffPosition",
-              "teachingClass":"teachingClass",
-              "subjectSpeciality":"subjectSpeciality",
-              "SubjectSpec":"SubjectSpec",
-              "teachingmedium":"teachingmedium",
-              "teachingExperience":"teachingExperience",
-              "experienceDuration":"experienceDuration",
-              "dateofbirth":"dateofbirth",
-              "dateofJoining":"dateofJoining",
-              "contractstart":"contractstart",
-              "contractend":"contractend",
-              "vaccinated":"vaccinated",
-              "vaccineshots":"vaccineshots",
-              "vacinatedstatus":"vacinatedstatus",
-              "startingSalary":"startingSalary",
-              "currentSalary":"currentSalary",
-              "salaryPaymentMethod":"salaryPaymentMethod",
-              "bankname":"bankname",
-              "accounttitle":"accounttitle",
-              "bankdistrict":"bankdistrict",
-              "bankcity":"bankcity",
-              "ibanAccount":"ibanAccount",
-              "bankaccountnumber":"bankaccountnumber",
-              "schoolstaff":"schoolstaff",
-              "teachingSubject":"teachingSubject"
-}
+    "email":"hedits43@gmail.com"
+  }
+
+###
+POST http://192.168.18.14:8000/api/user/reset-password/62d932616b322e7b3f958823/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmQ5MzI2MTZiMzIyZTdiM2Y5NTg4MjMiLCJpYXQiOjE2NTg5MjA1NDMsImV4cCI6MTY1ODkyMTQ0M30.33A4GBSUBoqtlIX6lLKKdDxSmubb7GfJizFlj6nXm_g
+Content-Type: application/json
+
+ {
+    "password":"12345",
+    "password_confirmation":"12345"
+
+  }

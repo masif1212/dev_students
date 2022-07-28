@@ -57,6 +57,7 @@ const CreateStudentForm = () => {
 
 
 
+  const [ message, setMessage ] = useState("");
 
   //================================DATE PICKER=============================================//
   const showDatePicker = () => {
@@ -371,20 +372,16 @@ const CreateStudentForm = () => {
         selectedDistricts
 
       };
-      const res = await registerStudent(formData);
-      if (res.data.status === "success") {
-        await storeToken(res.data.token); // Store Token in Storage
-        clearTextInput();
-        navigation.navigate("CreateStudent");
-      }
-      if (res.data.status === "failed") {
-        Toast.show({
-          type: "warning",
-          position: "top",
-          topOffset: 0,
-          text1: res.data.message,
-        });
-      }
+      fetch('http://192.168.18.64:8000/api/user/createstudent', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+              }).then(res =>res.json())
+                .then(res => setMessage(res.message))
+                .then((res) => message == "Email already exists" && "Unable to Register" ? null :  navigation.navigate('CreateStudent') ); 
 
     } else {
       Toast.show({
@@ -442,6 +439,8 @@ const CreateStudentForm = () => {
           </TouchableOpacity>
         </View>
         <Toast config={toastConfig} />
+    { message ?<Text style={{ fontSize: 15, paddingLeft: 30, color: 'green', fontWeight: 'bold'}}>{message}</Text> : null}
+
       </View>
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
