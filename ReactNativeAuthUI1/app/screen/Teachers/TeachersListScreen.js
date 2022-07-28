@@ -36,7 +36,7 @@ const TeachersListScreen = ({navigation, route})=> {
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
           data={teachers}
-          keyExtractor={(item) => item.contact}
+          keyExtractor={(item) => item.email}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
@@ -56,7 +56,7 @@ const TeachersListScreen = ({navigation, route})=> {
                     gender: item.gender,
                     religion:item.religion,
                     maritalStatus:item.maritalStatus,
-                    staff_name:item.staff_name,
+                    staffName:item.staffName,
                     staffPosition:item.staffPosition,
                     dateofJoining:item.dateofJoining,
                     contractstart:item.contractstart,
@@ -67,8 +67,8 @@ const TeachersListScreen = ({navigation, route})=> {
                     teachingSubject:item.teachingSubject,
                     SubjectSpec:item.SubjectSpec,
                     father_name:item.father_name,
-                    districts:item.districts,
-                    selectedTehsil:item.selectedTehsil,
+                    selectedDistricts:item.selectedDistricts,
+                    seletctedTehsil:item.seletctedTehsil,
                   })
                 }
               >
@@ -79,7 +79,7 @@ const TeachersListScreen = ({navigation, route})=> {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} />
+                    <Image style={styles.image} source={{uri:item.image}} />
                   </View>
                   <View
                     style={{
@@ -88,7 +88,7 @@ const TeachersListScreen = ({navigation, route})=> {
                    
                     }}
                   >
-                    <Text style={styles.username}>{item.first_name}</Text>
+                    <Text style={styles.username}>{item.staffName}</Text>
                   </View>
                   <View
                     style={{
@@ -105,7 +105,7 @@ const TeachersListScreen = ({navigation, route})=> {
                    
                     }}
                   >
-                    <Pie outerRadius={'50%'} />
+                    {/* <Pie outerRadius={'50%'} /> */}
                   </View>
                 </View>
               </TouchableOpacity>

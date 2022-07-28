@@ -361,7 +361,14 @@ const ClassStudents = ({ navigation, route }) => {
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
-                 
+                  student_id_att:item.student_id_att,
+                  schoolName:item.schoolName,
+                  roll_no:item.roll_no,
+                  gender:item.gender,
+                  dateofbirth:item.dateofbirth,
+                  currentshift:item.currentshift,
+                  religion:item.religion,
+                  date_of_admission:item.date_of_admission,
                  
                  })}
                  style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '24%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>

@@ -66,7 +66,8 @@ class StudentController {
             "roll_no",
             "student_class",
             "section",
-            "city"
+            "city",
+            "schoolName"
   
   
           ],

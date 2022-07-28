@@ -24,7 +24,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
     const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${newData.schoolId}`);
     const data = await resp.json();
     setTeachers(data);
-    console.log(data)
+    console.log(teachers)
   };
   
   const focus = useIsFocused();
@@ -115,7 +115,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                       marginTop: 25,
                     }}
                   >
-                    <Image style={styles.image} preview={{ preview: item.image }} />
+                    <Image style={styles.image} source={{ uri: item.image }} />
                   </View>
                   <View
                     style={{
