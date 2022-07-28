@@ -17,6 +17,8 @@ const SchoolDashboardScreen = () => {
     (async () => {
       const token = await getToken(); // Getting Token from Storage
       setUserLToken(token); // Store Token in Local State
+      console.log(token)
+
       dispatch(setUserToken({ token: token })); // Store Token in Redux Store
     })();
   });

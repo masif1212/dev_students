@@ -16,6 +16,7 @@ const DashboardScreen = () => {
     (async () => {
       const token = await getToken(); // Getting Token from Storage
       setUserLToken(token); // Store Token in Local State
+      
       dispatch(setUserToken({ token: token })); // Store Token in Redux Store
     })();
   });
