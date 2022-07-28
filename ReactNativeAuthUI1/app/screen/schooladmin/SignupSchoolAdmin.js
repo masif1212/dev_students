@@ -2207,7 +2207,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
         };
 
-        fetch('http://192.168.18.14:8000/api/user/schooladmin', {
+        fetch('http://192.168.18.64:8000/api/user/schooladmin', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -2215,8 +2215,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
           },
           body: JSON.stringify(formData)
         }).then(res => res.json())
-          .then(res => setMessage(res.message))
-          .then((res) => message == "Email already exists" && "Unable to Register" ? null : navigation.goBack());
+          .then((res)=> res.message === 'Registration Success' ? navigation.goBack() : console.log('navigate'))
       } else {
         Toast.show({
           type: "warning",

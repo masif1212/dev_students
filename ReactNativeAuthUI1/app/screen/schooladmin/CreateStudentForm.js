@@ -380,8 +380,8 @@ const CreateStudentForm = () => {
                 },
                 body: JSON.stringify(formData)
               }).then(res =>res.json())
-                .then(res => setMessage(res.message))
-                .then((res) => message == "Email already exists" && "Unable to Register" ? null :  navigation.navigate('CreateStudent') ); 
+                .then(res => console.log(res.message))
+                
 
     } else {
       Toast.show({
