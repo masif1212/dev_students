@@ -2321,7 +2321,7 @@ const schoolId = route.params.schoolId;
           teachingSubject
         };
 
-              fetch('http://192.168.18.64:8000/api/user/registerTeacher', {
+              fetch('http://192.168.18.26:8000/api/user/registerTeacher', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',

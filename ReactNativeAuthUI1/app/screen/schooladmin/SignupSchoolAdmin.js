@@ -98,9 +98,9 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
   const getDate = () => {
     let tempDate = moment(dateofbirth).toString().split(" ");
-    return dateofbirth !== ""
+    return dateofbirth ? dateofbirth !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
-      : false;
+      : false : <Text style={{ color: 'gray', fontWeight: "bold"}}>Date of Birth</Text>;
   };
   //===============================END DATE OF BIRTH========================//
   //=================== date of joining===============================//
@@ -109,7 +109,6 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   const [teacherQualificationShow, setTeacherQualificationShow] = useState("")
   const [teacherQualification, setTeacherQualification] = useState("");
   const [qualifications, setQualifications] = useState([
-    { label: "Select Qualificaton", value: "Select Qualificaton" },
     { label: "Metric", value: "Metric" },
     { label: "Inter", value: "Inter" },
     { label: "B.A", value: "B.A" },
@@ -138,10 +137,6 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
     setTeacherProfessionalQualification,
   ] = useState("");
   const [professionalQualifications, setProfessionalQualifications] = useState([
-    {
-      label: "Select Professional Qualification",
-      value: "Select Professional Qualification",
-    },
     { label: "B.ED", value: "B.ED" },
     { label: "M.ED", value: "M.ED" },
     { label: "DIT", value: "DIT" },
@@ -2207,7 +2202,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
         };
 
-        fetch('http://192.168.18.14:8000/api/user/schooladmin', {
+        fetch('http://192.168.18.26:8000/api/user/schooladmin', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
@@ -2518,10 +2513,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
                 }}
               >
                 <Text>{getDate()}</Text>
-                <Text style={{
-                  right: 98,
-                  top: 10
-                }}>Date of Birth</Text>
+            
                 <Icon
                   style={{
                     color: "gray",
@@ -2568,7 +2560,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
               open={teacherprofessionalQualificationshow}
               value={teacherprofessionalqualification}
               items={professionalQualifications}
-              setOpen={setTeacherQualificationShow}
+              setOpen={setTeacherProfessionalQualificationShow}
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
             />
