@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View, Image,TouchableOpacity,ScrollView, } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
 const TeachersProfileScreen = ({route,navigation}) => {
+
+ 
 
   return (
     <ScrollView style={{
@@ -325,7 +327,7 @@ const TeachersProfileScreen = ({route,navigation}) => {
             }}
             onPress= {()=> navigation.navigate("TeacherAttendanceDetails",{
               staffName:route.params.staffName,
-              teacher_id_att:route.params.teacher_id_att,
+              teacherId:route.params.teacherId,
               
             }) }
             >

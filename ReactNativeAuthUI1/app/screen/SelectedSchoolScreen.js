@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 
@@ -7,7 +7,8 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 const SelectedSchoolScreen = ({navigation, route}) => {
   const { id, title } = route.params;
 
- 
+  
+
   
   return (
     <View>

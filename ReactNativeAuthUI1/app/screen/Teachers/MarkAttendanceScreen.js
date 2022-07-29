@@ -24,28 +24,40 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [attendance, setAttendance] = useState()
   const [attendanceState, setAttendanceState] = useState('')
 
-
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getSometeacher/${route.params.schoolId}`);
-    const data = await resp.json();
-    const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
-    setAttendanceState(schAdminId)
+    fetch('https://ams.firefly-techsolutions.com/services/getTeacher',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: route.params.schoolId })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+      const schAdminId = (response.data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+      setAttendanceState(schAdminId)
 
+       
+     });
   };
+
+  // const sxs = async () => {
+  //   const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getTeacher/${route.params.schoolId}`);
+  //   const data = await resp.json();
+  //   console.log(data)
+  //   const schAdminId = (data.data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+  //   setAttendanceState(schAdminId)
+
+  // };
 
   const focus = useIsFocused();
 
   useLayoutEffect(() => {
     fetchData();
-
-
   }, [focus])
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l.teacher_id_att === item.teacher_id_att ? { ...l, attendance: S } : l));
-    setAttendanceState(attend)
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
     setAttendance(attend)
-
+    setAttendanceState(attend)
   }
 
   const [items, setItems] = useState()
@@ -60,20 +72,25 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    fetch('http://192.168.18.26:8000/api/user/teacherattendance', {
-      method: "POST",
-      body: JSON.stringify(attendance),
+    const formData = {
+      attendance,
+      schoolId,
+
+    };
+    console.log(formData)
+    fetch('https://ams.firefly-techsolutions.com/services/teacherattendance', {
+      method: 'POST',
       headers: {
-        'content-type': 'application/json',
-      }
-    })
-      .then((jsonRes) =>console.log("muzammil", jsonRes))
-      .catch(err => {
-        console.log(err);
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(attendance)
+    }).then(res =>res.json())
+      .then((res)=> console.log('hello')) 
+    };
 
-      })
-  };
-
+    // useEffect(()=>{
+    // console.log(attendance)
+    // })
 
   // const onSubmit = () => {
   //       attendance.forEach((item) => {

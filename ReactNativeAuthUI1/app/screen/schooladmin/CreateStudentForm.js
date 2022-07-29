@@ -372,7 +372,7 @@ const CreateStudentForm = () => {
         selectedDistricts
 
       };
-      fetch('http://192.168.18.26:8000/api/user/createstudent', {
+      fetch('https://ams.firefly-techsolutions.com/services/createstudent', {
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
@@ -380,7 +380,7 @@ const CreateStudentForm = () => {
                 },
                 body: JSON.stringify(formData)
               }).then(res =>res.json())
-                .then(res => console.log(res.message))
+                .then((res)=> res.message === 'Registration Success' ? navigation.goBack() : setMessage(res.message)) 
                 
 
     } else {

@@ -23,7 +23,7 @@ const SideBar = ({ ...props }) => {
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
 
- 
+
 
 
   return (
@@ -36,7 +36,7 @@ const SideBar = ({ ...props }) => {
         justifyContent:'center',
         bottom:10
         }}>
-        <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : myData.image}} />
+        <Image style={{ height: 100,width:100,borderRadius:80,top:1}} />
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white",}}>{myData.first_name + " "+myData.last_name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" ,}}>{myData.email}</Text>
 

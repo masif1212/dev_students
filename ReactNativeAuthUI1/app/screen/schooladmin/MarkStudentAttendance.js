@@ -142,18 +142,16 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
   const handleFormSubmit = async () => {
-  fetch('http://192.168.18.26:8000/api/user/studentattendance', {
-        method: "POST",
-        body: JSON.stringify(attendance),
-        headers: {
-          'content-type': 'application/json',
-        }
-      })
-      .then((response) => response)
-      .catch(err => {
-        console.log(err);
-  
-    })
+    console.log(attendance)
+    fetch('https://ams.firefly-techsolutions.com/services/teacherattendance', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(attendance)
+    }).then(res =>res.json())
+      .then((res)=> console.log(res)) 
     };
   
 

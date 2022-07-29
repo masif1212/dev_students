@@ -32,8 +32,10 @@ const SchoolAdminLogin = () => {
     if (email && password) {
       const formData = { email, password };
       const res = await loginSchoolAdmin(formData);
-      if (res.data.status === "success") {
-        await storeToken(res.data.token); // Store Token in Storage
+      console.log(res)
+      if (res.data.type === "success") {
+        await storeToken(res.data.data.email); // Store Token in Storage
+        console.log(res.data.data.email) // Store Token in Storage
         clearTextInput();
         navigation.navigate("SchoolAdminPannel");
       }

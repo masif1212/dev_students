@@ -75,35 +75,52 @@ const TeacherListPieChart = ({outerRadius, teacherId}) => {
     const focus = useIsFocused();
     
 
-const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacherattendancedashboardbyteacherid/${teacherId}`);
-  const students = await resp.json();
-  const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
-    console.log(attendanceOfAbsent)
-  const attendanceOfPresent = students.filter(x => x.attendance=='P').length;
   
-  const attendanceOfLeave = students.filter(x => x.attendance=='L').length;
-  
-  const attendanceOfTotalStudents = students.filter(x => x.attendance).length;
-  
-  const absentaverage = attendanceOfAbsent/attendanceOfTotalStudents*100;
-//   console.log(absentaverage)
-  
-  const presentaverage = attendanceOfPresent/attendanceOfTotalStudents*100;
-//   console.log(presentaverage)
-  
-  const leaveAverage = attendanceOfLeave/attendanceOfTotalStudents*100;
-//   console.log(leaveAverage)
-
-      data[0].status = Math.round(absentaverage) ;
-      data[1].status = Math.round(presentaverage);
-      data[2].status = Math.round(leaveAverage);
-};
 
 useLayoutEffect(() => {
+  function fetchData () {
+    fetch(
+      "https://ams.firefly-techsolutions.com/services/getteacherattendancedashboardbyteacherid",
+      {
+        method: "POST", //GET and ...
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: teacherId }),
+      }
+    )
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        const students = response;
+        const attendanceOfAbsent = students.data.filter(
+          (x) => x.attendance == "A"
+        ).length;
+
+        const attendanceOfPresent = students.data.filter(
+          (x) => x.attendance == "P"
+        ).length;
+
+        const attendanceOfLeave = students.data.filter(
+          (x) => x.attendance == "L"
+        ).length;
+
+        const attendanceOfTotalStudents = students.data.filter(
+          (x) => x.attendance
+        ).length;
+
+        const absentaverage =
+          (attendanceOfAbsent / attendanceOfTotalStudents) * 100;
+
+        const presentaverage =
+          (attendanceOfPresent / attendanceOfTotalStudents) * 100;
+
+        const leaveAverage =
+          (attendanceOfLeave / attendanceOfTotalStudents) * 100;
+        data[0].status = Math.round(absentaverage);
+        data[1].status = Math.round(presentaverage);
+        data[2].status = Math.round(leaveAverage);
+      });
+  };
  fetchData();
-    console.log(teacherId)
-}, [focus]);
+}, []);
 
 
  

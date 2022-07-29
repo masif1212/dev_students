@@ -1,16 +1,16 @@
 
 ###
-POST http://192.168.18.64:8000/api/user/schoolAdminlogin
+POST http://192.168.18.64:8000/api/user/teachersLogin
 Content-Type: application/json
 
 {
-  "email": "admin@gmail.com",
+  "email": "teacher@gmail.com",
  "password":"1234"
 }
 
 ###
-GET  http://192.168.18.26:8000/api/user/loggedSchoolAdmin
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmM1NDMwMzExNGJkZjAzYTY4MDAyMTciLCJpYXQiOjE2NTg5Mzc5MjYsImV4cCI6MTY1OTM2OTkyNn0.-YR4cmoAuqb1kRj9ATFeQZi2HIIr6JnHBsdXOnfJB3Q
+GET  http://192.168.18.26:8000/api/user/loggeduser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MmUxMWIyMzY0MmI1NDE1ZTI5NDEyNTkiLCJpYXQiOjE2NTg5OTc5MjEsImV4cCI6MTY1OTQyOTkyMX0.CQwfUnuISrOpa1b09-G9fBz4m5CR1iIkPbVfMNGkLlo
 
 ###
 
@@ -55,11 +55,11 @@ Content-Type: application/json
   }
 
 ###
-POST http://192.168.18.26:8000/api/user/teachersLogin
+POST http://192.168.18.26:8000/api/user/login
 Content-Type: application/json
 
 {
-  "email": "Qasim@gmail.com",
+  "email": "Admin@gmail.com",
  "password":"1234"
 }
 

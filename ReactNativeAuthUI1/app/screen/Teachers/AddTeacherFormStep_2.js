@@ -205,7 +205,7 @@ const schoolId = route.params.schoolId;
   // -==============================================================================================
   //=========================Bank Names=============================================//
   const [bankNameShow, setBankNameShow] = useState("");
-  const [bankname, setBankName] = useState([]);
+  const [bankname, setBankName] = useState('');
   const [banknames, setBankNames] = useState([
     { label: "Select Bank Name", value: "Select Bank Name" },
     { label: "Al Baraka Bank Limited", value: "Al Baraka Bank Limited" },
@@ -256,7 +256,7 @@ const schoolId = route.params.schoolId;
 
   //=========================Bank Names=============================================//
   const [bankCityShow, setBankCityShow] = useState("");
-  const [bankcity, setBankCity] = useState([]);
+  const [bankcity, setBankCity] = useState("");
   const [bankCities, setBankCities] = useState([
     {
       label: "Abbottabad",
@@ -2014,11 +2014,11 @@ const schoolId = route.params.schoolId;
   //=========================end Bank Names=============================================//
   //=========================Bank Names=============================================//
   const [bankDistrictShow, setBankDistrictShow] = useState("");
-  const [bankdistrict, setBankDistrict] = useState([]);
+  const [bankdistrict, setBankDistrict] = useState("");
   const [bankdistricts, setBankDistricts] = useState([
-    { label: "Select District", label: "Select District" },
-    { label: "BANNU DISTRICT", label: "BANNU DISTRICT" },
-    { label: "DERA ISMAIL KHAN DISTRICT", label: "DERA ISMAIL KHAN DISTRICT" },
+    { label: "Select District", value: "Select District" },
+    { label: "BANNU DISTRICT", value: "BANNU DISTRICT" },
+    { label: "DERA ISMAIL KHAN DISTRICT", value: "DERA ISMAIL KHAN DISTRICT" },
     { label: "LAKKI MARWAT DISTRICT", value: "LAKKI MARWAT DISTRICT" },
     { label: "TANK DISTRICT", value: "TANK DISTRICT" },
     { label: "ABBOTTABAD DISTRICT", value: "ABBOTTABAD DISTRICT" },
@@ -2320,17 +2320,19 @@ const schoolId = route.params.schoolId;
           schoolstaff,
           teachingSubject
         };
-
-              fetch('http://192.168.18.26:8000/api/user/registerTeacher', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-              }).then(res =>res.json())
-                .then(res => setMessage(res.message))
-                .then((res) => message == "Email already exists" && "Unable to Register" ? null :  navigation.navigate('TeachersListForSchoolAdmin') );     
+        const res = await registerTeacher(formData);
+        console.log(res.data.type)
+        if (res.data.type === "success") {
+          navigation.navigate('SchoolAdminHomePage');
+        }
+        if (res.data.status === "failed") {
+          Toast.show({
+            type: "warning",
+            position: "top",
+            topOffset: 0,
+            text1: res.data.message,
+          });
+        }    
       } else {
         Toast.show({
           type: "warning",
@@ -2353,61 +2355,7 @@ const schoolId = route.params.schoolId;
   //   console.log(formData)
   // })
   //=====================clear text input================================//
-  const clearTextInput = () => {
-    setDistricts(" ");
-    setSeletctedTehsil("");
-    setStaff_Name("");
-    setStaffPosition("");
-    setFormerProgramm("");
-    setSchoolStaff("");
-    setGender("");
-    setReligion("");
-    setMaritalStatus("");
-    setDateOfBirth("");
-    setDataofJoining("");
-    setContractStart("");
-    setContractEnd("");
-    setTeacherQualification("");
-    setTeacherProfessionalQualification("");
-    setFormerProgramm("");
-    setTeachingClass("");
-    setTeachingSubject("");
-    setSubjectSpeciality("");
-    setSubjectSpec("");
-    setTeachingMedium("");
-    setTeacherTraining("");
-    setTrainingNumber("");
-    setTrainInWhichSubject("");
-    setMentiontraining("");
-    setTeachingExperience("");
-    setExperienceDuration("");
-    setStartingSalary("");
-    setCurrentSalary("");
-    setSalaryPaymentMethod("");
-    setBankName("");
-    setBankDistrict("");
-    setBankCity("");
-    setAccountTitle("");
-    setIbanAccount("");
-    setBankAccountNumber("");
-    setFather_Name("");
-    setEmail("");
-    setPassword("");
-    setconfirm_password("");
-    setContact("");
-    setAlt_Contact("");
-    setAddress_1("");
-    setAddress_2("");
-    setcnic("");
-    setImage("");
-    setVaccinated("");
-    setVaccineShots("");
-    setVaccinatedStatus("");
-    setStaffPosition("");
-    setTeachingClass("");
-    setSchoolStaff("");
-    setTeachingSubject("")
-  };
+
   //=====================clear text input================================//
   return (
     <SafeAreaView
@@ -2649,8 +2597,8 @@ const schoolId = route.params.schoolId;
               gender={teachingmedium}
               options={["Sindhi", "Urdu"]}
               horizontal={true}
-              onChangeSelect={(opt) => {
-                opt;
+              onChangeSelect={(opt, i) => {
+                i;
                 setTeachingMedium(opt);
               }}
             />

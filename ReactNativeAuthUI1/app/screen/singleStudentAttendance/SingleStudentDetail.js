@@ -253,7 +253,7 @@ const SingleStudentDetail = ({route,navigation}) => {
             marginTop:5,
             fontWeight:'bold'
         }} >Date of Admission</Text>
-        <Text>{route.params.religion}</Text>
+        <Text>{route.params.date_of_admission}</Text>
       
       </View>
       

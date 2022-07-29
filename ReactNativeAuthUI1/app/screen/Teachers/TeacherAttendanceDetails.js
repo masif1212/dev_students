@@ -35,7 +35,7 @@ const TeacherAttendanceDetails = ({
 
   const fetchData = async () => {
     const resp = await fetch(
-      `http://192.168.18.26:8000/api/user/getteacherattendance/${route.params.teacher_id_att}`
+      `http://192.168.18.26:8000/api/user/getteacherattendance/${route.params.teacherId}`
     );
     const data = await resp.json();
     setTeachers(data);
@@ -43,6 +43,8 @@ const TeacherAttendanceDetails = ({
 
   useLayoutEffect(() => {
     fetchData();
+    console.log(route.params.teacherId)
+
   }, [focus]);
 
   const showDatePicker = () => {
@@ -160,7 +162,7 @@ const TeacherAttendanceDetails = ({
         <View style ={{left:100,bottom:1}}>
            <TeacherListPieChart
               outerRadius={"70%"}
-              teacherId={route.params.teacher_id_att}
+              teacherId={route.params.teacherId}
             />
             </View>
 

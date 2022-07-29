@@ -17,12 +17,18 @@ const TeachersListScreen = ({navigation, route})=> {
   const [teachers,setTeachers] = useState();
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getteacher/${route.params.schoolid}`);
-    const data = await resp.json();
-    setTeachers(data);
+    fetch('https://ams.firefly-techsolutions.com/services/getTeacher',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: route.params.schoolid })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+       setTeachers(response.data)
+     });
   };
   
-  
+ 
   const focus = useIsFocused();
 
   useEffect(() => {
@@ -32,6 +38,8 @@ const TeachersListScreen = ({navigation, route})=> {
 
     return (
       <View style={styles.body}>
+
+
         <FlatList
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
