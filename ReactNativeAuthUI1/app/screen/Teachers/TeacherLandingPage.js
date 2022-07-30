@@ -34,11 +34,15 @@ const TeacherLandingPage = () => {
   const newData = useSelector((state) => state.teacher);
 
   const fetchData = async () => {
-    const resp = await fetch(
-      `http://192.168.18.26:8000/api/user/getStudents/${newData.schoolId}`
-    );
-    const data = await resp.json();
-    setStudents(data);
+    fetch("https://ams.firefly-techsolutions.com/services/getStudents", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ schoolId: newData.schoolId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setStudents(response.data);
+      });
   };
 
   const focus = useIsFocused();
@@ -47,8 +51,6 @@ const TeacherLandingPage = () => {
     fetchData();
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-    setTeacherId(newData.id);
-    console.log(students)
   }, [focus]);
 
   // select class and section

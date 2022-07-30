@@ -25,12 +25,15 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [ attendanceState, setAttendanceState ] = useState('')
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getSomestudents/${route.params.schoolId}`);
-    const data = await resp.json();
-   const schAdminId = (data.map(l => l.first_name ? { ...l, teacherId: route.params.teacherid } : l));
-   setAttendanceState(schAdminId)
-   
-    
+    fetch("https://ams.firefly-techsolutions.com/services/getSomestudents", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ schoolId: route.params.schoolId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setAttendanceState(response.data);
+      });
   };
   
   const focus = useIsFocused();
@@ -126,9 +129,10 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
  
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l.student_id_att === item.student_id_att ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l.student_id_att === item.student_id_att ? { ...l, attendance: S, teacherid: route.params.teacherid } : l));
     setAttendanceState(attend)
     setAttendance(attend)
+    console.log(attend)
   }
 
 
@@ -143,7 +147,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const handleFormSubmit = async () => {
     console.log(attendance)
-    fetch('https://ams.firefly-techsolutions.com/services/teacherattendance', {
+    fetch('https://ams.firefly-techsolutions.com/services/studentattendance', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

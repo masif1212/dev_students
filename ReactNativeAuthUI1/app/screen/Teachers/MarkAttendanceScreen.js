@@ -21,20 +21,19 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
   const [teachers, setTeachers] = useState([]);
-  const [attendance, setAttendance] = useState()
+  const [attendance, setAttendance] = useState("")
   const [attendanceState, setAttendanceState] = useState('')
 
   const fetchData = async () => {
-    fetch('https://ams.firefly-techsolutions.com/services/getTeacher',{
+    fetch('https://ams.firefly-techsolutions.com/services/getSometeacher',{
       method: 'POST',//GET and ...
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ schoolId: route.params.schoolId })
      })
      .then((response)=>response.json()) //   <------ this line 
      .then((response)=>{
-      const schAdminId = (response.data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+      const schAdminId = (response.data.map(l => l.staffName ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
       setAttendanceState(schAdminId)
-
        
      });
   };
@@ -52,10 +51,11 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     fetchData();
+    console.log(route.params.schoolId)
   }, [focus])
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S, schoolId: route.params.schoolId } : l));
     setAttendance(attend)
     setAttendanceState(attend)
   }
@@ -72,12 +72,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    const formData = {
-      attendance,
-      schoolId,
-
-    };
-    console.log(formData)
     fetch('https://ams.firefly-techsolutions.com/services/teacherattendance', {
       method: 'POST',
       headers: {
@@ -85,12 +79,16 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
       },
       body: JSON.stringify(attendance)
     }).then(res =>res.json())
-      .then((res)=> console.log('hello')) 
+      .then((res)=> {
+        if(res.type === 'success') {
+          navigation.goBack()
+        }
+      }) 
     };
 
-    // useEffect(()=>{
-    // console.log(attendance)
-    // })
+    useEffect(()=>{
+    console.log(attendance)
+    })
 
   // const onSubmit = () => {
   //       attendance.forEach((item) => {

@@ -34,12 +34,17 @@ const TeacherAttendanceDetails = ({
   const focus = useIsFocused();
 
   const fetchData = async () => {
-    const resp = await fetch(
-      `http://192.168.18.26:8000/api/user/getteacherattendance/${route.params.teacherId}`
-    );
-    const data = await resp.json();
-    setTeachers(data);
+    fetch("https://ams.firefly-techsolutions.com/services/getteacherattendancedashboardbyteacherid", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id : route.params.teacherId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setTeachers(response.data);
+      });
   };
+  
 
   useLayoutEffect(() => {
     fetchData();
