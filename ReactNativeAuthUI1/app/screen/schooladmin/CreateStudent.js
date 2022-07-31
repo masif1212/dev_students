@@ -42,7 +42,8 @@ const focus = useIsFocused();
      })
      .then((response)=>response.json()) //   <------ this line 
      .then((response)=>{
-       setStudents(response.data)       
+       setStudents(response.data)
+       return response       
      });
   };
   

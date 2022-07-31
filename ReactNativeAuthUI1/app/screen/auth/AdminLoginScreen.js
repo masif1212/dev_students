@@ -33,20 +33,25 @@ import {
       if (email && password) {
         const formData = { email, password };
         const res = await loginUser(formData);
+        if(res.data){
         if (res.data.type === "success") {
           clearTextInput();
           await storeToken(res.data.data.email); // Store Token in Storage
           console.log(res.data.data.email)
           navigation.navigate("UserPanelTab");
-        }
-        if (res.data.status === "failed") {
+        }} else if (res.error) {
+        if(res.error.data.type === "error") {
+          console.log(res.error.data.message)
+          console.log('hello')
+
           Toast.show({
             type: "warning",
             position: "top",
             topOffset: 0,
-            text1: res.data.message,
+            text1: res.error.data.message,
           });
         }
+      }
       } else {
         Toast.show({
           type: "warning",

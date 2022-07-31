@@ -8,6 +8,9 @@ const SingleStudentDetail = ({route,navigation}) => {
         flex:1,
         backgroundColor:'white'
     }}>
+      <View style={{
+        marginBottom: 30
+      }}>
       <View
         style={{
           justifyContent: "center",
@@ -256,7 +259,7 @@ const SingleStudentDetail = ({route,navigation}) => {
         <Text>{route.params.date_of_admission}</Text>
       
       </View>
-      
+      </View>
  
     </ScrollView>
   );

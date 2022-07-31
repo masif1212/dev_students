@@ -64,7 +64,7 @@ const TeacherPieChartForSchoolAdmin = ({ outerRadius, route }) => {
 
   const focus = useIsFocused();
 
-  const fetchData = async () => {
+  const fetchData =  () => {
     fetch(
       "https://ams.firefly-techsolutions.com/services/getstudentsattendancedashboardbyschoolid",
       {
@@ -109,7 +109,7 @@ const TeacherPieChartForSchoolAdmin = ({ outerRadius, route }) => {
 
   useLayoutEffect(() => {
     fetchData();
-  }, [focus]);
+  }, [myData]);
 
   return (
     <PieChart

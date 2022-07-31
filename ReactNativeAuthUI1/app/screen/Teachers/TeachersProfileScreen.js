@@ -316,7 +316,8 @@ const TeachersProfileScreen = ({route,navigation}) => {
       <View style={{
           flexDirection:'row',
           justifyContent:'flex-end',
-          marginRight:20
+          marginRight:20,
+          marginVertical: 40
 
       }}>
             <TouchableOpacity style={{

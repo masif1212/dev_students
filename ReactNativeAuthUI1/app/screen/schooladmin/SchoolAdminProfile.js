@@ -4,10 +4,14 @@ import React from "react";
 const SchoolAdminProfile = ({route}) => {
 
   return (
+    
     <ScrollView style={{
         flex:1,
-        backgroundColor:'white'
+        backgroundColor:'white',
     }}>
+      <View style={{
+        marginBottom: 40
+      }}>
       <View
         style={{
           justifyContent: "center",
@@ -206,21 +210,8 @@ const SchoolAdminProfile = ({route}) => {
         
       
       </View>
-      {/* <View style={{
-          flexDirection:'row',
-          justifyContent:'flex-end',
-          marginRight:20
-
-      }}>
-            <TouchableOpacity style={{
-                backgroundColor:'#5062BD',
-                padding:20,
-                borderRadius:20,
-
-            }}><Text style={{
-                color:'white'
-            }}>View Attendance</Text></TouchableOpacity>
-        </View> */}
+  
+        </View>
     </ScrollView>
   );
 };

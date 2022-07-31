@@ -33,7 +33,7 @@ const TeacherLandingPage = () => {
 
   const newData = useSelector((state) => state.teacher);
 
-  const fetchData = async () => {
+  const fetchData =  () => {
     fetch("https://ams.firefly-techsolutions.com/services/getStudents", {
       method: "POST", //GET and ...
       headers: { "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ const TeacherLandingPage = () => {
     fetchData();
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-  }, [focus]);
+  }, [newData]);
 
   // select class and section
 
@@ -306,10 +306,11 @@ const TeacherLandingPage = () => {
                         ...styles.tableRow,
                         backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",
                         width: "100%",
+                  
                       }}
                     >
                       <Text
-                        style={{ ...styles.columnRowTxt, fontWeight: "bold" }}
+                        style={{ ...styles.columnRowTxt, fontWeight: "bold", paddingLeft: 8 }}
                       >
                         {item.roll_no}
                       </Text>
@@ -317,7 +318,6 @@ const TeacherLandingPage = () => {
                       <Text style={{ ...styles.coloumnRowName }}>
                         {item.first_name + " " + item.last_name}
                       </Text>
-
                       <View
                         style={{
                           width: "100%",
@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     margin: 2,
-    left: 8,
+  
   },
   columnHeader: {
     width: "16%",
@@ -519,10 +519,12 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
+    paddingTop: 10
   },
   coloumnRowName: {
     width: "20%",
     right: 20,
+    paddingTop: 10
   },
   container: {
     padding: 20,

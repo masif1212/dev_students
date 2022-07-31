@@ -74,12 +74,9 @@ const fetchData = async () => {
   const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getteacherattendancedashboard`);
   const students = await resp.json();
   const attendanceOfAbsent = students.data.filter(x => x.attendance=='A').length;
-console.log(attendanceOfAbsent)
   const attendanceOfPresent = students.data.filter(x => x.attendance=='P').length;
-console.log(attendanceOfPresent)
   
   const attendanceOfLeave = students.data.filter(x => x.attendance=='L').length;
-  console.log(attendanceOfLeave)
   const attendanceOfTotalStudents = students.data.filter(x => x.attendance).length;
   
   const absentaverage = attendanceOfAbsent/attendanceOfTotalStudents*100;

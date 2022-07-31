@@ -22,7 +22,9 @@ const TeacherDashboardScreen = () => {
   });
 
   const isSuccess = true;
-  const fetchData = async () => {
+
+
+  const fetchData =  () => {
     fetch("https://ams.firefly-techsolutions.com/services/loggedTeachers", {
       method: "POST", //GET and ...
       headers: { "Content-Type": "application/json" },
@@ -34,14 +36,10 @@ const TeacherDashboardScreen = () => {
       });
   };
 
-  const firstUpdate = useRef(true);
-  useLayoutEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
+
+  useEffect(() => {
     fetchData();
-  }, [focus]);
+  });
 
   // Store User Data in Redux Store
   const dispatch = useDispatch();
@@ -107,7 +105,7 @@ const TeacherDashboardScreen = () => {
         
       );
     }
-  });
+  },[teacherData]);
 
   return (
     <View>

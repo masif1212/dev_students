@@ -2117,7 +2117,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
 
   const clearTextInput = () => {
-    S_NO("");
+    setS_NO("");
     setfirst_name("");
     setlast_name("");
     setEmail("");
@@ -2183,22 +2183,26 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
           salaryPaymentMethod,
           selectedDistricts,
           address_1
-
-
         };
 
         const res = await registerSchoolAdmin(formData);
-        console.log(res)
-        if (res.data.type === "success") {
-          navigation.goBack();
-        }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
+        if(res.data){
+          if (res.data.type === "success") {
+            clearTextInput();
+            setMessage(res.data.message)
+            { setTimeout(()=>{ navigation.goBack() }, 1000);}
+          }} else if (res.error) {
+          if(res.error.data.type === "error") {
+            console.log(res.error.data.message)
+            console.log('hello')
+  
+            Toast.show({
+              type: "warning",
+              position: "top",
+              topOffset: 0,
+              text1: res.error.data.message,
+            });
+          }
         }
       } else {
         Toast.show({
