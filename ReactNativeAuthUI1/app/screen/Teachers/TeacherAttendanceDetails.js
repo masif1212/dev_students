@@ -33,7 +33,7 @@ const TeacherAttendanceDetails = ({
 
   const focus = useIsFocused();
 
-  const fetchData = async () => {
+  const fetchData =  () => {
     fetch("https://ams.firefly-techsolutions.com/services/getteacherattendancedashboardbyteacherid", {
       method: "POST", //GET and ...
       headers: { "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ const TeacherAttendanceDetails = ({
     fetchData();
     console.log(route.params.teacherId)
 
-  }, [focus]);
+  }, [route.params.teacherId]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);

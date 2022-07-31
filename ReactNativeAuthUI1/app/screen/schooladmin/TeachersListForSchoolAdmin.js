@@ -120,27 +120,43 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                     style={{
                       justifyContent: "center",
                       marginTop: 25,
+                      marginLeft: 10
                     }}
                   >
                     <Image style={styles.image} source={{ uri: item.image }} />
                   </View>
                   <View
                     style={{
-                      marginLeft: 60,
-                      bottom: 50,
+                      marginLeft: 80,
+                      bottom: 60,
                    
                     }}
                   >
-                    <Text style={styles.username}>{item.first_name}</Text>
+                    <Text style={styles.username}>{item.staffName}</Text>
                   </View>
+
                   <View
                     style={{
                       marginLeft: 60,
-                      bottom: 50,
+                      bottom: 60,
+                      marginLeft: 80,
+
+                    }}
+                  >
+                    <Text style={styles.staffPosition}>{item.staffPosition}</Text>
+                  </View>
+                  
+                  <View
+                    style={{
+                      marginLeft: 60,
+                      bottom: 60,
+                      marginLeft: 80,
+
                     }}
                   >
                     <Text style={styles.email}>{item.email}</Text>
                   </View>
+                
                   <View
                     style={{
                       left: 120,
@@ -197,6 +213,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 10,
     bottom:5
+  },
+  staffPosition: {
+    color: "black",
+    fontSize: 12,
+    marginLeft: 10,
+    bottom:5,
+    fontWeight: 'bold'
   },
 });
 

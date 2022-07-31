@@ -503,7 +503,7 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
+    height: 50,
     margin: 2,
   
   },
@@ -519,12 +519,15 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
-    paddingTop: 10
+    paddingTop: 15,
+    fontSize: 14
   },
   coloumnRowName: {
     width: "20%",
     right: 20,
-    paddingTop: 10
+    paddingTop: 15,
+    fontWeight: 'bold'
+
   },
   container: {
     padding: 20,

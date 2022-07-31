@@ -2321,18 +2321,24 @@ const schoolId = route.params.schoolId;
           teachingSubject
         };
         const res = await registerTeacher(formData);
-        console.log(res.data.type)
-        if (res.data.type === "success") {
-          navigation.navigate('SchoolAdminHomePage');
+        if(res.data){
+          if (res.data.type === "success") {
+            clearTextInput();
+            setMessage(res.data.message)
+            { setTimeout(()=>{ navigation.navigate('SchoolAdminHomePage') }, 1000);}
+          }} else if (res.error) {
+          if(res.error.data.type === "error") {
+            console.log(res.error.data.message)
+            console.log('hello')
+  
+            Toast.show({
+              type: "warning",
+              position: "top",
+              topOffset: 0,
+              text1: res.error.data.message,
+            });
+          }
         }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
-        }    
       } else {
         Toast.show({
           type: "warning",
@@ -2365,10 +2371,6 @@ const schoolId = route.params.schoolId;
     <Toast config={toastConfig} />
     </View>
     { message ?<Text style={{ fontSize: 15, paddingLeft: 30, color: 'green', fontWeight: 'bold'}}>{message}</Text> : null}
-
-        
-
-
       <ScrollView
         nestedScrollEnabled={true}
         keyboardShouldPersistTaps="handled"

@@ -260,22 +260,24 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
     </View>
-    <View>
+    <View
+    style={{
+      alignItems: "center",
+      justifyContent: 'center'
+
+    }}
+    >
         <TouchableOpacity
           onPress={handleFormSubmit}
           style={{
             alignItems: "center",
             padding: 15,
-            width: "90%",
+            width: "50%",
             borderRadius: 40,
             bottom:75,
-            fontWeight: "bold",
             backgroundColor: "#5062BD",
             elevation: 1,
-            left:17,
             position: 'relative'
-
-
           }}
         >
           <Text
@@ -283,6 +285,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
               color: "white",
               justifyContent: "center",
               alignItems: "center",
+              fontWeight: "bold",
 
             }}
           >
@@ -312,9 +315,7 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: "row",
     padding:5,
-    left: 8,
-    
-  
+    height: 60
   },
   tableRowtext: {
     left: 8
@@ -334,7 +335,9 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "18%",
-    left:30
+    left:50,
+    paddingTop: 15,
+    fontWeight: 'bold'
   }
 
 });

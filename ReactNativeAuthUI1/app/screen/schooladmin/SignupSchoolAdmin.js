@@ -2669,6 +2669,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
           <TouchableOpacity
             onPress={handleFormSubmit}
             style={{
+              zIndex: -1,
               justifyContent: "center",
               alignItems: "center",
               padding: 15,

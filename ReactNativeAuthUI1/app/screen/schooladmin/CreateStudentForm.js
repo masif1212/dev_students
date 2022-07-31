@@ -380,7 +380,7 @@ const CreateStudentForm = () => {
                 },
                 body: JSON.stringify(formData)
               }).then(res =>res.json())
-                .then((res)=> res.message === 'Registration Success' ? navigation.goBack() : setMessage(res.message)) 
+                .then((res)=> res.message === 'Student Created successfully.' ? navigation.goBack() : setMessage(res.message)) 
                 
 
     } else {
