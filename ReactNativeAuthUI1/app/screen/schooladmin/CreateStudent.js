@@ -35,7 +35,7 @@ const newData = useSelector(state => state.schoolAdmin)
 const focus = useIsFocused();
 
    const fetchData = async () => {
-    fetch('https://ams.firefly-techsolutions.com/services/getStudents',{
+    fetch('https://ams.firefly-techsolutions.com/services/getstudents',{
       method: 'POST',//GET and ...
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ schoolId: newData.schoolId })
@@ -43,15 +43,13 @@ const focus = useIsFocused();
      .then((response)=>response.json()) //   <------ this line 
      .then((response)=>{
        setStudents(response.data)
-       return response       
      });
   };
   
  
   useLayoutEffect(() => {
    fetchData();
-    console.log(students)
-  }, [focus]);
+  }, [newData.schoolId]);
 
 
 
@@ -115,7 +113,7 @@ const focus = useIsFocused();
     },
     {
       id: 4,
-      name: 'D '
+      name: 'D'
     }
    
   ];
@@ -185,7 +183,6 @@ const focus = useIsFocused();
 
 
     <View style={{ height: '100%', width: '100%' }}>
-
       <View >
       <View style={styles.container}>
 
@@ -293,7 +290,6 @@ const focus = useIsFocused();
 
 
 
-
   </View>
       </View>
 
@@ -307,7 +303,6 @@ const focus = useIsFocused();
         renderItem={({ item, index }) => {
           return (
             <>
-            {/* <Text>{classes}</Text> */}
             { classes.name && section.name ? (
               <View>
                 { item.student_class === classes.name && item.section === section.name ? (
@@ -372,12 +367,10 @@ const focus = useIsFocused();
                
             </View>
                 )
-        :null } 
+        : null } 
             </View>
                 
-            )
-                
-      
+            ) 
     :null
   }
         

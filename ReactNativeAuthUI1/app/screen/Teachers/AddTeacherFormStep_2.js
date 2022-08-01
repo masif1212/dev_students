@@ -2323,7 +2323,6 @@ const schoolId = route.params.schoolId;
         const res = await registerTeacher(formData);
         if(res.data){
           if (res.data.type === "success") {
-            clearTextInput();
             setMessage(res.data.message)
             { setTimeout(()=>{ navigation.navigate('SchoolAdminHomePage') }, 1000);}
           }} else if (res.error) {

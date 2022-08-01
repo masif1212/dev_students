@@ -33,13 +33,14 @@ const TeacherDashboardScreen = () => {
       .then((response) => response.json()) //   <------ this line
       .then((response) => {
         setTeacherData(response.data);
+        console.log(response)
       });
   };
 
 
   useEffect(() => {
     fetchData();
-  });
+  }, [userLToken]);
 
   // Store User Data in Redux Store
   const dispatch = useDispatch();
