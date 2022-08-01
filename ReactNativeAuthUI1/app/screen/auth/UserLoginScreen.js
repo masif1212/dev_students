@@ -36,7 +36,6 @@ const SchoolAdminLogin = () => {
         if (res.data.type === "success") {
           clearTextInput();
           await storeToken(res.data.data.email); // Store Token in Storage
-          console.log(res.data.data.email)
           navigation.navigate("SchoolAdminPannel");
         }} else if (res.error) {
         if(res.error.data.type === "error") {

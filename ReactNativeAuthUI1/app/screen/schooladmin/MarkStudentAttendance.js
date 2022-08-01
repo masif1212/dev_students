@@ -108,7 +108,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
     },
     {
       id: 4,
-      name: "D ",
+      name: "D",
     },
   ];
 

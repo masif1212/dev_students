@@ -114,7 +114,7 @@ const TeacherLandingPage = () => {
     },
     {
       id: 4,
-      name: "D ",
+      name: "D",
     },
   ];
 

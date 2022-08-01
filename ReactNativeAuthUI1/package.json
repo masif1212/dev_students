@@ -1,5 +1,5 @@
 {
-  "name": "reactnativeauthui1",
+  "name": "SPO",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -7,7 +7,17 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "icon": "./assets/spologo.png",
+    "slug": "rnSpoapp",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "com.rnSpoapp.yourappname"
+    }
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
