@@ -314,7 +314,7 @@ const ClassStudents = ({ navigation, route }) => {
                  {item.student_class === classes.name && item.section === section.name ? (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowNumber, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name}</Text>
 
@@ -481,9 +481,8 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
+    height: 50,
     margin: 2,
-    left: 8
   },
   columnHeader: {
     width: "16%",
@@ -499,6 +498,12 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
+
+  },
+  columnRowNumber: {
+    width: "20%",
+    paddingLeft: 22
+
   }
 
 });

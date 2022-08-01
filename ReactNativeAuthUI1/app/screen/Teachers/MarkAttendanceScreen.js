@@ -23,6 +23,8 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [teachers, setTeachers] = useState([]);
   const [attendance, setAttendance] = useState("")
   const [attendanceState, setAttendanceState] = useState('')
+  const [message, setMessage] = useState("");
+
 
   const fetchData = async () => {
     fetch('https://ams.firefly-techsolutions.com/services/getSometeacher',{
@@ -51,13 +53,14 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     fetchData();
-    console.log(route.params.schoolId)
+    console.log(route.params.teacherId, "teacher id")
   }, [focus])
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S, schoolId: route.params.schoolId } : l));
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S, schoolId: route.params.schoolId, teacherId: l._id } : l));
     setAttendance(attend)
     setAttendanceState(attend)
+    console.log(attend)
   }
 
   const [items, setItems] = useState()
@@ -79,39 +82,34 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
       },
       body: JSON.stringify(attendance)
     }).then(res =>res.json())
-      .then((res)=> {
-        if(res.type === 'success') {
-          navigation.goBack()
-        }
-      }) 
+      .then((res) => res.type === "success"
+        ? navigation.goBack()
+        : setMessage(res.message)
+      
+    );
     };
 
     useEffect(()=>{
     console.log(attendance)
     })
 
-  // const onSubmit = () => {
-  //       attendance.forEach((item) => {
-  //       return item
-  //   });
-  //   console.log(attendance)
-  //   fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
-  //     method: "POST",
-  //     body: JSON.stringify(attendance),
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     }
-  //   })
-  //   .then((response) => console.log(response))
-  //   .catch(err => {
-  //     console.log(err);
 
-  // })
-  // }
   
   const tableHeader = () => (
 
     <View style={styles.tableHeader} >
+      {message ? (
+          <Text
+            style={{
+              fontSize: 15,
+              paddingLeft: 30,
+              color: "green",
+              fontWeight: "bold",
+            }}
+          >
+            {message}
+          </Text>
+        ) : null}
       {
         columns.map((column, index) => {
           {
@@ -334,8 +332,8 @@ const styles = StyleSheet.create({
 
   },
   columnRowTxt: {
-    width: "18%",
-    left:50,
+    width: "25%",
+    paddingLeft:10,
     paddingTop: 15,
     fontWeight: 'bold'
   }

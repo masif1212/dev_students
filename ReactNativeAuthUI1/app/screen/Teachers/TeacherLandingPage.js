@@ -42,6 +42,7 @@ const TeacherLandingPage = () => {
       .then((response) => response.json()) //   <------ this line
       .then((response) => {
         setStudents(response.data);
+        console.log(response)
       });
   };
 
@@ -290,7 +291,7 @@ const TeacherLandingPage = () => {
 
       <FlatList
         data={students}
-        keyExtractor={(item, index) => index + ""}
+        keyExtractor={(item, index) => item.first_name}
         style={{ maxWidth: "100%" }}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
@@ -337,7 +338,7 @@ const TeacherLandingPage = () => {
                               section: item.section,
                               address_1: item.address_1,
                               city: item.city,
-                              student_id_att: item.student_id_att,
+                              studentId: item._id,
                               schoolName: item.schoolName,
                               roll_no: item.roll_no,
                               gender: item.gender,
@@ -525,7 +526,7 @@ const styles = StyleSheet.create({
   coloumnRowName: {
     width: "20%",
     right: 20,
-    paddingTop: 15,
+    paddingTop: 9,
     fontWeight: 'bold'
 
   },

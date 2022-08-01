@@ -27,6 +27,7 @@ const SchoolAdmin = ({ navigation, route }) => {
      .then((response)=>response.json()) //   <------ this line 
      .then((response)=>{
        setAdmin(response.data)
+       console.log(admin)
      });
   };
   
@@ -128,6 +129,14 @@ const SchoolAdmin = ({ navigation, route }) => {
                     }}
                   >
                     <Text style={styles.email}>{item.email}</Text>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: 60,
+                      bottom: 50,
+                    }}
+                  >
+                    <Text style={styles.email}>{item.schoolName}</Text>
                   </View>
                   <View
                     style={{

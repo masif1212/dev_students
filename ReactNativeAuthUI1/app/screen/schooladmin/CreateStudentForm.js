@@ -17,19 +17,14 @@ import { useRegisterStudentMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import RadioButton from "../../Components/RadioButton";
 import Checkbox from "expo-checkbox";
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import CustomDropDown from "../../Components/CustomDropdown";
 
-
-
-
-
 const CreateStudentForm = () => {
-
   const [image, setImage] = useState("");
   const [first_name, setFirst_Name] = useState("");
   const [last_name, setLast_Name] = useState("");
@@ -45,19 +40,20 @@ const CreateStudentForm = () => {
   const [city, setCity] = useState();
   const [schoolId, setSchoolId] = useState();
   const [schoolName, setSchoolName] = useState();
-  const [gender, setGender] = useState("")
-  const [disability, setDisability] = useState(false)
-  const [disabledetail, setDisableDetail] = useState("")
-  const [dateofbirth, setDateOfBirth] = useState('');
+  const [gender, setGender] = useState("");
+  const [disability, setDisability] = useState(false);
+  const [disabledetail, setDisableDetail] = useState("");
+  const [dateofbirth, setDateOfBirth] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [currentshift, setCurrentShift] = useState(null)
-  const [lastschool, setLastSchool] = useState("")
-  const [reasonleft, setReasonLeft] = useState("")
-  const [religion, setReligion] = useState("")
+  const [currentshift, setCurrentShift] = useState(null);
+  const [lastschool, setLastSchool] = useState("");
+  const [reasonleft, setReasonLeft] = useState("");
+  const [religion, setReligion] = useState("");
+
+  const [message, setMessage] = useState("");
 
 
-
-  const [ message, setMessage ] = useState("");
+  
 
   //================================DATE PICKER=============================================//
   const showDatePicker = () => {
@@ -69,30 +65,23 @@ const CreateStudentForm = () => {
   };
 
   const handleConfirm = (dateofbirth) => {
-    setDateOfBirth(moment(dateofbirth).utc().format('YYYY-MM-DD'));
+    setDateOfBirth(moment(dateofbirth).utc().format("YYYY-MM-DD"));
     hideDatePicker();
-    searchFilter(dateofbirth)
+    searchFilter(dateofbirth);
   };
-
-  
 
   const getDate = () => {
-    let tempDate = (moment(dateofbirth).toString().split(' '));
-    return dateofbirth !== ''
+    let tempDate = moment(dateofbirth).toString().split(" ");
+    return dateofbirth !== ""
       ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
       : false;
-
   };
 
-
   //==========================END DATEPICKER===================================//
-  
-  
 
   //==================DROPDOWN=================================================//
 
-
-      //=====================================fetch api end====================================//
+  //=====================================fetch api end====================================//
   const [divisionShow, setDivisionShow] = useState("");
   const [selectDivision, setSelectDivision] = useState([]);
   const [division, setDivision] = useState([
@@ -306,10 +295,7 @@ const CreateStudentForm = () => {
 
   //=========================div district tehsil end=============================================//
 
-
-
   //============================DROP DOWN COMPONENT END=========================//
-
 
   const clearTextInput = () => {
     setFirst_Name("");
@@ -335,14 +321,34 @@ const CreateStudentForm = () => {
     setSelectDivision("");
     setSelectedDistricts("");
     setSeletctedTehsil("");
-
   };
   const navigation = useNavigation();
 
   const [registerStudent] = useRegisterStudentMutation();
 
   const handleFormSubmit = async () => {
-    if (reasonleft,lastschool,currentshift,dateofbirth,disabledetail,disability,gender,image, first_name, last_name, father_name, father_cnic, contact, roll_no, emergency_contact, address_1, address_2, student_class, section, city) {
+    if (
+      (reasonleft,
+      lastschool,
+      currentshift,
+      dateofbirth,
+      disabledetail,
+      disability,
+      gender,
+      image,
+      first_name,
+      last_name,
+      father_name,
+      father_cnic,
+      contact,
+      roll_no,
+      emergency_contact,
+      address_1,
+      address_2,
+      student_class,
+      section,
+      city)
+    ) {
       const formData = {
         image,
         schoolId,
@@ -369,20 +375,22 @@ const CreateStudentForm = () => {
         religion,
         selectDivision,
         selectedTehsil,
-        selectedDistricts
-
+        selectedDistricts,
       };
-      fetch('https://ams.firefly-techsolutions.com/services/createstudent', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-              }).then(res =>res.json())
-                .then((res)=> res.message === 'Student Created successfully.' ? navigation.goBack() : setMessage(res.message)) 
-                
-
+      fetch("https://ams.firefly-techsolutions.com/services/createstudent", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((res) =>
+          res.message === "Student Created successfully."
+            ? navigation.goBack()
+            : setMessage(res.message)
+        );
     } else {
       Toast.show({
         type: "warning",
@@ -392,12 +400,14 @@ const CreateStudentForm = () => {
       });
     }
   };
-  const newData = useSelector(state => state.schoolAdmin);
+  const newData = useSelector((state) => state.schoolAdmin);
 
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-  }, [newData])
+  }, [newData]);
+
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -439,18 +449,31 @@ const CreateStudentForm = () => {
           </TouchableOpacity>
         </View>
         <Toast config={toastConfig} />
-    { message ?<Text style={{ fontSize: 15, paddingLeft: 30, color: 'green', fontWeight: 'bold'}}>{message}</Text> : null}
-
+        {message ? (
+          <Text
+            style={{
+              fontSize: 15,
+              paddingLeft: 30,
+              color: "green",
+              fontWeight: "bold",
+            }}
+          >
+            {message}
+          </Text>
+        ) : null}
       </View>
 
-      <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        style={{ height: "100%" }}
+      >
         <View style={{ marginLeft: 25 }}>
           <View>
             <TextInput
               style={styleOne.input}
               value={schoolName}
               onChangeText={setSchoolName}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your School Name"
             />
           </View>
@@ -459,7 +482,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={roll_no}
               onChangeText={setRoll_no}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Set Student Roll No."
             />
           </View>
@@ -468,7 +491,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={first_name}
               onChangeText={setFirst_Name}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your First Name"
             />
           </View>
@@ -478,7 +501,7 @@ const CreateStudentForm = () => {
               value={last_name}
               onChangeText={setLast_Name}
               placeholder="Write Your Last Name"
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
             />
           </View>
           <View>
@@ -487,7 +510,7 @@ const CreateStudentForm = () => {
               keyboardType="email-address"
               value={father_name}
               onChangeText={setFather_Name}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Write Your Father Name"
             />
           </View>
@@ -497,7 +520,7 @@ const CreateStudentForm = () => {
               value={father_cnic}
               onChangeText={setFather_cnic}
               placeholder="Father CNIC (XXXXX-XXXXXXX-X)"
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               keyboardType="phone-pad"
             />
           </View>
@@ -508,7 +531,7 @@ const CreateStudentForm = () => {
               value={contact}
               onChangeText={setContact}
               placeholder="Contact"
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               keyboardType="numeric"
             />
           </View>
@@ -518,7 +541,7 @@ const CreateStudentForm = () => {
               value={emergency_contact}
               onChangeText={setEmergency_Contact}
               placeholder="Emergency Contact"
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               keyboardType="numeric"
             />
           </View>
@@ -527,7 +550,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={address_1}
               onChangeText={setAdress_1}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Address 1"
             />
           </View>
@@ -536,17 +559,17 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={address_2}
               onChangeText={setAdress_2}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Address 2"
             />
           </View>
-      
+
           <View>
             <TextInput
               style={styleOne.input}
               value={student_class}
               onChangeText={setStudent_class}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Student Class"
             />
           </View>
@@ -555,7 +578,7 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={section}
               onChangeText={setSection}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Section"
             />
           </View>
@@ -563,33 +586,33 @@ const CreateStudentForm = () => {
           <View style={{ margin: 20, right: 20 }}>
             <RadioButton
               gender={currentshift}
-              options={['Morning', 'Evening']}
+              options={["Morning", "Evening"]}
               horizontal={true}
               onChangeSelect={(opt, i) => {
-                (opt)
+                opt;
                 setCurrentShift(opt);
-              }} />
+              }}
+            />
           </View>
           <View style={styleOne.input}></View>
           <View style={{ margin: 20, right: 20 }}>
             <RadioButton
               gender={religion}
-              options={['Muslim', 'Non Muslim']}
+              options={["Muslim", "Non Muslim"]}
               horizontal={true}
               onChangeSelect={(opt, i) => {
-                (opt)
+                opt;
                 setReligion(opt);
-              }} />
+              }}
+            />
           </View>
-
-      
 
           <View>
             <TextInput
               style={styleOne.input}
               value={city}
               onChangeText={setCity}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="City"
             />
           </View>
@@ -636,10 +659,7 @@ const CreateStudentForm = () => {
             />
           </View>
 
-
-
-          <View style={{ flexDirection: 'row' }}>
-
+          <View style={{ flexDirection: "row" }}>
             <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
               <TextInput
                 value={getDate()}
@@ -657,24 +677,19 @@ const CreateStudentForm = () => {
             />
           </View>
 
-
-
-
-
           <View style={{ margin: 20, right: 20 }}>
             <RadioButton
               gender={gender}
-              options={['Male', 'Female', 'Other']}
+              options={["Male", "Female", "Other"]}
               horizontal={true}
               onChangeSelect={(opt, i) => {
-                (opt)
+                opt;
                 setGender(opt);
-              }} />
+              }}
+            />
           </View>
 
-
-
-          <View style={{left:12, flex: 1, flexDirection: "row" }}>
+          <View style={{ left: 12, flex: 1, flexDirection: "row" }}>
             <Checkbox
               value={disability}
               onValueChange={() => setDisability(!disability)}
@@ -683,28 +698,25 @@ const CreateStudentForm = () => {
             <Text style={styles.labelText}>Disable, if Yes</Text>
           </View>
           <View>
-            {
-              disability ? (
-                <View style={{ width: '90%', marginTop: 20 }}>
-                  <TextInput
-                    style={{
-                      backgroundColor: "transparent",
-                      padding: 15,
-                      fontSize: 14,
-                      fontWeight: "400",
-                      borderBottomColor: "gray",
-                      borderBottomWidth: 1,
-                      marginBottom: 30,
-                    }}
-                    value={disabledetail}
-                    onChangeText={setDisableDetail}
-                    placeholder="Disabilty Detail"
-                    placeholderTextColor='gray'
-
-                  />
-                </View>
-              ) : null
-            }
+            {disability ? (
+              <View style={{ width: "90%", marginTop: 20 }}>
+                <TextInput
+                  style={{
+                    backgroundColor: "transparent",
+                    padding: 15,
+                    fontSize: 14,
+                    fontWeight: "400",
+                    borderBottomColor: "gray",
+                    borderBottomWidth: 1,
+                    marginBottom: 30,
+                  }}
+                  value={disabledetail}
+                  onChangeText={setDisableDetail}
+                  placeholder="Disabilty Detail"
+                  placeholderTextColor="gray"
+                />
+              </View>
+            ) : null}
           </View>
 
           <View>
@@ -712,23 +724,20 @@ const CreateStudentForm = () => {
               style={styleOne.input}
               value={lastschool}
               onChangeText={setLastSchool}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Name of Previous School"
             />
           </View>
 
-          
           <View>
             <TextInput
               style={styleOne.input}
               value={reasonleft}
               onChangeText={setReasonLeft}
-              placeholderTextColor='gray'
+              placeholderTextColor="gray"
               placeholder="Reason of Previous School Left"
             />
           </View>
-
-
         </View>
 
         <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -758,7 +767,6 @@ const CreateStudentForm = () => {
             </Text>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

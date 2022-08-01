@@ -28,6 +28,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [teachers, setTeachers] = useState([]);
   const [attendance, setAttendance] = useState();
   const [attendanceState, setAttendanceState] = useState("");
+  const [message, setMessage] = useState("");
 
   const fetchData = async () => {
     fetch("https://ams.firefly-techsolutions.com/services/getSomestudents", {
@@ -123,8 +124,8 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const MarkAttendance = (item, S) => {
     const attend = attendanceState.map((l) =>
-      l.student_id_att === item.student_id_att
-        ? { ...l, attendance: S, teacherid: route.params.teacherid }
+      l._id === item._id
+        ? { ...l, studentId: l._id, attendance: S, teacherId: route.params.teacherid }
         : l
     );
     setAttendanceState(attend);
@@ -149,9 +150,11 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(attendance),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res));
+    }).then(res =>res.json())
+    .then((res) => res.type === "success"
+      ? navigation.goBack()
+      : setMessage(res.message)
+  );
   };
 
   // const onSubmit = () => {
@@ -172,6 +175,18 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
   const tableHeader = () => (
     <View style={styles.tableHeader}>
+       {message ? (
+          <Text
+            style={{
+              fontSize: 15,
+              paddingLeft: 30,
+              color: "green",
+              fontWeight: "bold",
+            }}
+          >
+            {message}
+          </Text>
+        ) : null}
       {columns.map((column, index) => {
         {
           return (
