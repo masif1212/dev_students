@@ -42,7 +42,6 @@ const TeacherLandingPage = () => {
       .then((response) => response.json()) //   <------ this line
       .then((response) => {
         setStudents(response.data);
-        console.log(response)
       });
   };
 
@@ -238,7 +237,12 @@ const TeacherLandingPage = () => {
       <View>
         <View>
           {/* add pie here */}
-
+            <View style={{
+              marginLeft: 30,
+              marginBottom: 10
+            }}>
+              <Text style={{ fontWeight: 'bold'}}>{schoolName}</Text>
+            </View>
           <View
             style={{
               flexDirection: "row",
@@ -526,7 +530,7 @@ const styles = StyleSheet.create({
   coloumnRowName: {
     width: "20%",
     right: 20,
-    paddingTop: 9,
+    paddingTop: 15,
     fontWeight: 'bold'
 
   },

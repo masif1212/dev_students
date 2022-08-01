@@ -1,4 +1,4 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import DashboardScreen from "./DashboardScreen";
@@ -27,12 +27,15 @@ const UserPanelTab = () => {
           headerTintColor: "white",
           
           headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate("Registration")}
-              title="Create Super Admin"
-              color="#5062BD"
-              
-            />
+            <TouchableOpacity
+            onPress={()=> navigation.navigate('Registration')}
+              style={{
+                backgroundColor: 'white',
+                marginRight: 15,
+                padding: 10,
+                borderRadius: 10
+              }}
+            ><Text style={{ fontWeight: 'bold'}}>Create Super Admin</Text></TouchableOpacity>
           ),
           headerStyle: {
             backgroundColor: "#5062BD",
@@ -62,7 +65,7 @@ const UserPanelTab = () => {
       <Drawer.Screen
         name="ChangePassword"
         component={ChangePasswordScreen}
-        options={{ headerTitle: "Change Password" }}
+        options={{ title: 'Change Password', headerTitle: "Change Password" }}
       />
     </Drawer.Navigator>
   );

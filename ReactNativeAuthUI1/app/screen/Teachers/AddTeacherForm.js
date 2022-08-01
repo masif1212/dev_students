@@ -71,7 +71,6 @@ const TeacherRegister = ({ navigation,routes }) => {
   useEffect(() => {
     setSchoolId(myData.schoolId);
     setSchoolName(myData.schoolName);
-    console.log('myData')
   }, [focus]);
 
   useEffect(() => {

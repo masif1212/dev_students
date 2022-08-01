@@ -2327,9 +2327,7 @@ const schoolId = route.params.schoolId;
             { setTimeout(()=>{ navigation.navigate('SchoolAdminHomePage') }, 1000);}
           }} else if (res.error) {
           if(res.error.data.type === "error") {
-            console.log(res.error.data.message)
-            console.log('hello')
-  
+            setMessage(res.error.data.message)
             Toast.show({
               type: "warning",
               position: "top",

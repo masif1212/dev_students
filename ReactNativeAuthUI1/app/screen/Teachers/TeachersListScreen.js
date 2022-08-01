@@ -33,6 +33,7 @@ const TeachersListScreen = ({navigation, route})=> {
 
   useEffect(() => {
    fetchData();
+
   }, [focus]);
 
 
@@ -59,7 +60,7 @@ const TeachersListScreen = ({navigation, route})=> {
                     contact: item.contact,
                     alt_contact: item.alt_contact,
                     city: item.city,
-                    teacher_id_att:item.teacher_id_att,
+                    teacherId:item._id,
                     schoolName:item.schoolName,
                     gender: item.gender,
                     religion:item.religion,

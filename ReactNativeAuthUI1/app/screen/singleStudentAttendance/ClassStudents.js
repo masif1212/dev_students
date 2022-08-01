@@ -105,7 +105,7 @@ const ClassStudents = ({ navigation, route }) => {
       },
       {
         id: 4,
-        name: 'D '
+        name: 'D'
       }
      
     ];
@@ -332,7 +332,7 @@ const ClassStudents = ({ navigation, route }) => {
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
-                  student_id_att:item.student_id_att,
+                  studentId:item._id,
                   schoolName:item.schoolName,
                   roll_no:item.roll_no,
                   gender:item.gender,
@@ -362,7 +362,7 @@ const ClassStudents = ({ navigation, route }) => {
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
-                  student_id_att:item.student_id_att,
+                  studentId:item._id,
                   schoolName:item.schoolName,
                   roll_no:item.roll_no,
                   gender:item.gender,

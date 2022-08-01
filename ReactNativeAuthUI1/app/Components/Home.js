@@ -25,17 +25,15 @@ const Home =({ navigation })=> {
           }}
         >
           <View style={styles.imageContainer}>
-            <TouchableOpacity >
               <Image
                 source={require("../../assets/spologo.png")}
                 style={{
-                  width: Dimensions.get("window").width - 100,
-                  height: 230,
+                  width: Dimensions.get("window").width - 80,
+                  height: 200,
                   borderRadius: 15,
                   marginTop: 20,
                 }}
               ></Image>
-            </TouchableOpacity>
           </View>
 
           <View style={styles.textContainer}>

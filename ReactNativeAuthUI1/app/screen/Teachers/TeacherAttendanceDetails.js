@@ -48,8 +48,6 @@ const TeacherAttendanceDetails = ({
 
   useLayoutEffect(() => {
     fetchData();
-    console.log(route.params.teacherId)
-
   }, [route.params.teacherId]);
 
   const showDatePicker = () => {

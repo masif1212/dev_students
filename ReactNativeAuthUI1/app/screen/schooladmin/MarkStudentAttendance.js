@@ -360,7 +360,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                         <View style={{ flexDirection: "row", left: 40 }}>
                           <View
                             style={{
-                              left: 23,
+                              left: 15,
                             }}
                           >
                             <CheckBox
@@ -385,7 +385,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
                           </View>
                           <View
                             style={{
-                              left: 5,
+                              left: 0,
                             }}
                           >
                             <CheckBox
@@ -411,7 +411,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
                           <View
                             style={{
-                              left: 5,
+                              left: 0,
                             }}
                           >
                             <CheckBox

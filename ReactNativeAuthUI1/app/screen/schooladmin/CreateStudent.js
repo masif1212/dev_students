@@ -325,7 +325,7 @@ const focus = useIsFocused();
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
-                  student_id_att:item.student_id_att
+                  studentId:item._id
 
                 })}
                 style={{ backgroundColor: '#5062BD', margin: 3, borderRadius: 6, width: '30%', alignItems: 'center', padding: 4, justifyContent: 'center', }}>
@@ -345,7 +345,7 @@ const focus = useIsFocused();
                   section:item.section,
                   address_1:item.address_1,
                   city:item.city,
-                  student_id_att:item.student_id_att,
+                  studentId:item._id,
                   schoolName:item.schoolName,
                   roll_no:item.roll_no,
                   gender:item.gender,

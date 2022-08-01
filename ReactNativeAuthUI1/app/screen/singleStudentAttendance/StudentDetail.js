@@ -53,12 +53,13 @@ const fetchData =  () => {
    })
    .then((response)=>response.json()) //   <------ this line 
    .then((response)=>{
-     setStudents(response.data)  
+     setStudents(response.data) 
    });
 };
 
   useLayoutEffect(() => {
    fetchData();
+   console.log(route.params.studentId)
   }, [route.params.studentId]);
 
 
@@ -281,8 +282,9 @@ const fetchData =  () => {
 
   }}>{route.params.first_name + ' ' + route.params.last_name}</Text>
   <Text style={{
-    left: 5
-  }} >School Name</Text>
+    left: 5,
+    fontWeight: 'bold'
+  }} >{route.params.schoolName}</Text>
 </View>
 {/* add pie here */}
 
