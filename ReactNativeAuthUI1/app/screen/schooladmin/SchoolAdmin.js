@@ -19,9 +19,10 @@ const SchoolAdmin = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.26:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
+    const resp = await fetch(`http://192.168.18.14:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
     const data = await resp.json();
     setAdmin(data);
+    console.log(data)
   };
   
   
@@ -72,7 +73,7 @@ const SchoolAdmin = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
           enableEmptySections={true}
           data={admin}
-          keyExtractor={(item) => item.key}
+          keyExtractor={(item) => item.email}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
