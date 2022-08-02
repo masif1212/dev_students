@@ -8,7 +8,7 @@ import {
     StyleSheet,
     TouchableOpacity,
   } from "react-native";
-  import React, { useState } from "react";
+  import React, { useEffect, useState } from "react";
   import { SafeAreaView } from "react-native-safe-area-context";
   import { styles, toastConfig } from "../../../style";
   import Toast from "react-native-toast-message";
@@ -29,22 +29,29 @@ import {
     const [loginUser] = useLoginUserMutation();
   
     const handleFormSubmit = async () => {
+      
       if (email && password) {
         const formData = { email, password };
         const res = await loginUser(formData);
-        if (res.data.status === "success") {
-          await storeToken(res.data.token); // Store Token in Storage
+        if(res.data){
+        if (res.data.type === "success") {
           clearTextInput();
+          await storeToken(res.data.data.email); // Store Token in Storage
+          console.log(res.data.data.email)
           navigation.navigate("UserPanelTab");
-        }
-        if (res.data.status === "failed") {
+        }} else if (res.error) {
+        if(res.error.data.type === "error") {
+          console.log(res.error.data.message)
+          console.log('hello')
+
           Toast.show({
             type: "warning",
             position: "top",
             topOffset: 0,
-            text1: res.data.message,
+            text1: res.error.data.message,
           });
         }
+      }
       } else {
         Toast.show({
           type: "warning",
@@ -54,7 +61,8 @@ import {
         });
       }
     };
-  
+    
+
     return (
       <SafeAreaView>
         <ScrollView keyboardShouldPersistTaps="handled">

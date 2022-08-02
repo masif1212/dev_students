@@ -11,6 +11,7 @@ import { unsetUserToken } from '../../../features/authSlice.js';
 const TeacherSideBar = ({ ...props }) => {
 
   const handleLogout = async () => {
+    unsetTeacherInfo({ email: "", firstName: "", lastName: "", image: '' })
     unsetUserToken({ token: null })
     await removeToken('token')
     navigation.navigate('MONITORING APP');
@@ -22,7 +23,6 @@ const TeacherSideBar = ({ ...props }) => {
   const myData = useSelector(state => state.teacher)
   // const myToken = useSelector(state => state.auth)
   // console.log(myToken)
-
 
   return (
     <DrawerContentScrollView {...props}>

@@ -32,18 +32,24 @@ const SchoolAdminLogin = () => {
     if (email && password) {
       const formData = { email, password };
       const res = await loginSchoolAdmin(formData);
-      if (res.data.status === "success") {
-        await storeToken(res.data.token); // Store Token in Storage
-        clearTextInput();
-        navigation.navigate("SchoolAdminPannel");
-      }
-      if (res.data.status === "failed") {
-        Toast.show({
-          type: "warning",
-          position: "top",
-          topOffset: 0,
-          text1: res.data.message,
-        });
+      if(res.data){
+        if (res.data.type === "success") {
+          clearTextInput();
+          await storeToken(res.data.data.email); // Store Token in Storage
+          console.log(res.data.data.email)
+          navigation.navigate("SchoolAdminPannel");
+        }} else if (res.error) {
+        if(res.error.data.type === "error") {
+          console.log(res.error.data.message)
+          console.log('hello')
+
+          Toast.show({
+            type: "warning",
+            position: "top",
+            topOffset: 0,
+            text1: res.error.data.message,
+          });
+        }
       }
     } else {
       Toast.show({

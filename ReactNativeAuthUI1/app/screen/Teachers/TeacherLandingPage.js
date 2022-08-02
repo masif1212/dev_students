@@ -33,12 +33,17 @@ const TeacherLandingPage = () => {
 
   const newData = useSelector((state) => state.teacher);
 
-  const fetchData = async () => {
-    const resp = await fetch(
-      `http://192.168.18.14:8000/api/user/getStudents/${newData.schoolId}`
-    );
-    const data = await resp.json();
-    setStudents(data);
+  const fetchData =  () => {
+    fetch("https://ams.firefly-techsolutions.com/services/getStudents", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ schoolId: newData.schoolId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setStudents(response.data);
+        console.log(response)
+      });
   };
 
   const focus = useIsFocused();
@@ -47,9 +52,7 @@ const TeacherLandingPage = () => {
     fetchData();
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-    setTeacherId(newData.id);
-    console.log(students)
-  }, [focus]);
+  }, [newData]);
 
   // select class and section
 
@@ -288,7 +291,7 @@ const TeacherLandingPage = () => {
 
       <FlatList
         data={students}
-        keyExtractor={(item, index) => index + ""}
+        keyExtractor={(item, index) => item.first_name}
         style={{ maxWidth: "100%" }}
         ListHeaderComponent={tableHeader}
         stickyHeaderIndices={[0]}
@@ -304,10 +307,11 @@ const TeacherLandingPage = () => {
                         ...styles.tableRow,
                         backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white",
                         width: "100%",
+                  
                       }}
                     >
                       <Text
-                        style={{ ...styles.columnRowTxt, fontWeight: "bold" }}
+                        style={{ ...styles.columnRowTxt, fontWeight: "bold", paddingLeft: 8 }}
                       >
                         {item.roll_no}
                       </Text>
@@ -315,7 +319,6 @@ const TeacherLandingPage = () => {
                       <Text style={{ ...styles.coloumnRowName }}>
                         {item.first_name + " " + item.last_name}
                       </Text>
-
                       <View
                         style={{
                           width: "100%",
@@ -335,7 +338,7 @@ const TeacherLandingPage = () => {
                               section: item.section,
                               address_1: item.address_1,
                               city: item.city,
-                              student_id_att: item.student_id_att,
+                              studentId: item._id,
                               schoolName: item.schoolName,
                               roll_no: item.roll_no,
                               gender: item.gender,
@@ -501,9 +504,9 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
+    height: 50,
     margin: 2,
-    left: 8,
+  
   },
   columnHeader: {
     width: "16%",
@@ -517,10 +520,15 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
+    paddingTop: 15,
+    fontSize: 14
   },
   coloumnRowName: {
     width: "20%",
     right: 20,
+    paddingTop: 9,
+    fontWeight: 'bold'
+
   },
   container: {
     padding: 20,

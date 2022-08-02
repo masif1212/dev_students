@@ -23,7 +23,7 @@ const myData = useSelector(state => state.teacher)
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-
+    console.log(newData.teacherId, "hello")
   })
 
 
@@ -134,7 +134,7 @@ const myData = useSelector(state => state.teacher)
         onPress={() => navigation.navigate('MarkAttendanceScreen', {
           schoolId: schoolId,
           schoolName: schoolName,
-          schoolAdminID: newData.id,
+          schoolAdminID: newData.schoolAdminiId,
           teacherId : myData.teacherid
         })}
           style={{

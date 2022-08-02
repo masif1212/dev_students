@@ -23,8 +23,6 @@ import * as ImagePicker from "expo-image-picker";
 import RadioButton from '../../Components/RadioButton.js'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
-import axios from "axios";
-import DropDownCountry from "../../Components/DropDownCountry.js";
 
 
 
@@ -49,7 +47,7 @@ const RegistrationScreen = () => {
   const [dateofbirth, setDateOfBirth] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = useState([]);
-  const [getcountry, setCountry] = useState()
+  const [message, setMessage] = useState("")
 
 
 //country state city api==========================//
@@ -128,23 +126,25 @@ const RegistrationScreen = () => {
           disability,
           disabledetail,
           dateofbirth
-
-
         };
         const res = await registerUser(formData);
-        if (res.data.status === "success") {
-          await storeToken(res.data.token); 
-          console.log(formData)// Store Token in Storage
-          clearTextInput();
-          navigation.navigate("UserPanelTab");
-        }
-        if (res.data.status === "failed") {
-          Toast.show({
-            type: "warning",
-            position: "top",
-            topOffset: 0,
-            text1: res.data.message,
-          });
+        if(res.data){
+          if (res.data.type === "success") {
+            clearTextInput()
+            setMessage(res.data.message)
+            { setTimeout(()=>{ navigation.goBack() }, 1000);}
+          }} else if (res.error) {
+          if(res.error.data.type === "error") {
+            console.log(res.error.data.message)
+            console.log('hello')
+  
+            Toast.show({
+              type: "warning",
+              position: "top",
+              topOffset: 0,
+              text1: res.error.data.message,
+            });
+          }
         }
       } else {
         Toast.show({
@@ -206,6 +206,7 @@ const RegistrationScreen = () => {
         </View>
         <Toast config={toastConfig} />
       </View>
+      <Text>{ message ? <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 20}}>{message}</Text> : null}</Text>
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>

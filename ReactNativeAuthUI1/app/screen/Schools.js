@@ -31,20 +31,15 @@ const Schools = ({ navigation }) => {
 
   const focus = useIsFocused();
   const fetchData = async () => {
-    const resp = await fetch("http://192.168.18.14:8000/api/user/getschools");
+    const resp = await fetch("https://ams.firefly-techsolutions.com/services/getschools");
     const data = await resp.json();
-    setMasterDate(data);
-    setFilterData(data);
+    setMasterDate(data.data);
+    setFilterData(data.data);
   };
 
   useEffect(() => {
      fetchData();
   }, [focus]);
-
-
- 
-  
-
 
 
   const searchFilter = (text) => {

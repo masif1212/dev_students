@@ -107,7 +107,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
   //=========================programs=============================================//
   const [teacherQualificationShow, setTeacherQualificationShow] = useState("")
-  const [teacherQualification, setTeacherQualification] = useState("");
+  const [teacherQualification, setTeacherQualification] = useState([]);
   const [qualifications, setQualifications] = useState([
     { label: "Metric", value: "Metric" },
     { label: "Inter", value: "Inter" },
@@ -135,7 +135,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   const [
     teacherprofessionalqualification,
     setTeacherProfessionalQualification,
-  ] = useState("");
+  ] = useState([]);
   const [professionalQualifications, setProfessionalQualifications] = useState([
     { label: "B.ED", value: "B.ED" },
     { label: "M.ED", value: "M.ED" },
@@ -149,22 +149,9 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
     "ZWYzM2l0dXYzWENaS2dKM2lWR0ZRV3hBRXlTSFd0NlFHMlgyMDVVVA=="
   );
 
-  var requestOptions = {
-    method: "GET",
-    headers: headers,
-    redirect: "follow",
-  };
+ 
 
-  useEffect(() => {
-    fetch(
-      "https://api.countrystatecity.in/v1/countries/PK/cities",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => setBankCities(result))
-      .catch((error) => console.log("error", error));
-  });
-
+ 
 
   //=========================Bank Names=============================================//
   const [bankNameShow, setBankNameShow] = useState("");
@@ -217,9 +204,8 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   ]);
   //=========================end Bank Names=============================================//
 
-  //=========================Bank Names=============================================//
   const [bankCityShow, setBankCityShow] = useState("");
-  const [bankcity, setBankCity] = useState([]);
+  const [bankcity, setBankCity] = useState("");
   const [bankCities, setBankCities] = useState([
     {
       label: "Abbottabad",
@@ -1974,15 +1960,13 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
       value: "Ziarat",
     },
   ]);
-
   //=========================end Bank Names=============================================//
   //=========================Bank Names=============================================//
   const [bankDistrictShow, setBankDistrictShow] = useState("");
-  const [bankdistrict, setBankDistrict] = useState([]);
+  const [bankdistrict, setBankDistrict] = useState("");
   const [bankdistricts, setBankDistricts] = useState([
-    { label: "Select District", label: "Select District" },
-    { label: "BANNU DISTRICT", label: "BANNU DISTRICT" },
-    { label: "DERA ISMAIL KHAN DISTRICT", label: "DERA ISMAIL KHAN DISTRICT" },
+    { label: "BANNU DISTRICT", value: "BANNU DISTRICT" },
+    { label: "DERA ISMAIL KHAN DISTRICT", value: "DERA ISMAIL KHAN DISTRICT" },
     { label: "LAKKI MARWAT DISTRICT", value: "LAKKI MARWAT DISTRICT" },
     { label: "TANK DISTRICT", value: "TANK DISTRICT" },
     { label: "ABBOTTABAD DISTRICT", value: "ABBOTTABAD DISTRICT" },
@@ -2133,7 +2117,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
 
   const clearTextInput = () => {
-    S_NO("");
+    setS_NO("");
     setfirst_name("");
     setlast_name("");
     setEmail("");
@@ -2199,18 +2183,27 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
           salaryPaymentMethod,
           selectedDistricts,
           address_1
-
         };
 
-        fetch('http://192.168.18.64:8000/api/user/schooladmin', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        }).then(res => res.json())
-          .then((res)=> res.message === 'Registration Success' ? navigation.goBack() : console.log('navigate'))
+        const res = await registerSchoolAdmin(formData);
+        if(res.data){
+          if (res.data.type === "success") {
+            clearTextInput();
+            setMessage(res.data.message)
+            { setTimeout(()=>{ navigation.goBack() }, 1000);}
+          }} else if (res.error) {
+          if(res.error.data.type === "error") {
+            console.log(res.error.data.message)
+            console.log('hello')
+  
+            Toast.show({
+              type: "warning",
+              position: "top",
+              topOffset: 0,
+              text1: res.error.data.message,
+            });
+          }
+        }
       } else {
         Toast.show({
           type: "warning",
@@ -2547,6 +2540,8 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
               setOpen={setTeacherQualificationShow}
               setValue={setTeacherQualification}
               setItems={setQualifications}
+              searchable
+
             />
           </View>
 
@@ -2562,6 +2557,8 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
               setOpen={setTeacherProfessionalQualificationShow}
               setValue={setTeacherProfessionalQualification}
               setItems={setProfessionalQualifications}
+              searchable
+
             />
           </View>
 
@@ -2595,6 +2592,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
                     setOpen={setBankNameShow}
                     setValue={setBankName}
                     setItems={setBankNames}
+                    searchable
                   />
                 </View>
 
@@ -2610,10 +2608,11 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
                     setOpen={setBankDistrictShow}
                     setValue={setBankDistrict}
                     setItems={setBankDistricts}
+                    searchable
                   />
                 </View>
 
-               <View
+                <View
                   style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}
                 >
                   <CustomDropDown
@@ -2670,6 +2669,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
           <TouchableOpacity
             onPress={handleFormSubmit}
             style={{
+              zIndex: -1,
               justifyContent: "center",
               alignItems: "center",
               padding: 15,

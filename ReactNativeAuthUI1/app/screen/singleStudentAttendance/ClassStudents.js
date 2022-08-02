@@ -31,17 +31,20 @@ const ClassStudents = ({ navigation, route }) => {
   
   const focus = useIsFocused();
   
-    const fetchData = async () => {
-      const resp = await fetch(`http://192.168.18.14:8000/api/user/getStudents/${route.params.schoolid}`);
-      const data = await resp.json();
-      setStudents(data);
-    };
-    
-    useEffect(() => {
-     fetchData();
-    }, [focus]);
-
-
+  const fetchData = async () => {
+    fetch('https://ams.firefly-techsolutions.com/services/getStudents',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: route.params.schoolid })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+       setStudents(response.data)  
+     });
+  };
+  useEffect(() => {
+    fetchData(data);   
+  });
     //select class and section
   
     var  items  = [
@@ -118,10 +121,7 @@ const ClassStudents = ({ navigation, route }) => {
    
     const {data} = useGetStudentQuery();
   
-    useEffect(() => {
-      setStudent(data);
-     
-    });
+   
 
 
 
@@ -314,7 +314,7 @@ const ClassStudents = ({ navigation, route }) => {
                  {item.student_class === classes.name && item.section === section.name ? (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowNumber, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name}</Text>
 
@@ -322,6 +322,7 @@ const ClassStudents = ({ navigation, route }) => {
               <View style={{ width: '100%', flexDirection: 'row' }}>
                 <TouchableOpacity 
                 onPress={()=>navigation.navigate('StudentDetail',{
+                  image:item.image,
                   first_name:item.first_name,
                   last_name:item.last_name,
                   contact:item.contact,
@@ -480,9 +481,8 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
+    height: 50,
     margin: 2,
-    left: 8
   },
   columnHeader: {
     width: "16%",
@@ -498,6 +498,12 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
+
+  },
+  columnRowNumber: {
+    width: "20%",
+    paddingLeft: 22
+
   }
 
 });

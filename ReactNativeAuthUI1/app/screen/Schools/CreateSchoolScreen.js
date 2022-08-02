@@ -257,13 +257,11 @@ const CreateSchoolScreen = ({navigation}) => {
         
         };
         const res = await schoolRegister(formData);
-        console.log(formData)
-        console.log(res)
-        if (res.data.status === "success") {
+        if (res.data.type === "success") {
           await setInputFieldClear();
           navigation.navigate("UserPanelTab");
         }
-        if (res.data.status === "failed") {
+        if (res.data.type === "failed") {
           Toast.show({
             type: "warning",
             position: "top",

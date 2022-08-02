@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
+  teacherid : "",
   selectDivision:"",
   selectedDistricts:"",
   seletctedTehsil:"",
@@ -113,6 +114,7 @@ export const teacherSlice = createSlice({
       state.vacinatedstatus = action.payload.vacinatedstatus
     },
     unsetTeacherInfo: (state, action) => {
+      state.teacherid = action.payload.teacherid;
       state.selectDivision = action.payload.selectDivision;
       state.selectedDistricts = action.payload.selectedDistricts;
       state.seletctedTehsil = action.payload.seletctedTehsil;

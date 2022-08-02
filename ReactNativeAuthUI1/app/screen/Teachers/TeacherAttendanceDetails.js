@@ -33,17 +33,24 @@ const TeacherAttendanceDetails = ({
 
   const focus = useIsFocused();
 
-  const fetchData = async () => {
-    const resp = await fetch(
-      `http://192.168.18.14:8000/api/user/getteacherattendance/${route.params.teacher_id_att}`
-    );
-    const data = await resp.json();
-    setTeachers(data);
+  const fetchData =  () => {
+    fetch("https://ams.firefly-techsolutions.com/services/getteacherattendancedashboardbyteacherid", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id : route.params.teacherId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setTeachers(response.data);
+      });
   };
+  
 
   useLayoutEffect(() => {
     fetchData();
-  }, [focus]);
+    console.log(route.params.teacherId)
+
+  }, [route.params.teacherId]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -160,7 +167,7 @@ const TeacherAttendanceDetails = ({
         <View style ={{left:100,bottom:1}}>
            <TeacherListPieChart
               outerRadius={"70%"}
-              teacherId={route.params.teacher_id_att}
+              teacherId={route.params.teacherId}
             />
             </View>
 

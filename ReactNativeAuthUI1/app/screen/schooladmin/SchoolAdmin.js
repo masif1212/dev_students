@@ -19,10 +19,16 @@ const SchoolAdmin = ({ navigation, route }) => {
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getschoolAdmin/${route.params.schoolid}`);
-    const data = await resp.json();
-    setAdmin(data);
-    console.log(data)
+    fetch('https://ams.firefly-techsolutions.com/services/getschooladmin',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: route.params.schoolid })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+       setAdmin(response.data)
+       console.log(admin)
+     });
   };
   
   
@@ -123,6 +129,14 @@ const SchoolAdmin = ({ navigation, route }) => {
                     }}
                   >
                     <Text style={styles.email}>{item.email}</Text>
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: 60,
+                      bottom: 50,
+                    }}
+                  >
+                    <Text style={styles.email}>{item.schoolName}</Text>
                   </View>
                   <View
                     style={{

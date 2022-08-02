@@ -21,12 +21,18 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
   const newData = useSelector(state => state.schoolAdmin);
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getteacher/${newData.schoolId}`);
-    const data = await resp.json();
-    console.log(data)
-
-    setTeachers(data);
+    fetch('https://ams.firefly-techsolutions.com/services/getTeacher',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: newData.schoolId })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+       setTeachers(response.data)
+       
+     });
   };
+ 
   
   const focus = useIsFocused();
 
@@ -78,7 +84,7 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("TeachersProfile", {
-                    teacher_id_att:item.teacher_id_att,
+                    teacherId:item._id,
                     staffName:item.staffName,
                     email: item.email,
                     image: item.image,
@@ -114,27 +120,43 @@ const TeachersListForSchoolAdmin = ({navigation}) => {
                     style={{
                       justifyContent: "center",
                       marginTop: 25,
+                      marginLeft: 10
                     }}
                   >
                     <Image style={styles.image} source={{ uri: item.image }} />
                   </View>
                   <View
                     style={{
-                      marginLeft: 60,
-                      bottom: 50,
+                      marginLeft: 80,
+                      bottom: 60,
                    
                     }}
                   >
                     <Text style={styles.username}>{item.staffName}</Text>
                   </View>
+
                   <View
                     style={{
                       marginLeft: 60,
-                      bottom: 50,
+                      bottom: 60,
+                      marginLeft: 80,
+
+                    }}
+                  >
+                    <Text style={styles.staffPosition}>{item.staffPosition}</Text>
+                  </View>
+                  
+                  <View
+                    style={{
+                      marginLeft: 60,
+                      bottom: 60,
+                      marginLeft: 80,
+
                     }}
                   >
                     <Text style={styles.email}>{item.email}</Text>
                   </View>
+                
                   <View
                     style={{
                       left: 120,
@@ -191,6 +213,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 10,
     bottom:5
+  },
+  staffPosition: {
+    color: "black",
+    fontSize: 12,
+    marginLeft: 10,
+    bottom:5,
+    fontWeight: 'bold'
   },
 });
 

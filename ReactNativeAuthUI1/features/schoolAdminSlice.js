@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-  id:"",
+  schoolAdminiId:"",
   schoolId: "",
   schoolName: "",
   email: "",
@@ -38,7 +38,7 @@ export const schoolAdminSlice = createSlice({
   initialState,
   reducers: {
     setSchoolAdminInfo: (state, action) => {
-      state.id = action.payload.id;
+      state.schoolAdminiId = action.payload.schoolAdminiId;
       state.schoolName = action.payload.schoolName;
       state.schoolId = action.payload.schoolId
       state.email = action.payload.email
@@ -69,7 +69,7 @@ export const schoolAdminSlice = createSlice({
       state.address_1=action.payload.address_1
     },
     unSetSchoolAdminInfo: (state, action) => {
-      state.id = action.payload.id;
+      state.schoolAdminiId = action.payload.schoolAdminiId;
       state.schoolName = action.payload.schoolName;
       state.schoolId = action.payload.schoolId
       state.email = action.payload.email

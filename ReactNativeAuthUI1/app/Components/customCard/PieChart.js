@@ -71,15 +71,16 @@ const Pie = ({outerRadius}) => {
     const focus = useIsFocused();
 
 const fetchData = async () => {
-  const resp = await fetch(`http://192.168.18.14:8000/api/user/getstudentsattendancedashboard`);
+  const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getstudentsattendancedashboard`);
   const students = await resp.json();
-  const attendanceOfAbsent = students.filter(x => x.attendance=='A').length;
+  console.log(students.data)
+  const attendanceOfAbsent = students.data.filter(x => x.attendance=='A').length;
 
-  const attendanceOfPresent = students.filter(x => x.attendance=='P').length;
+  const attendanceOfPresent = students.data.filter(x => x.attendance=='P').length;
   
-  const attendanceOfLeave = students.filter(x => x.attendance=='L').length;
+  const attendanceOfLeave = students.data.filter(x => x.attendance=='L').length;
   
-  const attendanceOfTotalStudents = students.filter(x => x.attendance).length;
+  const attendanceOfTotalStudents = students.data.filter(x => x.attendance).length;
   
   const absentaverage = attendanceOfAbsent/attendanceOfTotalStudents*100;
   
@@ -87,8 +88,8 @@ const fetchData = async () => {
   
   const leaveAverage = attendanceOfLeave/attendanceOfTotalStudents*100;
   
-      data[0].status = Math.round(absentaverage) ;
-      data[1].status = Math.round(presentaverage);
+      data[0].status = Math.round(presentaverage) ;
+      data[1].status = Math.round(absentaverage);
       data[2].status = Math.round(leaveAverage);
 };
 

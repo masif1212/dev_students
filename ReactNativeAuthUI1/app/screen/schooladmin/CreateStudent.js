@@ -34,12 +34,17 @@ const newData = useSelector(state => state.schoolAdmin)
 
 const focus = useIsFocused();
 
-  const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getStudents/${newData.schoolId}`);
-    const data = await resp.json();
-    setStudents(data)
-
-
+   const fetchData = async () => {
+    fetch('https://ams.firefly-techsolutions.com/services/getStudents',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: newData.schoolId })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+       setStudents(response.data)
+       return response       
+     });
   };
   
  
@@ -275,23 +280,7 @@ const focus = useIsFocused();
           <Text style={{
             left: 25
           }}>Section : {section.name}</Text>
-          {/* <View style={{
-            backgroundColor: '#5062BD',
-            borderRadius: 7,
-            left: 40
-          }}>
-            <TouchableOpacity onPress={() => navigation.navigate('ViewFullAttendance',{  
-                      someArray : [...students]
-            })} >
-              <Text style={{
-
-
-                padding: 10,
-                color: 'white'
-              }}>View full class Attendance</Text>
-
-            </TouchableOpacity>
-          </View> */}
+      
 
         </View>
       </View>
@@ -324,7 +313,7 @@ const focus = useIsFocused();
                 { item.student_class === classes.name && item.section === section.name ? (
             <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
 
-              <Text style={{ ...styles.columnRowTxt, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowNumber, fontWeight: "bold" }}>{item.roll_no}</Text>
 
               <Text style={{ ...styles.columnRowTxt, }}>{item.first_name+' '+item.last_name}</Text>
 
@@ -488,9 +477,8 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: "row",
-    height: 40,
+    height: 60,
     margin: 2,
-    left: 8
   },
   columnHeader: {
     width: "16%",
@@ -506,7 +494,14 @@ const styles = StyleSheet.create({
   },
   columnRowTxt: {
     width: "20%",
+    paddingTop: 10
+  },
+  columnRowNumber: {
+    width: "20%",
+    paddingLeft: 15,
+    paddingTop: 13
   }
+
 
 });
 

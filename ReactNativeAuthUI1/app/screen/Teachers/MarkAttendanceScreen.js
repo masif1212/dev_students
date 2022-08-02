@@ -21,31 +21,46 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
   const [teachers, setTeachers] = useState([]);
-  const [attendance, setAttendance] = useState()
+  const [attendance, setAttendance] = useState("")
   const [attendanceState, setAttendanceState] = useState('')
+  const [message, setMessage] = useState("");
 
 
   const fetchData = async () => {
-    const resp = await fetch(`http://192.168.18.14:8000/api/user/getSometeacher/${route.params.schoolId}`);
-    const data = await resp.json();
-    const schAdminId = (data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
-    setAttendanceState(schAdminId)
-
+    fetch('https://ams.firefly-techsolutions.com/services/getSometeacher',{
+      method: 'POST',//GET and ...
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ schoolId: route.params.schoolId })
+     })
+     .then((response)=>response.json()) //   <------ this line 
+     .then((response)=>{
+      const schAdminId = (response.data.map(l => l.staffName ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+      setAttendanceState(schAdminId)
+       
+     });
   };
+
+  // const sxs = async () => {
+  //   const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getTeacher/${route.params.schoolId}`);
+  //   const data = await resp.json();
+  //   console.log(data)
+  //   const schAdminId = (data.data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
+  //   setAttendanceState(schAdminId)
+
+  // };
 
   const focus = useIsFocused();
 
   useLayoutEffect(() => {
     fetchData();
-
-
+    console.log(route.params.teacherId, "teacher id")
   }, [focus])
 
   const MarkAttendance = (item, S) => {
-    const attend = (attendanceState.map(l => l.teacher_id_att === item.teacher_id_att ? { ...l, attendance: S } : l));
-    setAttendanceState(attend)
+    const attend = (attendanceState.map(l => l._id === item._id ? { ...l, attendance: S, schoolId: route.params.schoolId, teacherId: l._id } : l));
     setAttendance(attend)
-
+    setAttendanceState(attend)
+    console.log(attend)
   }
 
   const [items, setItems] = useState()
@@ -60,43 +75,41 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   const [registerTechAttendance] = useRegisterTechAttendanceMutation();
 
   const handleFormSubmit = async () => {
-    fetch('http://192.168.18.14:8000/api/user/teacherattendance', {
-      method: "POST",
-      body: JSON.stringify(attendance),
+    fetch('https://ams.firefly-techsolutions.com/services/teacherattendance', {
+      method: 'POST',
       headers: {
-        'content-type': 'application/json',
-      }
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(attendance)
+    }).then(res =>res.json())
+      .then((res) => res.type === "success"
+        ? navigation.goBack()
+        : setMessage(res.message)
+      
+    );
+    };
+
+    useEffect(()=>{
+    console.log(attendance)
     })
-      .then((jsonRes) =>console.log("muzammil", jsonRes))
-      .catch(err => {
-        console.log(err);
-
-      })
-  };
 
 
-  // const onSubmit = () => {
-  //       attendance.forEach((item) => {
-  //       return item
-  //   });
-  //   console.log(attendance)
-  //   fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
-  //     method: "POST",
-  //     body: JSON.stringify(attendance),
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     }
-  //   })
-  //   .then((response) => console.log(response))
-  //   .catch(err => {
-  //     console.log(err);
-
-  // })
-  // }
   
   const tableHeader = () => (
 
     <View style={styles.tableHeader} >
+      {message ? (
+          <Text
+            style={{
+              fontSize: 15,
+              paddingLeft: 30,
+              color: "green",
+              fontWeight: "bold",
+            }}
+          >
+            {message}
+          </Text>
+        ) : null}
       {
         columns.map((column, index) => {
           {
@@ -245,22 +258,24 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
 
 
     </View>
-    <View>
+    <View
+    style={{
+      alignItems: "center",
+      justifyContent: 'center'
+
+    }}
+    >
         <TouchableOpacity
           onPress={handleFormSubmit}
           style={{
             alignItems: "center",
             padding: 15,
-            width: "90%",
+            width: "50%",
             borderRadius: 40,
             bottom:75,
-            fontWeight: "bold",
             backgroundColor: "#5062BD",
             elevation: 1,
-            left:17,
             position: 'relative'
-
-
           }}
         >
           <Text
@@ -268,6 +283,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
               color: "white",
               justifyContent: "center",
               alignItems: "center",
+              fontWeight: "bold",
 
             }}
           >
@@ -297,9 +313,7 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: "row",
     padding:5,
-    left: 8,
-    
-  
+    height: 60
   },
   tableRowtext: {
     left: 8
@@ -318,8 +332,10 @@ const styles = StyleSheet.create({
 
   },
   columnRowTxt: {
-    width: "18%",
-    left:30
+    width: "25%",
+    paddingLeft:10,
+    paddingTop: 15,
+    fontWeight: 'bold'
   }
 
 });
