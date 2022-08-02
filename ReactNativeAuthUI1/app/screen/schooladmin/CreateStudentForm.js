@@ -53,7 +53,7 @@ const CreateStudentForm = () => {
   const [message, setMessage] = useState("");
 
 
-  
+
 
   //================================DATE PICKER=============================================//
   const showDatePicker = () => {
@@ -384,10 +384,8 @@ const CreateStudentForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
-        .then((res) => res.json())
-        .then((res) =>
-          res.message === "Student Created successfully."
+      }).then((res) => res.json())
+        .then((res) => res.message === "Student Created successfully."
             ? navigation.goBack()
             : setMessage(res.message)
         );

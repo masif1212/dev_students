@@ -30,8 +30,7 @@ const SchoolDashboardScreen = () => {
       method: "POST", //GET and ...
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user: userLToken }),
-    })
-      .then((response) => response.json()) //   <------ this line
+    }).then((response) => response.json()) //   <------ this line
       .then((response) => {
         setCompData(response.data);
       });
@@ -42,7 +41,6 @@ const SchoolDashboardScreen = () => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
       dispatch(
         setSchoolAdminInfo({
           S_NO: compData.S_NO,
@@ -76,7 +74,6 @@ const SchoolDashboardScreen = () => {
           teacherprofessionalqualification: compData.teacherQualification,
         })
       );
-    }
   });
 
   return (

@@ -143,8 +143,7 @@ export const userAuthApi = createApi({
           method: 'POST',
           body: formdata,
           headers: {
-            'authorization': `Bearer ${userLToken}`,
-            
+            'authorization': `Bearer ${userLToken}`,            
           }
         }
       }

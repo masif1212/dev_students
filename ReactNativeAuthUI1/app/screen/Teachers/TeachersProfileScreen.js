@@ -1,15 +1,21 @@
-import { StyleSheet, Text, View, Image,TouchableOpacity,ScrollView, } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useEffect } from "react";
 
-const TeachersProfileScreen = ({route,navigation}) => {
-
- 
-
+const TeachersProfileScreen = ({ route, navigation }) => {
   return (
-    <ScrollView style={{
-        flex:1,
-        backgroundColor:'white'
-    }}>
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+      }}
+    >
       <View
         style={{
           justifyContent: "center",
@@ -36,21 +42,19 @@ const TeachersProfileScreen = ({route,navigation}) => {
               borderRadius: 50,
               backgroundColor: "#5062BD",
             }}
-            source={{uri:route.params.image}}
-              
-          
+            source={{ uri: route.params.image }}
           />
-         
-        <Text style={{
-          color:'white',
-          fontSize:20,
-          top:-12
-          
-        }}>{route.params.staffName}
-        </Text>
-        
+
+          <Text
+            style={{
+              color: "white",
+              fontSize: 20,
+              top: -12,
+            }}
+          >
+            {route.params.staffName}
+          </Text>
         </View>
-   
       </View>
       <View
         style={{
@@ -69,274 +73,340 @@ const TeachersProfileScreen = ({route,navigation}) => {
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >School Name</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          School Name
+        </Text>
         <Text>{route.params.schoolName}</Text>
-        
+
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Email</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Email
+        </Text>
         <Text>{route.params.email}</Text>
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Address</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Address
+        </Text>
         <Text>{route.params.address_1}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Address 2</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Address 2
+        </Text>
         <Text>{route.params.address_2}</Text>
-       
+
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Contact</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Contact
+        </Text>
         <Text>+92 {route.params.contact}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >alt_Contact</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          alt_Contact
+        </Text>
         <Text>+92 {route.params.alt_contact}</Text>
-
-
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Staff Position</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Staff Position
+        </Text>
         <Text> {route.params.staffPosition}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Contract Start Date</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Contract Start Date
+        </Text>
         <Text> {route.params.contractstart}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Contract End Date</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Contract End Date
+        </Text>
         <Text> {route.params.contractend}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Teacher Qualification</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Teacher Qualification
+        </Text>
         <Text> {route.params.teacherQualification}</Text>
 
-        
-        
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Teaching Class</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Teaching Class
+        </Text>
         <Text> {route.params.teachingClass}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Teaching Subject</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Teaching Subject
+        </Text>
         <Text> {route.params.teachingSubject}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Subject Specification</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Subject Specification
+        </Text>
         <Text> {route.params.SubjectSpec}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >District</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          District
+        </Text>
         <Text> {route.params.selectedDistricts}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Tehsil</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Tehsil
+        </Text>
         <Text> {route.params.seletctedTehsil}</Text>
-
-        
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Religion</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Religion
+        </Text>
         <Text> {route.params.religion}</Text>
 
         <View
           style={{
-              marginTop:10,
+            marginTop: 10,
             borderBottomColor: "gray",
             borderBottomWidth: 1,
-            width:'95%'
+            width: "95%",
           }}
         />
-        <Text style={{
-            marginTop:5,
-            fontWeight:'bold'
-        }} >Gender</Text>
+        <Text
+          style={{
+            marginTop: 5,
+            fontWeight: "bold",
+          }}
+        >
+          Gender
+        </Text>
         <Text> {route.params.gender}</Text>
-      
       </View>
 
-
-      <View style={{
-          flexDirection:'row',
-          justifyContent:'flex-end',
-          marginRight:20,
-          marginVertical: 40
-
-      }}>
-            <TouchableOpacity style={{
-                backgroundColor:'#5062BD',
-                padding:20,
-                borderRadius:20,
-
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          marginRight: 20,
+          marginVertical: 40,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#5062BD",
+            padding: 20,
+            borderRadius: 20,
+          }}
+          onPress={() =>
+            navigation.navigate("TeacherAttendanceDetails", {
+              staffName: route.params.staffName,
+              teacherId: route.params.teacherId,
+            })
+          }
+        >
+          <Text
+            style={{
+              color: "white",
             }}
-            onPress= {()=> navigation.navigate("TeacherAttendanceDetails",{
-              staffName:route.params.staffName,
-              teacherId:route.params.teacherId,
-              
-            }) }
-            >
-              
-              <Text style={{
-                color:'white'
-            }}>view Attendance</Text></TouchableOpacity>
-        </View>
+          >
+            View Attendance
+          </Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };

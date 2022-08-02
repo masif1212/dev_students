@@ -15,28 +15,25 @@ const Home =({ navigation })=> {
   const edges = useSafeAreaInsets();
 
   return (
-    <View>
-      <ScrollView>
+    <View style={{backgroundColor:'#ffffff', height:'100%'}}>
+      <ScrollView >
         <View
           style={{
-            paddingLeft: 15,
-            paddingRight: 15,
+            paddingRight: 0,
             paddingTop: edges.top + 0,
             paddingBottom: 25,
           }}
         >
           <View style={styles.imageContainer}>
-            <TouchableOpacity >
               <Image
-                source={require("../../assets/images/welcomeImg.png")}
+                source={require("../../assets/spologo.png")}
                 style={{
-                  width: Dimensions.get("window").width - 100,
-                  height: 230,
+                  width: Dimensions.get("window").width - 80,
+                  height: 200,
                   borderRadius: 15,
                   marginTop: 20,
                 }}
               ></Image>
-            </TouchableOpacity>
           </View>
 
           <View style={styles.textContainer}>
@@ -62,7 +59,7 @@ const Home =({ navigation })=> {
                   borderRadius: 50,
                   marginBottom: 0,
                   fontWeight: "bold",
-                  backgroundColor: "#5062BD",
+                  backgroundColor: "#307C26",
                   elevation: 4,
                   marginTop: 50,
                 }}
