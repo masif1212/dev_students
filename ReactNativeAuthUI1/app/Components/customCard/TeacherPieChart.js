@@ -37,7 +37,6 @@ var out = data.filter(person => {
 })
 
 
-console.log(out)
 
 
 

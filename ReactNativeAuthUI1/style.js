@@ -27,8 +27,8 @@ const toastConfig = {
     </View>
   ),
   done: ({ text1, props }) => (
-    <View style={{height: 25, width: '100%', backgroundColor: 'green',   padding: 4, position: 'absolute',top:0}}>
-      <Text style={{color: 'green', fontWeight: 'bold', top:80}}>{text1}</Text>
+    <View style={{height: 25, width: '100%', backgroundColor: 'green',   padding: 4, position: 'absolute',top:30}}>
+      <Text style={{color: 'white', fontWeight: 'bold',}}>{text1}</Text>
       <Text>{props.uuid}</Text>
     </View>
   ),

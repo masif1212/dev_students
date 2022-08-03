@@ -82,41 +82,25 @@ const TeachersListScreen = ({navigation, route})=> {
                 }
               >
                 <View style={styles.box}>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      marginTop: 25,
-                    }}
-                  >
-                    <Image style={styles.image} source={{uri:item.image}} />
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 50,
-                   
-                    }}
-                  >
-                    <Text style={styles.username}>{item.staffName}</Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 50,
-                    }}
-                  >
-                    <Text style={styles.email}>{item.email}</Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 220,
-                      bottom: 150,
-                   
-                    }}
-                  >
-                    {/* <Pie outerRadius={'50%'} /> */}
-                  </View>
+                <View
+                  style={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image style={styles.image} source={{ uri: item.image }} />
                 </View>
+                <View
+                  style={{
+                    margin: 0,
+                    paddingLeft: 10,
+                  }}
+                >
+                  <Text style={styles.username}>{item.staffName}</Text>
+                  <Text style={styles.email}>{item.email}</Text>
+                  <Text style={styles.email}>{item.schoolName}</Text>
+                  <Text style={styles.email}>{item.selectedDistricts}</Text>
+                </View>
+              </View>
               </TouchableOpacity>
             );
           }}
@@ -129,10 +113,11 @@ const TeachersListScreen = ({navigation, route})=> {
 
 const styles = StyleSheet.create({
   image: {
-    width: 60,
-    height: 70,
-    borderRadius: 40,
-    marginLeft: 3,
+    width: 90,
+    height: 110,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    marginLeft: 4,
   },
   body: {
     padding: 20,
@@ -145,6 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     shadowColor: "black",
     shadowOpacity: 0.2,
+    flexDirection: "row",
     shadowOffset: {
       height: 1,
       width: -2,
@@ -155,14 +141,12 @@ const styles = StyleSheet.create({
   username: {
     color: "black",
     fontSize: 22,
-    marginLeft: 10,
-    bottom:5
+    marginTop: 10,
   },
   email: {
     color: "black",
     fontSize: 12,
-    marginLeft: 10,
-    bottom:5
+    marginVertical: 2,
   },
 });
 export default TeachersListScreen;

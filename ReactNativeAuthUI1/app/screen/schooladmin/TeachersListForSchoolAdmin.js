@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,195 +6,163 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useSelector } from 'react-redux';
-import { useIsFocused } from "@react-navigation/native"; 
+import { useSelector } from "react-redux";
+import { useIsFocused } from "@react-navigation/native";
 
+const TeachersListForSchoolAdmin = ({ navigation }) => {
+  const [teachers, setTeachers] = useState();
 
-
-const TeachersListForSchoolAdmin = ({navigation}) => {
-  
-  const [teachers,setTeachers] = useState();
-
-  const newData = useSelector(state => state.schoolAdmin);
+  const newData = useSelector((state) => state.schoolAdmin);
 
   const fetchData = async () => {
-    fetch('https://ams.firefly-techsolutions.com/services/getTeacher',{
-      method: 'POST',//GET and ...
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ schoolId: newData.schoolId })
-     })
-     .then((response)=>response.json()) //   <------ this line 
-     .then((response)=>{
-       setTeachers(response.data)
-       
-     });
+    fetch("https://ams.firefly-techsolutions.com/services/getTeacher", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ schoolId: newData.schoolId }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setTeachers(response.data);
+      });
   };
- 
-  
+
   const focus = useIsFocused();
 
   useEffect(() => {
-   fetchData();
-  }, [focus]);
+    fetchData();
+  }, [newData]);
 
-
-    return (
-      <View style={styles.body}>
-           <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-end',
-                 
-               
-          }}>
-          <TouchableOpacity 
-          onPress={()=>navigation.navigate('AddTeacherForm')}
+  return (
+    <View style={styles.body}>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => navigation.navigate("AddTeacherForm")}
           style={{
-              borderRadius:10,
-              backgroundColor:'#5062BD',
-              padding:8,
-              flexDirection:'row',
-          }}>
-              <Icon style={{
-                  color:'white',
-                  margin:5,
-                  justifyContent:'center',
-                  alignItems:'center'
-                }}
-               name="user-plus" />
-              <Text style={{
-                  color:'white',
-                  marginTop:2,
-                  justifyContent:'center',
-                  alignItems:'center'
-              }}>Add Teacher</Text>
-          </TouchableOpacity>
-          </View>
-        
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          enableEmptySections={true}
-              data={teachers}
-          keyExtractor={item => item.image}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("TeachersProfile", {
-                    teacherId:item._id,
-                    staffName:item.staffName,
-                    email: item.email,
-                    image: item.image,
-                    address_1: item.address_1,
-                    address_2: item.address_2,
-                    contact: item.contact,
-                    alt_contact: item.alt_contact,
-                    city: item.city,
-                    teacher_id_att:item.teacher_id_att,
-                    schoolName:item.schoolName,
-                    gender: item.gender,
-                    religion:item.religion,
-                    maritalStatus:item.maritalStatus,
-                    staff_name:item.staff_name,
-                    staffPosition:item.staffPosition,
-                    dateofJoining:item.dateofJoining,
-                    contractstart:item.contractstart,
-                    contractend:item.contractend,
-                    teacherQualification:item.teacherQualification,
-                    teacherprofessionalqualification:item.teacherprofessionalqualification,
-                    teachingClass:item.teachingClass,
-                    teachingSubject:item.teachingSubject,
-                    SubjectSpec:item.SubjectSpec,
-                    father_name:item.father_name,
-                    selectedDistricts:item.selectedDistricts,
-                    seletctedTehsil:item.seletctedTehsil,
-
-                  })
-                }
-              >
-                <View style={styles.box}>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      marginTop: 25,
-                      marginLeft: 10
-                    }}
-                  >
-                    <Image style={styles.image} source={{ uri: item.image }} />
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 80,
-                      bottom: 60,
-                   
-                    }}
-                  >
-                    <Text style={styles.username}>{item.staffName}</Text>
-                  </View>
-
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 60,
-                      marginLeft: 80,
-
-                    }}
-                  >
-                    <Text style={styles.staffPosition}>{item.staffPosition}</Text>
-                  </View>
-                  
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 60,
-                      marginLeft: 80,
-
-                    }}
-                  >
-                    <Text style={styles.email}>{item.email}</Text>
-                  </View>
-                
-                  <View
-                    style={{
-                      left: 120,
-                      bottom: 154,
-                      // position:"absolute"
-                   
-                    }}
-                  >
-                    {/* <TeacherListPieChart  outerRadius={'60%'} teacherId = {item.teacher_id_att}/> */}
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
+            borderRadius: 10,
+            backgroundColor: "#5062BD",
+            padding: 8,
+            flexDirection: "row",
           }}
-        />
+        >
+          <Icon
+            style={{
+              color: "white",
+              margin: 5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            name="user-plus"
+          />
+          <Text
+            style={{
+              color: "white",
+              marginTop: 2,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Add Teacher
+          </Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
 
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        enableEmptySections={true}
+        data={teachers}
+        keyExtractor={(item) => item.image}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("TeachersProfile", {
+                  teacherId: item._id,
+                  staffName: item.staffName,
+                  email: item.email,
+                  image: item.image,
+                  address_1: item.address_1,
+                  address_2: item.address_2,
+                  contact: item.contact,
+                  alt_contact: item.alt_contact,
+                  city: item.city,
+                  teacher_id_att: item.teacher_id_att,
+                  schoolName: item.schoolName,
+                  gender: item.gender,
+                  religion: item.religion,
+                  maritalStatus: item.maritalStatus,
+                  staff_name: item.staff_name,
+                  staffPosition: item.staffPosition,
+                  dateofJoining: item.dateofJoining,
+                  contractstart: item.contractstart,
+                  contractend: item.contractend,
+                  teacherQualification: item.teacherQualification,
+                  teacherprofessionalqualification:
+                    item.teacherprofessionalqualification,
+                  teachingClass: item.teachingClass,
+                  teachingSubject: item.teachingSubject,
+                  SubjectSpec: item.SubjectSpec,
+                  father_name: item.father_name,
+                  selectedDistricts: item.selectedDistricts,
+                  seletctedTehsil: item.seletctedTehsil,
+                })
+              }
+            >
+              <View style={styles.box}>
+                <View
+                  style={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image style={styles.image} source={{ uri: item.image }} />
+                </View>
+                <View
+                  style={{
+                    margin: 0,
+                    paddingLeft: 10,
+                  }}
+                >
+                  <Text style={styles.username}>{item.staffName}</Text>
+                  <Text style={styles.email}>{item.email}</Text>
+                  <Text style={styles.email}>{item.schoolName}</Text>
+                  <Text style={styles.email}>{item.selectedDistricts}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   image: {
-    width: 60,
-    height: 70,
-    borderRadius: 40,
-    marginLeft: 3,
+    width: 90,
+    height: 110,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    marginLeft: 4,
   },
   body: {
     padding: 20,
     backgroundColor: "#E6E6FA",
   },
   box: {
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 5,
     borderRadius: 20,
     backgroundColor: "#FFFFFF",
     shadowColor: "black",
     shadowOpacity: 0.2,
+    flexDirection: "row",
     shadowOffset: {
       height: 1,
       width: -2,
@@ -205,24 +173,20 @@ const styles = StyleSheet.create({
   username: {
     color: "black",
     fontSize: 22,
-    marginLeft: 10,
-    bottom:5
+    marginTop: 10,
   },
   email: {
     color: "black",
     fontSize: 12,
-    marginLeft: 10,
-    bottom:5
+    marginVertical: 2,
   },
   staffPosition: {
     color: "black",
     fontSize: 12,
     marginLeft: 10,
-    bottom:5,
-    fontWeight: 'bold'
+    bottom: 5,
+    fontWeight: "bold",
   },
 });
 
-
-
-export default TeachersListForSchoolAdmin
+export default TeachersListForSchoolAdmin;

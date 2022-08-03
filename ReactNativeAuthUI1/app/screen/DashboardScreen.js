@@ -45,6 +45,7 @@ const isSuccess = true;
     if (isSuccess) {
     dispatch(
       setUserInfo({
+        superAdminId: compData._id,
         email: compData.email,
         firstName: compData.firstName,
         lastName: compData.lastName,

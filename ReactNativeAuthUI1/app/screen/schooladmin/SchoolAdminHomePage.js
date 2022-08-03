@@ -23,7 +23,6 @@ const myData = useSelector(state => state.teacher)
   useEffect(() => {
     setSchoolId(newData.schoolId);
     setSchoolName(newData.schoolName);
-    console.log(newData.teacherId, "hello")
   })
 
 

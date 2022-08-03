@@ -37,12 +37,9 @@ import {
         if (res.data.type === "success") {
           clearTextInput();
           await storeToken(res.data.data.email); // Store Token in Storage
-          console.log(res.data.data.email)
           navigation.navigate("UserPanelTab");
         }} else if (res.error) {
         if(res.error.data.type === "error") {
-          console.log(res.error.data.message)
-          console.log('hello')
 
           Toast.show({
             type: "warning",

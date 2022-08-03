@@ -2193,9 +2193,6 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
             { setTimeout(()=>{ navigation.goBack() }, 1000);}
           }} else if (res.error) {
           if(res.error.data.type === "error") {
-            console.log(res.error.data.message)
-            console.log('hello')
-  
             Toast.show({
               type: "warning",
               position: "top",

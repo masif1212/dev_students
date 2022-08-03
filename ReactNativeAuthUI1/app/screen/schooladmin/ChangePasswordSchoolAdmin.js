@@ -7,7 +7,7 @@ import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
 import { getToken } from '../../../services/AsyncStorageService'
 import { useSelector } from 'react-redux';
 
-const ChangePasswordScreen = () => {
+const ChangePasswordSchoolAdmin = () => {
   const [new_password, setPassword] = useState("")
   const [conf_new_password, setPassword_confirmation] = useState("")
   const [ old_password, setOldPassword] = useState("");
@@ -21,12 +21,12 @@ const ChangePasswordScreen = () => {
   }
 
   const [changeUserPassword] = useChangeUserPasswordMutation()
-  const myData = useSelector(state => state.user)
+  const myData = useSelector(state => state.schoolAdmin)
 
   useEffect(() => {
     (async () => {
       const token = await getToken() // Getting Token from Storage
-      setId(myData.superAdminId)
+      setId(myData.schoolAdminiId)
       setUserLToken(token)          // Store Token in Local State
     })();
   })
@@ -36,6 +36,8 @@ const ChangePasswordScreen = () => {
       if (new_password === conf_new_password) {
         const formdata = { id, new_password, conf_new_password, old_password }
         const res = await changeUserPassword({ formdata, userLToken })
+        console.log(res)
+        console.log(formdata)
         if (res.data.type === "success") {
           clearTextInput()
           Toast.show({
@@ -158,4 +160,4 @@ const styleOne = StyleSheet.create({
   },
  
 });
-export default ChangePasswordScreen
+export default ChangePasswordSchoolAdmin

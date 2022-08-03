@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ReactNativeAuthUI1",
+    "name": "SPO",
     "slug": "ReactNativeAuthUI1",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/AppIcon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

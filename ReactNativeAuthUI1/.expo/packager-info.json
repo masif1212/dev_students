@@ -1,10 +1,10 @@
 {
   "expoServerPort": null,
-  "packagerPort": null,
+  "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://me-cvt.muzi245.reactnativeauthui1.exp.direct",
+  "packagerNgrokUrl": "https://me-cvt.muzi245.reactnativeauthui1.exp.direct",
+  "ngrokPid": 9916,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }

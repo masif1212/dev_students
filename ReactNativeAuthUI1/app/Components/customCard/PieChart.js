@@ -37,7 +37,6 @@ var out = data.filter(person => {
 })
 
 
-console.log(out)
 
 
 
@@ -73,7 +72,6 @@ const Pie = ({outerRadius}) => {
 const fetchData = async () => {
   const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getstudentsattendancedashboard`);
   const students = await resp.json();
-  console.log(students.data)
   const attendanceOfAbsent = students.data.filter(x => x.attendance=='A').length;
 
   const attendanceOfPresent = students.data.filter(x => x.attendance=='P').length;

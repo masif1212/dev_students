@@ -260,28 +260,7 @@ const ClassStudents = ({ navigation, route }) => {
           <Text style={{
             left: 25
           }}>Section : {section.name}</Text>
-          {/* <View style={{
-            backgroundColor: '#5062BD',
-            borderRadius: 7,
-            left: 40
-
-
-
-
-          }}>
-
-            <TouchableOpacity onPress={() => navigation.navigate('ViewFullAttendance')} >
-
-              <Text style={{
-
-
-                padding: 10,
-                color: 'white'
-              }}>View full class Attendance</Text>
-
-            </TouchableOpacity>
-          </View> */}
-
+       
         </View>
       </View>
 
