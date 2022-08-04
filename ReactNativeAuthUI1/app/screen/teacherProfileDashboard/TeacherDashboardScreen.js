@@ -33,7 +33,6 @@ const TeacherDashboardScreen = () => {
       .then((response) => response.json()) //   <------ this line
       .then((response) => {
         setTeacherData(response.data);
-        console.log(response)
       });
   };
 

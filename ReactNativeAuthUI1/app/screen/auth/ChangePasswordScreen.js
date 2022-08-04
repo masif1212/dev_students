@@ -1,4 +1,4 @@
-import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, toastConfig } from '../../../style';
@@ -12,6 +12,8 @@ const ChangePasswordScreen = () => {
   const [conf_new_password, setPassword_confirmation] = useState("")
   const [ old_password, setOldPassword] = useState("");
   const [ id, setId] = useState("");
+  const table = "user";
+
   const [userLToken, setUserLToken] = useState()
 
   const clearTextInput = () => {
@@ -34,7 +36,7 @@ const ChangePasswordScreen = () => {
   const handleFormSubmit = async () => {
     if (new_password && conf_new_password) {
       if (new_password === conf_new_password) {
-        const formdata = { id, new_password, conf_new_password, old_password }
+        const formdata = { id, new_password, conf_new_password, old_password, table }
         const res = await changeUserPassword({ formdata, userLToken })
         if (res.data.type === "success") {
           clearTextInput()
@@ -73,8 +75,9 @@ const ChangePasswordScreen = () => {
   return (
     
 <>
+<View>
 <Toast config={toastConfig} />
-
+</View>
       <View style={{ marginTop: 30}} keyboardShouldPersistTaps='handled'>
 
         <View style={styleOne.container}>

@@ -12,6 +12,7 @@ const ChangePasswordSchoolAdmin = () => {
   const [conf_new_password, setPassword_confirmation] = useState("")
   const [ old_password, setOldPassword] = useState("");
   const [ id, setId] = useState("");
+  const table = "schooladmin"
   const [userLToken, setUserLToken] = useState()
 
   const clearTextInput = () => {
@@ -34,10 +35,8 @@ const ChangePasswordSchoolAdmin = () => {
   const handleFormSubmit = async () => {
     if (new_password && conf_new_password) {
       if (new_password === conf_new_password) {
-        const formdata = { id, new_password, conf_new_password, old_password }
+        const formdata = { id, new_password, conf_new_password, old_password, table }
         const res = await changeUserPassword({ formdata, userLToken })
-        console.log(res)
-        console.log(formdata)
         if (res.data.type === "success") {
           clearTextInput()
           Toast.show({

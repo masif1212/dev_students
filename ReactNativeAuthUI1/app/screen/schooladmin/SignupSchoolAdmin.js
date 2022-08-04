@@ -17,7 +17,7 @@ import { useRegisterSchoolAdminMutation } from "../../../services/userAuthApi.js
 import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
-
+import * as DocumentPicker from 'expo-document-picker';
 import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -63,7 +63,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   const [address_1, setAddress_1] = useState("");
 
   const [message, setMessage] = useState("");
-
+  const [passwordVisible, setPasswordVisible] = useState(true);
   // const focus = useIsFocused();
   // const myData = useSelector((state) => state.schoolAdmin);
   // useEffect(() => {
@@ -71,9 +71,9 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   //   setSchoolName(myData.schoolName);
   // }, [focus]);
 
-  // useEffect(() => {
-  //   LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  // }, []);
+  useEffect(() => {
+console.log(image)
+  }, []);
 
   //asdasdasd
 
@@ -2186,6 +2186,8 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
         };
 
         const res = await registerSchoolAdmin(formData);
+        console.log(formData)
+        
         if(res.data){
           if (res.data.type === "success") {
             clearTextInput();
@@ -2224,17 +2226,12 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
     setSchoolName(route.params.schoolName)
   })
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setImage(result.uri);
+    let result = await DocumentPicker.getDocumentAsync({});
+    setImage(result)
+    console.log(result)
     }
-  };
+
+  
 
   //=========================div district tehsil=============================================//
   const [districtShow, setDistrictsShow] = useState("");
@@ -2294,7 +2291,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
             />
             {image ? (
               <Image
-                source={{ uri: image }}
+                source={{ uri: image.uri }}
                 style={{ width: 100, height: 100, borderRadius: 50 }}
               />
             ) : (
@@ -2386,6 +2383,7 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
               placeholder="Write Your Password"
               secureTextEntry={true}
               keyboardType={"default"}
+              right={<TextInput.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} />}
             />
           </View>
           <View>

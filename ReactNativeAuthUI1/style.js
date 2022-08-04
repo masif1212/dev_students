@@ -21,13 +21,13 @@ const styles = StyleSheet.create({
 
 const toastConfig = {
   warning: ({ text1, props }) => (
-    <View style={{ height: 25, width: '90%', backgroundColor: 'red', padding: 4, position: 'absolute',top:30}}>
+    <View style={{ height: 25, width: '90%',borderRadius: 120, backgroundColor: 'red', padding: 4, top:10, alignItems: 'center', }}>
       <Text style={{color: 'white', fontWeight: 'bold'}}>{text1}</Text>
       <Text>{props.uuid}</Text>
     </View>
   ),
   done: ({ text1, props }) => (
-    <View style={{height: 25, width: '100%', backgroundColor: 'green',   padding: 4, position: 'absolute',top:30}}>
+    <View style={{height: 25, width: '90%',borderRadius: 120, backgroundColor: 'green', padding: 4, top:10, alignItems: 'center',}}>
       <Text style={{color: 'white', fontWeight: 'bold',}}>{text1}</Text>
       <Text>{props.uuid}</Text>
     </View>
