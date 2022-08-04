@@ -168,6 +168,7 @@ const TeacherLandingPage = () => {
       <View>
         <View style={styles.container}>
           <SearchableDropdown
+           selectedItems={classes}
             onTextChange={(text) => setClasses(text)}
             onItemSelect={(item) => setClasses(item)}
             containerStyle={{
@@ -201,6 +202,7 @@ const TeacherLandingPage = () => {
           />
 
           <SearchableDropdown
+           selectedItems={section}
             onTextChange={(text) => setSections(text)}
             onItemSelect={(item) => setSections(item)}
             containerStyle={{
