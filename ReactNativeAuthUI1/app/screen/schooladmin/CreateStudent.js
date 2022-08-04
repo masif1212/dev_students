@@ -187,6 +187,7 @@ const focus = useIsFocused();
       <View style={styles.container}>
 
 <SearchableDropdown
+     selectedItems={classes}
     onTextChange={(text) =>  setClasses(text)}
     onItemSelect={(item) =>  setClasses(item)}
     containerStyle={{
@@ -221,6 +222,7 @@ const focus = useIsFocused();
     underlineColorAndroid='transparent' />
 
 <SearchableDropdown
+     selectedItems={section}
     onTextChange={(text) =>  setSections(text)}
     onItemSelect={(item) =>  setSections(item)}
     containerStyle={{
