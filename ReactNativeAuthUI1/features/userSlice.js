@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
+  superAdminId: "",
   email: "",
   firstName: "",
   lastName: "",
@@ -21,6 +22,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserInfo: (state, action) => {
+      state.superAdminId= action.payload.superAdminId
       state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability
@@ -37,6 +39,7 @@ export const userSlice = createSlice({
       state.city = action.payload.city
     },
     unSetUserInfo: (state, action) => {
+      state.superAdminId= action.payload.superAdminId
       state.dateofbirth= action.payload.dateofbirth
       state.disabledetail = action.payload.disabledetail
       state.disability = action.payload.disability

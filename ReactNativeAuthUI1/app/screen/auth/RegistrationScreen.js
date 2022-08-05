@@ -23,6 +23,7 @@ import * as ImagePicker from "expo-image-picker";
 import RadioButton from '../../Components/RadioButton.js'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
+import * as DocumentPicker from 'expo-document-picker';
 
 
 
@@ -128,6 +129,7 @@ const RegistrationScreen = () => {
           dateofbirth
         };
         const res = await registerUser(formData);
+        console.log(res)
         if(res.data){
           if (res.data.type === "success") {
             clearTextInput()
@@ -165,16 +167,9 @@ const RegistrationScreen = () => {
   };
 
   const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setImage(result.uri);
-    }
+    let result = await DocumentPicker.getDocumentAsync({});
+    setImage(result)
+    console.log(result)
   };
 
   return (
@@ -196,7 +191,7 @@ const RegistrationScreen = () => {
             />
             {image ? (
               <Image
-                source={{ uri: image }}
+                source={{ uri: image.uri }}
                 style={{ width: 100, height: 100, borderRadius: 50 }}
               />
             ) : (
@@ -226,10 +221,12 @@ const RegistrationScreen = () => {
               onChangeText={setLastName}
               placeholder="Write Your Last Name"
               placeholderTextColor='gray'
+              
 
             />
           </View>
           <View>
+            
             <TextInput
               style={styleOne.input}
               keyboardType="email-address"

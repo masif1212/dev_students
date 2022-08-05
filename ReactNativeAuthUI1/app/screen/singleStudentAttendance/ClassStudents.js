@@ -23,10 +23,12 @@ const ClassStudents = ({ navigation, route }) => {
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
   const [students, setStudents] = useState('')
+  const [selectedItems, setSelectedItems] = useState()
 
   
   
   
+
  
   
   const focus = useIsFocused();
@@ -115,15 +117,13 @@ const ClassStudents = ({ navigation, route }) => {
   
     const [ classes, setClasses ] = useState({})
     const [ section, setSections ] = useState({})
-    const [student, setStudent] = useState({})
     
   
    
     const {data} = useGetStudentQuery();
   
+    
    
-
-
 
   const sortTable = (column) => {
     const newDirection = direction === "desc" ? "asc" : "desc"
@@ -173,6 +173,7 @@ const ClassStudents = ({ navigation, route }) => {
       <View style={styles.container}>
 
 <SearchableDropdown
+ selectedItems={classes}
     onTextChange={(text) =>  setClasses(text)}
     onItemSelect={(item) =>  setClasses(item)}
     containerStyle={{
@@ -205,6 +206,7 @@ const ClassStudents = ({ navigation, route }) => {
     underlineColorAndroid='transparent' />
 
 <SearchableDropdown
+selectedItems={section}
     onTextChange={(text) =>  setSections(text)}
     onItemSelect={(item) =>  setSections(item)}
     containerStyle={{
@@ -260,28 +262,7 @@ const ClassStudents = ({ navigation, route }) => {
           <Text style={{
             left: 25
           }}>Section : {section.name}</Text>
-          {/* <View style={{
-            backgroundColor: '#5062BD',
-            borderRadius: 7,
-            left: 40
-
-
-
-
-          }}>
-
-            <TouchableOpacity onPress={() => navigation.navigate('ViewFullAttendance')} >
-
-              <Text style={{
-
-
-                padding: 10,
-                color: 'white'
-              }}>View full class Attendance</Text>
-
-            </TouchableOpacity>
-          </View> */}
-
+       
         </View>
       </View>
 
@@ -312,11 +293,11 @@ const ClassStudents = ({ navigation, route }) => {
              { classes.name && section.name ? (
               <View>
                  {item.student_class === classes.name && item.section === section.name ? (
-            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%', }}>
+            <View style={{ ...styles.tableRow, backgroundColor: index % 2 == 1 ? "#F0FBFC" : "white", width: '100%'}}>
 
-              <Text style={{ ...styles.columnRowNumber, fontWeight: "bold" }}>{item.roll_no}</Text>
+              <Text style={{ ...styles.columnRowNumber, fontWeight: "bold", marginTop:14 }}>{item.roll_no}</Text>
 
-              <Text style={{ ...styles.columnRowTxt, }}>{item.first_name}</Text>
+              <Text style={{ ...styles.columnRowTxt,marginTop:14 }}>{item.first_name}</Text>
 
 
               <View style={{ width: '100%', flexDirection: 'row' }}>

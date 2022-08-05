@@ -86,7 +86,6 @@ const App = ({navigation}) => (
         <Stack.Screen  name="CreateStudentForm"  component={CreateStudentForm} options={{title: 'Add Student', headerShown:true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD" } }}  />
         <Stack.Screen  name="SchoolAdminDrawer"  component={SchoolAdminDrawer}  options={{ headerShown: true,headerTintColor:'white',  headerShown:true, headerStyle: {  backgroundColor: "#5062BD" }}} />
         <Stack.Screen name="TeacherDrawer" component={TeacherDrawer} options={{  headerShown:true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD"}}}/>
-        <Stack.Screen name="MarkAttendanceFilter"  component={MarkAttendanceFilter} options={{ headerShown: true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD"}}} />
         <Stack.Screen name="SchoolAdminProfile" component={SchoolAdminProfile} options={{title: 'School Admin Profile', headerShown: true,headerTintColor:'white', headerStyle: { backgroundColor: "#5062BD"}}} />
 
         <Stack.Screen name="MarkTeacherAttendance" component={MarkTeacherAttendance} options={{ headerShown: true, headerShown:true,headerStyle: { backgroundColor: "#5062BD", },  }} />

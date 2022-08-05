@@ -20,7 +20,6 @@ const SideBar = ({ ...props }) => {
   // Getting User Data from Redux Store
   const myData = useSelector(state => state.user)
 
-
   return (
     <DrawerContentScrollView {...props} style={styles.mainContainer}>
       <View

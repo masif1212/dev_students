@@ -21,7 +21,6 @@ const SideBar = ({ ...props }) => {
   // Getting User Data from Redux Store
   const myData = useSelector(state => state.schoolAdmin)
   // const myToken = useSelector(state => state.auth)
-  // console.log(myToken)
 
 
 
@@ -39,7 +38,6 @@ const SideBar = ({ ...props }) => {
         <Image style={{ height: 100,width:100,borderRadius:80,top:1}} />
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white",}}>{myData.first_name + " "+myData.last_name}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" ,}}>{myData.email}</Text>
-
       </View>
       <DrawerItemList {...props} />
       <DrawerItem label='Logout' onPress={handleLogout} />

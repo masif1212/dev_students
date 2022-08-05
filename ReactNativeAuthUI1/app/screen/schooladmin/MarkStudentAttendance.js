@@ -130,7 +130,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
     );
     setAttendanceState(attend);
     setAttendance(attend);
-    console.log(attend);
   };
 
   const sortTable = (column) => {
@@ -142,7 +141,6 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   };
 
   const handleFormSubmit = async () => {
-    console.log(attendance);
     fetch("https://ams.firefly-techsolutions.com/services/studentattendance", {
       method: "POST",
       headers: {
@@ -157,21 +155,7 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
   );
   };
 
-  // const onSubmit = () => {
 
-  //   fetch('http://192.168.18.64:8000/api/user/teacherattendance', {
-  //     method: "POST",
-  //     body: JSON.stringify({attendance}),
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     }
-  //   })
-  //   .then((response) => response.json())
-  //   .catch(err => {
-  //     console.log(err);
-
-  // })
-  // }
 
   const tableHeader = () => (
     <View style={styles.tableHeader}>

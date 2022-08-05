@@ -10,13 +10,12 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-
-const Home =({ navigation })=> {
+const Home = ({ navigation }) => {
   const edges = useSafeAreaInsets();
 
   return (
-    <View style={{backgroundColor:'#ffffff', height:'100%'}}>
-      <ScrollView >
+    <View style={{ backgroundColor: "#ffffff", height: "100%" }}>
+      <ScrollView>
         <View
           style={{
             paddingRight: 0,
@@ -25,15 +24,15 @@ const Home =({ navigation })=> {
           }}
         >
           <View style={styles.imageContainer}>
-              <Image
-                source={require("../../assets/spologo.png")}
-                style={{
-                  width: Dimensions.get("window").width - 80,
-                  height: 200,
-                  borderRadius: 15,
-                  marginTop: 20,
-                }}
-              ></Image>
+            <Image
+              source={require("../../assets/spologo.png")}
+              style={{
+                width: Dimensions.get("window").width - 80,
+                height: 220,
+                borderRadius: 15,
+                marginTop: 20,
+              }}
+            ></Image>
           </View>
 
           <View style={styles.textContainer}>
@@ -46,10 +45,11 @@ const Home =({ navigation })=> {
               marginTop: 0,
             }}
           >
-                      <View >
-          <TouchableOpacity
-               onPress={() => navigation.navigate("AdminLogin", { screen: "AdminLogin" }) }
-
+            <View style={{ margin: 10}}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("AdminLogin", { screen: "AdminLogin" })
+                }
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
@@ -67,18 +67,19 @@ const Home =({ navigation })=> {
                 <Text
                   style={{
                     color: "white",
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                 >
+                >
                   Super Admin
                 </Text>
               </TouchableOpacity>
 
-              
               <TouchableOpacity
-                onPress={() => navigation.navigate("UserLogin", { screen: "UserLogin" }) }
+                onPress={() =>
+                  navigation.navigate("UserLogin", { screen: "UserLogin" })
+                }
                 // onPress={() => navigation.navigate("TeacherLandingPage", { screen: "TeacherLandingPage" }) }
 
                 style={{
@@ -91,7 +92,7 @@ const Home =({ navigation })=> {
                   marginBottom: 50,
                   fontWeight: "bold",
                   backgroundColor: "#fff",
-                  elevation: 1,
+                  elevation: 4,
                   marginTop: 50,
                 }}
               >
@@ -102,26 +103,28 @@ const Home =({ navigation })=> {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                 >
+                >
                   Admin
                 </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => navigation.navigate("TeacherLoginScreen", { screen: "TeacherLoginScreen" }) }
-
+                onPress={() =>
+                  navigation.navigate("TeacherLoginScreen", {
+                    screen: "TeacherLoginScreen",
+                  })
+                }
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
                   padding: 15,
                   width: "100%",
-               
+
                   borderRadius: 50,
-      
+
                   fontWeight: "bold",
                   backgroundColor: "#fff",
-                  elevation: 1,
-            
+                  elevation: 4,
                 }}
               >
                 <Text
@@ -131,18 +134,17 @@ const Home =({ navigation })=> {
                     justifyContent: "center",
                     alignItems: "center",
                   }}
-                 >
+                >
                   Teacher
                 </Text>
               </TouchableOpacity>
+            </View>
           </View>
-          </View>
-         
         </View>
       </ScrollView>
     </View>
   );
-}
+};
 
 export default Home;
 
@@ -157,12 +159,12 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontWeight: "bold",
     fontSize: 35,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   loginText: {
     fontWeight: "700",
     fontSize: 18,
-    color: '#696969'
+    color: "#696969",
   },
   buttonStyle: {
     backgroundColor: "#5062BD",

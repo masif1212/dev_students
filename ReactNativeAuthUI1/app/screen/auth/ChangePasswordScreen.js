@@ -1,37 +1,44 @@
-import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, toastConfig } from '../../../style';
 import Toast from 'react-native-toast-message';
 import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
 import { getToken } from '../../../services/AsyncStorageService'
+import { useSelector } from 'react-redux';
 
 const ChangePasswordScreen = () => {
-  const [password, setPassword] = useState("")
-  const [password_confirmation, setPassword_confirmation] = useState("")
+  const [new_password, setPassword] = useState("")
+  const [conf_new_password, setPassword_confirmation] = useState("")
+  const [ old_password, setOldPassword] = useState("");
+  const [ id, setId] = useState("");
+  const table = "user";
+
   const [userLToken, setUserLToken] = useState()
 
   const clearTextInput = () => {
     setPassword('')
     setPassword_confirmation('')
+    setOldPassword('')
   }
 
   const [changeUserPassword] = useChangeUserPasswordMutation()
+  const myData = useSelector(state => state.user)
 
   useEffect(() => {
     (async () => {
       const token = await getToken() // Getting Token from Storage
+      setId(myData.superAdminId)
       setUserLToken(token)          // Store Token in Local State
     })();
   })
 
   const handleFormSubmit = async () => {
-    if (password && password_confirmation) {
-      if (password === password_confirmation) {
-        const formdata = { password, password_confirmation }
+    if (new_password && conf_new_password) {
+      if (new_password === conf_new_password) {
+        const formdata = { id, new_password, conf_new_password, old_password, table }
         const res = await changeUserPassword({ formdata, userLToken })
-        console.log(res)
-        if (res.data.status === "success") {
+        if (res.data.type === "success") {
           clearTextInput()
           Toast.show({
             type: 'done',
@@ -53,7 +60,7 @@ const ChangePasswordScreen = () => {
           type: 'warning',
           position: 'top',
           topOffset: 0,
-          text1: "New Password and Confirm New Password doesn't match"
+          text1: "New Password and Confirm Password doesn't match"
         });
       }
     } else {
@@ -67,18 +74,29 @@ const ChangePasswordScreen = () => {
   }
   return (
     
-
+<>
+<View>
+<Toast config={toastConfig} />
+</View>
       <View style={{ marginTop: 30}} keyboardShouldPersistTaps='handled'>
-      <View>
-          <Toast config={toastConfig} />
-          </View>
 
         <View style={styleOne.container}>
+
+        <View>
+            <TextInput
+              style={styleOne.input}
+              value={old_password}
+              onChangeText={setOldPassword}
+              placeholder="Write Your Old Password"
+              placeholderTextColor="gray"
+              secureTextEntry={true}
+            />
+          </View>
 
           <View>
             <TextInput
               style={styleOne.input}
-              value={password}
+              value={new_password}
               onChangeText={setPassword}
               placeholder="Write Your New Password"
               placeholderTextColor="gray"
@@ -88,7 +106,7 @@ const ChangePasswordScreen = () => {
           <View style={styles.inputWithLabel}>
             <TextInput
               style={styleOne.input}
-              value={password_confirmation}
+              value={conf_new_password}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your New Confirm Password"
               placeholderTextColor="gray"
@@ -124,6 +142,7 @@ const ChangePasswordScreen = () => {
         </View>
         
       </View>
+      </>
   )
 }
 

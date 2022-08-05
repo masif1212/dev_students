@@ -1,4 +1,4 @@
-import React, { Component ,useState,useEffect} from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,161 +9,141 @@ import {
 } from "react-native";
 import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 
-
-const SchoolAdmin = ({ navigation, route }) => { 
-  const [admin,setAdmin] = useState('');
-  const newData = useSelector(state => state.schoolAdmin);
-
+const SchoolAdmin = ({ navigation, route }) => {
+  const [admin, setAdmin] = useState("");
+  const newData = useSelector((state) => state.schoolAdmin);
 
   const fetchData = async () => {
-    fetch('https://ams.firefly-techsolutions.com/services/getschooladmin',{
-      method: 'POST',//GET and ...
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ schoolId: route.params.schoolid })
-     })
-     .then((response)=>response.json()) //   <------ this line 
-     .then((response)=>{
-       setAdmin(response.data)
-       console.log(admin)
-     });
+    fetch("https://ams.firefly-techsolutions.com/services/getschooladmin", {
+      method: "POST", //GET and ...
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ schoolId: route.params.schoolid }),
+    })
+      .then((response) => response.json()) //   <------ this line
+      .then((response) => {
+        setAdmin(response.data);
+      });
   };
-  
-  
+
   const focus = useIsFocused();
 
   useEffect(() => {
-   fetchData();
+    fetchData();
   }, [focus]);
 
-  
-
-    return (
-      <View style={styles.body}>
-         <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-end',
-                 
-               
-          }}>
-          <TouchableOpacity 
-          onPress={()=>navigation.navigate('SignupSchoolAdmin',{
-            schoolid: route.params.schoolid,
-            schoolName:route.params.schoolName,
-          })}
+  return (
+    <View style={styles.body}>
+      <View
+        style={{
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("SignupSchoolAdmin", {
+              schoolid: route.params.schoolid,
+              schoolName: route.params.schoolName,
+            })
+          }
           style={{
-              borderRadius:10,
-              backgroundColor:'#5062BD',
-              padding:8,
-              flexDirection:'row',
-          }}>
-              <Icon style={{
-                  color:'white',
-                  margin:5,
-                  justifyContent:'center',
-                  alignItems:'center'
-                }}
-               name="user-plus" />
-              <Text style={{
-                  color:'white',
-                  marginTop:2,
-                  justifyContent:'center',
-                  alignItems:'center'
-              }}>Create Admin</Text>
-          </TouchableOpacity>
-          </View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          enableEmptySections={true}
-          data={admin}
-          keyExtractor={(item) => item.key}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("SchoolAdminProfile", {
-                    image:item.image,
-                    first_name: item.first_name,
-                    last_name: item.last_name,
-                    email: item.email,
-                    contact:item.contact,
-                    alt_contact:item.alt_contact,
-                    cnic:item.cnic,
-                    address_1:item.address_1,
-                    address_2:item.address_2,
-                    schoolName:item.schoolName,
-                    gender: item.gender,
-                    religion:item.religion,
-                    maritalStatus:item.maritalStatus,
-                    teacherQualification:item.teacherQualification,
-                    teacherprofessionalqualification:item.teacherprofessionalqualification
-
-                  })
-                }
-              >
-                <View style={styles.box}>
-                  <View
-                    style={{
-                      justifyContent: "center",
-                      marginTop: 25,
-                    }}
-                  >
-                    <Image style={styles.image} source={{ uri: item.image }} />
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 50,
-                   
-                    }}
-                  >
-                    <Text style={styles.username}>{item.first_name}</Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 50,
-                    }}
-                  >
-                    <Text style={styles.email}>{item.email}</Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 60,
-                      bottom: 50,
-                    }}
-                  >
-                    <Text style={styles.email}>{item.schoolName}</Text>
-                  </View>
-                  <View
-                    style={{
-                      marginLeft: 220,
-                      bottom: 150,
-                   
-                    }}
-                  >
-                    {/* <Pie outerRadius={'50%'} /> */}
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
+            borderRadius: 10,
+            backgroundColor: "#5062BD",
+            padding: 8,
+            flexDirection: "row",
           }}
-        />
-        
+        >
+          <Icon
+            style={{
+              color: "white",
+              margin: 5,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            name="user-plus"
+          />
+          <Text
+            style={{
+              color: "white",
+              marginTop: 2,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Create Admin
+          </Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        enableEmptySections={true}
+        data={admin}
+        keyExtractor={(item) => item.key}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("SchoolAdminProfile", {
+                  image: item.image,
+                  first_name: item.first_name,
+                  last_name: item.last_name,
+                  email: item.email,
+                  contact: item.contact,
+                  alt_contact: item.alt_contact,
+                  cnic: item.cnic,
+                  address_1: item.address_1,
+                  address_2: item.address_2,
+                  schoolName: item.schoolName,
+                  gender: item.gender,
+                  religion: item.religion,
+                  maritalStatus: item.maritalStatus,
+                  teacherQualification: item.teacherQualification,
+                  teacherprofessionalqualification:
+                    item.teacherprofessionalqualification,
+                })
+              }
+            >
+              <View style={styles.box}>
+                <View
+                  style={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image style={styles.image} source={{ uri: item.image }} />
+                </View>
+                <View
+                  style={{
+                    margin: 0,
+                    paddingLeft: 10,
+                  }}
+                >
+                  <Text style={styles.username}>{item.first_name}</Text>
 
+                  <Text style={styles.email}>{item.email}</Text>
+
+                  <Text style={styles.email}>{item.schoolName}</Text>
+                  <Text style={styles.email}>{item.address_1}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   image: {
-    width: 60,
-    height: 70,
-    borderRadius: 40,
-    marginLeft: 3,
+    width: 90,
+    height: 110,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    marginLeft: 4,
   },
   body: {
     padding: 20,
@@ -176,6 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     shadowColor: "black",
     shadowOpacity: 0.2,
+    flexDirection: "row",
     shadowOffset: {
       height: 1,
       width: -2,
@@ -186,15 +167,13 @@ const styles = StyleSheet.create({
   username: {
     color: "black",
     fontSize: 22,
-    marginLeft: 10,
-    bottom:5
+    marginTop: 10,
   },
   email: {
     color: "black",
     fontSize: 12,
-    marginLeft: 10,
-    bottom:5
+    marginVertical: 2,
   },
 });
 
-export default SchoolAdmin
+export default SchoolAdmin;

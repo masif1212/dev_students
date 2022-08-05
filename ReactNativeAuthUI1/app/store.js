@@ -22,6 +22,10 @@ export const store = configureStore({
     
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userAuthApi.middleware),
+    getDefaultMiddleware( {
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(userAuthApi.middleware),
+   
 })
 setupListeners(store.dispatch)
