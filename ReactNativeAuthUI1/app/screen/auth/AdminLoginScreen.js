@@ -7,6 +7,7 @@ import {
     TouchableWithoutFeedback,
     StyleSheet,
     TouchableOpacity,
+    Pressable
   } from "react-native";
   import React, { useEffect, useState } from "react";
   import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,7 +16,9 @@ import {
   import { useNavigation } from "@react-navigation/native";
   import { useLoginUserMutation } from "../../../services/userAuthApi.js";
   import { storeToken } from "../../../services/AsyncStorageService";
-  
+  import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
+
   const AdminLoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState("");
@@ -28,6 +31,9 @@ import {
   
     const [loginUser] = useLoginUserMutation();
   
+    const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+
     const handleFormSubmit = async () => {
       
       if (email && password) {
@@ -86,15 +92,18 @@ import {
               />
             </View>
   
-            <View style={styles.inputWithLabel}>
+            <View style={[styles.inputWithLabel, {flexDirection: 'row'}]}>
               <TextInput
                 style={styleOne.input}
                 value={password}
                 onChangeText={setPassword}
                 placeholder="Write Your Password"
               placeholderTextColor='gray'
-                secureTextEntry={true}
+                secureTextEntry={passwordVisibility}
               />
+               <Pressable style={{ marginTop: 20, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={18} color="gray" />
+        </Pressable>
             </View>
   
             <View>

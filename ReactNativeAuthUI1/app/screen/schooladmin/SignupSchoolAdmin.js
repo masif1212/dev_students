@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   Image,
-  TouchableWithoutFeedback,
+  Pressable,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -22,22 +22,11 @@ import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomDropDown from "../../Components/CustomDropdown";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
 
 const SignUpSchoolAdmin = ({ route, navigation }) => {
-  // const [first_name, setfirst_name] = useState("");
-  // const [last_name, setlast_name] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirm_password, setconfirm_password] = useState("");
-  // const [contact, setContact] = useState("");
-  // const [alt_contact, setAlt_Contact] = useState("");
-  // const [address_1, setAdress_1] = useState("");
-  // const [address_2, setAdress_2] = useState("");
-  // const [cnic, setcnic] = useState("");
-  // const [city, setCity] = useState("");
-  // const [image, setImage] = useState();
-  // const [schoolId, setSchoolId] = useState("")
-  // const[schoolName, setSchoolName]=useState("")
+
 
   const [S_NO, setS_NO] = useState("");
   const [first_name, setfirst_name] = useState("");
@@ -63,7 +52,10 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   const [address_1, setAddress_1] = useState("");
 
   const [message, setMessage] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(true);
+
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+   
   // const focus = useIsFocused();
   // const myData = useSelector((state) => state.schoolAdmin);
   // useEffect(() => {
@@ -71,9 +63,6 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
   //   setSchoolName(myData.schoolName);
   // }, [focus]);
 
-  useEffect(() => {
-console.log(image)
-  }, []);
 
   //asdasdasd
 
@@ -2186,6 +2175,7 @@ console.log(image)
         };
 
         const res = await registerSchoolAdmin(formData);
+        console.log(res)
         console.log(formData)
         
         if(res.data){
@@ -2374,17 +2364,20 @@ console.log(image)
               placeholder="Write Your Email"
             />
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholderTextColor="gray"
               placeholder="Write Your Password"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
+              enablesReturnKeyAutomatically
               keyboardType={"default"}
-              right={<TextInput.Icon name={passwordVisible ? "eye" : "eye-off"} onPress={() => setPasswordVisible(!passwordVisible)} />}
-            />
+              />
+            <Pressable style={{ marginTop: 20, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+        </Pressable>
           </View>
           <View>
             <TextInput
@@ -2396,6 +2389,7 @@ console.log(image)
               secureTextEntry={true}
               keyboardType={"default"}
             />
+            
           </View>
           <View>
             <TextInput

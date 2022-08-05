@@ -109,27 +109,30 @@ const RegistrationScreen = () => {
   const handleFormSubmit = async () => {
     if (firstName && email && password && password_confirmation && tc) {
       if (password === password_confirmation) {
-        const formData = {
-          firstName,
-          lastName,
-          email,
-          password,
-          password_confirmation,
-          contact,
-          image,
-          alt_contact,
-          address_1,
-          address_2,
-          CNIC,
-          city,
-          tc,
-          gender,
-          disability,
-          disabledetail,
-          dateofbirth
-        };
+        let formData = new FormData()
+       
+          formData.append('firstName', firstName)
+          formData.append('lastName', lastName)
+          formData.append('email', email)
+          formData.append('password', password)
+          formData.append('password_confirmation', password_confirmation)
+          formData.append('contact', contact)
+          formData.append('image', image)
+          formData.append('alt_contact', alt_contact)
+          formData.append('address_1', address_1)
+          formData.append('address_2', address_2)
+          formData.append('CNIC', CNIC)
+          formData.append('city', city)
+          formData.append('tc', tc)
+          formData.append('gender', gender)
+          formData.append('disability', disability)
+          formData.append('disabledetail', disabledetail)
+          formData.append('dateofbirth', dateofbirth)
+          
         const res = await registerUser(formData);
+        console.log(formData)
         console.log(res)
+
         if(res.data){
           if (res.data.type === "success") {
             clearTextInput()
