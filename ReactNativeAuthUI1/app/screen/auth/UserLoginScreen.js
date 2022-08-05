@@ -2,7 +2,7 @@ import {
   View,
   Text,
   TextInput,
-  Button,
+  Pressable,
   ScrollView,
   TouchableWithoutFeedback,
   StyleSheet,
@@ -15,11 +15,16 @@ import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { useSchoolAdminLoginMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
 
 const SchoolAdminLogin = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+  useTogglePasswordVisibility();
 
   const clearTextInput = () => {
     setEmail("");
@@ -85,15 +90,18 @@ const SchoolAdminLogin = () => {
             />
           </View>
 
-          <View style={styles.inputWithLabel}>
+          <View style={[styles.inputWithLabel, {flexDirection: 'row'}]}>
             <TextInput
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your Password"
               placeholderTextColor='gray'
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+             <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={18} color="gray" />
+        </Pressable>
           </View>
 
           <View>

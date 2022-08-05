@@ -7,8 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Button,
-  onBlur
+  Pressable
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -24,7 +23,9 @@ import RadioButton from '../../Components/RadioButton.js'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from "moment";
 import * as DocumentPicker from 'expo-document-picker';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
+import { useToggleConfPasswordVisibility } from '../hooks/useToggleConfPasswordVisibility';
 
 
 
@@ -50,7 +51,11 @@ const RegistrationScreen = () => {
   const [data, setData] = useState([]);
   const [message, setMessage] = useState("")
 
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+  useTogglePasswordVisibility();
 
+  const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
+  useToggleConfPasswordVisibility();
 //country state city api==========================//
 
 //=========================================================================//
@@ -240,29 +245,35 @@ const RegistrationScreen = () => {
 
             />
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your Password"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
               keyboardType={"default"}
               placeholderTextColor='gray'
 
             />
+            <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+        </Pressable>
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={password_confirmation}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your Confirm Password"
-              secureTextEntry={true}
+              secureTextEntry={ConfpasswordVisibility}
               keyboardType={"default"}
               placeholderTextColor='gray'
 
             />
+               <Pressable style={{ marginTop: 23, right: 25}} onPress={handleConfPasswordVisibility}>
+          <MaterialCommunityIcons name={righticon} size={15} color="gray" />
+        </Pressable>
           </View>
           <View>
             <TextInput

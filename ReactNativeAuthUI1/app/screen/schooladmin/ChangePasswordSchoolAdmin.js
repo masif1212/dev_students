@@ -1,4 +1,4 @@
-import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, Pressable } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles, toastConfig } from '../../../style';
@@ -6,6 +6,10 @@ import Toast from 'react-native-toast-message';
 import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
 import { getToken } from '../../../services/AsyncStorageService'
 import { useSelector } from 'react-redux';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTogglePasswordVisibility } from "../hooks/useTogglePasswordVisibility";
+import { useToggleConfPasswordVisibility } from "../hooks/useToggleConfPasswordVisibility";
+
 
 const ChangePasswordSchoolAdmin = () => {
   const [new_password, setPassword] = useState("")
@@ -14,6 +18,14 @@ const ChangePasswordSchoolAdmin = () => {
   const [ id, setId] = useState("");
   const table = "schooladmin"
   const [userLToken, setUserLToken] = useState()
+
+  
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+
+  const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
+    useToggleConfPasswordVisibility();
+
 
   const clearTextInput = () => {
     setPassword('')
@@ -80,36 +92,54 @@ const ChangePasswordSchoolAdmin = () => {
 
         <View style={styleOne.container}>
 
-        <View>
+        <View style={{ flexDirection: "row" }}>
             <TextInput
               style={styleOne.input}
               value={old_password}
               onChangeText={setOldPassword}
               placeholder="Write Your Old Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={ConfpasswordVisibility}
             />
+             <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handleConfPasswordVisibility}
+            >
+              <MaterialCommunityIcons name={righticon} size={18} color="gray" />
+            </Pressable>
           </View>
 
-          <View>
+          <View style={{ flexDirection: "row" }}>
             <TextInput
               style={styleOne.input}
               value={new_password}
               onChangeText={setPassword}
               placeholder="Write Your New Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+            <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handlePasswordVisibility}
+            >
+              <MaterialCommunityIcons style={{ zIndex: 99}} name={rightIcon} size={18} color="gray" />
+            </Pressable>
           </View>
-          <View style={styles.inputWithLabel}>
+          <View style={[styles.inputWithLabel, { flexDirection: "row" }]}>
             <TextInput
               style={styleOne.input}
               value={conf_new_password}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your New Confirm Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+            <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handlePasswordVisibility}
+            >
+              <MaterialCommunityIcons name={rightIcon} size={18} color="gray" />
+            </Pressable>
           </View>
           <View style={{ width: 200, alignSelf: 'center', margin: 10 }}>
             {/* <Button title="Save" onPress={handleFormSubmit} color='purple' /> */}

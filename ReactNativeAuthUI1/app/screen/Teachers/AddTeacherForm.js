@@ -8,24 +8,23 @@ import {
   TouchableOpacity,
   Picker,
   Platform,
-  Button,
+  Pressable
 } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { toastConfig } from "../../../style";
-import Toast from "react-native-toast-message";
-import { storeToken } from "../../../services/AsyncStorageService.js";
 import Icon from "react-native-vector-icons/AntDesign";
 import * as ImagePicker from "expo-image-picker";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
-import { LogBox } from "react-native";
 import RadioButton from "../../Components/RadioButton.js";
 import moment from "moment";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Checkbox from "expo-checkbox";
 import CustomDropDown from "../../Components/CustomDropdown";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
+import { useToggleConfPasswordVisibility } from '../hooks/useToggleConfPasswordVisibility';
+
 
 const TeacherRegister = ({ navigation,routes }) => {
   const [staff_name, setStaff_Name] = useState("");
@@ -43,28 +42,20 @@ const TeacherRegister = ({ navigation,routes }) => {
   const [schoolId, setSchoolId] = useState("");
   const [gender, setGender] = useState("");
   const [religion, setReligion] = useState("");
-  const [dateofbirth, setDateOfBirth] = useState("");
   const [maritalStatus, setMaritalStatus] = useState("");
-  // const [dateofJoining, setDataofJoining] = useState("");
-  // const [contractstart, setContractStart] = useState("");
-  // const [contractend, setContractEnd] = useState("");
-  // const [subjectSpeciality, setSubjectSpeciality] = useState(false);
-  // const [teachingmedium, setTeachingMedium] = useState("");
   const [teacherTraining, setTeacherTraining] = useState(false);
   const [trainingnumber, setTrainingNumber] = useState("");
   const [lsuTrainingDate, setLsuTrainingDate] = useState("");
   const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
   const [mentionTraining, setMentiontraining] = useState("");
-  // const [teachingExperience, setTeachingExperience] = useState(false);
-  // const [startingSalary, setStartingSalary] = useState("");
-  // const [currentSalary, setCurrentSalary] = useState("");
-  // const [salaryPaymentMethod, setSalaryPaymentMethod] = useState("");
-  // const [accounttitle, setAccountTitle] = useState("");
-  // const [ibanAccount, setIbanAccount] = useState("");
-  // const [bankaccountnumber, setBankAccountNumber] = useState("");
-  // const [vaccinated, setVaccinated] = useState(false);
-  // const [vaccineshots, setVaccineShots] = useState("");
-  // const [vacinatedstatus, setVaccinatedStatus] = useState("");
+
+
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+  useTogglePasswordVisibility();
+
+  const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
+  useToggleConfPasswordVisibility();
+
 
   const focus = useIsFocused();
   const myData = useSelector((state) => state.schoolAdmin);
@@ -73,9 +64,7 @@ const TeacherRegister = ({ navigation,routes }) => {
     setSchoolName(myData.schoolName);
   }, [focus]);
 
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
+ 
 
   //=========================================================================//
 
@@ -513,62 +502,7 @@ const TeacherRegister = ({ navigation,routes }) => {
             />
           </View>
 
-          {/* <View style={{ ...(Platform.OS !== "android" && { zIndex: 6 }) }}>
-            <CustomDropDown
-              placeholder="Select Position"
-              zIndex={1000}
-              open={positionShow}
-              value={staffPosition}
-              items={postionsItem}
-              setOpen={setPositionShow}
-              setValue={setStaffPosition}
-              setItems={setPositionsItem}
-              searchable
-            />
-          </View>
-      
-         
-          <View style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}>
-            <CustomDropDown
-              placeholder="Select Current Teaching Class"
-              zIndex={900}
-              open={teachingClassShow}
-              value={teachingClass}
-              items={currentTeachingClass}
-              setOpen={setTeachingClassShow}
-              setValue={setTeachingClass}
-              setItems={setTeachingClass}
-              multiple={true}
-            />
-          </View>
-
-
-          <View style={{ ...(Platform.OS !== "android" && { zIndex: 4 }) }}>
-            <CustomDropDown
-              placeholder="Select School staff"
-              zIndex={800}
-              open={schoolStaffShow}
-              value={schoolstaff}
-              items={staff}
-              setOpen={setSchoolStaffShow}
-              setValue={setSchoolStaff}
-              setItems={setStaff}
-            />
-          </View>
-
-          <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
-            <CustomDropDown
-              placeholder="Select teaching subject"
-              zIndex={700}
-              open={teachingSubjectShow}
-              value={teachingSubject}
-              items={currentTeachingSubject}
-              setOpen={setTeachingSubjectShow}
-              setValue={setTeachingSubject}
-              setItems={setTeachingSubject}
-              multiple={true}
-            />
-          </View> */}
+        
 
           <View style={{ margin: 20, right: 20 }}>
             <Text style={{ marginBottom: 12, marginLeft: 9 }}>
@@ -613,134 +547,7 @@ const TeacherRegister = ({ navigation,routes }) => {
             />
           </View>
 
-          {/* <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>{getDate()}</Text>
-                <Icon
-                  style={{
-                    color: "gray",
-                    // left: 160,
-                    // // paddingTop: 30
-                  }}
-                  name="calendar"
-                  color="#c9c9c9"
-                  size={30}
-                />
-              </View>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-              is24Hour={false}
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              onPress={showjoiningDatePicker}
-              style={styleOne.input}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>{getJoiningDate()}</Text>
-                <Icon
-                  style={{
-                    color: "gray",
-                    // left: 160,
-                    // // paddingTop: 30
-                  }}
-                  name="calendar"
-                  color="#c9c9c9"
-                  size={30}
-                />
-              </View>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isJoiningDatePickerVisible}
-              mode="date"
-              onConfirm={handleJoiningConfirm}
-              onCancel={hidejoiningDatePicker}
-              is24Hour={false}
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              onPress={showstartcontractDatePicker}
-              style={styleOne.input}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>{getContractStartDate()}</Text>
-                <Icon
-                  style={{
-                    color: "gray",
-                    // left: 160,
-                    // // paddingTop: 30
-                  }}
-                  name="calendar"
-                  color="#c9c9c9"
-                  size={30}
-                />
-              </View>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isContractStartDatePickerVisible}
-              mode="date"
-              onConfirm={handleContractStartConfirm}
-              onCancel={hidestartcontractDatePicker}
-              is24Hour={false}
-            />
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity
-              onPress={showcontractendDatePicker}
-              style={styleOne.input}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>{getContractEndDate()}</Text>
-                <Icon
-                  style={{
-                    color: "gray",
-                    // left: 160,
-                    // // paddingTop: 30
-                  }}
-                  name="calendar"
-                  color="#c9c9c9"
-                  size={30}
-                />
-              </View>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isContractEndDatePickerVisible}
-              mode="date"
-              onConfirm={handleContractEndConfirm}
-              onCancel={hidecontractendDatePicker}
-              is24Hour={false}
-            />
-          </View> */}
+      
           
           <View style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}>
             <CustomDropDown
@@ -780,59 +587,7 @@ const TeacherRegister = ({ navigation,routes }) => {
               setItems={setProfessionalQualifications}
             />
           </View>
-          {/* <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
-            <CustomDropDown
-              zIndex={9000}
-              placeholder="Select a Proffesional Qualification"
-              open={formerProgrammOpen}
-              value={formerProgram}
-              items={programm}
-              setOpen={setFormerProgrammOpen}
-              setValue={setFormerProgramm}
-              setItems={setProgramm}
-            />
-          </View> */}
-          {/* <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
-            <Checkbox
-              value={subjectSpeciality}
-              onValueChange={() => setSubjectSpeciality(!subjectSpeciality)}
-              color={subjectSpeciality ? "#5062BD" : undefined}
-            />
-            <Text> if , any Subject Speciality</Text>
-          </View>
-          <View>
-            {subjectSpeciality ? (
-              <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
-                <CustomDropDown
-                  placeholder="Subject Speciality"
-                  zIndex={9000}
-                  open={subjectSpecShow}
-                  value={SubjectSpec}
-                  items={subjectspecial}
-                  setOpen={setSubjectSpecShow}
-                  setValue={setSubjectSpec}
-                  setItems={setSubjectSpecial}
-                  multiple={true}
-                />
-              </View>
-            ) : null}
-          </View> */}
-
-          {/* <View style={{ margin: 20, right: 20 }}>
-            <Text style={{ marginBottom: 12, marginLeft: 9 }}>
-              {" "}
-              Medium of Teaching
-            </Text>
-            <RadioButton
-              gender={teachingmedium}
-              options={["Sindhi", "Urdu"]}
-              horizontal={true}
-              onChangeSelect={(opt, i) => {
-                opt;
-                setTeachingMedium(i);
-              }}
-            />
-          </View> */}
+       
 
           <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
             <Checkbox
@@ -920,150 +675,6 @@ const TeacherRegister = ({ navigation,routes }) => {
             ) : null}
           </View>
 
-          {/* <View style={{ flex: 1, flexDirection: "row", margin: 10 }}>
-            <Checkbox
-              value={teachingExperience}
-              onValueChange={() => setTeachingExperience(!teachingExperience)}
-              color={teachingExperience ? "#5062BD" : undefined}
-            />
-            <Text> if ,have any teaching experience</Text>
-          </View>
-          <View>
-            {teachingExperience ? (
-              <>
-                <View style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}>
-                <CustomDropDown
-                  placeholder="Experience Duration"
-                  zIndex={9000}
-                  open={experienceDurationShow}
-                  value={experienceDuration}
-                  items={experienceTime}
-                  setOpen={setExperienceDurationShow}
-                  setValue={setExperienceDuration}
-                  setItems={setExperienceTime}
-                />
-              </View>
-              </>
-            ) : null}
-          </View> */}
-
-          {/* <View>
-            <TextInput
-              style={styleOne.input}
-              value={startingSalary}
-              onChangeText={setStartingSalary}
-              placeholderTextColor="gray"
-              placeholder="Starting salary"
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View>
-            <TextInput
-              style={styleOne.input}
-              value={currentSalary}
-              onChangeText={setCurrentSalary}
-              placeholderTextColor="gray"
-              placeholder="Current salary"
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View style={{ margin: 20, right: 20 }}>
-            <Text style={{ marginBottom: 12, marginLeft: 9 }}>
-              {" "}
-              Salary Disbursed
-            </Text>
-            <RadioButton
-              gender={salaryPaymentMethod}
-              options={["Cash", "Online"]}
-              horizontal={true}
-              onChangeSelect={(opt) => {
-                opt;
-                setSalaryPaymentMethod(opt);
-              }}
-            />
-          </View>
-
-          <View>
-            {salaryPaymentMethod === "Online" ? (
-              <>
-                <View
-                  style={{ ...(Platform.OS !== "android" && { zIndex: 10 }) }}
-                >
-                  <CustomDropDown
-                    placeholder="Bank Name"
-                    zIndex={14000}
-                    open={bankNameShow}
-                    value={bankname}
-                    items={banknames}
-                    setOpen={setBankNameShow}
-                    setValue={setBankName}
-                    setItems={setBankNames}
-                  />
-                </View>
-
-                <View
-                  style={{ ...(Platform.OS !== "android" && { zIndex: 5 }) }}
-                >
-                  <CustomDropDown
-                    placeholder="Bank District"
-                    zIndex={11000}
-                    open={bankDistrictShow}
-                    value={bankdistrict}
-                    items={bankdistricts}
-                    setOpen={setBankDistrictShow}
-                    setValue={setBankDistrict}
-                    setItems={setBankDistricts}
-                  />
-                </View>
-
-                <View
-                  style={{ ...(Platform.OS !== "android" && { zIndex: 3 }) }}
-                >
-                  <CustomDropDown
-                    placeholder="Bank City"
-                    zIndex={9000}
-                    open={bankCityShow}
-                    value={bankcity}
-                    items={bankCities}
-                    setOpen={setBankCityShow}
-                    setValue={setBankCity}
-                    setItems={setBankCities}
-                  />
-                </View>
-
-                <View>
-                  <TextInput
-                    style={styleOne.input}
-                    value={accounttitle}
-                    onChangeText={setAccountTitle}
-                    placeholder="Account Title"
-                    placeholderTextColor="gray"
-                  />
-                </View>
-                <View>
-                  <TextInput
-                    style={styleOne.input}
-                    value={ibanAccount}
-                    onChangeText={setIbanAccount}
-                    placeholder="Bank account IBAN"
-                    placeholderTextColor="gray"
-                  />
-                </View>
-                <View>
-                  <TextInput
-                    style={styleOne.input}
-                    value={bankaccountnumber}
-                    onChangeText={setBankAccountNumber}
-                    placeholder="Bank account Number"
-                    placeholderTextColor="gray"
-                  />
-                </View>
-              </>
-            ) : null}
-          </View> */}
-
           <View>
             <TextInput
               style={styleOne.input}
@@ -1083,27 +694,33 @@ const TeacherRegister = ({ navigation,routes }) => {
               placeholder="Write Your Email"
             />
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholderTextColor="gray"
               placeholder="Write Your Password"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
               keyboardType={"default"}
             />
+             <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+        </Pressable>
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={confirm_password}
               onChangeText={setconfirm_password}
               placeholderTextColor="gray"
               placeholder="Write Your Confirm Password"
-              secureTextEntry={true}
+              secureTextEntry={ConfpasswordVisibility}
               keyboardType={"default"}
             />
+            <Pressable style={{ marginTop: 23, right: 25}} onPress={handleConfPasswordVisibility}>
+          <MaterialCommunityIcons name={righticon} size={15} color="gray" />
+        </Pressable>
           </View>
           <View>
             <TextInput
