@@ -19,8 +19,7 @@ const SideBar = ({ ...props }) => {
   const navigation = useNavigation()
   // Getting User Data from Redux Store
   const myData = useSelector(state => state.user)
-  // const myToken = useSelector(state => state.auth)
-  // console.log(myToken)
+
 
   return (
     <DrawerContentScrollView {...props} style={styles.mainContainer}>
@@ -33,7 +32,7 @@ const SideBar = ({ ...props }) => {
         justifyContent:'center',
         bottom:10
         }}>
-     <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : myData.image}}/>
+     <Image style={{ height: 100,width:100,borderRadius:80,top:1}} source={{ uri : `https://${myData.image}`}}/>
         <Text style={{ fontSize: 18, marginBottom: 5, fontWeight: 'bold',color:"white",}}>{myData.firstName + " "+myData.lastName}</Text>
         <Text style={{ fontSize: 16, marginBottom: 5,color:"white" ,}}>{myData.email}</Text>
         
