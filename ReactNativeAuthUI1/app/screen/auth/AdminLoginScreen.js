@@ -2,7 +2,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   ScrollView,
   TouchableWithoutFeedback,
   StyleSheet,
