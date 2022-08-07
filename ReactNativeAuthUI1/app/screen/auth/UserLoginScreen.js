@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   TouchableOpacity,
+  Button
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -72,7 +73,6 @@ const SchoolAdminLogin = () => {
           <View>
             <Text style={styleOne.heading}>Welcome</Text>
           </View>
-
           <Text style={{ fontWeight: "bold" }}>Sign in and get started</Text>
         </View>
         <View style={{ height: 20}}>
@@ -89,7 +89,7 @@ const SchoolAdminLogin = () => {
               keyboardType="email-address"
             />
           </View>
-
+          <Button title="hello" />
           <View style={[styles.inputWithLabel, {flexDirection: 'row'}]}>
             <TextInput
               style={styleOne.input}
