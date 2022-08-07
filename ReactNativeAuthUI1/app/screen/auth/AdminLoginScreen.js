@@ -105,7 +105,6 @@ import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibilit
           <MaterialCommunityIcons name={rightIcon} size={18} color="gray" />
         </Pressable>
             </View>
-  
             <View>
               <TouchableOpacity
                 onPress={handleFormSubmit}
