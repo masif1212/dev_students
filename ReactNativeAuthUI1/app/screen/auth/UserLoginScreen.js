@@ -2,11 +2,12 @@ import {
   View,
   Text,
   TextInput,
-  Button,
+  Pressable,
   ScrollView,
   TouchableWithoutFeedback,
   StyleSheet,
   TouchableOpacity,
+  Button
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,11 +16,16 @@ import Toast from "react-native-toast-message";
 import { useNavigation } from "@react-navigation/native";
 import { useSchoolAdminLoginMutation } from "../../../services/userAuthApi";
 import { storeToken } from "../../../services/AsyncStorageService";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
 
 const SchoolAdminLogin = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+  useTogglePasswordVisibility();
 
   const clearTextInput = () => {
     setEmail("");
@@ -67,7 +73,6 @@ const SchoolAdminLogin = () => {
           <View>
             <Text style={styleOne.heading}>Welcome</Text>
           </View>
-
           <Text style={{ fontWeight: "bold" }}>Sign in and get started</Text>
         </View>
         <View style={{ height: 20}}>
@@ -84,16 +89,19 @@ const SchoolAdminLogin = () => {
               keyboardType="email-address"
             />
           </View>
-
-          <View style={styles.inputWithLabel}>
+          <Button title="hello" />
+          <View style={[styles.inputWithLabel, {flexDirection: 'row'}]}>
             <TextInput
               style={styleOne.input}
               value={password}
               onChangeText={setPassword}
               placeholder="Write Your Password"
               placeholderTextColor='gray'
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+             <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={18} color="gray" />
+        </Pressable>
           </View>
 
           <View>

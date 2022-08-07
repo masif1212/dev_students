@@ -1,119 +1,158 @@
-import { View, Text, Button,TouchableOpacity,StyleSheet, TextInput, ScrollView, Alert } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { styles, toastConfig } from '../../../style';
-import Toast from 'react-native-toast-message';
-import { useChangeUserPasswordMutation } from '../../../services/userAuthApi';
-import { getToken } from '../../../services/AsyncStorageService'
-import { useSelector } from 'react-redux';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Pressable,
+} from "react-native";
+import React, { useState, useEffect } from "react";
+import { styles, toastConfig } from "../../../style";
+import Toast from "react-native-toast-message";
+import { useChangeUserPasswordMutation } from "../../../services/userAuthApi";
+import { getToken } from "../../../services/AsyncStorageService";
+import { useSelector } from "react-redux";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTogglePasswordVisibility } from "../hooks/useTogglePasswordVisibility";
+import { useToggleConfPasswordVisibility } from "../hooks/useToggleConfPasswordVisibility";
 
 const ChangePasswordScreen = () => {
-  const [new_password, setPassword] = useState("")
-  const [conf_new_password, setPassword_confirmation] = useState("")
-  const [ old_password, setOldPassword] = useState("");
-  const [ id, setId] = useState("");
+  const [new_password, setPassword] = useState("");
+  const [conf_new_password, setPassword_confirmation] = useState("");
+  const [old_password, setOldPassword] = useState("");
+  const [id, setId] = useState("");
   const table = "user";
 
-  const [userLToken, setUserLToken] = useState()
+  const [userLToken, setUserLToken] = useState();
+
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+
+  const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
+    useToggleConfPasswordVisibility();
 
   const clearTextInput = () => {
-    setPassword('')
-    setPassword_confirmation('')
-    setOldPassword('')
-  }
+    setPassword("");
+    setPassword_confirmation("");
+    setOldPassword("");
+  };
 
-  const [changeUserPassword] = useChangeUserPasswordMutation()
-  const myData = useSelector(state => state.user)
+  const [changeUserPassword] = useChangeUserPasswordMutation();
+  const myData = useSelector((state) => state.user);
 
   useEffect(() => {
     (async () => {
-      const token = await getToken() // Getting Token from Storage
-      setId(myData.superAdminId)
-      setUserLToken(token)          // Store Token in Local State
+      const token = await getToken(); // Getting Token from Storage
+      setId(myData.superAdminId);
+      setUserLToken(token); // Store Token in Local State
     })();
-  })
+  });
 
   const handleFormSubmit = async () => {
     if (new_password && conf_new_password) {
       if (new_password === conf_new_password) {
-        const formdata = { id, new_password, conf_new_password, old_password, table }
-        const res = await changeUserPassword({ formdata, userLToken })
+        const formdata = {
+          id,
+          new_password,
+          conf_new_password,
+          old_password,
+          table,
+        };
+        const res = await changeUserPassword({ formdata, userLToken });
         if (res.data.type === "success") {
-          clearTextInput()
+          clearTextInput();
           Toast.show({
-            type: 'done',
-            position: 'top',
+            type: "done",
+            position: "top",
             topOffset: 0,
-            text1: 'Password Changed Successfully'
+            text1: "Password Changed Successfully",
           });
         }
         if (res.data.status === "failed") {
           Toast.show({
-            type: 'warning',
-            position: 'top',
+            type: "warning",
+            position: "top",
             topOffset: 0,
-            text1: res.data.message
+            text1: res.data.message,
           });
         }
       } else {
         Toast.show({
-          type: 'warning',
-          position: 'top',
+          type: "warning",
+          position: "top",
           topOffset: 0,
-          text1: "New Password and Confirm Password doesn't match"
+          text1: "New Password and Confirm Password doesn't match",
         });
       }
     } else {
       Toast.show({
-        type: 'warning',
-        position: 'top',
+        type: "warning",
+        position: "top",
         topOffset: 0,
-        text1: 'All Fields are Required'
+        text1: "All Fields are Required",
       });
     }
-  }
+  };
   return (
-    
-<>
-<View>
-<Toast config={toastConfig} />
-</View>
-      <View style={{ marginTop: 30}} keyboardShouldPersistTaps='handled'>
-
+    <>
+      <View>
+        <Toast config={toastConfig} />
+      </View>
+      <View style={{ marginTop: 30 }} keyboardShouldPersistTaps="handled">
         <View style={styleOne.container}>
-
-        <View>
+          <View style={{ flexDirection: "row" }}>
             <TextInput
               style={styleOne.input}
               value={old_password}
               onChangeText={setOldPassword}
               placeholder="Write Your Old Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={ConfpasswordVisibility}
             />
+             <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handleConfPasswordVisibility}
+            >
+              <MaterialCommunityIcons name={righticon} size={15} color="gray" />
+            </Pressable>
           </View>
 
-          <View>
+          <View style={{ flexDirection: "row" }}>
             <TextInput
               style={styleOne.input}
               value={new_password}
               onChangeText={setPassword}
               placeholder="Write Your New Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+            <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handlePasswordVisibility}
+            >
+              <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+            </Pressable>
           </View>
-          <View style={styles.inputWithLabel}>
+
+          
+          <View style={[styles.inputWithLabel, { flexDirection: "row" }]}>
             <TextInput
               style={styleOne.input}
               value={conf_new_password}
               onChangeText={setPassword_confirmation}
               placeholder="Write Your New Confirm Password"
               placeholderTextColor="gray"
-              secureTextEntry={true}
+              secureTextEntry={passwordVisibility}
             />
+            <Pressable
+              style={{ marginTop: 23, right: 25 }}
+              onPress={handlePasswordVisibility}
+            >
+              <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+            </Pressable>
           </View>
-          <View style={{ width: 200, alignSelf: 'center', margin: 10 }}>
+          <View style={{ width: 200, alignSelf: "center", margin: 10 }}>
             {/* <Button title="Save" onPress={handleFormSubmit} color='purple' /> */}
             <TouchableOpacity
               onPress={handleFormSubmit}
@@ -140,12 +179,10 @@ const ChangePasswordScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-        
       </View>
-      </>
-  )
-}
-
+    </>
+  );
+};
 
 const styleOne = StyleSheet.create({
   input: {
@@ -157,8 +194,7 @@ const styleOne = StyleSheet.create({
     borderBottomColor: "gray",
     borderBottomWidth: 1,
     marginBottom: 10,
-    marginLeft: 20
+    marginLeft: 20,
   },
- 
 });
-export default ChangePasswordScreen
+export default ChangePasswordScreen;

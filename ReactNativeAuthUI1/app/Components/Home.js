@@ -45,7 +45,7 @@ const Home = ({ navigation }) => {
               marginTop: 0,
             }}
           >
-            <View style={{ margin: 10}}>
+            <View style={{ margin: 10 }}>
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("AdminLogin", { screen: "AdminLogin" })
@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
                   marginBottom: 0,
                   fontWeight: "bold",
                   backgroundColor: "#307C26",
-                  elevation: 4,
+                  elevation: 2,
                   marginTop: 50,
                 }}
               >
@@ -70,6 +70,9 @@ const Home = ({ navigation }) => {
                     fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
+                    textShadowColor: "rgba(0, 0, 0, 0.50)",
+                    textShadowOffset: { width: -1, height: 1 },
+                    textShadowRadius: 10,
                   }}
                 >
                   Super Admin
@@ -92,7 +95,7 @@ const Home = ({ navigation }) => {
                   marginBottom: 50,
                   fontWeight: "bold",
                   backgroundColor: "#fff",
-                  elevation: 4,
+                  elevation: 1,
                   marginTop: 50,
                 }}
               >
@@ -102,6 +105,9 @@ const Home = ({ navigation }) => {
                     fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
+                    textShadowColor: "rgba(0, 0, 0, 0.20)",
+                    textShadowOffset: { width: -1, height: 1 },
+                    textShadowRadius: 10,
                   }}
                 >
                   Admin
@@ -124,7 +130,7 @@ const Home = ({ navigation }) => {
 
                   fontWeight: "bold",
                   backgroundColor: "#fff",
-                  elevation: 4,
+                  elevation: 1,
                 }}
               >
                 <Text
@@ -133,6 +139,9 @@ const Home = ({ navigation }) => {
                     fontWeight: "bold",
                     justifyContent: "center",
                     alignItems: "center",
+                    textShadowColor: "rgba(0, 0, 0, 0.20)",
+                    textShadowOffset: { width: -1, height: 1 },
+                    textShadowRadius: 10,
                   }}
                 >
                   Teacher
@@ -160,11 +169,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 35,
     paddingBottom: 10,
+    textShadowColor: "rgba(0, 0, 0, 0.50)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   loginText: {
     fontWeight: "700",
     fontSize: 18,
     color: "#696969",
+    textShadowColor: "rgba(0, 0, 0, 0.25)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   buttonStyle: {
     backgroundColor: "#5062BD",

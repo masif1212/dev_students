@@ -24,6 +24,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomDropDown from "../../Components/CustomDropdown";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
+import { useToggleConfPasswordVisibility } from '../hooks/useToggleConfPasswordVisibility';
 
 const SignUpSchoolAdmin = ({ route, navigation }) => {
 
@@ -55,16 +56,11 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
 
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
+
+    const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
+    useToggleConfPasswordVisibility();
    
-  // const focus = useIsFocused();
-  // const myData = useSelector((state) => state.schoolAdmin);
-  // useEffect(() => {
-  //   setSchoolId(myData.schoolId);
-  //   setSchoolName(myData.schoolName);
-  // }, [focus]);
 
-
-  //asdasdasd
 
   //=====================clear text input================================//
 
@@ -137,10 +133,6 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
     "X-CSCAPI-KEY",
     "ZWYzM2l0dXYzWENaS2dKM2lWR0ZRV3hBRXlTSFd0NlFHMlgyMDVVVA=="
   );
-
- 
-
- 
 
   //=========================Bank Names=============================================//
   const [bankNameShow, setBankNameShow] = useState("");
@@ -2375,20 +2367,23 @@ const SignUpSchoolAdmin = ({ route, navigation }) => {
               enablesReturnKeyAutomatically
               keyboardType={"default"}
               />
-            <Pressable style={{ marginTop: 20, right: 25}} onPress={handlePasswordVisibility}>
+            <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
           <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
         </Pressable>
           </View>
-          <View>
+          <View style={{ flexDirection: 'row'}}>
             <TextInput
               style={styleOne.input}
               value={confirm_password}
               onChangeText={setconfirm_password}
               placeholderTextColor="gray"
               placeholder="Write Your Confirm Password"
-              secureTextEntry={true}
+              secureTextEntry={ConfpasswordVisibility}
               keyboardType={"default"}
             />
+            <Pressable style={{ marginTop: 23, right: 25}} onPress={handleConfPasswordVisibility}>
+          <MaterialCommunityIcons name={righticon} size={15} color="gray" />
+        </Pressable>
             
           </View>
           <View>
