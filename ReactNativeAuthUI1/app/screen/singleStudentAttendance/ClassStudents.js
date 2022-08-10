@@ -3,15 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView,Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import _ from "lodash"
-import { useSelector } from 'react-redux';
 import { useIsFocused } from "@react-navigation/native"; 
-
-const {width} = Dimensions.get('window');
 import { Divider } from 'react-native-paper';
 import  SearchableDropdown from 'react-native-searchable-dropdown';
 import { useGetStudentQuery } from '../../../services/userAuthApi';
 
 
+const {width} = Dimensions.get('window');
 
 
 const ClassStudents = ({ navigation, route }) => {
@@ -23,15 +21,8 @@ const ClassStudents = ({ navigation, route }) => {
   const [direction, setDirection] = useState('')
   const [selectedColumn, setSelectedColumn] = useState('')
   const [students, setStudents] = useState('')
-  const [selectedItems, setSelectedItems] = useState()
 
-  
-  
-  
 
- 
-  
-  const focus = useIsFocused();
   
   const fetchData = async () => {
     fetch('https://ams.firefly-techsolutions.com/services/getStudents',{
@@ -44,9 +35,12 @@ const ClassStudents = ({ navigation, route }) => {
        setStudents(response.data)  
      });
   };
+
+  const focus = useIsFocused();
+
   useEffect(() => {
-    fetchData(data);   
-  });
+    fetchData();   
+  },[route.params.schoolid, focus]);
     //select class and section
   
     var  items  = [
@@ -118,8 +112,12 @@ const ClassStudents = ({ navigation, route }) => {
     const [ classes, setClasses ] = useState({})
     const [ section, setSections ] = useState({})
     
-  
-   
+    const clearVariable = () => {
+      setClasses(''); 
+      setSections('');
+    };
+
+ 
     const {data} = useGetStudentQuery();
   
     
@@ -173,9 +171,10 @@ const ClassStudents = ({ navigation, route }) => {
       <View style={styles.container}>
 
 <SearchableDropdown
- selectedItems={classes}
+    selectedItems={classes}
     onTextChange={(text) =>  setClasses(text)}
     onItemSelect={(item) =>  setClasses(item)}
+   
     containerStyle={{
       padding: 5,
     }}
@@ -209,6 +208,7 @@ const ClassStudents = ({ navigation, route }) => {
 selectedItems={section}
     onTextChange={(text) =>  setSections(text)}
     onItemSelect={(item) =>  setSections(item)}
+ 
     containerStyle={{
       padding: 5
     }}

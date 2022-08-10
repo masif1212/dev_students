@@ -28,8 +28,8 @@ import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibilit
 import { useToggleConfPasswordVisibility } from '../hooks/useToggleConfPasswordVisibility';
 
 
-
-const RegistrationScreen = () => {
+// registration
+  const RegistrationScreen = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -52,13 +52,13 @@ const RegistrationScreen = () => {
   const [message, setMessage] = useState("")
 
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
-  useTogglePasswordVisibility();
+    useTogglePasswordVisibility();
 
   const { ConfpasswordVisibility, righticon, handleConfPasswordVisibility } =
-  useToggleConfPasswordVisibility();
-//country state city api==========================//
+    useToggleConfPasswordVisibility();
+  //country state city api==========================//
 
-//=========================================================================//
+  //=========================================================================//
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -114,40 +114,43 @@ const RegistrationScreen = () => {
   const handleFormSubmit = async () => {
     if (firstName && email && password && password_confirmation && tc) {
       if (password === password_confirmation) {
-        let formData = new FormData()
-       
-          formData.append('firstName', firstName)
-          formData.append('lastName', lastName)
-          formData.append('email', email)
-          formData.append('password', password)
-          formData.append('password_confirmation', password_confirmation)
-          formData.append('contact', contact)
-          formData.append('image', image)
-          formData.append('alt_contact', alt_contact)
-          formData.append('address_1', address_1)
-          formData.append('address_2', address_2)
-          formData.append('CNIC', CNIC)
-          formData.append('city', city)
-          formData.append('tc', tc)
-          formData.append('gender', gender)
-          formData.append('disability', disability)
-          formData.append('disabledetail', disabledetail)
-          formData.append('dateofbirth', dateofbirth)
-          
+        let formData = {
+          firstName,
+          lastName,
+          email,
+          password,
+          password_confirmation,
+          contact,
+          image,
+          alt_contact,
+          address_1,
+          address_2,
+          CNIC,
+          city,
+          tc,
+          gender,
+          disability,
+          disabledetail,
+          dateofbirth,
+        }
+
+
+
         const res = await registerUser(formData);
         console.log(formData)
         console.log(res)
 
-        if(res.data){
+        if (res.data) {
           if (res.data.type === "success") {
             clearTextInput()
             setMessage(res.data.message)
-            { setTimeout(()=>{ navigation.goBack() }, 1000);}
-          }} else if (res.error) {
-          if(res.error.data.type === "error") {
+            { setTimeout(() => { navigation.goBack() }, 1000); }
+          }
+        } else if (res.error) {
+          if (res.error.data.type === "error") {
             console.log(res.error.data.message)
             console.log('hello')
-  
+
             Toast.show({
               type: "warning",
               position: "top",
@@ -177,7 +180,7 @@ const RegistrationScreen = () => {
   const pickImage = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
     setImage(result)
-    console.log(result)
+    console.log(result.uri, 'base64')
   };
 
   return (
@@ -209,7 +212,7 @@ const RegistrationScreen = () => {
         </View>
         <Toast config={toastConfig} />
       </View>
-      <Text>{ message ? <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 20}}>{message}</Text> : null}</Text>
+      <Text>{message ? <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'green', marginLeft: 20 }}>{message}</Text> : null}</Text>
 
       <ScrollView keyboardShouldPersistTaps="handled" style={{ height: '100%' }}>
         <View style={{ marginLeft: 25 }}>
@@ -229,12 +232,12 @@ const RegistrationScreen = () => {
               onChangeText={setLastName}
               placeholder="Write Your Last Name"
               placeholderTextColor='gray'
-              
+
 
             />
           </View>
           <View>
-            
+
             <TextInput
               style={styleOne.input}
               keyboardType="email-address"
@@ -245,7 +248,7 @@ const RegistrationScreen = () => {
 
             />
           </View>
-          <View style={{ flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <TextInput
               style={styleOne.input}
               value={password}
@@ -256,11 +259,11 @@ const RegistrationScreen = () => {
               placeholderTextColor='gray'
 
             />
-            <Pressable style={{ marginTop: 23, right: 25}} onPress={handlePasswordVisibility}>
-          <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
-        </Pressable>
+            <Pressable style={{ marginTop: 23, right: 25 }} onPress={handlePasswordVisibility}>
+              <MaterialCommunityIcons name={rightIcon} size={15} color="gray" />
+            </Pressable>
           </View>
-          <View style={{ flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <TextInput
               style={styleOne.input}
               value={password_confirmation}
@@ -271,9 +274,9 @@ const RegistrationScreen = () => {
               placeholderTextColor='gray'
 
             />
-               <Pressable style={{ marginTop: 23, right: 25}} onPress={handleConfPasswordVisibility}>
-          <MaterialCommunityIcons name={righticon} size={15} color="gray" />
-        </Pressable>
+            <Pressable style={{ marginTop: 23, right: 25 }} onPress={handleConfPasswordVisibility}>
+              <MaterialCommunityIcons name={righticon} size={15} color="gray" />
+            </Pressable>
           </View>
           <View>
             <TextInput
@@ -352,7 +355,7 @@ const RegistrationScreen = () => {
 
 
 
-          
+
           {/* <View style={{margin: 10, right: 10}}>
           <Text>Select Date of Birth :</Text>
 
@@ -370,11 +373,11 @@ const RegistrationScreen = () => {
 
             <TouchableOpacity onPress={showDatePicker} style={styleOne.input}>
               <View>
-              <TextInput
+                <TextInput
 
-                value={getDate()}
-                placeholder="Select DOB (Day| MM | DD | YY)"
-              />
+                  value={getDate()}
+                  placeholder="Select DOB (Day| MM | DD | YY)"
+                />
               </View>
             </TouchableOpacity>
 
@@ -404,7 +407,7 @@ const RegistrationScreen = () => {
 
           </View>
 
-        
+
 
           <View>
             {

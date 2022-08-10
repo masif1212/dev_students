@@ -148,7 +148,8 @@ export const userAuthApi = createApi({
       }
     }),
 
-    // TEACHER SECTION 
+
+//=============================== TEACHER SECTION===============================================================//
     registerTeachers : builder.mutation({
       query: (teacher) => {
         return {
@@ -191,8 +192,6 @@ export const userAuthApi = createApi({
         body: addSchools,
         headers: {
           'Content-type': 'application/json',
-          
-
         }
       })
     }),
@@ -204,16 +203,14 @@ export const userAuthApi = createApi({
       })
     }),
 
- 
-
-
     getTeachers: builder.query({
       query: () => ({
         url: 'getTeachers',
         method: 'GET',
-        
       })
     }),
+
+    
 
     registerTechAttendance: builder.mutation({
       query: (attendance) => {
@@ -223,7 +220,6 @@ export const userAuthApi = createApi({
           body: attendance,
           headers: {
             'Content-type': 'application/json',
-            
           }
         }
       }

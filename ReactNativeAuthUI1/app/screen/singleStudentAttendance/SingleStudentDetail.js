@@ -1,7 +1,56 @@
-import { StyleSheet, Text, View, Image,TouchableOpacity,ScrollView, } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, Image,TouchableOpacity,ScrollView,Modal } from "react-native";
+import React,{useEffect, useState} from "react";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleModal from "../../Components/SimpleModal";
+
+
 
 const SingleStudentDetail = ({route,navigation}) => {
+  const [id, setId] = useState();
+  const table = "students";
+
+
+//===========================================DELETE============================================================//
+const [isModalVisible, setIsModalVisible] = useState(false)
+const [chooseData, setChooseData] = useState()
+
+
+
+const changeModalVisible = (bool) => {
+  setIsModalVisible(bool)
+}
+const setData = (data) => {
+  setChooseData(data)
+}
+const closeModal =(bool,data) =>{
+ changeModalVisible(bool)
+  setData(data)
+  }
+
+  useEffect(() => {
+      setId(route.params.studentId);
+  });
+
+  const handleFormSubmit =  () => {
+   const formData = {
+        id,
+        table
+      };
+      fetch("https://ams.firefly-techsolutions.com/services/deleterecord", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }).then((res) => res.json())
+        .then((res) => res.type === 'success' ? closeModal(false, 'Yes') || navigation.goBack() :null)
+
+  };
+
+
+//===========================================DELETE============================================================//
+
 
   return (
     <ScrollView style={{
@@ -260,6 +309,49 @@ const SingleStudentDetail = ({route,navigation}) => {
       
       </View>
       </View>
+      <View
+        style={{
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            alignItems: "center",
+            padding: 15,
+            marginRight:25,
+            width: "18%",
+            bottom:20,
+            backgroundColor: "red",
+            elevation: 1,
+            borderHeight:10,
+            position: "relative",
+            borderRadius:10
+          }}
+          onPress={()=>{changeModalVisible(true); setId(route.params.studentId); }}
+        >
+          <MaterialCommunityIcons
+                      name="trash-can-outline"
+                      size={27}
+                      color="white"
+                    />
+        </TouchableOpacity>
+      </View>
+      <Modal
+                  transparent={true}
+                  animationType='fade'
+                  visible={isModalVisible}
+                  nRequestClose={() => changeModalVisible(false)}
+                >
+                  <SimpleModal
+                    changeModalVisible={changeModalVisible}
+                    setData={setData}
+                      onPressYes ={()=>{handleFormSubmit()}}
+                      onPressNo={() =>closeModal(false,'No')}
+                      text= "Are you sure you want to delete?"
+                    />
+                </Modal>
  
     </ScrollView>
   );

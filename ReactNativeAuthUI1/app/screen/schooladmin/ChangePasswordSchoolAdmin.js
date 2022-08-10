@@ -87,11 +87,8 @@ const ChangePasswordSchoolAdmin = () => {
     
 <>
 <Toast config={toastConfig} />
-
       <View style={{ marginTop: 30}} keyboardShouldPersistTaps='handled'>
-
         <View style={styleOne.container}>
-
         <View style={{ flexDirection: "row" }}>
             <TextInput
               style={styleOne.input}

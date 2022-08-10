@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "react-native-element-dropdown": "^2.0.0",
-    "react-native-select-search": "^1.0.6",
-    "react-native-vector-icons": "^9.2.0"
-  }
-}

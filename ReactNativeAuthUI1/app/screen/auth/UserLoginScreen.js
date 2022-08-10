@@ -89,7 +89,6 @@ const SchoolAdminLogin = () => {
               keyboardType="email-address"
             />
           </View>
-          <Button title="hello" />
           <View style={[styles.inputWithLabel, {flexDirection: 'row'}]}>
             <TextInput
               style={styleOne.input}

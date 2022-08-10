@@ -40,36 +40,7 @@ const AddTeacherForm2 = ({ navigation , route}) => {
 
 // ================================================================================
 const [ message, setMessage ] = useState("");
-// const [staff_name, setStaff_Name] = useState("");
-//   const [father_name, setFather_Name] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [confirm_password, setconfirm_password] = useState("");
-//   const [contact, setContact] = useState("");
-//   const [alt_contact, setAlt_Contact] = useState("");
-//   const [address_1, setAdress_1] = useState("");
-//   const [address_2, setAdress_2] = useState("");
-//   const [cnic, setcnic] = useState("");
-//   const [image, setImage] = useState("");
-//   const [schoolName, setSchoolName] = useState("");
-//   const [schoolId, setSchoolId] = useState("");
-//   const [gender, setGender] = useState("");
-//   cons [religion, setReligion] = useState("");
-//   const [maritalStatus, setMaritalStatus] = useState("");
-//   const [teacherTraining, setTeacherTraining] = useState("");
-//   const [trainingnumber, setTrainingNumber] = useState("");
-//   const [lsuTrainingDate, setLsuTrainingDate] = useState("");
-//   const [trainInWhichSubject, setTrainInWhichSubject] = useState("");
-//   const [mentionTraining, setMentiontraining] = useState("");
-//   const [selectDivision, setSelectDivision] = useState();
-//   const [selectedTehsil, setSeletctedTehsil] = useState();
-//   const [selectedDistricts, setSelectedDistricts] = useState();
-//   const [formerProgram, setFormerProgramm] = useState();
-//   const [teacherQualification, setTeacherQualification] = useState();
-//   const [
-//     teacherprofessionalqualification,
-//     setTeacherProfessionalQualification,
-//   ] = useState();
+
 const staffName = route.params.staff_name;
 const father_Name = route.params.father_name;
 const email = route.params.email;
@@ -251,6 +222,8 @@ const schoolId = route.params.schoolId;
     { label: "MCB Islamic  Bank Limited", value: "MCB Islamic  Bank Limited" },
     { label: "Mezan Bank Limited", value: "Mezan Bank Limited" },
     { label: "National Bank of Pakistan", value: "National Bank of Pakistan" },
+    { label: "Sindh Bank Limited", value: "Sindh Bank Limited" },
+
   ]);
   //=========================end Bank Names=============================================//
 
@@ -2321,6 +2294,7 @@ const schoolId = route.params.schoolId;
           teachingSubject
         };
         const res = await registerTeacher(formData);
+        console.log(res)
         if(res.data){
           if (res.data.type === "success") {
             setMessage(res.data.message)

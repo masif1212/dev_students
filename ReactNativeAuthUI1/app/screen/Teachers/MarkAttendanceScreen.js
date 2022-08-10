@@ -42,20 +42,12 @@ const MarkAttendanceScreen = ({ navigation, route }) => {
       });
   };
 
-  // const sxs = async () => {
-  //   const resp = await fetch(`https://ams.firefly-techsolutions.com/services/getTeacher/${route.params.schoolId}`);
-  //   const data = await resp.json();
-  //   console.log(data)
-  //   const schAdminId = (data.data.map(l => l.first_name ? { ...l, schoolAdminID: route.params.schoolAdminID } : l));
-  //   setAttendanceState(schAdminId)
-
-  // };
 
   const focus = useIsFocused();
 
   useLayoutEffect(() => {
     fetchData();
-  }, [focus]);
+  }, [route.params.schoolAdminID]);
 
   const MarkAttendance = (item, S) => {
     const attend = attendanceState.map((l) =>

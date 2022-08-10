@@ -24,6 +24,7 @@ import CustomDropDown from "../../Components/CustomDropdown";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useTogglePasswordVisibility } from '../hooks/useTogglePasswordVisibility';
 import { useToggleConfPasswordVisibility } from '../hooks/useToggleConfPasswordVisibility';
+import * as FileSystem from 'expo-file-system';
 
 
 const TeacherRegister = ({ navigation,routes }) => {
@@ -85,6 +86,7 @@ const TeacherRegister = ({ navigation,routes }) => {
       .then((response) => response.json())
       .then((result) => setBankCities(result))
       .catch((error) => console.log("error", error));
+
   });
 
   //=====================================fetch api end====================================//
@@ -396,9 +398,11 @@ const TeacherRegister = ({ navigation,routes }) => {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      const base64 = await FileSystem.readAsStringAsync(result.uri, { encoding: 'base64' });
+      setImage(base64);
     }
   };
+
 
   return (
     <SafeAreaView
@@ -421,7 +425,7 @@ const TeacherRegister = ({ navigation,routes }) => {
             />
             {image ? (
               <Image
-                source={{ uri: image }}
+                source={{uri: `data:image/png;base64,${image}`}}
                 style={{ width: 100, height: 100, borderRadius: 50 }}
               />
             ) : (

@@ -6,13 +6,56 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Modal
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleModal from "../../Components/SimpleModal";
 
 const TeachersListForSchoolAdmin = ({ navigation }) => {
-  const [teachers, setTeachers] = useState();
+  const [teachers, setTeachers] = useState([]);
+  const [id, setId] = useState();
+  const table = "teachers";
+
+  //=================================================================//
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [chooseData, setChooseData] = useState()
+
+
+
+  const changeModalVisible = (bool) => {
+    setIsModalVisible(bool)
+  }
+  const setData = (data) => {
+    setChooseData(data)
+  }
+  const closeModal =(bool,data) =>{
+   changeModalVisible(bool)
+    setData(data)
+    }
+
+    
+    const handleFormSubmit =  () => {
+     const formData = {
+          id,
+          table
+        };
+        fetch("https://ams.firefly-techsolutions.com/services/deleterecord", {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }).then((res) => res.json())
+          .then((res) => res.type === 'success' ? closeModal(false, 'Yes') :null)
+
+    };
+
+
+  //==============================================================================//
 
   const newData = useSelector((state) => state.schoolAdmin);
 
@@ -121,7 +164,7 @@ const TeachersListForSchoolAdmin = ({ navigation }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <Image style={styles.image} source={{ uri: item.image }} />
+                  <Image style={styles.image} source={{uri: `${item.image}`}} />
                 </View>
                 <View
                   style={{
@@ -134,7 +177,32 @@ const TeachersListForSchoolAdmin = ({ navigation }) => {
                   <Text style={styles.email}>{item.schoolName}</Text>
                   <Text style={styles.email}>{item.selectedDistricts}</Text>
                 </View>
+
+                <View style={{ marginTop: 85, marginLeft: 68 }}>
+                  <TouchableOpacity onPress={() => {changeModalVisible(true), setId(item._id)}}>
+                    <MaterialCommunityIcons
+                      name="trash-can-outline"
+                      size={25}
+                      color="red"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <Modal
+                  transparent={true}
+                  animationType='fade'
+                  visible={isModalVisible}
+                  nRequestClose={() => changeModalVisible(false)}
+                >
+                  <SimpleModal
+                    changeModalVisible={changeModalVisible}
+                    setData={setData}
+                      onPressYes ={()=>{handleFormSubmit()}}
+                      onPressNo={() =>closeModal(false,'No')}
+                      text= "Are you sure you want to delete?"
+                    />
+                </Modal>
               </View>
+
             </TouchableOpacity>
           );
         }}

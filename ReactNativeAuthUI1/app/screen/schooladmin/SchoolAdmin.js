@@ -6,15 +6,56 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Modal
 } from "react-native";
-import Pie from "../../Components/DrawerComponents/Pie";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleModal from "../../Components/SimpleModal";
 
 const SchoolAdmin = ({ navigation, route }) => {
   const [admin, setAdmin] = useState("");
   const newData = useSelector((state) => state.schoolAdmin);
+  const [id, setId] = useState();
+  const table = "schooladmin";
+
+//=================================Delete==============================================//
+
+const [isModalVisible, setIsModalVisible] = useState(false)
+const [chooseData, setChooseData] = useState()
+
+const changeModalVisible = (bool) => {
+  setIsModalVisible(bool)
+}
+const setData = (data) => {
+  setChooseData(data)
+}
+const closeModal =(bool,data) =>{
+ changeModalVisible(bool)
+  setData(data)
+  }
+
+  const handleFormSubmit = () => {
+   const formData = {
+        id,
+        table
+      };
+      fetch("https://ams.firefly-techsolutions.com/services/deleterecord", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }).then((res) => res.json())
+        .then((res) => res.type === 'success' ? closeModal(false) :null)
+
+  };
+
+//==================================Delete===============================================//
+
+
 
   const fetchData = async () => {
     fetch("https://ams.firefly-techsolutions.com/services/getschooladmin", {
@@ -128,6 +169,31 @@ const SchoolAdmin = ({ navigation, route }) => {
                   <Text style={styles.email}>{item.schoolName}</Text>
                   <Text style={styles.email}>{item.address_1}</Text>
                 </View>
+
+                <View style={{ marginTop: 85, marginLeft: 68}}>
+                  <TouchableOpacity onPress={() => {changeModalVisible(true), setId(item._id)}}>
+                    <MaterialCommunityIcons
+                      name="trash-can-outline"
+                      size={25}
+                      color="red"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <Modal
+                  transparent={true}
+                  animationType='fade'
+                  visible={isModalVisible}
+                  nRequestClose={() => changeModalVisible(false)}
+                >
+                  <SimpleModal
+                    changeModalVisible={changeModalVisible}
+                      setData={setData}
+                      onPressYes ={()=>{handleFormSubmit()}}
+                      onPressNo={() =>closeModal(false,'No')}
+                      text= "Are you sure you want to delete?"
+                    />
+                </Modal>
+
               </View>
             </TouchableOpacity>
           );
